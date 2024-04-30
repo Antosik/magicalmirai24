@@ -1,0 +1,27 @@
+{
+  "folders": [
+    {
+      "name": "Magical Mirai 2024",
+      "path": ".",
+    },
+  ],
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "stylelint.vscode-stylelint",
+      "svelte.svelte-vscode",
+    ],
+  },
+  "settings": {
+    "[svelte]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "eslint.validate": ["javascript", "javascriptreact", "svelte"],
+    "eslint.workingDirectories": [
+      {
+        "mode": "auto",
+      },
+    ],
+  },
+}
