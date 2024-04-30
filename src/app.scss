@@ -1,17 +1,13 @@
 @import './scss/index';
 
+html,
 body {
-	// background: $background-color;
-}
-
-#svelte {
-	display: flex;
-	flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 
 main {
-	display: flex;
-	box-sizing: border-box;
-	flex: 1;
-	flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
