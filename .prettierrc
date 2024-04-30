@@ -1,0 +1,32 @@
+{
+	"arrowParens": "always",
+	"bracketSpacing": true,
+	"bracketSameLine": false,
+	"jsxSingleQuote": false,
+	"endOfLine": "lf",
+	"printWidth": 100,
+	"proseWrap": "preserve",
+	"quoteProps": "as-needed",
+	"semi": true,
+	"singleQuote": true,
+	"tabWidth": 2,
+	"trailingComma": "all",
+	"useTabs": false,
+	"plugins": ["prettier-plugin-svelte"],
+	"overrides": [
+	  {
+		"files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+		"options": {
+		  "parser": "typescript"
+		}
+	  },
+	  {
+		"files": ["*.yml", "*.yaml", "*.json"],
+		"options": {
+		  "tabWidth": 2
+		}
+	  },
+	  { "files": "*.svelte", "options": { "parser": "svelte" } }
+	]
+  }
+  

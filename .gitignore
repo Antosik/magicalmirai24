@@ -1,0 +1,14 @@
+# misc
+.DS_Store
+
+# node
+node_modules
+
+# output
+/build
+
+# framework-related
+/.svelte-kit
+/package
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*

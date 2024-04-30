@@ -1,0 +1,19 @@
+# misc
+.DS_Store
+
+# node
+node_modules
+
+# output
+/build
+
+# framework-related
+/.svelte-kit
+/package
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# package manager
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
