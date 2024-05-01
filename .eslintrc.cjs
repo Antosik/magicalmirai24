@@ -45,6 +45,7 @@ module.exports = {
 	},
 	rules: {
 		'@typescript-eslint/no-namespace': 'off',
+		'import/no-duplicates': 'off',
 		'import/order': [
 			'error',
 			{

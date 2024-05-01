@@ -24,11 +24,7 @@
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
 
-  {#if sceneReady}
-    <slot />
-  {:else}
-    Launching...
-  {/if}
+  <slot ready={sceneReady} />
 </main>
 
 <style>

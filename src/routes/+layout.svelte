@@ -1,8 +1,15 @@
 <script lang="ts">
   import { initSettings } from '$lib/contexts/settings';
+  import Player from '$lib/textalive/TextAlivePlayer.svelte';
   import '../app.scss';
 
   initSettings();
 </script>
 
-<slot />
+<Player let:ready>
+  {#if ready}
+    <slot />
+  {:else}
+    Initializing...
+  {/if}
+</Player>
