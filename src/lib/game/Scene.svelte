@@ -6,7 +6,7 @@
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
-  let playerY = spring(0, { stiffness: 0.1 });
+  let playerY = spring(window.innerHeight / 2, { stiffness: 0.1 });
 
   const handleMouseMove = (e: MouseEvent & { currentTarget: HTMLElement }) => {
     $playerY = e.clientY;
