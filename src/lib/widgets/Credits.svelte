@@ -12,8 +12,8 @@
   section {
     position: absolute;
     z-index: 1;
-    inset: 20% 10%;
     padding: grid(4);
+    inset: 20% 10%;
     text-align: center;
 
     &::before {
