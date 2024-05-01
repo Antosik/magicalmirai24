@@ -44,7 +44,18 @@
   beforeNavigate(() => {
     $player.requestStop();
   });
+
+  const handleVisibilityChange = (e: Event & { currentTarget: HTMLDocument }) => {
+    if (e.currentTarget.hidden) {
+      $player.requestPause();
+    } else {
+      timer = START_SONG_DELAY / 1e3;
+      startTimer(timer);
+    }
+  };
 </script>
+
+<svelte:document on:visibilitychange={handleVisibilityChange} />
 
 <Scene let:ready={sceneReady} let:errorNode let:playerNode>
   {#if sceneReady && songReady}
