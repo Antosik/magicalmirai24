@@ -16,10 +16,16 @@
       return 'volume-x';
     }
   };
+
+  const handleButtonClick = () => {
+    value = value > 0 ? 0 : 100;
+  };
 </script>
 
 <div>
-  <FeatherIcon name={calculateIcon(value)} size="24" />
+  <button type="button" on:click={handleButtonClick}>
+    <FeatherIcon name={calculateIcon(value)} size="24" />
+  </button>
   <input type="range" min="0" max="100" bind:value />
 </div>
 
@@ -27,7 +33,17 @@
   div {
     @include flex_center;
 
+    width: 24px;
     flex-direction: column;
+    gap: grid(1);
+  }
+
+  button {
+    @include flex_center;
+
+    background: none;
+    border: 0;
+    color: #1e5b64;
   }
 
   input {
