@@ -3,7 +3,7 @@
   import { songs } from '$lib/songs';
 
   import PauseButton from '$lib/blocks/PauseButton.svelte';
-  import { initGameContext } from '$lib/contexts/game';
+  import { createGameStore, initGameContext, resetGameStore } from '$lib/contexts/game';
   import { getPlayer } from '$lib/contexts/player';
   import { getSettings } from '$lib/contexts/settings';
   import Scene from '$lib/game/Scene.svelte';
@@ -11,7 +11,8 @@
   import Game from '$lib/widgets/Game.svelte';
   import Pause from '$lib/widgets/Pause.svelte';
 
-  initGameContext();
+  const store = createGameStore();
+  initGameContext(store);
 
   const settings = getSettings();
   const player = getPlayer();
@@ -21,6 +22,8 @@
   let songReady = false;
   let timer = START_SONG_DELAY / 1e3;
   let timeout: ReturnType<typeof setTimeout>;
+  let restart = 0;
+  let visibilityState: DocumentVisibilityState;
 
   $: $player.volume = $settings.volume;
 
@@ -31,13 +34,17 @@
   $player.addListener({
     onTimerReady: () => {
       songReady = true;
-      startTimer(timer);
+      resumeGame();
     },
   });
 
   function startTimer(i: number) {
     if (i === 0) {
-      $player.requestPlay();
+      if (visibilityState === 'visible') {
+        $player?.requestPlay();
+      } else {
+        pauseGame();
+      }
       return;
     }
 
@@ -51,7 +58,7 @@
   function pauseGame() {
     pause = true;
     timer = 0;
-    $player.requestPause();
+    $player?.requestPause();
     clearTimeout(timeout);
   }
 
@@ -61,8 +68,22 @@
     startTimer(timer);
   }
 
+  function stopGame() {
+    pause = false;
+    timer = 0;
+    $player?.requestStop();
+    clearTimeout(timeout);
+  }
+
+  function restartGame() {
+    stopGame();
+    resetGameStore(store);
+    resumeGame();
+    restart++;
+  }
+
   beforeNavigate(() => {
-    $player.requestStop();
+    $player?.requestStop();
     clearTimeout(timeout);
   });
 
@@ -73,12 +94,15 @@
   };
 </script>
 
-<svelte:document on:visibilitychange={handleVisibilityChange} />
+<svelte:document bind:visibilityState on:visibilitychange={handleVisibilityChange} />
 
 <Scene let:ready={sceneReady} let:errorNode let:playerNode>
   {#if sceneReady && songReady}
-    <Game {errorNode} {playerNode} pause={Boolean(pause || timer)} />
-    <Pause open={pause} on:resume={resumeGame} />
+    {#key restart}
+      <Game {errorNode} {playerNode} pause={Boolean(pause || timer)} />
+    {/key}
+
+    <Pause open={pause} on:resume={resumeGame} on:restart={restartGame} />
 
     {#if !pause && !timer}
       <PauseButton on:click={pauseGame} />

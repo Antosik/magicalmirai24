@@ -15,7 +15,7 @@ type Game = {
 
 export const GAME_CONTEXT_KEY = 'game';
 
-export const initGameContext = () => {
-  setContext(GAME_CONTEXT_KEY, writable<Game>({ chars: new Map() }));
-};
+export const createGameStore = () => writable<Game>({ chars: new Map() });
+export const resetGameStore = (store: Writable<Game>) => store.set({ chars: new Map() });
+export const initGameContext = (store: Writable<Game>) => setContext(GAME_CONTEXT_KEY, store);
 export const getGame = () => getContext<Writable<Game>>(GAME_CONTEXT_KEY);

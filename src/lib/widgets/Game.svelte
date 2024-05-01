@@ -16,9 +16,9 @@
     'Total',
     $game.chars.size,
     'Catched',
-    Array.from($game.chars.values()).filter((el) => el.state === 1),
+    Array.from($game.chars.values()).filter((el) => el.state === 1).length,
     'Missed',
-    Array.from($game.chars.values()).filter((el) => el.state === -1),
+    Array.from($game.chars.values()).filter((el) => el.state === -1).length,
   );
 
   const maxAmplitude = $player.getMaxVocalAmplitude();
