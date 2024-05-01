@@ -43,5 +43,6 @@
     width: 100px;
     height: 50px;
     background: #f3d9a8;
+    transform: translateY(-50%);
   }
 </style>
