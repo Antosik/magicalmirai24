@@ -15,17 +15,7 @@
     padding: grid(4);
     inset: 20% 10%;
     text-align: center;
-
-    &::before {
-      position: fixed;
-      z-index: -1;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgb(255 255 255 / 80%);
-      content: '';
-    }
+    background-color: rgb(255 255 255 / 70%);
   }
 
   a {

@@ -2,12 +2,14 @@
   import { beforeNavigate } from '$app/navigation';
   import { songs } from '$lib/songs';
 
+  import PauseButton from '$lib/blocks/PauseButton.svelte';
   import { initGameContext } from '$lib/contexts/game';
   import { getPlayer } from '$lib/contexts/player';
   import { getSettings } from '$lib/contexts/settings';
   import Scene from '$lib/game/Scene.svelte';
   import SongInfo from '$lib/textalive/SongInfo.svelte';
   import Game from '$lib/widgets/Game.svelte';
+  import Pause from '$lib/widgets/Pause.svelte';
 
   initGameContext();
 
@@ -15,9 +17,12 @@
   const player = getPlayer();
   const START_SONG_DELAY = 3e3; // 3s
 
+  let pause = false;
   let songReady = false;
   let timer = START_SONG_DELAY / 1e3;
   let timeout: ReturnType<typeof setTimeout>;
+
+  $: $player.volume = $settings.volume;
 
   const song = songs[$settings.song];
   $player.createFromSongUrl(song.url, {
@@ -43,18 +48,27 @@
     }, 1e3);
   }
 
+  function pauseGame() {
+    pause = true;
+    timer = 0;
+    $player.requestPause();
+    clearTimeout(timeout);
+  }
+
+  function resumeGame() {
+    pause = false;
+    timer = START_SONG_DELAY / 1e3;
+    startTimer(timer);
+  }
+
   beforeNavigate(() => {
     $player.requestStop();
     clearTimeout(timeout);
   });
 
-  const handleVisibilityChange = (e: Event & { currentTarget: HTMLDocument }) => {
+  const handleVisibilityChange = (e: Event & { currentTarget: Document }) => {
     if (e.currentTarget.hidden) {
-      $player.requestPause();
-      clearTimeout(timeout);
-    } else {
-      timer = START_SONG_DELAY / 1e3;
-      startTimer(timer);
+      pauseGame();
     }
   };
 </script>
@@ -63,7 +77,12 @@
 
 <Scene let:ready={sceneReady} let:errorNode let:playerNode>
   {#if sceneReady && songReady}
-    <Game {errorNode} {playerNode} />
+    <Game {errorNode} {playerNode} pause={Boolean(pause || timer)} />
+    <Pause open={pause} on:resume={resumeGame} />
+
+    {#if !pause && !timer}
+      <PauseButton on:click={pauseGame} />
+    {/if}
 
     {#if timer}
       <div>
