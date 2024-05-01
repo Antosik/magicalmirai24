@@ -31,18 +31,18 @@
 <style>
   .error {
     position: fixed;
+    top: 0;
+    left: -2px;
     width: 2px;
     height: 100%;
     background: red;
-    left: -2px;
-    top: 0;
   }
 
   .player {
     position: absolute;
+    left: 20px;
     width: 100px;
     height: 50px;
     background: lightskyblue;
-    left: 20px;
   }
 </style>

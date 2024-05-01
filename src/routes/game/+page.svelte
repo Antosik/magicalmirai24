@@ -1,8 +1,8 @@
 <script lang="ts">
   import Scene from '$lib/game/Scene.svelte';
-  import MainMenu from '$lib/widgets/MainMenu.svelte';
+  import Game from '$lib/widgets/Game.svelte';
 </script>
 
 <Scene>
-  <MainMenu />
+  <Game />
 </Scene>
