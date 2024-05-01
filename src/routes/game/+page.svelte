@@ -6,6 +6,7 @@
   import { getPlayer } from '$lib/contexts/player';
   import { getSettings } from '$lib/contexts/settings';
   import Scene from '$lib/game/Scene.svelte';
+  import SongInfo from '$lib/textalive/SongInfo.svelte';
   import Game from '$lib/widgets/Game.svelte';
 
   initGameContext();
@@ -16,6 +17,7 @@
 
   let songReady = false;
   let timer = START_SONG_DELAY / 1e3;
+  let timeout: ReturnType<typeof setTimeout>;
 
   const song = songs[$settings.song];
   $player.createFromSongUrl(song.url, {
@@ -28,26 +30,28 @@
     },
   });
 
-  const startTimer = (i: number) => {
+  function startTimer(i: number) {
     if (i === 0) {
       $player.requestPlay();
       return;
     }
 
-    const a = setTimeout(() => {
+    timeout = setTimeout(() => {
       timer = i - 1;
+      clearTimeout(timeout);
       startTimer(timer);
-      clearTimeout(a);
     }, 1e3);
-  };
+  }
 
   beforeNavigate(() => {
     $player.requestStop();
+    clearTimeout(timeout);
   });
 
   const handleVisibilityChange = (e: Event & { currentTarget: HTMLDocument }) => {
     if (e.currentTarget.hidden) {
       $player.requestPause();
+      clearTimeout(timeout);
     } else {
       timer = START_SONG_DELAY / 1e3;
       startTimer(timer);
@@ -69,6 +73,8 @@
   {:else}
     <div>Loading song...</div>
   {/if}
+
+  <SongInfo />
 </Scene>
 
 <style lang="scss">
@@ -80,5 +86,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+
+    font-size: 24px;
   }
 </style>

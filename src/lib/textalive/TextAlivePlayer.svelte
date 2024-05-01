@@ -33,6 +33,6 @@
   });
 </script>
 
-<div id="media" bind:this={mediaElementHtml}></div>
+<div hidden id="media" bind:this={mediaElementHtml}></div>
 
 <slot ready={appReady} />
