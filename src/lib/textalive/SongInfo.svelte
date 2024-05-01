@@ -14,9 +14,11 @@
   });
 </script>
 
-<div>
-  {artist} - {title}
-</div>
+{#if title && artist}
+  <div>
+    {artist} - {title}
+  </div>
+{/if}
 
 <style lang="scss">
   div {
