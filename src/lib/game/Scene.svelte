@@ -28,6 +28,11 @@
 </main>
 
 <style>
+  .error,
+  .player {
+    user-select: none;
+  }
+
   .error {
     position: fixed;
     top: 0;

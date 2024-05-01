@@ -106,6 +106,7 @@
     transition: right 200ms ease-in-out;
     will-change: right;
     font-size: 48px;
+    user-select: none;
 
     &--color-1 {
       color: #1e5b64;
