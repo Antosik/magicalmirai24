@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { beforeNavigate } from '$app/navigation';
+  import { beforeNavigate, goto } from '$app/navigation';
   import { songs } from '$lib/songs';
 
   import PauseButton from '$lib/blocks/PauseButton.svelte';
@@ -73,19 +73,21 @@
     timer = 0;
     $player?.requestStop();
     clearTimeout(timeout);
+    restart++;
+    resetGameStore(store);
   }
 
   function restartGame() {
     stopGame();
-    resetGameStore(store);
     resumeGame();
-    restart++;
   }
 
-  beforeNavigate(() => {
-    $player?.requestStop();
-    clearTimeout(timeout);
-  });
+  async function backToMenu() {
+    stopGame();
+    await goto('/');
+  }
+
+  beforeNavigate(stopGame);
 
   const handleVisibilityChange = (e: Event & { currentTarget: Document }) => {
     if (e.currentTarget.hidden) {
@@ -102,7 +104,7 @@
       <Game {errorNode} {playerNode} pause={Boolean(pause || timer)} />
     {/key}
 
-    <Pause open={pause} on:resume={resumeGame} on:restart={restartGame} />
+    <Pause open={pause} on:resume={resumeGame} on:restart={restartGame} on:back={backToMenu} />
 
     {#if !pause && !timer}
       <PauseButton on:click={pauseGame} />
@@ -130,6 +132,7 @@
     width: 100%;
     height: 100%;
 
-    font-size: 24px;
+    font-size: 28px;
+    color: #1e5b64;
   }
 </style>
