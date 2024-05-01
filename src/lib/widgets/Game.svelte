@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { TransitionConfig } from 'svelte/transition';
   import type { IChar, IChord } from 'textalive-app-api';
 
   import { getGame, type Char } from '$lib/contexts/game';
@@ -8,14 +7,26 @@
 
   export let playerNode: HTMLElement;
   export let errorNode: HTMLElement;
+  export let pause: boolean = false;
 
   const player = getPlayer();
   const game = getGame();
+
+  $: console.log(
+    'Total',
+    $game.chars.size,
+    'Catched',
+    Array.from($game.chars.values()).filter((el) => el.state === 1),
+    'Missed',
+    Array.from($game.chars.values()).filter((el) => el.state === -1),
+  );
 
   const maxAmplitude = $player.getMaxVocalAmplitude();
 
   let c: IChar;
   let chord: IChord;
+  let charNodes: Record<string, HTMLElement> = {};
+  let done = false;
 
   let activeColor: Char['color'];
 
@@ -65,21 +76,32 @@
     });
   }
 
-  function flying(charNode: HTMLElement, { duration = 2000 } = {}): TransitionConfig {
-    return {
-      duration,
-      tick: () => {
+  requestAnimationFrame(checkIntersections);
+  function checkIntersections() {
+    if (done) {
+      return;
+    }
+
+    if (!pause) {
+      for (const [id, charNode] of Object.entries(charNodes)) {
+        if (!charNode) {
+          delete charNodes[id];
+          continue;
+        }
         if (isIntersecting(playerNode, charNode)) {
-          setCharState(charNode.id, 1);
-          return;
+          setCharState(id, 1);
+          delete charNodes[id];
+          continue;
         }
         if (isIntersecting(errorNode, charNode)) {
-          setCharState(charNode.id, -1);
-          return;
+          setCharState(id, -1);
+          delete charNodes[id];
+          continue;
         }
-      },
-      css: (t: number) => `right: ${t * 100 * 1.1}%`,
-    };
+      }
+    }
+
+    requestAnimationFrame(checkIntersections);
   }
 </script>
 
@@ -87,8 +109,9 @@
   {#if char.state === 0}
     <div
       class="char char--color-{char.color}"
+      class:playing={!pause}
       id={char.id}
-      in:flying
+      bind:this={charNodes[char.id]}
       style:top="{calculateCharYPosition(char.amplitude, maxAmplitude)}%"
     >
       {char.text}
@@ -102,8 +125,7 @@
 
     position: absolute;
     right: 0%;
-    transform: translateY(-50%);
-    transition: right 200ms ease-in-out;
+    transform: translateY(-50%) translateZ(0);
     will-change: right;
     font-size: 48px;
     user-select: none;
@@ -116,6 +138,27 @@
     }
     &--color-3 {
       color: #fff;
+    }
+
+    animation-name: flyingchar;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-delay: 100ms;
+    animation-iteration-count: 1;
+    animation-play-state: paused;
+
+    &.playing {
+      animation-play-state: running;
+    }
+  }
+
+  @keyframes flyingchar {
+    0% {
+      right: 0%;
+    }
+
+    100% {
+      right: 110%;
     }
   }
 </style>

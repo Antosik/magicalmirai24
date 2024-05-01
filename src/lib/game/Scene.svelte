@@ -36,10 +36,10 @@
   .error {
     position: fixed;
     top: 0;
-    left: -2px;
+    left: -1px;
     width: 2px;
     height: 100%;
-    background: lightskyblue;
+    background: transparent;
   }
 
   .player {
