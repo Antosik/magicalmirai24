@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { initSettings } from '$lib/contexts/settings';
+  import { initSettingsContext } from '$lib/contexts/settings';
   import Player from '$lib/textalive/TextAlivePlayer.svelte';
   import '../app.scss';
 
-  initSettings();
+  initSettingsContext();
 </script>
 
 <Player let:ready>
