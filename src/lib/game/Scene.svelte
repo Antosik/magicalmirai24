@@ -11,13 +11,16 @@
   const handleMouseMove = (e: MouseEvent & { currentTarget: HTMLElement }) => {
     $playerY = e.clientY;
   };
+  const handleTouchMove = (e: TouchEvent & { currentTarget: HTMLElement }) => {
+    $playerY = e.changedTouches[0].clientY;
+  };
 
   onMount(() => {
     sceneReady = true;
   });
 </script>
 
-<main on:mousemove={handleMouseMove}>
+<main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
 
