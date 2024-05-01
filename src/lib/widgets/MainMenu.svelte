@@ -1,9 +1,14 @@
 <script lang="ts">
   import { songs } from '$lib/songs';
 
+  import Volume from '$lib/blocks/Volume.svelte';
+  import { getPlayer } from '$lib/contexts/player';
   import { getSettings } from '$lib/contexts/settings';
 
   const settings = getSettings();
+  const player = getPlayer();
+
+  $: $player.volume = $settings.volume;
 </script>
 
 <section>
@@ -27,6 +32,10 @@
     </li>
   </ul>
 </section>
+
+<div class="volume">
+  <Volume bind:value={$settings.volume} />
+</div>
 
 <style lang="scss">
   section {
@@ -72,5 +81,11 @@
 
     padding: grid(2) grid(4);
     border: 1px solid black;
+  }
+
+  .volume {
+    position: fixed;
+    top: grid(4);
+    right: 0;
   }
 </style>
