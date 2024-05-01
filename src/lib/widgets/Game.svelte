@@ -12,15 +12,6 @@
   const player = getPlayer();
   const game = getGame();
 
-  $: console.log(
-    'Total',
-    $game.chars.size,
-    'Catched',
-    Array.from($game.chars.values()).filter((el) => el.state === 1).length,
-    'Missed',
-    Array.from($game.chars.values()).filter((el) => el.state === -1).length,
-  );
-
   const maxAmplitude = $player.getMaxVocalAmplitude();
 
   let c: IChar;

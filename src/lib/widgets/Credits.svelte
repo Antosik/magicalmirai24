@@ -15,7 +15,7 @@
     padding: grid(4);
     inset: 20% 10%;
     text-align: center;
-    background-color: rgb(255 255 255 / 70%);
+    background-color: rgb(255 255 255 / 50%);
   }
 
   a {

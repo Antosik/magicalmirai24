@@ -47,7 +47,7 @@
     padding: grid(8);
     text-align: center;
     transform: translate(-50%, -50%);
-    background-color: rgb(255 255 255 / 70%);
+    background-color: rgb(255 255 255 / 50%);
   }
 
   h1,
