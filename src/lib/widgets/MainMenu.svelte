@@ -1,5 +1,19 @@
+<script lang="ts">
+  import { songs } from '$lib/songs';
+
+  import { getSettings } from '$lib/contexts/settings';
+
+  const settings = getSettings();
+</script>
+
 <section>
   <h1>Main Menu</h1>
+
+  <select bind:value={$settings.song}>
+    {#each Object.entries(songs) as [songId, song] (songId)}
+      <option value={songId}>{song.artist} - {song.title}</option>
+    {/each}
+  </select>
 
   <ul>
     <li>
@@ -38,8 +52,13 @@
     }
   }
 
-  h1 {
+  h1,
+  select {
     margin-bottom: grid(4);
+  }
+
+  select {
+    width: 100%;
   }
 
   ul {
