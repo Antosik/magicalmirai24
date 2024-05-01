@@ -32,8 +32,8 @@
       let current = c || $player.video.firstChar;
       while (current && current.startTime < position + 500) {
         if (c !== current) {
+          createChar({ id: `${position}.${current.text}`, text: current.text, state: 0 });
           c = current;
-          createChar({ id: position.toString(), text: c.text, state: 0 });
         }
         current = current.next;
       }
@@ -57,7 +57,7 @@
     });
   }
 
-  function flying(charNode: HTMLElement, { duration = 200 } = {}): TransitionConfig {
+  function flying(charNode: HTMLElement, { duration = 2000 } = {}): TransitionConfig {
     return {
       duration,
       tick: () => {
@@ -89,10 +89,8 @@
     top: 50%;
     right: 0%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background: lightskyblue;
-    border-radius: 50%;
     transition: right 200ms ease-in-out;
+    will-change: right;
+    font-size: 40px;
   }
 </style>
