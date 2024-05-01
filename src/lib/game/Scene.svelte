@@ -34,7 +34,7 @@
     left: -2px;
     width: 2px;
     height: 100%;
-    background: red;
+    background: lightskyblue;
   }
 
   .player {
@@ -42,6 +42,6 @@
     left: 20px;
     width: 100px;
     height: 50px;
-    background: lightskyblue;
+    background: #f3d9a8;
   }
 </style>

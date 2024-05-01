@@ -23,9 +23,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgb(255 255 255 / 50%);
+      background-color: rgb(255 255 255 / 80%);
       content: '';
-      filter: blur(20px);
     }
   }
 

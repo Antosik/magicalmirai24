@@ -43,8 +43,8 @@
     z-index: 1;
     top: 50%;
     left: 50%;
-    width: 200px;
-    padding: grid(4);
+    width: 300px;
+    padding: grid(8);
     text-align: center;
     transform: translate(-50%, -50%);
 
@@ -55,9 +55,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgb(255 255 255 / 50%);
+      background-color: rgb(255 255 255 / 80%);
       content: '';
-      filter: blur(20px);
     }
   }
 
@@ -86,6 +85,6 @@
   .volume {
     position: fixed;
     top: grid(4);
-    right: 0;
+    right: grid(4);
   }
 </style>
