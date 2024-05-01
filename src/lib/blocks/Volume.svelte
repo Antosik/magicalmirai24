@@ -41,8 +41,8 @@
   button {
     @include flex_center;
 
-    background: none;
     border: 0;
+    background: none;
     color: #1e5b64;
   }
 

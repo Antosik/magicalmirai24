@@ -131,8 +131,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-
-    font-size: 28px;
     color: #1e5b64;
+    font-size: 28px;
   }
 </style>

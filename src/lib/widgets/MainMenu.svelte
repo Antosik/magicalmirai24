@@ -45,9 +45,9 @@
     left: 50%;
     width: 300px;
     padding: grid(8);
+    background-color: rgb(255 255 255 / 50%);
     text-align: center;
     transform: translate(-50%, -50%);
-    background-color: rgb(255 255 255 / 50%);
   }
 
   h1,

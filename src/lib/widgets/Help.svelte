@@ -13,9 +13,9 @@
     position: absolute;
     z-index: 1;
     padding: grid(4);
+    background-color: rgb(255 255 255 / 70%);
     inset: 20% 10%;
     text-align: center;
-    background-color: rgb(255 255 255 / 70%);
   }
 
   a {

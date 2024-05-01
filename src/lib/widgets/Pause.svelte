@@ -58,10 +58,10 @@
     left: 50%;
     width: 300px;
     padding: grid(8);
+    border: 1px solid #1e5b64;
+    background-color: rgb(255 255 255 / 50%);
     text-align: center;
     transform: translate(-50%, -50%);
-    background-color: rgb(255 255 255 / 50%);
-    border: 1px solid #1e5b64;
   }
 
   h2,
@@ -79,9 +79,11 @@
     &.total {
       color: #1e5b64;
     }
+
     &.catched {
       color: #fff;
     }
+
     &.missed {
       color: #dc2b4d;
     }
@@ -98,8 +100,8 @@
 
     width: 100%;
     padding: grid(2) grid(4);
-    background: none;
     border: 1px solid black;
+    background: none;
   }
 
   .volume {

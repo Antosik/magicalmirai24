@@ -116,27 +116,28 @@
 
     position: absolute;
     right: 0%;
-    transform: translateY(-50%) translateZ(0);
-    will-change: right;
+    animation-delay: 100ms;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-name: flyingchar;
+    animation-play-state: paused;
+    animation-timing-function: linear;
     font-size: 48px;
+    transform: translateY(-50%) translateZ(0);
     user-select: none;
+    will-change: right;
 
     &--color-1 {
       color: #1e5b64;
     }
+
     &--color-2 {
       color: #dc2b4d;
     }
+
     &--color-3 {
       color: #fff;
     }
-
-    animation-name: flyingchar;
-    animation-duration: 2s;
-    animation-timing-function: linear;
-    animation-delay: 100ms;
-    animation-iteration-count: 1;
-    animation-play-state: paused;
 
     &.playing {
       animation-play-state: running;

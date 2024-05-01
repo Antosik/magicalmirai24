@@ -26,8 +26,8 @@
     right: grid(4);
     bottom: grid(4);
     padding: grid(2) grid(2) grid(2) grid(6);
-    text-align: right;
-    font-size: 12px;
     background-color: #fff;
+    font-size: 12px;
+    text-align: right;
   }
 </style>

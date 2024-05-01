@@ -11,8 +11,8 @@
     position: fixed;
     top: grid(4);
     right: grid(4);
-    color: #1e5b64;
     border: 0;
     background: none;
+    color: #1e5b64;
   }
 </style>
