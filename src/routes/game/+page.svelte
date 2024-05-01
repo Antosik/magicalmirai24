@@ -2,10 +2,13 @@
   import { beforeNavigate } from '$app/navigation';
   import { songs } from '$lib/songs';
 
+  import { initGameContext } from '$lib/contexts/game';
   import { getPlayer } from '$lib/contexts/player';
   import { getSettings } from '$lib/contexts/settings';
   import Scene from '$lib/game/Scene.svelte';
   import Game from '$lib/widgets/Game.svelte';
+
+  initGameContext();
 
   const settings = getSettings();
   const player = getPlayer();
@@ -43,9 +46,9 @@
   });
 </script>
 
-<Scene>
-  {#if songReady}
-    <Game />
+<Scene let:ready={sceneReady} let:errorNode let:playerNode>
+  {#if sceneReady && songReady}
+    <Game {errorNode} {playerNode} />
 
     {#if timer}
       <div>

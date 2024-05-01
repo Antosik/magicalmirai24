@@ -24,7 +24,7 @@
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
 
-  <slot ready={sceneReady} />
+  <slot ready={sceneReady} {errorNode} {playerNode} />
 </main>
 
 <style>
