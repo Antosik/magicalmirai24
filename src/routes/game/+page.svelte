@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { beforeNavigate } from '$app/navigation';
   import { songs } from '$lib/songs';
 
   import { getPlayer } from '$lib/contexts/player';
@@ -36,6 +37,10 @@
       clearTimeout(a);
     }, 1e3);
   };
+
+  beforeNavigate(() => {
+    $player.requestStop();
+  });
 </script>
 
 <Scene>
