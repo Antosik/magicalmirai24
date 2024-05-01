@@ -4,6 +4,8 @@ import { writable, type Writable } from 'svelte/store';
 export type Char = {
   id: string;
   text: string;
+  amplitude: number;
+  color: 1 | 2 | 3; // 1 dark, 2 red, 3 white
   state?: -1 | 0 | 1; // -1 (missed), 0 (on game), 1 (catched)
 };
 
