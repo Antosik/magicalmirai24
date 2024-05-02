@@ -11,6 +11,7 @@
   export let strokeWidth = 2;
   export let strokeLineCap: 'butt' | 'round' | 'square' = 'round';
   export let strokeLineJoin: 'miter' | 'round' | 'bevel' = 'round';
+  export let fill: string = '';
 
   if (size !== '100%') {
     size = size.slice(-1) === 'x' ? size.slice(0, size.length - 1) + 'em' : parseInt(size) + 'px';
@@ -18,6 +19,7 @@
 </script>
 
 {@html icons[name].toSvg({
+  ...(fill ? { fill } : {}),
   class: `feather feather-${name} ${className}`,
   width: size,
   height: size,

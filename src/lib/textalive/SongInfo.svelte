@@ -1,0 +1,33 @@
+<script lang="ts">
+  import { getPlayer } from '$lib/contexts/player';
+
+  const player = getPlayer();
+
+  let title = '';
+  let artist = '';
+
+  $player.addListener({
+    onVideoReady() {
+      title = $player.data.song.name;
+      artist = $player.data.song.artist.name;
+    },
+  });
+</script>
+
+{#if title && artist}
+  <div>
+    {artist} - {title}
+  </div>
+{/if}
+
+<style lang="scss">
+  div {
+    position: absolute;
+    right: grid(4);
+    bottom: grid(4);
+    padding: grid(2) grid(2) grid(2) grid(6);
+    background-color: #fff;
+    font-size: 12px;
+    text-align: right;
+  }
+</style>
