@@ -23,9 +23,9 @@
 		"textalive-app-api": "0.3.2"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-static": "3.0.1",
-		"@sveltejs/kit": "2.5.7",
+		"@sveltejs/vite-plugin-svelte": "3.1.0",
 		"@total-typescript/ts-reset": "0.5.1",
+		"@tsconfig/svelte": "5.0.4",
 		"@types/feather-icons": "4.29.4",
 		"@types/node": "20.12.7",
 		"@typescript-eslint/eslint-plugin": "7.7.0",
