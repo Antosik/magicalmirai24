@@ -2,6 +2,8 @@
   import type { Char } from './types';
   import type { IChar, IChord } from 'textalive-app-api';
 
+  import { createEventDispatcher } from 'svelte';
+
   import { getGame } from '$lib/contexts/game';
   import { getPlayerInstance } from '$lib/contexts/player';
   import { calculateActiveColor, calculateCharYPosition, isIntersecting } from '$lib/game/utils';
@@ -11,6 +13,9 @@
   export let playerNode: HTMLElement;
   export let errorNode: HTMLElement;
   export let pause: boolean = false;
+  export let done: boolean = false;
+
+  const dispatch = createEventDispatcher();
 
   const player = getPlayerInstance();
   const { chars } = getGame();
@@ -20,13 +25,16 @@
   let c: IChar;
   let chord: IChord;
   let charNodes: Record<string, HTMLElement> = {};
-  let done = false;
-
   let activeColor: Char['color'];
 
   player.addListener({
     onTimeUpdate(position) {
       if (!player.video.firstChar) {
+        return;
+      }
+
+      if (position > player.video.endTime) {
+        dispatch('ended');
         return;
       }
 

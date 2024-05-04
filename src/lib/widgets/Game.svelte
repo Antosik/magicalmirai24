@@ -11,6 +11,7 @@
   import SongInfo from '$lib/game/SongInfo.svelte';
   import { START_SONG_DELAY } from '$lib/game/constants';
   import { isRealPause } from '$lib/game/utils';
+  import Results from '../game/Results.svelte';
 
   export let playerNode: HTMLElement;
   export let errorNode: HTMLElement;
@@ -24,6 +25,7 @@
   let timeout: ReturnType<typeof setTimeout>;
   let restart = 0;
   let visibilityState: DocumentVisibilityState;
+  let done = false;
 
   $: pause = $songState === 'paused' && isRealPause(player);
   $: song = songs[$songId];
@@ -51,20 +53,19 @@
   }
 
   function pauseGame() {
-    pause = true;
     timer = 0;
+    done = false;
     player?.requestPause();
     clearTimeout(timeout);
   }
 
   function resumeGame() {
-    pause = false;
     timer = START_SONG_DELAY / 1e3;
+    done = false;
     startTimer(timer);
   }
 
   function stopGame() {
-    pause = false;
     timer = 0;
     player?.requestStop();
     clearTimeout(timeout);
@@ -82,9 +83,14 @@
     page.set('main_page');
   }
 
+  async function handleSongEnded() {
+    pauseGame();
+    done = true;
+  }
+
   /** If user is alt+tab'ed during the game - pause it */
   const handleVisibilityChange = (e: Event & { currentTarget: Document }) => {
-    if (e.currentTarget.hidden && $manageability === 'full') {
+    if (e.currentTarget.hidden && $manageability === 'full' && !done) {
       pauseGame();
     }
   };
@@ -94,15 +100,28 @@
 
 {#if $readiness.timer}
   {#key restart}
-    <Game {errorNode} {playerNode} pause={Boolean(pause || timer)} />
+    <Game
+      {errorNode}
+      {playerNode}
+      {done}
+      pause={Boolean(pause || timer || done)}
+      on:ended={handleSongEnded}
+    />
   {/key}
 
   {#if $manageability === 'full'}
-    <Pause open={pause} on:resume={resumeGame} on:restart={restartGame} on:back={backToMenu} />
+    <Pause
+      open={pause && !done}
+      on:resume={resumeGame}
+      on:restart={restartGame}
+      on:back={backToMenu}
+    />
 
     {#if !pause && !timer}
       <PauseButton on:click={pauseGame} />
     {/if}
+
+    <Results open={done} on:restart={restartGame} on:back={backToMenu} />
 
     {#if timer}
       <div>
