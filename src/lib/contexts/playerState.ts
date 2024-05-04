@@ -1,27 +1,33 @@
 import type { Readable, Writable } from 'svelte/store';
-import type { Player } from 'textalive-app-api';
+import type { IPlayerApp, Player } from 'textalive-app-api';
 
 import { getContext } from 'svelte';
 import { writable } from 'svelte/store';
 
 import { SongId } from '$lib/songs/types';
 
+/** Contains song info */
 type SongInfo = {
+  /** Author's name */
   artist: string;
+  /** Song title */
   title: string;
 };
 
+/** Contains flags for player's readiness */
 type Readiness = {
+  /** Updates with 'onAppReady' */
   app: boolean;
+  /** Updates with 'onVideoReady' */
   video: boolean;
+  /** Updates with 'onTimerReady' */
   timer: boolean;
 };
 
-type Manageability = {
-  managed: boolean;
-  songUrl: boolean;
-};
+/** Provides knowledge of game manageability by user  */
+type Manageability = 'full' | 'partial' | 'none';
 
+/** Different state for player */
 type SongState = 'none' | 'playing' | 'paused' | 'stopped';
 
 type PlayerState = {
@@ -34,10 +40,20 @@ type PlayerState = {
 
 export const PLAYER_STATE_CONTEXT_KEY = 'playerState';
 
+function calculateManageability(app: IPlayerApp): Manageability {
+  // If not managed app - user can fully control it
+  if (!app.managed) {
+    return 'full';
+  }
+
+  // If app managed and song is provided - no control at all, else we can partially control (select song)
+  return app.songUrl ? 'none' : 'partial';
+}
+
 export function createPlayerStateStore(player: Player): PlayerState {
   const songInfo = writable<SongInfo>({ artist: '', title: '' });
   const readiness = writable<Readiness>({ app: false, video: false, timer: false });
-  const manageability = writable<Manageability>({ managed: false, songUrl: false });
+  const manageability = writable<Manageability>('full');
   const songState = writable<SongState>('none');
   const song = writable<SongId>(SongId.SUPERHERO);
 
@@ -48,9 +64,10 @@ export function createPlayerStateStore(player: Player): PlayerState {
         $state.app = true;
         return $state;
       });
-      manageability.set({
-        managed: app.managed,
-        songUrl: Boolean(app.songUrl),
+
+      manageability.update(($state) => {
+        const newState = calculateManageability(app);
+        return $state === newState ? $state : newState;
       });
     },
     // Set song info on video loaded & video readiness

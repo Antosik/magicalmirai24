@@ -37,6 +37,10 @@ export function createGameStore(player: Player): Game {
 
   player.addListener({
     // reset chars on audio stop
+    onVideoReady() {
+      chars.set(new Map());
+    },
+    // reset chars on audio stop
     onStop() {
       chars.set(new Map());
     },

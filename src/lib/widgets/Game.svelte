@@ -6,7 +6,6 @@
   import { getPage } from '$lib/contexts/page';
   import { getPlayerInstance } from '$lib/contexts/player';
   import { getPlayerState } from '$lib/contexts/playerState';
-  import { getSettings } from '$lib/contexts/settings';
   import Game from '$lib/game/Game.svelte';
   import Pause from '$lib/game/Pause.svelte';
   import SongInfo from '$lib/textalive/SongInfo.svelte';
@@ -14,32 +13,24 @@
   export let playerNode: HTMLElement;
   export let errorNode: HTMLElement;
 
-  const { song: songId } = getPlayerState();
-  const settings = getSettings();
+  const { song: songId, manageability, readiness, songState } = getPlayerState();
   const page = getPage();
   const { chars } = getGame();
   const player = getPlayerInstance();
   const START_SONG_DELAY = 3e3; // 3s
 
-  let pause = false;
-  let songReady = false;
   let timer = START_SONG_DELAY / 1e3;
   let timeout: ReturnType<typeof setTimeout>;
   let restart = 0;
   let visibilityState: DocumentVisibilityState;
 
-  $: player.volume = $settings.volume;
-
-  const song = songs[$songId];
-  player.createFromSongUrl(song.url, {
-    video: song.video,
-  });
-  player.addListener({
-    onTimerReady: () => {
-      songReady = true;
-      resumeGame();
-    },
-  });
+  $: pause = $songState === 'paused';
+  $: song = songs[$songId];
+  $: $manageability !== 'none' &&
+    player.createFromSongUrl(song.url, {
+      video: song.video,
+    });
+  $: $readiness.timer && resumeGame();
 
   function startTimer(i: number) {
     if (i === 0) {
@@ -91,7 +82,7 @@
   }
 
   const handleVisibilityChange = (e: Event & { currentTarget: Document }) => {
-    if (e.currentTarget.hidden) {
+    if (e.currentTarget.hidden && $manageability === 'full') {
       pauseGame();
     }
   };
@@ -99,21 +90,23 @@
 
 <svelte:document bind:visibilityState on:visibilitychange={handleVisibilityChange} />
 
-{#if songReady}
+{#if $readiness.timer}
   {#key restart}
     <Game {errorNode} {playerNode} pause={Boolean(pause || timer)} />
   {/key}
 
-  <Pause open={pause} on:resume={resumeGame} on:restart={restartGame} on:back={backToMenu} />
+  {#if $manageability === 'full'}
+    <Pause open={pause} on:resume={resumeGame} on:restart={restartGame} on:back={backToMenu} />
 
-  {#if !pause && !timer}
-    <PauseButton on:click={pauseGame} />
-  {/if}
+    {#if !pause && !timer}
+      <PauseButton on:click={pauseGame} />
+    {/if}
 
-  {#if timer}
-    <div>
-      {timer}
-    </div>
+    {#if timer}
+      <div>
+        {timer}
+      </div>
+    {/if}
   {/if}
 {:else}
   <div>Loading song...</div>

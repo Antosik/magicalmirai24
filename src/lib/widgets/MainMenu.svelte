@@ -8,7 +8,7 @@
 
   const settings = getSettings();
   const page = getPage();
-  const { song } = getPlayerState();
+  const { song, manageability } = getPlayerState();
 </script>
 
 <section>
@@ -33,9 +33,11 @@
   </ul>
 </section>
 
-<div class="volume">
-  <Volume bind:value={$settings.volume} />
-</div>
+{#if $manageability === 'full'}
+  <div class="volume">
+    <Volume bind:value={$settings.volume} />
+  </div>
+{/if}
 
 <style lang="scss">
   section {

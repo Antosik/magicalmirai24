@@ -22,7 +22,7 @@ export function createSettingsStore(player: Player): Writable<Settings> {
   player.addListener({
     onAppParameterUpdate<T extends keyof Settings>(name: T, value: Settings[T]) {
       store.update(($store) => {
-        $store[name] = value || DEFAULT_SETTINGS[name];
+        $store[name] = value ?? DEFAULT_SETTINGS[name];
         return $store;
       });
     },
