@@ -8,7 +8,9 @@
   import { getPlayerState } from '$lib/contexts/playerState';
   import Game from '$lib/game/Game.svelte';
   import Pause from '$lib/game/Pause.svelte';
-  import SongInfo from '$lib/textalive/SongInfo.svelte';
+  import SongInfo from '$lib/game/SongInfo.svelte';
+  import { START_SONG_DELAY } from '$lib/game/constants';
+  import { isRealPause } from '$lib/game/utils';
 
   export let playerNode: HTMLElement;
   export let errorNode: HTMLElement;
@@ -17,14 +19,13 @@
   const page = getPage();
   const { chars } = getGame();
   const player = getPlayerInstance();
-  const START_SONG_DELAY = 3e3; // 3s
 
   let timer = START_SONG_DELAY / 1e3;
   let timeout: ReturnType<typeof setTimeout>;
   let restart = 0;
   let visibilityState: DocumentVisibilityState;
 
-  $: pause = $songState === 'paused';
+  $: pause = $songState === 'paused' && isRealPause(player);
   $: song = songs[$songId];
   $: $manageability !== 'none' &&
     player.createFromSongUrl(song.url, {
@@ -81,6 +82,7 @@
     page.set('main_page');
   }
 
+  /** If user is alt+tab'ed during the game - pause it */
   const handleVisibilityChange = (e: Event & { currentTarget: Document }) => {
     if (e.currentTarget.hidden && $manageability === 'full') {
       pauseGame();

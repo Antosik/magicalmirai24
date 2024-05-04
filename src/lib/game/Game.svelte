@@ -1,9 +1,12 @@
 <script lang="ts">
+  import type { Char } from './types';
   import type { IChar, IChord } from 'textalive-app-api';
 
-  import { getGame, type Char } from '$lib/contexts/game';
+  import { getGame } from '$lib/contexts/game';
   import { getPlayerInstance } from '$lib/contexts/player';
-  import { calculateActiveColor, calculateCharYPosition, isIntersecting } from '$lib/utils/game';
+  import { calculateActiveColor, calculateCharYPosition, isIntersecting } from '$lib/game/utils';
+
+  import { CharState } from './constants';
 
   export let playerNode: HTMLElement;
   export let errorNode: HTMLElement;
@@ -41,7 +44,7 @@
             amplitude,
             color: activeColor,
             text: current.text,
-            state: 0,
+            state: CharState.IN_PROGRESS,
           });
           c = current;
         }
@@ -80,12 +83,12 @@
           continue;
         }
         if (isIntersecting(playerNode, charNode)) {
-          setCharState(id, 1);
+          setCharState(id, CharState.CATCHED);
           delete charNodes[id];
           continue;
         }
         if (isIntersecting(errorNode, charNode)) {
-          setCharState(id, -1);
+          setCharState(id, CharState.MISSED);
           delete charNodes[id];
           continue;
         }
@@ -97,7 +100,7 @@
 </script>
 
 {#each $chars as [id, char] (id)}
-  {#if char.state === 0}
+  {#if char.state === CharState.IN_PROGRESS}
     <div
       class="char char--color-{char.color}"
       class:playing={!pause}
@@ -127,15 +130,15 @@
     user-select: none;
     will-change: right;
 
-    &--color-1 {
+    &--color-dark {
       color: #1e5b64;
     }
 
-    &--color-2 {
+    &--color-red {
       color: #dc2b4d;
     }
 
-    &--color-3 {
+    &--color-white {
       color: #fff;
     }
 
