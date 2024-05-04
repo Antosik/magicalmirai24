@@ -1,60 +1,26 @@
-import type { Readable, Writable } from 'svelte/store';
-import type { IPlayerApp, Player } from 'textalive-app-api';
+import type { Player } from 'textalive-app-api';
 
 import { getContext } from 'svelte';
 import { writable } from 'svelte/store';
 
 import { SongId } from '$lib/songs/types';
 
-/** Contains song info */
-type SongInfo = {
-  /** Author's name */
-  artist: string;
-  /** Song title */
-  title: string;
-};
-
-/** Contains flags for player's readiness */
-type Readiness = {
-  /** Updates with 'onAppReady' */
-  app: boolean;
-  /** Updates with 'onVideoReady' */
-  video: boolean;
-  /** Updates with 'onTimerReady' */
-  timer: boolean;
-};
-
-/** Provides knowledge of game manageability by user  */
-type Manageability = 'full' | 'partial' | 'none';
-
-/** Different state for player */
-type SongState = 'none' | 'playing' | 'paused' | 'stopped';
-
-type PlayerState = {
-  songInfo: Readable<SongInfo>;
-  readiness: Readable<Readiness>;
-  manageability: Readable<Manageability>;
-  songState: Readable<SongState>;
-  song: Writable<SongId>;
-};
+import {
+  SongState,
+  Manageability,
+  type PlayerStateContext,
+  type Readiness,
+  type SongInfo,
+} from './types';
+import { calculateManageability } from './utils';
 
 export const PLAYER_STATE_CONTEXT_KEY = 'playerState';
 
-function calculateManageability(app: IPlayerApp): Manageability {
-  // If not managed app - user can fully control it
-  if (!app.managed) {
-    return 'full';
-  }
-
-  // If app managed and song is provided - no control at all, else we can partially control (select song)
-  return app.songUrl ? 'none' : 'partial';
-}
-
-export function createPlayerStateStore(player: Player): PlayerState {
+export function createPlayerStateStore(player: Player): PlayerStateContext {
   const songInfo = writable<SongInfo>({ artist: '', title: '' });
   const readiness = writable<Readiness>({ app: false, video: false, timer: false });
-  const manageability = writable<Manageability>('full');
-  const songState = writable<SongState>('none');
+  const manageability = writable<Manageability>(Manageability.FULL);
+  const songState = writable<SongState>(SongState.NONE);
   const song = writable<SongId>(SongId.SUPERHERO);
 
   player.addListener({
@@ -93,16 +59,16 @@ export function createPlayerStateStore(player: Player): PlayerState {
         $state.timer = false;
         return $state;
       });
-      songState.set('none');
+      songState.set(SongState.NONE);
     },
     onPlay() {
-      songState.set('playing');
+      songState.set(SongState.PLAYING);
     },
     onPause() {
-      songState.set('paused');
+      songState.set(SongState.PAUSED);
     },
     onStop() {
-      songState.set('stopped');
+      songState.set(SongState.STOPPED);
     },
   });
 
@@ -115,4 +81,6 @@ export function createPlayerStateStore(player: Player): PlayerState {
   };
 }
 
-export const getPlayerState = () => getContext<PlayerState>(PLAYER_STATE_CONTEXT_KEY);
+export const getPlayerState = () => getContext<PlayerStateContext>(PLAYER_STATE_CONTEXT_KEY);
+
+export { Manageability, SongState };

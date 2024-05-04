@@ -2,8 +2,8 @@
   import { songs } from '$lib/songs';
 
   import Volume from '$lib/blocks/Volume.svelte';
-  import { getPage } from '$lib/contexts/page';
-  import { getPlayerState } from '$lib/contexts/playerState';
+  import { Page, getPage } from '$lib/contexts/page';
+  import { Manageability, getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
 
   const settings = getSettings();
@@ -22,18 +22,18 @@
 
   <ul>
     <li>
-      <button type="button" on:click={() => ($page = 'game')}>Play</button>
+      <button type="button" on:click={() => ($page = Page.GAME)}>Play</button>
     </li>
     <li>
-      <button type="button" on:click={() => ($page = 'help')}>Help</button>
+      <button type="button" on:click={() => ($page = Page.HELP)}>Help</button>
     </li>
     <li>
-      <button type="button" on:click={() => ($page = 'credits')}>Credits</button>
+      <button type="button" on:click={() => ($page = Page.CREDITS)}>Credits</button>
     </li>
   </ul>
 </section>
 
-{#if $manageability === 'full'}
+{#if $manageability === Manageability.FULL}
   <div class="volume">
     <Volume bind:value={$settings.volume} />
   </div>

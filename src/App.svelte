@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { getPage } from '$lib/contexts/page';
-  import { getPlayerState } from '$lib/contexts/playerState';
+  import { Page, getPage } from '$lib/contexts/page';
+  import { Manageability, getPlayerState } from '$lib/contexts/playerState';
   import Credits from '$lib/widgets/Credits.svelte';
   import Game from '$lib/widgets/Game.svelte';
   import Help from '$lib/widgets/Help.svelte';
@@ -15,13 +15,13 @@
 <Scene let:errorNode let:playerNode>
   {#if !$readiness.app}
     App loading...
-  {:else if $manageability === 'none' || $page === 'game'}
+  {:else if $manageability === Manageability.NONE || $page === Page.GAME}
     <Game {errorNode} {playerNode} />
-  {:else if $page === 'main_page'}
+  {:else if $page === Page.MAIN_PAGE}
     <MainMenu />
-  {:else if $page === 'credits'}
+  {:else if $page === Page.CREDITS}
     <Credits />
-  {:else if $page === 'help'}
+  {:else if $page === Page.HELP}
     <Help />
   {/if}
 </Scene>

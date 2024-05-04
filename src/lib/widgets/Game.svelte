@@ -3,9 +3,9 @@
 
   import PauseButton from '$lib/blocks/PauseButton.svelte';
   import { getGame } from '$lib/contexts/game';
-  import { getPage } from '$lib/contexts/page';
+  import { Page, getPage } from '$lib/contexts/page';
   import { getPlayerInstance } from '$lib/contexts/player';
-  import { getPlayerState } from '$lib/contexts/playerState';
+  import { Manageability, SongState, getPlayerState } from '$lib/contexts/playerState';
   import Game from '$lib/game/Game.svelte';
   import Pause from '$lib/game/Pause.svelte';
   import SongInfo from '$lib/game/SongInfo.svelte';
@@ -27,9 +27,9 @@
   let visibilityState: DocumentVisibilityState;
   let done = false;
 
-  $: pause = $songState === 'paused' && isRealPause(player);
+  $: pause = $songState === SongState.PAUSED && isRealPause(player);
   $: song = songs[$songId];
-  $: $manageability !== 'none' &&
+  $: $manageability !== Manageability.NONE &&
     player.createFromSongUrl(song.url, {
       video: song.video,
     });
@@ -80,7 +80,7 @@
 
   async function backToMenu() {
     stopGame();
-    page.set('main_page');
+    page.set(Page.MAIN_PAGE);
   }
 
   async function handleSongEnded() {
@@ -90,7 +90,7 @@
 
   /** If user is alt+tab'ed during the game - pause it */
   const handleVisibilityChange = (e: Event & { currentTarget: Document }) => {
-    if (e.currentTarget.hidden && $manageability === 'full' && !done) {
+    if (e.currentTarget.hidden && $manageability === Manageability.FULL && !done) {
       pauseGame();
     }
   };
@@ -109,7 +109,7 @@
     />
   {/key}
 
-  {#if $manageability === 'full'}
+  {#if $manageability === Manageability.FULL}
     <Pause
       open={pause && !done}
       on:resume={resumeGame}

@@ -1,24 +1,15 @@
-import type { Readable, Writable } from 'svelte/store';
+import type { Chars, GameContext } from './types';
 import type { Player } from 'textalive-app-api';
 
 import { getContext } from 'svelte';
 import { derived, writable } from 'svelte/store';
 
 import { CharState } from '$lib/game/constants';
-import type { Char } from '$lib/game/types';
-
-type Chars = Map<Char['id'], Char>;
-
-type Game = {
-  chars: Writable<Chars>;
-  catched: Readable<Char[]>;
-  missed: Readable<Char[]>;
-};
 
 export const GAME_CONTEXT_KEY = 'game';
 
-export function createGameStore(player: Player): Game {
-  const chars = writable<Map<Char['id'], Char>>(new Map());
+export function createGameStore(player: Player): GameContext {
+  const chars = writable<Chars>(new Map());
   const catched = derived(
     chars,
     ($charsStore) =>
@@ -54,4 +45,4 @@ export function createGameStore(player: Player): Game {
   };
 }
 
-export const getGame = () => getContext<Game>(GAME_CONTEXT_KEY);
+export const getGame = () => getContext<GameContext>(GAME_CONTEXT_KEY);

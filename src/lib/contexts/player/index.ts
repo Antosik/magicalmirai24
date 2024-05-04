@@ -1,7 +1,7 @@
 import { getContext } from 'svelte';
 import * as TextAliveApp from 'textalive-app-api';
 
-import { DEFAULT_SETTINGS } from './settings';
+import { DEFAULT_SETTINGS } from '../settings';
 
 export const PLAYER_CONTEXT_KEY = 'player';
 
