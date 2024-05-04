@@ -4,13 +4,8 @@ import type { Player } from 'textalive-app-api';
 import { getContext } from 'svelte';
 import { derived, writable } from 'svelte/store';
 
-export type Char = {
-  id: string;
-  text: string;
-  amplitude: number;
-  color: 1 | 2 | 3; // 1 dark, 2 red, 3 white
-  state?: -1 | 0 | 1; // -1 (missed), 0 (on game), 1 (catched)
-};
+import { CharState } from '$lib/game/constants';
+import type { Char } from '$lib/game/types';
 
 type Chars = Map<Char['id'], Char>;
 
@@ -26,25 +21,27 @@ export function createGameStore(player: Player): Game {
   const chars = writable<Map<Char['id'], Char>>(new Map());
   const catched = derived(
     chars,
-    ($charsStore) => Array.from($charsStore.values()).filter((char) => char.state === 1),
+    ($charsStore) =>
+      Array.from($charsStore.values()).filter((char) => char.state === CharState.CATCHED),
     [],
   );
   const missed = derived(
     chars,
-    ($charsStore) => Array.from($charsStore.values()).filter((char) => char.state === -1),
+    ($charsStore) =>
+      Array.from($charsStore.values()).filter((char) => char.state === CharState.MISSED),
     [],
   );
 
   player.addListener({
-    // reset chars on audio stop
+    // Reset chars on video readiness
     onVideoReady() {
       chars.set(new Map());
     },
-    // reset chars on audio stop
+    // Reset chars on audio stop
     onStop() {
       chars.set(new Map());
     },
-    // reset chars on audio change
+    // Reset chars on audio change
     onAppMediaChange() {
       chars.set(new Map());
     },

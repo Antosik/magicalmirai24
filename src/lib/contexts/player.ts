@@ -22,7 +22,7 @@ export function createPlayerInstance(): TextAliveApp.Player {
           title: 'Speed',
           name: 'speed',
           className: 'Slider',
-          params: [0, 100],
+          params: [0, 25],
           initialValue: DEFAULT_SETTINGS.speed,
         },
       ],

@@ -16,7 +16,7 @@ function getLocalStorageValue<T>(key: string): T | undefined {
 export function saveable<T>(key: string, defaultValue: T): Writable<T> {
   const value = getLocalStorageValue<T>(key) || defaultValue;
 
-  const store = writable<T>(value);
+  const store = writable<T>({ ...defaultValue, ...value });
   store.subscribe(($value) => {
     localStorage.setItem(key, JSON.stringify($value));
   });

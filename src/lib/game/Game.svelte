@@ -1,29 +1,45 @@
 <script lang="ts">
+  import type { Char } from './types';
   import type { IChar, IChord } from 'textalive-app-api';
 
-  import { getGame, type Char } from '$lib/contexts/game';
+  import { createEventDispatcher } from 'svelte';
+
+  import { getGame } from '$lib/contexts/game';
   import { getPlayerInstance } from '$lib/contexts/player';
-  import { calculateActiveColor, calculateCharYPosition, isIntersecting } from '$lib/utils/game';
+  import { getSettings } from '$lib/contexts/settings';
+  import { calculateActiveColor, calculateCharYPosition, isIntersecting } from '$lib/game/utils';
+  import { convertSpeedToDuration } from '$lib/utils/settings';
+
+  import { CharState } from './constants';
 
   export let playerNode: HTMLElement;
   export let errorNode: HTMLElement;
   export let pause: boolean = false;
+  export let done: boolean = false;
+
+  const dispatch = createEventDispatcher();
 
   const player = getPlayerInstance();
+  const settings = getSettings();
   const { chars } = getGame();
 
   const maxAmplitude = player.getMaxVocalAmplitude();
 
+  $: animationDuration = convertSpeedToDuration($settings.speed);
+
   let c: IChar;
   let chord: IChord;
   let charNodes: Record<string, HTMLElement> = {};
-  let done = false;
-
   let activeColor: Char['color'];
 
   player.addListener({
     onTimeUpdate(position) {
       if (!player.video.firstChar) {
+        return;
+      }
+
+      if (position > player.video.endTime + animationDuration) {
+        dispatch('ended');
         return;
       }
 
@@ -41,7 +57,7 @@
             amplitude,
             color: activeColor,
             text: current.text,
-            state: 0,
+            state: CharState.IN_PROGRESS,
           });
           c = current;
         }
@@ -80,12 +96,12 @@
           continue;
         }
         if (isIntersecting(playerNode, charNode)) {
-          setCharState(id, 1);
+          setCharState(id, CharState.CATCHED);
           delete charNodes[id];
           continue;
         }
         if (isIntersecting(errorNode, charNode)) {
-          setCharState(id, -1);
+          setCharState(id, CharState.MISSED);
           delete charNodes[id];
           continue;
         }
@@ -97,13 +113,14 @@
 </script>
 
 {#each $chars as [id, char] (id)}
-  {#if char.state === 0}
+  {#if char.state === CharState.IN_PROGRESS}
     <div
       class="char char--color-{char.color}"
       class:playing={!pause}
       id={char.id}
       bind:this={charNodes[char.id]}
       style:top="{calculateCharYPosition(char.amplitude, maxAmplitude)}%"
+      style:--duration="${animationDuration}ms"
     >
       {char.text}
     </div>
@@ -117,7 +134,7 @@
     position: absolute;
     right: 0%;
     animation-delay: 100ms;
-    animation-duration: 2s;
+    animation-duration: var(--duration);
     animation-iteration-count: 1;
     animation-name: flyingchar;
     animation-play-state: paused;
@@ -127,15 +144,15 @@
     user-select: none;
     will-change: right;
 
-    &--color-1 {
+    &--color-dark {
       color: #1e5b64;
     }
 
-    &--color-2 {
+    &--color-red {
       color: #dc2b4d;
     }
 
-    &--color-3 {
+    &--color-white {
       color: #fff;
     }
 
