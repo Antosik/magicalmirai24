@@ -25,7 +25,7 @@
 
   const maxAmplitude = player.getMaxVocalAmplitude();
 
-  $: animationDuration = `${convertSpeedToDuration($settings.speed)}ms`;
+  $: animationDuration = convertSpeedToDuration($settings.speed);
 
   let c: IChar;
   let chord: IChord;
@@ -38,7 +38,7 @@
         return;
       }
 
-      if (position > player.video.endTime) {
+      if (position > player.video.endTime + animationDuration) {
         dispatch('ended');
         return;
       }
@@ -120,7 +120,7 @@
       id={char.id}
       bind:this={charNodes[char.id]}
       style:top="{calculateCharYPosition(char.amplitude, maxAmplitude)}%"
-      style:--duration={animationDuration}
+      style:--duration="${animationDuration}ms"
     >
       {char.text}
     </div>
