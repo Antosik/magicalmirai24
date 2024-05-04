@@ -58,8 +58,8 @@
   div {
     @include flex_center;
 
-    gap: grid(1);
     font-size: 20px;
+    gap: grid(1);
   }
 
   span {
