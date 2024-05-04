@@ -1,42 +1,39 @@
-import { getContext, setContext } from 'svelte';
-import { writable, type Writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
+import type { Player } from 'textalive-app-api';
 
-import { SongId } from '$lib/songs/types';
+import { getContext } from 'svelte';
+
+import { saveable } from '../utils/saveable';
 
 export type Settings = {
-  song: SongId;
   volume: number;
-};
-
-const DEFAULT_SETTINGS = { song: SongId.SUPERHERO, volume: 100 };
-const SETTINGS_LOCALSTORAGE_KEY = 'mm24_settings';
-
-const loadSavedSettings = () => {
-  try {
-    const savedSettingsStr = localStorage.getItem(SETTINGS_LOCALSTORAGE_KEY);
-    if (!savedSettingsStr) {
-      return DEFAULT_SETTINGS;
-    }
-
-    const savedSettings = JSON.parse(savedSettingsStr) as Settings;
-    return {
-      ...DEFAULT_SETTINGS,
-      song: savedSettings.song ?? DEFAULT_SETTINGS.song,
-      volume: savedSettings.volume ?? DEFAULT_SETTINGS.volume,
-    };
-  } catch {
-    return DEFAULT_SETTINGS;
-  }
+  speed: number;
 };
 
 export const SETTINGS_CONTEXT_KEY = 'settings';
 
-export const initSettingsContext = () => {
-  const settingsStore = writable(loadSavedSettings());
-  settingsStore.subscribe(($settings) => {
-    localStorage.setItem(SETTINGS_LOCALSTORAGE_KEY, JSON.stringify($settings));
+const SETTINGS_LOCALSTORAGE_KEY = 'mm24_settings';
+export const DEFAULT_SETTINGS = { volume: 100, speed: 1 / 2 };
+
+export function createSettingsStore(player: Player): Writable<Settings> {
+  const store = saveable<Settings>(SETTINGS_LOCALSTORAGE_KEY, DEFAULT_SETTINGS);
+
+  // Update settings on host update
+  player.addListener({
+    onAppParameterUpdate<T extends keyof Settings>(name: T, value: Settings[T]) {
+      store.update(($store) => {
+        $store[name] = value || DEFAULT_SETTINGS[name];
+        return $store;
+      });
+    },
   });
 
-  setContext(SETTINGS_CONTEXT_KEY, settingsStore);
-};
+  // Update player volume on volume in store update
+  store.subscribe(($store) => {
+    player.volume = $store.volume;
+  });
+
+  return store;
+}
+
 export const getSettings = () => getContext<Writable<Settings>>(SETTINGS_CONTEXT_KEY);
