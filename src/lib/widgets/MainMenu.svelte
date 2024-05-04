@@ -2,19 +2,19 @@
   import { songs } from '$lib/songs';
 
   import Volume from '$lib/blocks/Volume.svelte';
-  import { getPlayer } from '$lib/contexts/player';
+  import { getPage } from '$lib/contexts/page';
+  import { getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
 
   const settings = getSettings();
-  const player = getPlayer();
-
-  $: $player.volume = $settings.volume;
+  const page = getPage();
+  const { song, manageability } = getPlayerState();
 </script>
 
 <section>
   <h1>Main Menu</h1>
 
-  <select bind:value={$settings.song}>
+  <select bind:value={$song}>
     {#each Object.entries(songs) as [songId, song] (songId)}
       <option value={songId}>{song.artist} - {song.title}</option>
     {/each}
@@ -22,20 +22,22 @@
 
   <ul>
     <li>
-      <a href="/game">Play</a>
+      <button type="button" on:click={() => ($page = 'game')}>Play</button>
     </li>
     <li>
-      <a href="/help">Help</a>
+      <button type="button" on:click={() => ($page = 'help')}>Help</button>
     </li>
     <li>
-      <a href="/credits">Credits</a>
+      <button type="button" on:click={() => ($page = 'credits')}>Credits</button>
     </li>
   </ul>
 </section>
 
-<div class="volume">
-  <Volume bind:value={$settings.volume} />
-</div>
+{#if $manageability === 'full'}
+  <div class="volume">
+    <Volume bind:value={$settings.volume} />
+  </div>
+{/if}
 
 <style lang="scss">
   section {
@@ -65,9 +67,10 @@
     gap: grid(2);
   }
 
-  a {
+  button {
     @include flex_center;
 
+    width: 100%;
     padding: grid(2) grid(4);
     border: 1px solid black;
   }

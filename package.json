@@ -5,7 +5,6 @@
 		"dev": "vite --port 3001",
 		"build": "vite build",
 		"build:dev": "vite build --mode development",
-		"postinstall": "npm run kit:sync",
 		"preview": "vite preview --port 3001",
 		"lint": "concurrently -g \"npm:lint:svelte\" \"npm:lint:ts\" \"npm:lint:eslint\" \"npm:lint:css\"",
 		"lint:fix": "concurrently -g \"npm:lint:svelte\" \"npm:lint:ts\" \"npm:lint:eslint:fix\" \"npm:lint:css:fix\"",
@@ -15,17 +14,16 @@
 		"lint:ts": "tsc --noemit",
 		"lint:eslint": "eslint \"src/**/*.{svelte,js,mjs,cjs,ts}\"",
 		"lint:eslint:fix": "eslint \"src/**/*.{svelte,js,mjs,cjs,ts}\" --fix",
-		"format": "prettier --write --plugin prettier-plugin-svelte \"src/**/*.{svelte,js,cjs,mjs,ts,css,scss,html,json}\"",
-		"kit:sync": "svelte-kit sync"
+		"format": "prettier --write --plugin prettier-plugin-svelte \"src/**/*.{svelte,js,cjs,mjs,ts,css,scss,html,json}\""
 	},
 	"dependencies": {
 		"feather-icons": "4.29.1",
 		"textalive-app-api": "0.3.2"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-static": "3.0.1",
-		"@sveltejs/kit": "2.5.7",
+		"@sveltejs/vite-plugin-svelte": "3.1.0",
 		"@total-typescript/ts-reset": "0.5.1",
+		"@tsconfig/svelte": "5.0.4",
 		"@types/feather-icons": "4.29.4",
 		"@types/node": "20.12.7",
 		"@typescript-eslint/eslint-plugin": "7.7.0",

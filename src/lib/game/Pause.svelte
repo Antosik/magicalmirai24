@@ -9,17 +9,13 @@
   export let open = false;
 
   const settings = getSettings();
-  const game = getGame();
+  const { chars, catched, missed } = getGame();
 
   const dispatch = createEventDispatcher<{
     resume: void;
     restart: void;
     back: void;
   }>();
-
-  $: total = $game.chars.size;
-  $: catched = Array.from($game.chars.values()).filter((el) => el.state === 1).length;
-  $: missed = Array.from($game.chars.values()).filter((el) => el.state === -1).length;
 </script>
 
 {#if open}
@@ -27,9 +23,9 @@
     <h2>Pause</h2>
 
     <div>
-      <span class="total">total: {total}</span> /
-      <span class="catched">ok: {catched}</span> /
-      <span class="missed">miss: {missed}</span>
+      <span class="total">total: {$chars.size}</span> /
+      <span class="catched">ok: {$catched.length}</span> /
+      <span class="missed">miss: {$missed.length}</span>
     </div>
 
     <ul>

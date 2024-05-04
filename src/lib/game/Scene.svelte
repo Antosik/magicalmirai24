@@ -27,7 +27,13 @@
   <slot ready={sceneReady} {errorNode} {playerNode} />
 </main>
 
-<style>
+<style lang="scss">
+  main {
+    width: 100%;
+    height: 100%;
+    background-color: #00cfc3;
+  }
+
   .error,
   .player {
     user-select: none;

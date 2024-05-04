@@ -1,156 +1,129 @@
 <script lang="ts">
-  import type { IChar, IChord } from 'textalive-app-api';
+  import { songs } from '$lib/songs';
 
-  import { getGame, type Char } from '$lib/contexts/game';
-  import { getPlayer } from '$lib/contexts/player';
-  import { calculateActiveColor, calculateCharYPosition, isIntersecting } from '$lib/utils/game';
+  import PauseButton from '$lib/blocks/PauseButton.svelte';
+  import { getGame } from '$lib/contexts/game';
+  import { getPage } from '$lib/contexts/page';
+  import { getPlayerInstance } from '$lib/contexts/player';
+  import { getPlayerState } from '$lib/contexts/playerState';
+  import Game from '$lib/game/Game.svelte';
+  import Pause from '$lib/game/Pause.svelte';
+  import SongInfo from '$lib/textalive/SongInfo.svelte';
 
   export let playerNode: HTMLElement;
   export let errorNode: HTMLElement;
-  export let pause: boolean = false;
 
-  const player = getPlayer();
-  const game = getGame();
+  const { song: songId, manageability, readiness, songState } = getPlayerState();
+  const page = getPage();
+  const { chars } = getGame();
+  const player = getPlayerInstance();
+  const START_SONG_DELAY = 3e3; // 3s
 
-  const maxAmplitude = $player.getMaxVocalAmplitude();
+  let timer = START_SONG_DELAY / 1e3;
+  let timeout: ReturnType<typeof setTimeout>;
+  let restart = 0;
+  let visibilityState: DocumentVisibilityState;
 
-  let c: IChar;
-  let chord: IChord;
-  let charNodes: Record<string, HTMLElement> = {};
-  let done = false;
-
-  let activeColor: Char['color'];
-
-  $player.addListener({
-    onTimeUpdate(position) {
-      if (!$player.video.firstChar) {
-        return;
-      }
-
-      const amplitude = $player.getVocalAmplitude(position);
-      const currentChord = $player.findChord(position);
-
-      activeColor = calculateActiveColor(activeColor, chord, currentChord);
-      chord = currentChord;
-
-      let current = c || $player.video.firstChar;
-      while (current && current.startTime < position + 500) {
-        if (c !== current) {
-          createChar({
-            id: `${position}.${current.text}`,
-            amplitude,
-            color: activeColor,
-            text: current.text,
-            state: 0,
-          });
-          c = current;
-        }
-        current = current.next;
-      }
-    },
-  });
-
-  function createChar(char: Char) {
-    game.update(($game) => {
-      $game.chars.set(char.id, char);
-      return $game;
+  $: pause = $songState === 'paused';
+  $: song = songs[$songId];
+  $: $manageability !== 'none' &&
+    player.createFromSongUrl(song.url, {
+      video: song.video,
     });
-  }
+  $: $readiness.timer && resumeGame();
 
-  function setCharState(charId: Char['id'], state: Char['state']) {
-    game.update(($game) => {
-      const char = $game.chars.get(charId);
-      if (char) {
-        char.state = state;
+  function startTimer(i: number) {
+    if (i === 0) {
+      if (visibilityState === 'visible') {
+        player?.requestPlay();
+      } else {
+        pauseGame();
       }
-      return $game;
-    });
-  }
-
-  requestAnimationFrame(checkIntersections);
-  function checkIntersections() {
-    if (done) {
       return;
     }
 
-    if (!pause) {
-      for (const [id, charNode] of Object.entries(charNodes)) {
-        if (!charNode) {
-          delete charNodes[id];
-          continue;
-        }
-        if (isIntersecting(playerNode, charNode)) {
-          setCharState(id, 1);
-          delete charNodes[id];
-          continue;
-        }
-        if (isIntersecting(errorNode, charNode)) {
-          setCharState(id, -1);
-          delete charNodes[id];
-          continue;
-        }
-      }
-    }
-
-    requestAnimationFrame(checkIntersections);
+    timeout = setTimeout(() => {
+      timer = i - 1;
+      clearTimeout(timeout);
+      startTimer(timer);
+    }, 1e3);
   }
+
+  function pauseGame() {
+    pause = true;
+    timer = 0;
+    player?.requestPause();
+    clearTimeout(timeout);
+  }
+
+  function resumeGame() {
+    pause = false;
+    timer = START_SONG_DELAY / 1e3;
+    startTimer(timer);
+  }
+
+  function stopGame() {
+    pause = false;
+    timer = 0;
+    player?.requestStop();
+    clearTimeout(timeout);
+    chars.set(new Map());
+    restart++;
+  }
+
+  function restartGame() {
+    stopGame();
+    resumeGame();
+  }
+
+  async function backToMenu() {
+    stopGame();
+    page.set('main_page');
+  }
+
+  const handleVisibilityChange = (e: Event & { currentTarget: Document }) => {
+    if (e.currentTarget.hidden && $manageability === 'full') {
+      pauseGame();
+    }
+  };
 </script>
 
-{#each $game.chars as [id, char] (id)}
-  {#if char.state === 0}
-    <div
-      class="char char--color-{char.color}"
-      class:playing={!pause}
-      id={char.id}
-      bind:this={charNodes[char.id]}
-      style:top="{calculateCharYPosition(char.amplitude, maxAmplitude)}%"
-    >
-      {char.text}
-    </div>
+<svelte:document bind:visibilityState on:visibilitychange={handleVisibilityChange} />
+
+{#if $readiness.timer}
+  {#key restart}
+    <Game {errorNode} {playerNode} pause={Boolean(pause || timer)} />
+  {/key}
+
+  {#if $manageability === 'full'}
+    <Pause open={pause} on:resume={resumeGame} on:restart={restartGame} on:back={backToMenu} />
+
+    {#if !pause && !timer}
+      <PauseButton on:click={pauseGame} />
+    {/if}
+
+    {#if timer}
+      <div>
+        {timer}
+      </div>
+    {/if}
   {/if}
-{/each}
+{:else}
+  <div>Loading song...</div>
+{/if}
+
+<SongInfo />
 
 <style lang="scss">
-  .char {
+  div {
     @include flex_center;
 
     position: absolute;
-    right: 0%;
-    animation-delay: 100ms;
-    animation-duration: 2s;
-    animation-iteration-count: 1;
-    animation-name: flyingchar;
-    animation-play-state: paused;
-    animation-timing-function: linear;
-    font-size: 48px;
-    transform: translateY(-50%) translateZ(0);
-    user-select: none;
-    will-change: right;
-
-    &--color-1 {
-      color: #1e5b64;
-    }
-
-    &--color-2 {
-      color: #dc2b4d;
-    }
-
-    &--color-3 {
-      color: #fff;
-    }
-
-    &.playing {
-      animation-play-state: running;
-    }
-  }
-
-  @keyframes flyingchar {
-    0% {
-      right: 0%;
-    }
-
-    100% {
-      right: 110%;
-    }
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #1e5b64;
+    font-size: 28px;
   }
 </style>
