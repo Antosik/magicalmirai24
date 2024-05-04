@@ -6,7 +6,9 @@
 
   import { getGame } from '$lib/contexts/game';
   import { getPlayerInstance } from '$lib/contexts/player';
+  import { getSettings } from '$lib/contexts/settings';
   import { calculateActiveColor, calculateCharYPosition, isIntersecting } from '$lib/game/utils';
+  import { convertSpeedToDuration } from '$lib/utils/settings';
 
   import { CharState } from './constants';
 
@@ -18,9 +20,12 @@
   const dispatch = createEventDispatcher();
 
   const player = getPlayerInstance();
+  const settings = getSettings();
   const { chars } = getGame();
 
   const maxAmplitude = player.getMaxVocalAmplitude();
+
+  $: animationDuration = `${convertSpeedToDuration($settings.speed)}ms`;
 
   let c: IChar;
   let chord: IChord;
@@ -115,6 +120,7 @@
       id={char.id}
       bind:this={charNodes[char.id]}
       style:top="{calculateCharYPosition(char.amplitude, maxAmplitude)}%"
+      style:--duration={animationDuration}
     >
       {char.text}
     </div>
@@ -128,7 +134,7 @@
     position: absolute;
     right: 0%;
     animation-delay: 100ms;
-    animation-duration: 2s;
+    animation-duration: var(--duration);
     animation-iteration-count: 1;
     animation-name: flyingchar;
     animation-play-state: paused;
