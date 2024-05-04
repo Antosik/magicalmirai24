@@ -1,22 +1,12 @@
 <script lang="ts">
-  import { getPlayer } from '$lib/contexts/player';
+  import { getPlayerState } from '$lib/contexts/playerState';
 
-  const player = getPlayer();
-
-  let title = '';
-  let artist = '';
-
-  $player.addListener({
-    onVideoReady() {
-      title = $player.data.song.name;
-      artist = $player.data.song.artist.name;
-    },
-  });
+  const { songInfo } = getPlayerState();
 </script>
 
-{#if title && artist}
+{#if $songInfo.artist && $songInfo.title}
   <div>
-    {artist} - {title}
+    {$songInfo.artist} - {$songInfo.title}
   </div>
 {/if}
 

@@ -31,7 +31,7 @@ export function createGameStore(player: Player): Game {
   );
   const missed = derived(
     chars,
-    ($charsStore) => Array.from($charsStore.values()).filter((char) => char.state === 1),
+    ($charsStore) => Array.from($charsStore.values()).filter((char) => char.state === -1),
     [],
   );
 
