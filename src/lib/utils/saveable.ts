@@ -13,6 +13,12 @@ function getLocalStorageValue<T>(key: string): T | undefined {
   }
 }
 
+/**
+ * Creates a store instance, that synchronized with localStorage
+ * @param key unique key for localstorage
+ * @param defaultValue default value
+ * @returns Store instance
+ */
 export function saveable<T>(key: string, defaultValue: T): Writable<T> {
   const value = getLocalStorageValue<T>(key) || defaultValue;
 
