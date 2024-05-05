@@ -7,12 +7,8 @@
   import { getPlayerInstance } from '$lib/contexts/player';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
 
-  import {
-    CLOUD_ANIMATION_DURATION_MULTIPLIER,
-    DEFAULT_CLOUD_ANIMATION_DURATION,
-    MAX_CLOUD_ANIMATION_DURATION,
-    MIN_CLOUD_ANIMATION_DURATION,
-  } from './constants';
+  import { DEFAULT_CLOUD_ANIMATION_DURATION } from './constants';
+  import { calculateCloudAnimationDuration } from './utils';
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
@@ -24,15 +20,9 @@
   const listener: PlayerListener = {
     onThrottledTimeUpdate(position: number) {
       const beat = player.findBeat(position, { loose: true });
-      const duration = beat?.duration;
+      const duration = calculateCloudAnimationDuration(beat);
       if (duration) {
-        // Don't want to be animation too fast or too slow - pick maximum or minimum if needed
-        animationDuration.set(
-          Math.max(
-            MIN_CLOUD_ANIMATION_DURATION,
-            Math.min(duration * CLOUD_ANIMATION_DURATION_MULTIPLIER, MAX_CLOUD_ANIMATION_DURATION),
-          ),
-        );
+        animationDuration.set(duration);
       }
     },
     onAppMediaChange() {
