@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Char } from './types';
-  import type { IChar, IChord } from 'textalive-app-api';
+  import type { IChar, IChord, PlayerListener } from 'textalive-app-api';
 
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onDestroy } from 'svelte';
 
   import { getGame } from '$lib/contexts/game';
   import { getPlayerInstance } from '$lib/contexts/player';
@@ -32,7 +32,7 @@
   let charNodes: Record<string, HTMLElement> = {};
   let activeColor: Char['color'];
 
-  player.addListener({
+  const listener: PlayerListener = {
     onTimeUpdate(position) {
       if (!player.video.firstChar) {
         return;
@@ -64,7 +64,8 @@
         current = current.next;
       }
     },
-  });
+  };
+  player.addListener(listener);
 
   function createChar(char: Char) {
     chars.update(($chars) => {
@@ -110,6 +111,10 @@
 
     requestAnimationFrame(checkIntersections);
   }
+
+  onDestroy(() => {
+    player.removeListener(listener);
+  });
 </script>
 
 {#each $chars as [id, char] (id)}

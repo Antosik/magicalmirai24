@@ -1,4 +1,7 @@
 <script lang="ts">
+  import type { PlayerListener } from 'textalive-app-api';
+
+  import { onDestroy } from 'svelte';
   import { spring, tweened } from 'svelte/motion';
 
   import { getPlayerInstance } from '$lib/contexts/player';
@@ -18,7 +21,7 @@
 
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
-  player.addListener({
+  const listener: PlayerListener = {
     onThrottledTimeUpdate(position: number) {
       const beat = player.findBeat(position, { loose: true });
       const duration = beat?.duration;
@@ -38,7 +41,8 @@
     onStop() {
       animationDuration.set(DEFAULT_CLOUD_ANIMATION_DURATION);
     },
-  });
+  };
+  player.addListener(listener);
 
   $: pause = $songState === SongState.PAUSED;
 
@@ -48,6 +52,8 @@
   const handleTouchMove = (e: TouchEvent & { currentTarget: HTMLElement }) => {
     $playerY = e.changedTouches[0].clientY;
   };
+
+  onDestroy(() => player.removeListener(listener));
 </script>
 
 <main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
