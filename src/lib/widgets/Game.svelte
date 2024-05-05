@@ -80,6 +80,7 @@
 
   async function backToMenu() {
     stopGame();
+    songState.set(SongState.NONE);
     page.set(Page.MAIN_PAGE);
   }
 

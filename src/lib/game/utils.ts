@@ -1,6 +1,12 @@
-import type { IChord, Player } from 'textalive-app-api';
+import type { IBeat, IChord, Player } from 'textalive-app-api';
 
-import { CharColor, REAL_PAUSE_DELAY } from './constants';
+import {
+  CLOUD_ANIMATION_DURATION_MULTIPLIER,
+  CharColor,
+  MAX_CLOUD_ANIMATION_DURATION,
+  MIN_CLOUD_ANIMATION_DURATION,
+  REAL_PAUSE_DELAY,
+} from './constants';
 
 /**
  * Sometimes browser pause the song on launch,
@@ -77,4 +83,20 @@ export function calculateActiveColor(
     case CharColor.WHITE:
       return CharColor.DARK;
   }
+}
+
+/**
+ * Calculates the duration of cloud animation
+ * @param beat Beat info
+ * @returns Animation duration (ms)
+ */
+export function calculateCloudAnimationDuration(beat: IBeat): number | undefined {
+  if (!beat?.duration) {
+    return;
+  }
+
+  const duration = Math.floor(beat.duration * CLOUD_ANIMATION_DURATION_MULTIPLIER);
+
+  // Don't want to be animation too fast or too slow - pick maximum or minimum if needed
+  return Math.max(MIN_CLOUD_ANIMATION_DURATION, Math.min(duration, MAX_CLOUD_ANIMATION_DURATION));
 }
