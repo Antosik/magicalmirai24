@@ -12,8 +12,8 @@
 
 <style lang="scss">
   div {
-    z-index: 5;
     position: absolute;
+    z-index: 5;
     right: grid(4);
     bottom: grid(4);
     padding: grid(2) grid(2) grid(2) grid(6);

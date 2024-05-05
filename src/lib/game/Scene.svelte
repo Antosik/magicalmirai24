@@ -85,12 +85,12 @@
 
   .player {
     position: absolute;
+    z-index: 2;
     left: 20px;
     width: 100px;
     height: 50px;
     background: #f3d9a8;
     transform: translateY(-50%);
-    z-index: 2;
   }
 
   .cloud {
@@ -105,26 +105,32 @@
     }
 
     &--scene {
-      background: rgb(255 255 255 / 50%);
       animation-name: flyingcloud;
+      background: rgb(255 255 255 / 50%);
       will-change: right;
 
       &-first {
-        animation-duration: calc(var(--duration) * 1.1);
+        top: 20%;
         width: 200px;
         height: 100px;
-        top: 20%;
+        animation-duration: calc(var(--duration) * 1.1);
       }
 
       &-second {
-        animation-duration: calc(var(--duration) * 0.9);
+        top: 60%;
         width: 150px;
         height: 80px;
-        top: 60%;
+        animation-duration: calc(var(--duration) * 0.9);
       }
     }
 
     &--big-front {
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 20%;
+      animation-duration: var(--duration);
+      animation-name: movingcloud;
       background-image: linear-gradient(
         to right,
         rgb(255 255 255 / 50%) 0%,
@@ -132,12 +138,6 @@
         rgb(255 255 255 / 50%) 100%
       );
       background-size: 200% 200%;
-      width: 100%;
-      height: 20%;
-      left: 0;
-      bottom: 0;
-      animation-name: movingcloud;
-      animation-duration: var(--duration);
       will-change: background-position;
     }
   }
@@ -156,9 +156,11 @@
     0% {
       background-position: 0% 0%;
     }
+
     50% {
       background-position: 100% 0%;
     }
+
     100% {
       background-position: 200% 0%;
     }
