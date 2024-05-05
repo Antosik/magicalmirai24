@@ -17,12 +17,12 @@
 <style lang="scss">
   section {
     position: absolute;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    z-index: 1;
     padding: grid(4);
-    background-color: rgb(255 255 255 / 70%);
     border: 1px solid #1e5b64;
+    background-color: rgb(255 255 255 / 70%);
     inset: 20% 10%;
     text-align: center;
   }
@@ -32,8 +32,8 @@
     top: grid(4);
     left: grid(4);
     padding: grid(1) grid(2);
-    background-color: rgb(255 255 255 / 50%);
     border: 1px solid #1e5b64;
+    background-color: rgb(255 255 255 / 50%);
   }
 
   h1 {
