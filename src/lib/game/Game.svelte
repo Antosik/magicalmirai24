@@ -120,7 +120,7 @@
       id={char.id}
       bind:this={charNodes[char.id]}
       style:top="{calculateCharYPosition(char.amplitude, maxAmplitude)}%"
-      style:--duration="${animationDuration}ms"
+      style:--duration="{animationDuration}ms"
     >
       {char.text}
     </div>
