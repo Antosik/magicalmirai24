@@ -1,8 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { spring } from 'svelte/motion';
-
-  let sceneReady = false;
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
@@ -14,17 +11,17 @@
   const handleTouchMove = (e: TouchEvent & { currentTarget: HTMLElement }) => {
     $playerY = e.changedTouches[0].clientY;
   };
-
-  onMount(() => {
-    sceneReady = true;
-  });
 </script>
 
 <main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
 
-  <slot ready={sceneReady} {errorNode} {playerNode} />
+  <div class="cloud cloud--scene cloud--scene-first"></div>
+  <div class="cloud cloud--scene cloud--scene-second"></div>
+  <div class="cloud cloud--big-front"></div>
+
+  <slot {errorNode} {playerNode} />
 </main>
 
 <style lang="scss">
@@ -55,5 +52,50 @@
     height: 50px;
     background: #f3d9a8;
     transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .cloud {
+    position: absolute;
+    background: rgb(255 255 255 / 50%);
+    z-index: 0;
+
+    &--scene {
+      animation-duration: 6s;
+      animation-iteration-count: infinite;
+      animation-name: flyingcloud;
+      animation-play-state: running;
+      animation-timing-function: linear;
+      will-change: right;
+
+      &-first {
+        width: 200px;
+        height: 100px;
+        top: 20%;
+      }
+
+      &-second {
+        width: 150px;
+        height: 80px;
+        top: 60%;
+      }
+    }
+
+    &--big-front {
+      width: 100%;
+      height: 20%;
+      left: 0;
+      bottom: 0;
+    }
+  }
+
+  @keyframes flyingcloud {
+    0% {
+      right: -50%;
+    }
+
+    100% {
+      right: 150%;
+    }
   }
 </style>
