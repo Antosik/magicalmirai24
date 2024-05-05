@@ -84,7 +84,8 @@
     });
   }
 
-  requestAnimationFrame(checkIntersections);
+  let frame: number;
+  frame = requestAnimationFrame(checkIntersections);
   function checkIntersections() {
     if (done) {
       return;
@@ -109,11 +110,14 @@
       }
     }
 
-    requestAnimationFrame(checkIntersections);
+    frame = requestAnimationFrame(checkIntersections);
   }
 
   onDestroy(() => {
     player.removeListener(listener);
+    if (frame) {
+      cancelAnimationFrame(frame);
+    }
   });
 </script>
 
