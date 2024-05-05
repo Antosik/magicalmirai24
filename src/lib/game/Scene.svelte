@@ -85,28 +85,29 @@
 
   .cloud {
     position: absolute;
-    background: rgb(255 255 255 / 50%);
     z-index: 0;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
 
     &.pause {
       animation-play-state: paused;
     }
 
     &--scene {
-      animation-duration: var(--duration);
-      animation-iteration-count: infinite;
+      background: rgb(255 255 255 / 50%);
       animation-name: flyingcloud;
-      animation-play-state: running;
-      animation-timing-function: linear;
       will-change: right;
 
       &-first {
+        animation-duration: calc(var(--duration) * 1.1);
         width: 200px;
         height: 100px;
         top: 20%;
       }
 
       &-second {
+        animation-duration: calc(var(--duration) * 0.9);
         width: 150px;
         height: 80px;
         top: 60%;
@@ -114,10 +115,20 @@
     }
 
     &--big-front {
+      background-image: linear-gradient(
+        to right,
+        rgb(255 255 255 / 50%) 0%,
+        white,
+        rgb(255 255 255 / 50%) 100%
+      );
+      background-size: 200% 200%;
       width: 100%;
       height: 20%;
       left: 0;
       bottom: 0;
+      animation-name: movingcloud;
+      animation-duration: var(--duration);
+      will-change: background-position;
     }
   }
 
@@ -128,6 +139,18 @@
 
     100% {
       right: 150%;
+    }
+  }
+
+  @keyframes movingcloud {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: 200% 0%;
     }
   }
 </style>
