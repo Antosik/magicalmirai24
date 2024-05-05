@@ -21,3 +21,6 @@ export const CharState = {
   MISSED: -1,
 } as const;
 export type CharState = ValueOf<typeof CharState>;
+
+/** Need to calculate an clouds animation duration */
+export const CLOUD_ANIMATION_DURATION_MULTIPLIER = 5;

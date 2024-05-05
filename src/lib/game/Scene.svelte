@@ -1,14 +1,29 @@
 <script lang="ts">
-  import { spring } from 'svelte/motion';
+  import { spring, tweened } from 'svelte/motion';
 
+  import { getPlayerInstance } from '$lib/contexts/player';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
 
-  const { songState } = getPlayerState();
-  $: pause = $songState === SongState.PAUSED;
+  import { CLOUD_ANIMATION_DURATION_MULTIPLIER } from './constants';
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
   let playerY = spring(window.innerHeight / 2, { stiffness: 0.1 });
+  let animationDuration = tweened(6000);
+
+  const { songState } = getPlayerState();
+  const player = getPlayerInstance();
+  player.addListener({
+    onThrottledTimeUpdate(position: number) {
+      const beat = player.findBeat(position, { loose: true });
+      const duration = beat?.duration;
+      if (duration) {
+        animationDuration.set(duration * CLOUD_ANIMATION_DURATION_MULTIPLIER);
+      }
+    },
+  });
+
+  $: pause = $songState === SongState.PAUSED;
 
   const handleMouseMove = (e: MouseEvent & { currentTarget: HTMLElement }) => {
     $playerY = e.clientY;
@@ -22,9 +37,17 @@
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
 
-  <div class="cloud cloud--scene cloud--scene-first" class:pause></div>
-  <div class="cloud cloud--scene cloud--scene-second" class:pause></div>
-  <div class="cloud cloud--big-front" class:pause></div>
+  <div
+    class="cloud cloud--scene cloud--scene-first"
+    class:pause
+    style:--duration="{$animationDuration}ms"
+  ></div>
+  <div
+    class="cloud cloud--scene cloud--scene-second"
+    class:pause
+    style:--duration="{$animationDuration}ms"
+  ></div>
+  <div class="cloud cloud--big-front" class:pause style:--duration="{$animationDuration}ms"></div>
 
   <slot {errorNode} {playerNode} />
 </main>
@@ -70,7 +93,7 @@
     }
 
     &--scene {
-      animation-duration: 6s;
+      animation-duration: var(--duration);
       animation-iteration-count: infinite;
       animation-name: flyingcloud;
       animation-play-state: running;
