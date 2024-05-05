@@ -6,6 +6,7 @@
 
   import {
     CLOUD_ANIMATION_DURATION_MULTIPLIER,
+    DEFAULT_CLOUD_ANIMATION_DURATION,
     MAX_CLOUD_ANIMATION_DURATION,
     MIN_CLOUD_ANIMATION_DURATION,
   } from './constants';
@@ -13,7 +14,7 @@
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
   let playerY = spring(window.innerHeight / 2, { stiffness: 0.1 });
-  let animationDuration = tweened(6000);
+  let animationDuration = tweened(DEFAULT_CLOUD_ANIMATION_DURATION);
 
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
@@ -30,6 +31,12 @@
           ),
         );
       }
+    },
+    onAppMediaChange() {
+      animationDuration.set(DEFAULT_CLOUD_ANIMATION_DURATION);
+    },
+    onStop() {
+      animationDuration.set(DEFAULT_CLOUD_ANIMATION_DURATION);
     },
   });
 

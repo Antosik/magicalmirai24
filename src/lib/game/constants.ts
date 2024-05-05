@@ -25,6 +25,9 @@ export type CharState = ValueOf<typeof CharState>;
 /** Need to calculate an clouds animation duration */
 export const CLOUD_ANIMATION_DURATION_MULTIPLIER = 7;
 
+/** Default animation duration for clouds */
+export const DEFAULT_CLOUD_ANIMATION_DURATION = 6e3; // 6s
+
 /** Maximum animation duration for clouds */
 export const MAX_CLOUD_ANIMATION_DURATION = 10e3; // 10s
 
