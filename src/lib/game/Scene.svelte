@@ -4,7 +4,11 @@
   import { getPlayerInstance } from '$lib/contexts/player';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
 
-  import { CLOUD_ANIMATION_DURATION_MULTIPLIER } from './constants';
+  import {
+    CLOUD_ANIMATION_DURATION_MULTIPLIER,
+    MAX_CLOUD_ANIMATION_DURATION,
+    MIN_CLOUD_ANIMATION_DURATION,
+  } from './constants';
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
@@ -18,7 +22,13 @@
       const beat = player.findBeat(position, { loose: true });
       const duration = beat?.duration;
       if (duration) {
-        animationDuration.set(duration * CLOUD_ANIMATION_DURATION_MULTIPLIER);
+        // Don't want to be animation too fast or too slow - pick maximum or minimum if needed
+        animationDuration.set(
+          Math.max(
+            MIN_CLOUD_ANIMATION_DURATION,
+            Math.min(duration * CLOUD_ANIMATION_DURATION_MULTIPLIER, MAX_CLOUD_ANIMATION_DURATION),
+          ),
+        );
       }
     },
   });
