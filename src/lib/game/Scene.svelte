@@ -1,6 +1,11 @@
 <script lang="ts">
   import { spring } from 'svelte/motion';
 
+  import { SongState, getPlayerState } from '$lib/contexts/playerState';
+
+  const { songState } = getPlayerState();
+  $: pause = $songState === SongState.PAUSED;
+
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
   let playerY = spring(window.innerHeight / 2, { stiffness: 0.1 });
@@ -17,9 +22,9 @@
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
 
-  <div class="cloud cloud--scene cloud--scene-first"></div>
-  <div class="cloud cloud--scene cloud--scene-second"></div>
-  <div class="cloud cloud--big-front"></div>
+  <div class="cloud cloud--scene cloud--scene-first" class:pause></div>
+  <div class="cloud cloud--scene cloud--scene-second" class:pause></div>
+  <div class="cloud cloud--big-front" class:pause></div>
 
   <slot {errorNode} {playerNode} />
 </main>
@@ -59,6 +64,10 @@
     position: absolute;
     background: rgb(255 255 255 / 50%);
     z-index: 0;
+
+    &.pause {
+      animation-play-state: paused;
+    }
 
     &--scene {
       animation-duration: 6s;
