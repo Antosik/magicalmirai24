@@ -36,7 +36,7 @@ export function createPlayerStateStore(player: Player): PlayerStateContext {
         return $state === newState ? $state : newState;
       });
     },
-    // Set song info on video loaded & video readiness
+    // Set song info & video readiness when video loaded
     onVideoReady() {
       songInfo.set({ title: player.data.song.name, artist: player.data.song.artist.name });
       readiness.update(($state) => {

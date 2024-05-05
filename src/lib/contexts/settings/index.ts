@@ -9,7 +9,7 @@ import { convertDurationToSpeed } from '$lib/utils/settings';
 export const SETTINGS_CONTEXT_KEY = 'settings';
 
 const SETTINGS_LOCALSTORAGE_KEY = 'mm24_settings';
-export const DEFAULT_SETTINGS = { volume: 100, speed: convertDurationToSpeed(2000) };
+export const DEFAULT_SETTINGS: Settings = { volume: 100, speed: convertDurationToSpeed(2000) };
 
 export function createSettingsStore(player: Player): SettingsContext {
   const store = saveable<Settings>(SETTINGS_LOCALSTORAGE_KEY, DEFAULT_SETTINGS);
