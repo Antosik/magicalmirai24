@@ -49,7 +49,7 @@ export type PlayerStateContext = {
   /** Provides knowledge of game manageability by user  */
   manageability: Readable<Manageability>;
   /** Different state for player */
-  songState: Readable<SongState>;
+  songState: Writable<SongState>;
   /** Selected song */
   song: Writable<SongId>;
 };
