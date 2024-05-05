@@ -48,6 +48,7 @@
     width: 300px;
     padding: grid(8);
     background-color: rgb(255 255 255 / 50%);
+    border: 1px solid #1e5b64;
     text-align: center;
     transform: translate(-50%, -50%);
   }
@@ -72,7 +73,7 @@
 
     width: 100%;
     padding: grid(2) grid(4);
-    border: 1px solid black;
+    border: 1px solid #1e5b64;
   }
 
   .volume {
