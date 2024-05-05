@@ -12,6 +12,7 @@
 
 <style lang="scss">
   div {
+    z-index: 5;
     position: absolute;
     right: grid(4);
     bottom: grid(4);
