@@ -2,7 +2,7 @@
   import type { PlayerListener } from 'textalive-app-api';
 
   import { onDestroy } from 'svelte';
-  import { spring, tweened } from 'svelte/motion';
+  import { spring } from 'svelte/motion';
 
   import { getPlayerInstance } from '$lib/contexts/player';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
@@ -13,7 +13,7 @@
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
   let playerY = spring(window.innerHeight / 2, { stiffness: 0.1 });
-  let animationDuration = tweened(DEFAULT_CLOUD_ANIMATION_DURATION);
+  let animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
 
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
@@ -22,14 +22,14 @@
       const beat = player.findBeat(position, { loose: true });
       const duration = calculateCloudAnimationDuration(beat);
       if (duration) {
-        animationDuration.set(duration);
+        animationDuration = duration;
       }
     },
     onAppMediaChange() {
-      animationDuration.set(DEFAULT_CLOUD_ANIMATION_DURATION);
+      animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
     },
     onStop() {
-      animationDuration.set(DEFAULT_CLOUD_ANIMATION_DURATION);
+      animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
     },
   };
   player.addListener(listener);
@@ -53,14 +53,14 @@
   <div
     class="cloud cloud--scene cloud--scene-first"
     class:pause
-    style:--duration="{$animationDuration}ms"
+    style:--duration="{animationDuration}ms"
   ></div>
   <div
     class="cloud cloud--scene cloud--scene-second"
     class:pause
-    style:--duration="{$animationDuration}ms"
+    style:--duration="{animationDuration}ms"
   ></div>
-  <div class="cloud cloud--big-front" class:pause style:--duration="{$animationDuration}ms"></div>
+  <div class="cloud cloud--big-front" class:pause style:--duration="{animationDuration}ms"></div>
 
   <slot {errorNode} {playerNode} />
 </main>
@@ -90,10 +90,12 @@
     position: absolute;
     z-index: 2;
     left: 20px;
-    width: 100px;
-    height: 50px;
-    background: #f3d9a8;
-    transform: translateY(-50%);
+    width: 150px;
+    height: 150px;
+    background-image: url('../images/miku_draft_2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translateY(-50%) translateZ(0);
   }
 
   .cloud {
@@ -102,6 +104,7 @@
     animation-iteration-count: infinite;
     animation-play-state: running;
     animation-timing-function: linear;
+    transform: translateZ(0);
 
     &.pause {
       animation-play-state: paused;
@@ -109,20 +112,21 @@
 
     &--scene {
       animation-name: flyingcloud;
-      background: rgb(255 255 255 / 50%);
+      aspect-ratio: 800 / 450;
+      background-image: url('../images/base_cloud_draft.png');
+      background-repeat: no-repeat;
+      background-size: contain;
       will-change: right;
 
       &-first {
         top: 20%;
-        width: 200px;
-        height: 100px;
+        height: 150px;
         animation-duration: calc(var(--duration) * 1.1);
       }
 
       &-second {
         top: 60%;
-        width: 150px;
-        height: 80px;
+        height: 100px;
         animation-duration: calc(var(--duration) * 0.9);
       }
     }
@@ -134,14 +138,9 @@
       height: 20%;
       animation-duration: var(--duration);
       animation-name: movingcloud;
-      background-image: linear-gradient(
-        to right,
-        rgb(255 255 255 / 50%) 0%,
-        white,
-        rgb(255 255 255 / 50%) 100%
-      );
-      background-size: 200% 200%;
-      will-change: background-position;
+      background-image: url('../images/base_cloud_draft.png');
+      background-size: contain;
+      will-change: background-position-x;
     }
   }
 
@@ -157,15 +156,11 @@
 
   @keyframes movingcloud {
     0% {
-      background-position: 0% 0%;
-    }
-
-    50% {
-      background-position: 100% 0%;
+      background-position-x: 0%;
     }
 
     100% {
-      background-position: 200% 0%;
+      background-position-x: 200%;
     }
   }
 </style>
