@@ -69,7 +69,11 @@
   main {
     width: 100%;
     height: 100%;
-    background-color: #00cfc3;
+    background: linear-gradient(
+      180deg,
+      $background-gradient-upper 0%,
+      $background-gradient-center 20%,
+      $background-gradient-lower 100%);
   }
 
   .error,
@@ -89,9 +93,9 @@
   .player {
     position: absolute;
     z-index: 2;
-    left: 20px;
-    width: 150px;
-    height: 150px;
+    left: 100px;
+    width: 285px;
+    height: 261px;
     background-image: url('../images/miku_draft_2.png');
     background-repeat: no-repeat;
     background-size: cover;
