@@ -73,7 +73,8 @@
       180deg,
       $background-gradient-upper 0%,
       $background-gradient-center 20%,
-      $background-gradient-lower 100%);
+      $background-gradient-lower 100%
+    );
   }
 
   .error,
