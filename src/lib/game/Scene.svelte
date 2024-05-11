@@ -48,7 +48,6 @@
 
 <main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
   <div bind:this={errorNode} class="error"></div>
-  <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
 
   <div
     class="cloud cloud--scene cloud--scene-first"
@@ -63,6 +62,7 @@
   <div class="cloud cloud--big-front" class:pause style:--duration="{animationDuration}ms"></div>
 
   <div class="content">
+    <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
     <slot {errorNode} {playerNode} />
   </div>
 </main>
@@ -121,14 +121,32 @@
 
   .player {
     position: absolute;
-    z-index: 2;
-    left: 100px;
-    width: 285px;
-    height: 261px;
-    background-image: url('../images/miku_draft_2.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+    left: 5%;
+    height: 80px;
     transform: translateY(-50%) translateZ(0);
+    aspect-ratio: 1303 / 582;
+    filter: drop-shadow(rgb(0 0 0 / 60%) 4px 4px 4px);
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      aspect-ratio: 1300 / 1200;
+      content: '';
+      background-image: url('../images/miku_draft_2.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: bottom center;
+    }
+
+    @include breakpoint(md) {
+      height: 120px;
+    }
+
+    @include breakpoint(xl) {
+      height: 160px;
+    }
   }
 
   .cloud {
