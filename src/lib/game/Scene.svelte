@@ -69,6 +69,8 @@
 
 <style lang="scss">
   main {
+    --frame-size: 12px;
+
     position: relative;
     width: 100%;
     height: 100%;
@@ -85,7 +87,7 @@
       content: '';
       // Border
       border-style: solid;
-      border-width: 12px;
+      border-width: var(--frame-size);
       border-top-color: lighten(#4d2600, 20%);
       border-right-color: lighten(#4d2600, 0%);
       border-bottom-color: lighten(#4d2600, 20%);
@@ -94,14 +96,14 @@
       z-index: 1;
       user-select: none;
       touch-action: none;
+    }
 
-      @include breakpoint(md) {
-        border-width: 16px;
-      }
+    @include breakpoint(md) {
+      --frame-size: 16px;
+    }
 
-      @include breakpoint(xl) {
-        border-width: 20px;
-      }
+    @include breakpoint(xl) {
+      --frame-size: 20px;
     }
   }
 
@@ -117,6 +119,14 @@
     width: 2px;
     height: 100%;
     background: transparent;
+  }
+
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: var(--frame-size);
+    z-index: 1;
   }
 
   .player {
