@@ -136,6 +136,7 @@
     transform: translateY(-50%) translateZ(0);
     aspect-ratio: 1303 / 582;
     filter: drop-shadow(rgb(0 0 0 / 60%) 4px 4px 4px);
+    will-change: top;
 
     &::before {
       position: absolute;
@@ -165,7 +166,7 @@
     animation-iteration-count: infinite;
     animation-play-state: running;
     animation-timing-function: linear;
-    transform: translateZ(0);
+    width: 100%;
 
     &.pause {
       animation-play-state: paused;
@@ -180,21 +181,23 @@
       background-image: url('../images/base_cloud_draft.png');
       background-repeat: no-repeat;
       background-size: contain;
-      will-change: right;
+      background-position: right center;
+      will-change: transform;
+      right: -500px;
       filter: drop-shadow(rgb(0 0 0 / 60%) var(--shadow-drop) var(--shadow-drop) 2px);
 
       &-first {
         --shadow-drop: calc(var(--base-drop) * 1.2);
         top: 20%;
         height: calc(var(--base-height) * 1.2);
-        animation-duration: calc(var(--duration) * 1.1);
+        animation-duration: calc(var(--duration) * 1.2);
       }
 
       &-second {
         --shadow-drop: calc(var(--base-drop) * 0.8);
         top: 60%;
         height: calc(var(--base-height) * 0.8);
-        animation-duration: calc(var(--duration) * 0.9);
+        animation-duration: calc(var(--duration) * 0.8);
       }
 
       @include breakpoint(md) {
@@ -213,13 +216,13 @@
     &--big-front {
       bottom: grid(4);
       left: 0;
-      width: 100%;
+      width: 400%;
       height: 16%;
       animation-duration: var(--duration);
       animation-name: movingcloud;
       background-image: url('../images/base_cloud_draft.png');
       background-size: contain;
-      will-change: background-position-x;
+      will-change: transform;
 
       @include breakpoint(md) {
         height: 18%;
@@ -233,21 +236,21 @@
 
   @keyframes flyingcloud {
     0% {
-      right: -50%;
+      transform: translateX(0);
     }
 
     100% {
-      right: 150%;
+      transform: translateX(calc(-500px - 100%));
     }
   }
 
   @keyframes movingcloud {
     0% {
-      background-position-x: 0%;
+      transform: translateX(0%);
     }
 
     100% {
-      background-position-x: 200%;
+      transform: translateX(-75%);
     }
   }
 </style>

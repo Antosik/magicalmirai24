@@ -141,7 +141,9 @@
     @include flex_center;
 
     position: absolute;
-    right: 0%;
+    width: 100%;
+    right: -100%;
+    justify-content: left;
     animation-delay: 100ms;
     animation-duration: var(--duration);
     animation-iteration-count: 1;
@@ -149,9 +151,9 @@
     animation-play-state: paused;
     animation-timing-function: linear;
     font-size: 48px;
-    transform: translateY(-50%) translateZ(0);
+    will-change: transform;
     user-select: none;
-    will-change: right;
+    text-align: left;
 
     &--color-dark {
       color: #1e5b64;
@@ -172,11 +174,11 @@
 
   @keyframes flyingchar {
     0% {
-      right: 0%;
+      transform: translateX(0);
     }
 
     100% {
-      right: 110%;
+      transform: translateX(calc(-500px - 100%));
     }
   }
 </style>
