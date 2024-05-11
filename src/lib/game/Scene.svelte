@@ -62,11 +62,14 @@
   ></div>
   <div class="cloud cloud--big-front" class:pause style:--duration="{animationDuration}ms"></div>
 
-  <slot {errorNode} {playerNode} />
+  <div class="content">
+    <slot {errorNode} {playerNode} />
+  </div>
 </main>
 
 <style lang="scss">
   main {
+    position: relative;
     width: 100%;
     height: 100%;
     background: linear-gradient(
@@ -75,6 +78,31 @@
       $background-gradient-center 20%,
       $background-gradient-lower 100%
     );
+
+    &::before {
+      @include absolute_full;
+
+      content: '';
+      // Border
+      border-style: solid;
+      border-width: 12px;
+      border-top-color: lighten(#4d2600, 20%);
+      border-right-color: lighten(#4d2600, 0%);
+      border-bottom-color: lighten(#4d2600, 20%);
+      border-left-color: lighten(#4d2600, 0%);
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.6);
+      z-index: 1;
+      user-select: none;
+      touch-action: none;
+
+      @include breakpoint(md) {
+        border-width: 16px;
+      }
+
+      @include breakpoint(xl) {
+        border-width: 20px;
+      }
+    }
   }
 
   .error,
@@ -83,7 +111,7 @@
   }
 
   .error {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: -1px;
     width: 2px;
@@ -137,7 +165,7 @@
     }
 
     &--big-front {
-      bottom: 0;
+      bottom: grid(4);
       left: 0;
       width: 100%;
       height: 20%;
