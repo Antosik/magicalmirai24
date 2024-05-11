@@ -144,23 +144,41 @@
     }
 
     &--scene {
+      --base-height: 80px;
+      --base-drop: 2px;
+
       animation-name: flyingcloud;
       aspect-ratio: 800 / 450;
       background-image: url('../images/base_cloud_draft.png');
       background-repeat: no-repeat;
       background-size: contain;
       will-change: right;
+      filter: drop-shadow(rgb(0 0 0 / 60%) var(--shadow-drop) var(--shadow-drop) 2px);
 
       &-first {
+        --shadow-drop: calc(var(--base-drop) * 1.2);
         top: 20%;
-        height: 150px;
+        height: calc(var(--base-height) * 1.2);
         animation-duration: calc(var(--duration) * 1.1);
       }
 
       &-second {
+        --shadow-drop: calc(var(--base-drop) * 0.8);
         top: 60%;
-        height: 100px;
+        height: calc(var(--base-height) * 0.8);
         animation-duration: calc(var(--duration) * 0.9);
+      }
+
+      @include breakpoint(md) {
+        --base-height: 100px;
+      }
+
+      @include breakpoint(lg) {
+        --base-height: 120px;
+      }
+
+      @include breakpoint(xl) {
+        --base-height: 140px;
       }
     }
 
@@ -168,12 +186,20 @@
       bottom: grid(4);
       left: 0;
       width: 100%;
-      height: 20%;
+      height: 16%;
       animation-duration: var(--duration);
       animation-name: movingcloud;
       background-image: url('../images/base_cloud_draft.png');
       background-size: contain;
       will-change: background-position-x;
+
+      @include breakpoint(md) {
+        height: 18%;
+      }
+
+      @include breakpoint(xl) {
+        height: 20%;
+      }
     }
   }
 
