@@ -46,7 +46,8 @@ module.exports = {
 					"map_get",
 					"math_div",
 					"gradient",
-					"color_adjust_alpha"
+					"color_adjust_alpha",
+					"color_adjust"
 				]
 			}
 		],
