@@ -141,8 +141,8 @@
     @include flex_center;
 
     position: absolute;
-    width: 100%;
     right: -100%;
+    width: 100%;
     justify-content: left;
     animation-delay: 100ms;
     animation-duration: var(--duration);
@@ -151,9 +151,9 @@
     animation-play-state: paused;
     animation-timing-function: linear;
     font-size: 48px;
-    will-change: transform;
-    user-select: none;
     text-align: left;
+    user-select: none;
+    will-change: transform;
 
     &--color-dark {
       color: var(--blue-color);

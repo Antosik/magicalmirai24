@@ -37,10 +37,10 @@
   div {
     @include flex_center;
 
-    background: var(--transparent-white-color);
     flex-direction: row-reverse;
-    gap: grid(1);
     padding: grid(1);
+    background: var(--transparent-white-color);
+    gap: grid(1);
     transform: rotate(-90deg) translate(0, -100%);
     transform-origin: top right;
   }
@@ -61,18 +61,18 @@
 
     &::-webkit-slider-runnable-track {
       height: 10px;
+      margin-top: -1px;
       appearance: none;
       color: $unfilled-track-color;
-      margin-top: -1px;
     }
 
     &::-webkit-slider-thumb {
       width: 10px;
-      -webkit-appearance: none;
       height: 10px;
-      cursor: ew-resize;
+      appearance: none;
       background: $thumb-color;
       box-shadow: -80px 0 0 80px $filled-track-color;
+      cursor: ew-resize;
     }
 
     &::-moz-range-progress {

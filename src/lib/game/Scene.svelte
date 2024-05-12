@@ -97,18 +97,16 @@
     &::before {
       @include absolute_full;
 
-      content: '';
+      z-index: $z-index-frame;
+      border-width: var(--frame-size);
+
       // Border
       border-style: solid;
-      border-width: var(--frame-size);
-      border-top-color: lighten(#4d2600, 20%);
-      border-right-color: lighten(#4d2600, 0%);
-      border-bottom-color: lighten(#4d2600, 20%);
-      border-left-color: lighten(#4d2600, 0%);
-      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.6);
-      z-index: $z-index-frame;
-      user-select: none;
+      border-color: color_adjust(#4d2600, 20%) #4d2600 color_adjust(#4d2600, 20%) #4d2600;
+      box-shadow: inset 2px 2px 4px rgb(0 0 0 / 60%);
+      content: '';
       touch-action: none;
+      user-select: none;
     }
   }
 
@@ -128,19 +126,19 @@
 
   .content {
     position: relative;
+    z-index: $z-index-game;
     width: 100%;
     height: 100%;
     padding: var(--frame-size);
-    z-index: $z-index-game;
   }
 
   .player {
     position: absolute;
     left: 5%;
     height: 80px;
-    transform: translateY(-50%) translateZ(0);
     aspect-ratio: 1303 / 582;
     filter: drop-shadow(rgb(0 0 0 / 60%) 4px 4px 4px);
+    transform: translateY(-50%) translateZ(0);
     will-change: top;
 
     &::before {
@@ -149,11 +147,11 @@
       left: 0;
       width: 100%;
       aspect-ratio: 1300 / 1200;
-      content: '';
       background-image: url('../images/miku_draft_2.png');
+      background-position: bottom center;
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: bottom center;
+      content: '';
     }
 
     @include breakpoint(md) {
@@ -168,10 +166,10 @@
   .cloud {
     position: absolute;
     z-index: $z-index-scene;
+    width: 100%;
     animation-iteration-count: infinite;
     animation-play-state: running;
     animation-timing-function: linear;
-    width: 100%;
 
     &.pause {
       animation-play-state: paused;
@@ -181,18 +179,19 @@
       --base-height: 80px;
       --base-drop: 2px;
 
+      right: -500px;
       animation-name: flyingcloud;
       aspect-ratio: 800 / 450;
       background-image: url('../images/base_cloud_draft.png');
+      background-position: right center;
       background-repeat: no-repeat;
       background-size: contain;
-      background-position: right center;
-      will-change: transform;
-      right: -500px;
       filter: drop-shadow(rgb(0 0 0 / 60%) var(--shadow-drop) var(--shadow-drop) 2px);
+      will-change: transform;
 
       &-first {
         --shadow-drop: calc(var(--base-drop) * 1.2);
+
         top: 20%;
         height: calc(var(--base-height) * 1.2);
         animation-duration: calc(var(--duration) * 1.2);
@@ -200,6 +199,7 @@
 
       &-second {
         --shadow-drop: calc(var(--base-drop) * 0.8);
+
         top: 60%;
         height: calc(var(--base-height) * 0.8);
         animation-duration: calc(var(--duration) * 0.8);
