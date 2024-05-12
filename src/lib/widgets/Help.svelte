@@ -29,8 +29,8 @@
 
   button {
     position: fixed;
-    top: grid(4);
-    left: grid(4);
+    top: calc(var(--frame-size) + grid(1));
+    left: calc(var(--frame-size) + grid(1));
     padding: grid(1) grid(2);
     border: 1px solid var(--blue-color);
     background-color: var(--transparent-white-color);

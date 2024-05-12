@@ -68,8 +68,6 @@
 
 <style lang="scss">
   main {
-    --frame-size: 12px;
-
     position: relative;
     width: 100%;
     height: 100%;
@@ -95,14 +93,6 @@
       z-index: 1;
       user-select: none;
       touch-action: none;
-    }
-
-    @include breakpoint(md) {
-      --frame-size: 16px;
-    }
-
-    @include breakpoint(xl) {
-      --frame-size: 20px;
     }
   }
 

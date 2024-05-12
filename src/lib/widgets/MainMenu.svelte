@@ -77,8 +77,8 @@
   }
 
   .volume {
-    position: fixed;
-    top: grid(4);
-    right: grid(4);
+    position: absolute;
+    top: calc(var(--frame-size) + grid(1));
+    right: calc(var(--frame-size) + grid(1));
   }
 </style>

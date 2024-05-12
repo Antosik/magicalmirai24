@@ -9,8 +9,9 @@
 <style lang="scss">
   button {
     position: fixed;
-    top: grid(4);
-    right: grid(4);
+    top: calc(var(--frame-size) + grid(1));
+    right: calc(var(--frame-size) + grid(1));
+    padding: grid(1);
     border: 0;
     background: none;
     color: var(--blue-color);

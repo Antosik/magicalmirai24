@@ -5,6 +5,14 @@
   --red-color: #dc2b4d;
   --white-color: #fff;
   --transparent-white-color: rgb(255 255 255 / 50%);
+
+  --frame-size: 12px;
+  @include breakpoint(md) {
+    --frame-size: 16px;
+  }
+  @include breakpoint(xl) {
+    --frame-size: 20px;
+  }
 }
 
 html,
