@@ -3,6 +3,7 @@ import type { IBeat, IChord, Player } from 'textalive-app-api';
 import {
   CLOUD_ANIMATION_DURATION_MULTIPLIER,
   CharColor,
+  KEYBOARD_POSITION_STEP,
   MAX_CLOUD_ANIMATION_DURATION,
   MIN_CLOUD_ANIMATION_DURATION,
   REAL_PAUSE_DELAY,
@@ -101,4 +102,9 @@ export function calculateCloudAnimationDuration(beats: IBeat[] = []): number | u
 
   // Don't want to be animation too fast or too slow - pick maximum or minimum if needed
   return Math.max(MIN_CLOUD_ANIMATION_DURATION, Math.min(duration, MAX_CLOUD_ANIMATION_DURATION));
+}
+
+/** Calculates the step size (in px) for control with keyboard */
+export function calculateKeyboardPositioningStep(windowHeight: number): number {
+  return windowHeight * (KEYBOARD_POSITION_STEP / 100);
 }

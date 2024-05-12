@@ -33,3 +33,6 @@ export const MAX_CLOUD_ANIMATION_DURATION = 10e3; // 10s
 
 /** Maximum animation duration for clouds */
 export const MIN_CLOUD_ANIMATION_DURATION = 3e3; // 3s
+
+/** Window height percentage for conrol with keyboard */
+export const KEYBOARD_POSITION_STEP = 10; // 10%

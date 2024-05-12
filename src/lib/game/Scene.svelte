@@ -2,9 +2,9 @@
   import type { PlayerListener } from 'textalive-app-api';
 
   import { onDestroy } from 'svelte';
-  import { spring } from 'svelte/motion';
 
   import { getPlayerInstance } from '$lib/contexts/player';
+  import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
 
   import { DEFAULT_CLOUD_ANIMATION_DURATION } from './constants';
@@ -12,11 +12,11 @@
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
-  let playerY = spring(window.innerHeight / 2, { stiffness: 0.1 });
   let animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
 
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
+  const playerPosition = getPlayerPosition();
   const listener: PlayerListener = {
     onVideoReady() {
       const duration = calculateCloudAnimationDuration(player.data.songMap.beats);
@@ -36,10 +36,10 @@
   $: pause = $songState === SongState.PAUSED;
 
   const handleMouseMove = (e: MouseEvent & { currentTarget: HTMLElement }) => {
-    $playerY = e.clientY;
+    playerPosition.update(() => e.clientY);
   };
   const handleTouchMove = (e: TouchEvent & { currentTarget: HTMLElement }) => {
-    $playerY = e.changedTouches[0].clientY;
+    playerPosition.update(() => e.changedTouches[0].clientY);
   };
 
   onDestroy(() => player.removeListener(listener));
@@ -59,7 +59,7 @@
   <div class="cloud cloud--big-front" class:pause style:--duration="{animationDuration}ms"></div>
 
   <div bind:this={errorNode} class="error"></div>
-  <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
+  <div bind:this={playerNode} class="player" style:top="{$playerPosition}px"></div>
 
   <div class="content">
     <slot {errorNode} {playerNode} />
