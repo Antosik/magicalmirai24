@@ -17,7 +17,7 @@
     right: grid(4);
     bottom: grid(4);
     padding: grid(2) grid(2) grid(2) grid(6);
-    background-color: #fff;
+    background-color: var(--white-color);
     font-size: 12px;
     text-align: right;
   }

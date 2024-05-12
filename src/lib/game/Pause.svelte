@@ -54,8 +54,8 @@
     left: 50%;
     width: 300px;
     padding: grid(8);
-    border: 1px solid #1e5b64;
-    background-color: rgb(255 255 255 / 50%);
+    border: 1px solid var(--blue-color);
+    background-color: var(--transparent-white-color);
     text-align: center;
     transform: translate(-50%, -50%);
   }
@@ -73,15 +73,15 @@
 
   span {
     &.total {
-      color: #1e5b64;
+      color: var(--blue-color);
     }
 
     &.catched {
-      color: #fff;
+      color: var(--white-color);
     }
 
     &.missed {
-      color: #dc2b4d;
+      color: var(--red-color);
     }
   }
 

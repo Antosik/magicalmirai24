@@ -1,5 +1,12 @@
 @import './scss/index';
 
+:root {
+  --blue-color: #1e5b64;
+  --red-color: #dc2b4d;
+  --white-color: #fff;
+  --transparent-white-color: rgb(255 255 255 / 50%);
+}
+
 html,
 body {
   overflow: hidden;

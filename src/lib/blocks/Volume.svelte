@@ -43,7 +43,7 @@
 
     border: 0;
     background: none;
-    color: #1e5b64;
+    color: var(--blue-color);
   }
 
   input {

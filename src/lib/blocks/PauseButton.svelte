@@ -3,7 +3,7 @@
 </script>
 
 <button type="button" on:click>
-  <FeatherIcon name="pause" size="24" fill="#1e5b64" />
+  <FeatherIcon name="pause" size="24" fill="var(--blue-color)" />
 </button>
 
 <style lang="scss">
@@ -13,6 +13,6 @@
     right: grid(4);
     border: 0;
     background: none;
-    color: #1e5b64;
+    color: var(--blue-color);
   }
 </style>

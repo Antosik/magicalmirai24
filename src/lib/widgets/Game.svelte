@@ -145,7 +145,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    color: #1e5b64;
+    color: var(--blue-color);
     font-size: 28px;
   }
 </style>

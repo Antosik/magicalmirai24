@@ -156,15 +156,15 @@
     text-align: left;
 
     &--color-dark {
-      color: #1e5b64;
+      color: var(--blue-color);
     }
 
     &--color-red {
-      color: #dc2b4d;
+      color: var(--red-color);
     }
 
     &--color-white {
-      color: #fff;
+      color: var(--white-color);
     }
 
     &.playing {
