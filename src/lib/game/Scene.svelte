@@ -1,14 +1,16 @@
 <script lang="ts">
   import type { PlayerListener } from 'textalive-app-api';
 
+  import { interpolateLab } from 'd3-interpolate';
   import { onDestroy } from 'svelte';
+  import { tweened } from 'svelte/motion';
 
-  import { getPlayerInstance } from '$lib/contexts/player';
+  import { PLAYER_THROTTLE_INTERVAL, getPlayerInstance } from '$lib/contexts/player';
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
 
   import { DEFAULT_CLOUD_ANIMATION_DURATION } from './constants';
-  import { calculateCloudAnimationDuration } from './utils';
+  import { calculateVAColor, calculateCloudAnimationDuration } from './utils';
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
@@ -17,6 +19,13 @@
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
   const playerPosition = getPlayerPosition();
+
+  const emptyVa = { a: 0, v: 0 };
+  const vaColor = tweened<string>(calculateVAColor({ a: 0, v: 0 }), {
+    duration: PLAYER_THROTTLE_INTERVAL,
+    interpolate: interpolateLab,
+  });
+
   const listener: PlayerListener = {
     onVideoReady() {
       const duration = calculateCloudAnimationDuration(player.data.songMap.beats);
@@ -24,11 +33,17 @@
         animationDuration = duration;
       }
     },
+    onThrottledTimeUpdate(position) {
+      const va = player.getValenceArousal(position);
+      vaColor.set(calculateVAColor(va));
+    },
     onAppMediaChange() {
       animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+      vaColor.set(calculateVAColor(emptyVa));
     },
     onStop() {
       animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+      vaColor.set(calculateVAColor(emptyVa));
     },
   };
   player.addListener(listener);
@@ -46,6 +61,7 @@
 </script>
 
 <main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
+  <div class="va-background" style:--va-color={$vaColor}></div>
   <div
     class="cloud cloud--scene cloud--scene-first"
     class:pause
@@ -221,6 +237,13 @@
         height: 20%;
       }
     }
+  }
+
+  .va-background {
+    @include absolute_full;
+
+    background: linear-gradient(to bottom, var(--va-color), transparent);
+    will-change: background;
   }
 
   @keyframes flyingcloud {

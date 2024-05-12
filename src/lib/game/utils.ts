@@ -1,8 +1,12 @@
-import type { IBeat, IChord, Player } from 'textalive-app-api';
+import type { IBeat, IChord, Player, ValenceArousalValue } from 'textalive-app-api';
+
+import { color } from 'd3-color';
 
 import {
+  AROUSAL_COLOR_MULTIPLIER,
   CLOUD_ANIMATION_DURATION_MULTIPLIER,
   CharColor,
+  DEFAULT_VA_COLOR,
   KEYBOARD_POSITION_STEP,
   MAX_CLOUD_ANIMATION_DURATION,
   MIN_CLOUD_ANIMATION_DURATION,
@@ -107,4 +111,27 @@ export function calculateCloudAnimationDuration(beats: IBeat[] = []): number | u
 /** Calculates the step size (in px) for control with keyboard */
 export function calculateKeyboardPositioningStep(windowHeight: number): number {
   return windowHeight * (KEYBOARD_POSITION_STEP / 100);
+}
+
+function calculateArousalCoefficient(arousal: ValenceArousalValue['a']): number {
+  return Math.floor(Math.abs(arousal * AROUSAL_COLOR_MULTIPLIER) * 1000) / 1000;
+}
+
+export function calculateVAColor({ a: arousal, v: valence }: ValenceArousalValue): string {
+  const arousalCoefficient = calculateArousalCoefficient(arousal);
+
+  const d3color = color(DEFAULT_VA_COLOR);
+  if (!d3color) {
+    return DEFAULT_VA_COLOR;
+  }
+
+  if (valence < -0.1) {
+    return d3color.darker(arousalCoefficient).toString();
+  }
+
+  if (valence > 0.1) {
+    return d3color.brighter(arousalCoefficient).toString();
+  }
+
+  return d3color.toString();
 }
