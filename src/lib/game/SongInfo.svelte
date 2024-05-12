@@ -13,7 +13,7 @@
 <style lang="scss">
   div {
     position: absolute;
-    z-index: 5;
+    z-index: $z-index-menu;
     right: calc(var(--frame-size) + grid(1));
     bottom: calc(var(--frame-size) + grid(1));
     padding: grid(2) grid(2) grid(2) grid(6);

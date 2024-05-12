@@ -46,8 +46,6 @@
 </script>
 
 <main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
-  <div bind:this={errorNode} class="error"></div>
-
   <div
     class="cloud cloud--scene cloud--scene-first"
     class:pause
@@ -60,8 +58,10 @@
   ></div>
   <div class="cloud cloud--big-front" class:pause style:--duration="{animationDuration}ms"></div>
 
+  <div bind:this={errorNode} class="error"></div>
+  <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
+
   <div class="content">
-    <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
     <slot {errorNode} {playerNode} />
   </div>
 </main>
@@ -90,7 +90,7 @@
       border-bottom-color: lighten(#4d2600, 20%);
       border-left-color: lighten(#4d2600, 0%);
       box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.6);
-      z-index: 1;
+      z-index: $z-index-frame;
       user-select: none;
       touch-action: none;
     }
@@ -115,7 +115,7 @@
     width: 100%;
     height: 100%;
     padding: var(--frame-size);
-    z-index: 1;
+    z-index: $z-index-game;
   }
 
   .player {
@@ -151,7 +151,7 @@
 
   .cloud {
     position: absolute;
-    z-index: 0;
+    z-index: $z-index-scene;
     animation-iteration-count: infinite;
     animation-play-state: running;
     animation-timing-function: linear;

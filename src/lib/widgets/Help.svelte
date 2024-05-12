@@ -17,7 +17,7 @@
 <style lang="scss">
   section {
     position: absolute;
-    z-index: 3;
+    z-index: $z-index-menu;
     display: flex;
     flex-direction: column;
     padding: grid(4);

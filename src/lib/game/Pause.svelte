@@ -49,7 +49,7 @@
 <style lang="scss">
   dialog {
     position: absolute;
-    z-index: 5;
+    z-index: $z-index-menu;
     top: 50%;
     left: 50%;
     width: 300px;

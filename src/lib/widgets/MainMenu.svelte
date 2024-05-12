@@ -42,7 +42,7 @@
 <style lang="scss">
   section {
     position: absolute;
-    z-index: 3;
+    z-index: $z-index-menu;
     top: 50%;
     left: 50%;
     width: 300px;
