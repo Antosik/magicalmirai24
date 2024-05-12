@@ -18,9 +18,8 @@
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
   const listener: PlayerListener = {
-    onThrottledTimeUpdate(position: number) {
-      const beat = player.findBeat(position, { loose: true });
-      const duration = calculateCloudAnimationDuration(beat);
+    onVideoReady() {
+      const duration = calculateCloudAnimationDuration(player.data.songMap.beats);
       if (duration) {
         animationDuration = duration;
       }

@@ -87,15 +87,17 @@ export function calculateActiveColor(
 
 /**
  * Calculates the duration of cloud animation
- * @param beat Beat info
+ * @param beats Beats info
  * @returns Animation duration (ms)
  */
-export function calculateCloudAnimationDuration(beat: IBeat): number | undefined {
-  if (!beat?.duration) {
+export function calculateCloudAnimationDuration(beats: IBeat[] = []): number | undefined {
+  if (!beats?.length) {
     return;
   }
 
-  const duration = Math.floor(beat.duration * CLOUD_ANIMATION_DURATION_MULTIPLIER);
+  const beatsDuration = beats.map((el) => el.duration).filter(Boolean);
+  const mediumDuration = beatsDuration.reduce((a, b) => a + b, 0) / beatsDuration.length;
+  const duration = Math.floor(mediumDuration * CLOUD_ANIMATION_DURATION_MULTIPLIER);
 
   // Don't want to be animation too fast or too slow - pick maximum or minimum if needed
   return Math.max(MIN_CLOUD_ANIMATION_DURATION, Math.min(duration, MAX_CLOUD_ANIMATION_DURATION));
