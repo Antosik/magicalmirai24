@@ -13,11 +13,11 @@
 <style lang="scss">
   div {
     position: absolute;
-    z-index: 5;
-    right: grid(4);
-    bottom: grid(4);
+    z-index: $z-index-menu;
+    right: calc(var(--frame-size) + grid(1));
+    bottom: calc(var(--frame-size) + grid(1));
     padding: grid(2) grid(2) grid(2) grid(6);
-    background-color: #fff;
+    background-color: var(--white-color);
     font-size: 12px;
     text-align: right;
   }

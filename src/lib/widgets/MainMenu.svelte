@@ -42,13 +42,13 @@
 <style lang="scss">
   section {
     position: absolute;
-    z-index: 3;
+    z-index: $z-index-menu;
     top: 50%;
     left: 50%;
     width: 300px;
     padding: grid(8);
-    border: 1px solid #1e5b64;
-    background-color: rgb(255 255 255 / 50%);
+    border: 1px solid var(--blue-color);
+    background-color: var(--transparent-white-color);
     text-align: center;
     transform: translate(-50%, -50%);
   }
@@ -73,12 +73,12 @@
 
     width: 100%;
     padding: grid(2) grid(4);
-    border: 1px solid #1e5b64;
+    border: 1px solid var(--blue-color);
   }
 
   .volume {
-    position: fixed;
-    top: grid(4);
-    right: grid(4);
+    position: absolute;
+    top: calc(var(--frame-size) + grid(1));
+    right: calc(var(--frame-size) + grid(1));
   }
 </style>

@@ -30,12 +30,19 @@
 </div>
 
 <style lang="scss">
+  $unfilled-track-color: #48b8ad;
+  $filled-track-color: #1e5b64;
+  $thumb-color: #fbdfaf;
+
   div {
     @include flex_center;
 
-    width: 24px;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    padding: grid(1);
+    background: var(--transparent-white-color);
     gap: grid(1);
+    transform: rotate(-90deg) translate(0, -100%);
+    transform-origin: top right;
   }
 
   button {
@@ -43,10 +50,37 @@
 
     border: 0;
     background: none;
-    color: #1e5b64;
+    color: var(--blue-color);
+    transform: rotate(90deg);
   }
 
-  input {
-    transform: rotate(-90deg) translate(-50%);
+  input[type='range'] {
+    overflow: hidden;
+    appearance: none;
+    background-color: $unfilled-track-color;
+
+    &::-webkit-slider-runnable-track {
+      height: 10px;
+      margin-top: -1px;
+      appearance: none;
+      color: $unfilled-track-color;
+    }
+
+    &::-webkit-slider-thumb {
+      width: 10px;
+      height: 10px;
+      appearance: none;
+      background: $thumb-color;
+      box-shadow: -80px 0 0 80px $filled-track-color;
+      cursor: ew-resize;
+    }
+
+    &::-moz-range-progress {
+      background-color: $filled-track-color;
+    }
+
+    &::-moz-range-track {
+      background-color: $unfilled-track-color;
+    }
   }
 </style>

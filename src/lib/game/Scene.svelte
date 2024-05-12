@@ -1,35 +1,49 @@
 <script lang="ts">
   import type { PlayerListener } from 'textalive-app-api';
 
+  import { interpolateLab } from 'd3-interpolate';
   import { onDestroy } from 'svelte';
-  import { spring } from 'svelte/motion';
+  import { tweened } from 'svelte/motion';
 
-  import { getPlayerInstance } from '$lib/contexts/player';
+  import { PLAYER_THROTTLE_INTERVAL, getPlayerInstance } from '$lib/contexts/player';
+  import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
 
   import { DEFAULT_CLOUD_ANIMATION_DURATION } from './constants';
-  import { calculateCloudAnimationDuration } from './utils';
+  import { calculateVAColor, calculateCloudAnimationDuration } from './utils';
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
-  let playerY = spring(window.innerHeight / 2, { stiffness: 0.1 });
   let animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
 
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
+  const playerPosition = getPlayerPosition();
+
+  const emptyVa = { a: 0, v: 0 };
+  const vaColor = tweened<string>(calculateVAColor({ a: 0, v: 0 }), {
+    duration: PLAYER_THROTTLE_INTERVAL,
+    interpolate: interpolateLab,
+  });
+
   const listener: PlayerListener = {
-    onThrottledTimeUpdate(position: number) {
-      const beat = player.findBeat(position, { loose: true });
-      const duration = calculateCloudAnimationDuration(beat);
+    onVideoReady() {
+      const duration = calculateCloudAnimationDuration(player.data.songMap.beats);
       if (duration) {
         animationDuration = duration;
       }
     },
+    onThrottledTimeUpdate(position) {
+      const va = player.getValenceArousal(position);
+      vaColor.set(calculateVAColor(va));
+    },
     onAppMediaChange() {
       animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+      vaColor.set(calculateVAColor(emptyVa));
     },
     onStop() {
       animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+      vaColor.set(calculateVAColor(emptyVa));
     },
   };
   player.addListener(listener);
@@ -37,19 +51,17 @@
   $: pause = $songState === SongState.PAUSED;
 
   const handleMouseMove = (e: MouseEvent & { currentTarget: HTMLElement }) => {
-    $playerY = e.clientY;
+    playerPosition.update(() => e.clientY);
   };
   const handleTouchMove = (e: TouchEvent & { currentTarget: HTMLElement }) => {
-    $playerY = e.changedTouches[0].clientY;
+    playerPosition.update(() => e.changedTouches[0].clientY);
   };
 
   onDestroy(() => player.removeListener(listener));
 </script>
 
 <main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
-  <div bind:this={errorNode} class="error"></div>
-  <div bind:this={playerNode} class="player" style:top="{$playerY}px"></div>
-
+  <div class="va-background" style:--va-color={$vaColor}></div>
   <div
     class="cloud cloud--scene cloud--scene-first"
     class:pause
@@ -62,11 +74,17 @@
   ></div>
   <div class="cloud cloud--big-front" class:pause style:--duration="{animationDuration}ms"></div>
 
-  <slot {errorNode} {playerNode} />
+  <div bind:this={errorNode} class="error"></div>
+  <div bind:this={playerNode} class="player" style:top="{$playerPosition}px"></div>
+
+  <div class="content">
+    <slot {errorNode} {playerNode} />
+  </div>
 </main>
 
 <style lang="scss">
   main {
+    position: relative;
     width: 100%;
     height: 100%;
     background: linear-gradient(
@@ -75,6 +93,21 @@
       $background-gradient-center 20%,
       $background-gradient-lower 100%
     );
+
+    &::before {
+      @include absolute_full;
+
+      z-index: $z-index-frame;
+      border-width: var(--frame-size);
+
+      // Border
+      border-style: solid;
+      border-color: color_adjust(#4d2600, 20%) #4d2600 color_adjust(#4d2600, 20%) #4d2600;
+      box-shadow: inset 2px 2px 4px rgb(0 0 0 / 60%);
+      content: '';
+      touch-action: none;
+      user-select: none;
+    }
   }
 
   .error,
@@ -83,7 +116,7 @@
   }
 
   .error {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: -1px;
     width: 2px;
@@ -91,81 +124,145 @@
     background: transparent;
   }
 
+  .content {
+    position: relative;
+    z-index: $z-index-game;
+    width: 100%;
+    height: 100%;
+    padding: var(--frame-size);
+  }
+
   .player {
     position: absolute;
-    z-index: 2;
-    left: 100px;
-    width: 285px;
-    height: 261px;
-    background-image: url('../images/miku_draft_2.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+    left: 5%;
+    height: 80px;
+    aspect-ratio: 1303 / 582;
+    filter: drop-shadow(rgb(0 0 0 / 60%) 4px 4px 4px);
     transform: translateY(-50%) translateZ(0);
+    will-change: top;
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      aspect-ratio: 1300 / 1200;
+      background-image: url('../images/miku_draft_2.png');
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      content: '';
+    }
+
+    @include breakpoint(md) {
+      height: 120px;
+    }
+
+    @include breakpoint(xl) {
+      height: 160px;
+    }
   }
 
   .cloud {
     position: absolute;
-    z-index: 0;
+    z-index: $z-index-scene;
+    width: 100%;
     animation-iteration-count: infinite;
     animation-play-state: running;
     animation-timing-function: linear;
-    transform: translateZ(0);
 
     &.pause {
       animation-play-state: paused;
     }
 
     &--scene {
+      --base-height: 80px;
+      --base-drop: 2px;
+
+      right: -500px;
       animation-name: flyingcloud;
       aspect-ratio: 800 / 450;
       background-image: url('../images/base_cloud_draft.png');
+      background-position: right center;
       background-repeat: no-repeat;
       background-size: contain;
-      will-change: right;
+      filter: drop-shadow(rgb(0 0 0 / 60%) var(--shadow-drop) var(--shadow-drop) 2px);
+      will-change: transform;
 
       &-first {
+        --shadow-drop: calc(var(--base-drop) * 1.2);
+
         top: 20%;
-        height: 150px;
-        animation-duration: calc(var(--duration) * 1.1);
+        height: calc(var(--base-height) * 1.2);
+        animation-duration: calc(var(--duration) * 1.2);
       }
 
       &-second {
+        --shadow-drop: calc(var(--base-drop) * 0.8);
+
         top: 60%;
-        height: 100px;
-        animation-duration: calc(var(--duration) * 0.9);
+        height: calc(var(--base-height) * 0.8);
+        animation-duration: calc(var(--duration) * 0.8);
+      }
+
+      @include breakpoint(md) {
+        --base-height: 100px;
+      }
+
+      @include breakpoint(lg) {
+        --base-height: 120px;
+      }
+
+      @include breakpoint(xl) {
+        --base-height: 140px;
       }
     }
 
     &--big-front {
-      bottom: 0;
+      bottom: grid(4);
       left: 0;
-      width: 100%;
-      height: 20%;
+      width: 400%;
+      height: 16%;
       animation-duration: var(--duration);
       animation-name: movingcloud;
       background-image: url('../images/base_cloud_draft.png');
       background-size: contain;
-      will-change: background-position-x;
+      will-change: transform;
+
+      @include breakpoint(md) {
+        height: 18%;
+      }
+
+      @include breakpoint(xl) {
+        height: 20%;
+      }
     }
+  }
+
+  .va-background {
+    @include absolute_full;
+
+    background: linear-gradient(to bottom, var(--va-color), transparent);
+    will-change: background;
   }
 
   @keyframes flyingcloud {
     0% {
-      right: -50%;
+      transform: translateX(0);
     }
 
     100% {
-      right: 150%;
+      transform: translateX(calc(-500px - 100%));
     }
   }
 
   @keyframes movingcloud {
     0% {
-      background-position-x: 0%;
+      transform: translateX(0%);
     }
 
     100% {
-      background-position-x: 200%;
+      transform: translateX(-75%);
     }
   }
 </style>

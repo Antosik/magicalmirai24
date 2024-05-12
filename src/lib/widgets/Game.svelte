@@ -5,12 +5,13 @@
   import { getGame } from '$lib/contexts/game';
   import { Page, getPage } from '$lib/contexts/page';
   import { getPlayerInstance } from '$lib/contexts/player';
+  import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { Manageability, SongState, getPlayerState } from '$lib/contexts/playerState';
   import Game from '$lib/game/Game.svelte';
   import Pause from '$lib/game/Pause.svelte';
   import SongInfo from '$lib/game/SongInfo.svelte';
   import { START_SONG_DELAY } from '$lib/game/constants';
-  import { isRealPause } from '$lib/game/utils';
+  import { calculateKeyboardPositioningStep, isRealPause } from '$lib/game/utils';
   import Results from '../game/Results.svelte';
 
   export let playerNode: HTMLElement;
@@ -20,11 +21,13 @@
   const page = getPage();
   const { chars } = getGame();
   const player = getPlayerInstance();
+  const playerPosition = getPlayerPosition();
 
   let timer = START_SONG_DELAY / 1e3;
   let timeout: ReturnType<typeof setTimeout>;
   let restart = 0;
   let visibilityState: DocumentVisibilityState;
+  let windowHeight = window.innerHeight;
   let done = false;
 
   $: pause = $songState === SongState.PAUSED && isRealPause(player);
@@ -95,9 +98,45 @@
       pauseGame();
     }
   };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    const pxStep = calculateKeyboardPositioningStep(windowHeight);
+    switch (e.key) {
+      case 'Escape': {
+        if (pause) {
+          resumeGame();
+        } else {
+          pauseGame();
+        }
+        break;
+      }
+      case 'ArrowUp':
+      case 'w': {
+        if (pause) {
+          return;
+        }
+        playerPosition.update((y) => y - pxStep);
+        break;
+      }
+      case 'ArrowDown':
+      case 's': {
+        if (pause) {
+          return;
+        }
+        playerPosition.update((y) => y + pxStep);
+        break;
+      }
+    }
+  };
 </script>
 
-<svelte:document bind:visibilityState on:visibilitychange={handleVisibilityChange} />
+<svelte:window bind:innerHeight={windowHeight} />
+
+<svelte:document
+  bind:visibilityState
+  on:keydown={handleKeyDown}
+  on:visibilitychange={handleVisibilityChange}
+/>
 
 {#if $readiness.timer}
   {#key restart}
@@ -145,7 +184,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    color: #1e5b64;
+    color: var(--blue-color);
     font-size: 28px;
   }
 </style>

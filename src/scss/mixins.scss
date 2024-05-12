@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:map';
 @use 'sass:math';
 
@@ -13,6 +14,10 @@ $breakpoints: (
   xxl: 1920px,
   xxxl: 2560px,
 );
+
+@function color_adjust($color, $amount) {
+  @return color.adjust($color, $lightness: $amount);
+}
 
 @function math_div($a, $b) {
   @return math.div($a, $b);

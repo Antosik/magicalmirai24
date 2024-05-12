@@ -4,6 +4,7 @@ import * as TextAliveApp from 'textalive-app-api';
 import { DEFAULT_SETTINGS } from '../settings';
 
 export const PLAYER_CONTEXT_KEY = 'player';
+export const PLAYER_THROTTLE_INTERVAL = 1000;
 
 export function createPlayerInstance(): TextAliveApp.Player {
   return new TextAliveApp.Player({
@@ -28,6 +29,7 @@ export function createPlayerInstance(): TextAliveApp.Player {
       ],
     },
 
+    throttleInterval: PLAYER_THROTTLE_INTERVAL,
     mediaElement: document.getElementById('media')!,
     mediaBannerPosition: 'bottom right',
     valenceArousalEnabled: true,

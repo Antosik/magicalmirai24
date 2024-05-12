@@ -141,7 +141,9 @@
     @include flex_center;
 
     position: absolute;
-    right: 0%;
+    right: -100%;
+    width: 100%;
+    justify-content: left;
     animation-delay: 100ms;
     animation-duration: var(--duration);
     animation-iteration-count: 1;
@@ -149,20 +151,20 @@
     animation-play-state: paused;
     animation-timing-function: linear;
     font-size: 48px;
-    transform: translateY(-50%) translateZ(0);
+    text-align: left;
     user-select: none;
-    will-change: right;
+    will-change: transform;
 
     &--color-dark {
-      color: #1e5b64;
+      color: var(--blue-color);
     }
 
     &--color-red {
-      color: #dc2b4d;
+      color: var(--red-color);
     }
 
     &--color-white {
-      color: #fff;
+      color: var(--white-color);
     }
 
     &.playing {
@@ -172,11 +174,11 @@
 
   @keyframes flyingchar {
     0% {
-      right: 0%;
+      transform: translateX(0);
     }
 
     100% {
-      right: 110%;
+      transform: translateX(calc(-500px - 100%));
     }
   }
 </style>

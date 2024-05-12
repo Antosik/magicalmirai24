@@ -1,3 +1,8 @@
+import {
+  createPlayerPositionStore,
+  PLAYER_POSITION_CONTEXT_KEY,
+} from '$lib/contexts/playerPosition';
+
 import './app.scss';
 import App from './App.svelte';
 import { createGameStore, GAME_CONTEXT_KEY } from './lib/contexts/game';
@@ -12,6 +17,7 @@ const playerStateStore = createPlayerStateStore(playerInstance);
 const settingsStore = createSettingsStore(playerInstance);
 const gameStore = createGameStore(playerInstance);
 const pageStore = createPageStore();
+const playerPositionStore = createPlayerPositionStore();
 
 // Map player & stores to contexts
 const context = new Map<string, unknown>([
@@ -20,6 +26,7 @@ const context = new Map<string, unknown>([
   [SETTINGS_CONTEXT_KEY, settingsStore],
   [GAME_CONTEXT_KEY, gameStore],
   [PAGE_CONTEXT_KEY, pageStore],
+  [PLAYER_POSITION_CONTEXT_KEY, playerPositionStore],
 ]);
 
 // Pass context to app and mount it
