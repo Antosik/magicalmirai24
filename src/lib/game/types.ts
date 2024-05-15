@@ -8,6 +8,8 @@ export type Char = {
   text: string;
   /** Vocal amplitude on this character */
   amplitude: number;
+  /** Y Position on this character */
+  positionY: number;
   /** Color of the character (associated with chorus) */
   color: CharColor;
   /** Current state of the character (catched, missed, flying) */

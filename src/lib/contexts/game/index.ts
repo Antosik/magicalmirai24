@@ -22,6 +22,12 @@ export function createGameStore(player: Player): GameContext {
       Array.from($charsStore.values()).filter((char) => char.state === CharState.MISSED),
     [],
   );
+  const ingame = derived(
+    chars,
+    ($charsStore) =>
+      Array.from($charsStore.values()).filter((char) => char.state === CharState.IN_PROGRESS),
+    [],
+  );
 
   player.addListener({
     // Reset chars on video readiness
@@ -41,6 +47,7 @@ export function createGameStore(player: Player): GameContext {
   return {
     chars,
     catched,
+    ingame,
     missed,
   };
 }

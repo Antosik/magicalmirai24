@@ -5,10 +5,12 @@ import { convertDurationToSpeed } from '$lib/utils/settings';
 export const DEFAULT_SETTINGS: Settings = {
   volume: 100,
   speed: convertDurationToSpeed(2000),
+  autoplay: false,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- We need to pass because can't infer type
 const QUERY_SETTING_CONVERTERS: Record<keyof Settings, (value: string) => any> = {
+  autoplay: (value: string) => value === 'on',
   speed: (value: string) => Math.max(Math.min(Number(value) || DEFAULT_SETTINGS.speed, 100), 1),
   volume: (value: string) => Math.max(Math.min(Number(value) || DEFAULT_SETTINGS.volume, 100), 0),
 };

@@ -8,6 +8,7 @@
   import { PLAYER_THROTTLE_INTERVAL, getPlayerInstance } from '$lib/contexts/player';
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
+  import { getSettings } from '$lib/contexts/settings';
 
   import { DEFAULT_CLOUD_ANIMATION_DURATION } from './constants';
   import { calculateVAColor, calculateCloudAnimationDuration } from './utils';
@@ -19,6 +20,7 @@
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
   const playerPosition = getPlayerPosition();
+  const settings = getSettings();
 
   const emptyVa = { a: 0, v: 0 };
   const vaColor = tweened<string>(calculateVAColor({ a: 0, v: 0 }), {
@@ -51,9 +53,19 @@
   $: pause = $songState === SongState.PAUSED;
 
   const handleMouseMove = (e: MouseEvent & { currentTarget: HTMLElement }) => {
+    // Skip controls in automode
+    if ($settings.autoplay && $songState === SongState.PLAYING) {
+      return;
+    }
+
     playerPosition.update(() => e.clientY);
   };
   const handleTouchMove = (e: TouchEvent & { currentTarget: HTMLElement }) => {
+    // Skip controls in automode
+    if ($settings.autoplay && $songState === SongState.PLAYING) {
+      return;
+    }
+
     playerPosition.update(() => e.changedTouches[0].clientY);
   };
 

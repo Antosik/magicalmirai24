@@ -1,3 +1,3 @@
-import type { Writable } from 'svelte/store';
+import type { Spring } from 'svelte/motion';
 
-export type PlayerPositionContext = Writable<number>;
+export type PlayerPositionContext = Spring<number>;
