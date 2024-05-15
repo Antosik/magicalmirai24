@@ -7,6 +7,7 @@
   import { getPlayerInstance } from '$lib/contexts/player';
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { Manageability, SongState, getPlayerState } from '$lib/contexts/playerState';
+  import { getSettings } from '$lib/contexts/settings';
   import Game from '$lib/game/Game.svelte';
   import Pause from '$lib/game/Pause.svelte';
   import SongInfo from '$lib/game/SongInfo.svelte';
@@ -22,6 +23,7 @@
   const { chars } = getGame();
   const player = getPlayerInstance();
   const playerPosition = getPlayerPosition();
+  const settings = getSettings();
 
   let timer = START_SONG_DELAY / 1e3;
   let timeout: ReturnType<typeof setTimeout>;
@@ -100,6 +102,11 @@
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
+    // Skip controls in automode
+    if ($settings.autoplay && $songState === SongState.PLAYING) {
+      return;
+    }
+
     const pxStep = calculateKeyboardPositioningStep(windowHeight);
     switch (e.key) {
       case 'Escape': {

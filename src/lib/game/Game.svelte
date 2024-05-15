@@ -6,6 +6,7 @@
 
   import { getGame } from '$lib/contexts/game';
   import { getPlayerInstance } from '$lib/contexts/player';
+  import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { getSettings } from '$lib/contexts/settings';
   import { calculateActiveColor, calculateCharYPosition, isIntersecting } from '$lib/game/utils';
   import { convertSpeedToDuration } from '$lib/utils/settings';
@@ -20,12 +21,25 @@
   const dispatch = createEventDispatcher();
 
   const player = getPlayerInstance();
+  const playerPosition = getPlayerPosition();
   const settings = getSettings();
-  const { chars } = getGame();
+  const { chars, ingame } = getGame();
 
   const maxAmplitude = player.getMaxVocalAmplitude();
 
   $: animationDuration = convertSpeedToDuration($settings.speed);
+
+  // In autoplay, we need to set the position of a player to the first available catchable character
+  // If there is none - fallback to the center of the window
+  $: if ($settings.autoplay) {
+    const catchable = $ingame[0];
+    if (catchable) {
+      const positionInPx = (catchable?.positionY / 100) * window.innerHeight;
+      playerPosition.set(positionInPx, { soft: true });
+    } else {
+      playerPosition.set(window.innerHeight / 2, { soft: true });
+    }
+  }
 
   let c: IChar;
   let chord: IChord;
@@ -55,6 +69,7 @@
           createChar({
             id: `${position}.${current.text}`,
             amplitude,
+            positionY: calculateCharYPosition(amplitude, maxAmplitude),
             color: activeColor,
             text: current.text,
             state: CharState.IN_PROGRESS,
@@ -128,7 +143,7 @@
       class:playing={!pause}
       id={char.id}
       bind:this={charNodes[char.id]}
-      style:top="{calculateCharYPosition(char.amplitude, maxAmplitude)}%"
+      style:top="{char.positionY}%"
       style:--duration="{animationDuration}ms"
     >
       {char.text}

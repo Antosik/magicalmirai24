@@ -5,6 +5,8 @@ export type Settings = {
   volume: number;
   /** Game speed */
   speed: number;
+  /** Autoplay mode */
+  autoplay: boolean;
 };
 
 export type SettingsContext = Writable<Settings>;

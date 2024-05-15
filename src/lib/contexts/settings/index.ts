@@ -2,17 +2,17 @@ import type { Settings, SettingsContext } from './types';
 import type { Player } from 'textalive-app-api';
 
 import { getContext } from 'svelte';
+import { writable } from 'svelte/store';
 
-import { saveable } from '$lib/utils/saveable';
-import { convertDurationToSpeed } from '$lib/utils/settings';
+import { DEFAULT_SETTINGS, getSettingsFromQuery } from './utils';
 
 export const SETTINGS_CONTEXT_KEY = 'settings';
 
-const SETTINGS_LOCALSTORAGE_KEY = 'mm24_settings';
-export const DEFAULT_SETTINGS: Settings = { volume: 100, speed: convertDurationToSpeed(2000) };
-
 export function createSettingsStore(player: Player): SettingsContext {
-  const store = saveable<Settings>(SETTINGS_LOCALSTORAGE_KEY, DEFAULT_SETTINGS);
+  const store = writable<Settings>({
+    ...DEFAULT_SETTINGS,
+    ...getSettingsFromQuery(),
+  });
 
   // Update settings on host update
   player.addListener({
@@ -33,3 +33,5 @@ export function createSettingsStore(player: Player): SettingsContext {
 }
 
 export const getSettings = () => getContext<SettingsContext>(SETTINGS_CONTEXT_KEY);
+
+export { DEFAULT_SETTINGS };
