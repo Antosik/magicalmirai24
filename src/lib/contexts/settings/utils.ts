@@ -11,8 +11,22 @@ export const DEFAULT_SETTINGS: Settings = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- We need to pass because can't infer type
 const QUERY_SETTING_CONVERTERS: Record<keyof Settings, (value: string) => any> = {
   autoplay: (value: string) => value === 'on',
-  speed: (value: string) => Math.max(Math.min(Number(value) || DEFAULT_SETTINGS.speed, 100), 1),
-  volume: (value: string) => Math.max(Math.min(Number(value) || DEFAULT_SETTINGS.volume, 100), 0),
+  speed: (value: string) => {
+    const numericValue = Number(value);
+    if (Number.isNaN(numericValue)) {
+      return DEFAULT_SETTINGS.speed;
+    }
+
+    return Math.max(Math.min(numericValue, 100), 1);
+  },
+  volume: (value: string) => {
+    const numericValue = Number(value);
+    if (Number.isNaN(numericValue)) {
+      return DEFAULT_SETTINGS.volume;
+    }
+
+    return Math.max(Math.min(numericValue, 100), 0);
+  },
 };
 const AVAILABLE_QUERIES = Object.keys(QUERY_SETTING_CONVERTERS);
 
