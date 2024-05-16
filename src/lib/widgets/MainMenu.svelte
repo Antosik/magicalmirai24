@@ -1,6 +1,7 @@
 <script lang="ts">
   import { songs } from '$lib/songs';
 
+  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import { Page, getPage } from '$lib/contexts/page';
   import { Manageability, getPlayerState } from '$lib/contexts/playerState';
@@ -34,7 +35,8 @@
 </section>
 
 {#if $manageability === Manageability.FULL}
-  <div class="volume">
+  <div class="buttons">
+    <FullscreenButton />
     <Volume bind:value={$settings.volume} />
   </div>
 {/if}
@@ -76,8 +78,12 @@
     border: 1px solid var(--blue-color);
   }
 
-  .volume {
+  .buttons {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: grid(1);
     top: calc(var(--frame-size) + grid(1));
     right: calc(var(--frame-size) + grid(1));
   }

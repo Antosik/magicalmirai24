@@ -41,7 +41,8 @@
     </ul>
   </dialog>
 
-  <div class="volume" transition:fade={{ duration: 200 }}>
+  <div class="buttons" transition:fade={{ duration: 200 }}>
+    <FullscreenButton />
     <Volume bind:value={$settings.volume} />
   </div>
 {/if}
@@ -100,8 +101,12 @@
     background: none;
   }
 
-  .volume {
+  .buttons {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: grid(1);
     top: calc(var(--frame-size) + grid(1));
     right: calc(var(--frame-size) + grid(1));
   }
