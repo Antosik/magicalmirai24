@@ -114,7 +114,8 @@
 
       // Border
       border-style: solid;
-      border-color: color_adjust(#4d2600, 20%) #4d2600 color_adjust(#4d2600, 20%) #4d2600;
+      border-color: color_adjust($frame-color, 20%) $frame-color color_adjust($frame-color, 20%)
+        $frame-color;
       box-shadow: inset 2px 2px 4px rgb(0 0 0 / 60%);
       content: '';
       touch-action: none;
