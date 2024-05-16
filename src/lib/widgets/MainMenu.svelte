@@ -80,11 +80,11 @@
 
   .buttons {
     position: absolute;
+    top: calc(var(--frame-size) + grid(1));
+    right: calc(var(--frame-size) + grid(1));
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: grid(1);
-    top: calc(var(--frame-size) + grid(1));
-    right: calc(var(--frame-size) + grid(1));
   }
 </style>

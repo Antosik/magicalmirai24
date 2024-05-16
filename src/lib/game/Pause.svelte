@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { fade } from 'svelte/transition';
 
+  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import { getGame } from '$lib/contexts/game';
   import { getSettings } from '$lib/contexts/settings';
@@ -103,11 +104,11 @@
 
   .buttons {
     position: absolute;
+    top: calc(var(--frame-size) + grid(1));
+    right: calc(var(--frame-size) + grid(1));
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: grid(1);
-    top: calc(var(--frame-size) + grid(1));
-    right: calc(var(--frame-size) + grid(1));
   }
 </style>
