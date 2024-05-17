@@ -3,6 +3,7 @@
 
   import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
+  import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
   import { Manageability, getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
@@ -10,10 +11,11 @@
   const settings = getSettings();
   const page = getPage();
   const { song, manageability } = getPlayerState();
+  const { i18n } = getLocale();
 </script>
 
 <section>
-  <h1>Main Menu</h1>
+  <h1>{$i18n('Main Menu')}</h1>
 
   <select bind:value={$song}>
     {#each Object.entries(songs) as [songId, song] (songId)}
@@ -23,13 +25,13 @@
 
   <ul>
     <li>
-      <button type="button" on:click={() => ($page = Page.GAME)}>Play</button>
+      <button type="button" on:click={() => ($page = Page.GAME)}>{$i18n('Play')}</button>
     </li>
     <li>
-      <button type="button" on:click={() => ($page = Page.HELP)}>Help</button>
+      <button type="button" on:click={() => ($page = Page.HELP)}>{$i18n('Help')}</button>
     </li>
     <li>
-      <button type="button" on:click={() => ($page = Page.CREDITS)}>Credits</button>
+      <button type="button" on:click={() => ($page = Page.CREDITS)}>{$i18n('Credits')}</button>
     </li>
   </ul>
 </section>

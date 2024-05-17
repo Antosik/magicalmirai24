@@ -5,12 +5,14 @@
   import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import { getGame } from '$lib/contexts/game';
+  import { getLocale } from '$lib/contexts/locale';
   import { getSettings } from '$lib/contexts/settings';
 
   export let open = false;
 
   const settings = getSettings();
   const { chars, catched, missed } = getGame();
+  const { i18n } = getLocale();
 
   const dispatch = createEventDispatcher<{
     resume: void;
@@ -21,23 +23,23 @@
 
 {#if open}
   <dialog open transition:fade={{ duration: 200 }}>
-    <h2>Pause</h2>
+    <h2>{$i18n('Pause')}</h2>
 
     <div>
-      <span class="total">total: {$chars.size}</span> /
-      <span class="catched">ok: {$catched.length}</span> /
-      <span class="missed">miss: {$missed.length}</span>
+      <span class="total">{$i18n('total')}: {$chars.size}</span> /
+      <span class="catched">{$i18n('ok')}: {$catched.length}</span> /
+      <span class="missed">{$i18n('miss')}: {$missed.length}</span>
     </div>
 
     <ul>
       <li>
-        <button type="button" on:click={() => dispatch('resume')}>Resume</button>
+        <button type="button" on:click={() => dispatch('resume')}>{$i18n('Resume')}</button>
       </li>
       <li>
-        <button type="button" on:click={() => dispatch('restart')}>Restart</button>
+        <button type="button" on:click={() => dispatch('restart')}>{$i18n('Restart')}</button>
       </li>
       <li>
-        <button type="button" on:click={() => dispatch('back')}>Back</button>
+        <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
       </li>
     </ul>
   </dialog>

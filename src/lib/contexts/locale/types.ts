@@ -15,4 +15,22 @@ export type LocaleContext = {
 
 /** Available dictionary keys */
 export type LocaleDictionaryKeys = keyof LocaleDictionary;
-export interface LocaleDictionary {}
+export interface LocaleDictionary {
+  'App loading...': string;
+  'Loading song...': string;
+  Pause: string;
+  total: string;
+  ok: string;
+  miss: string;
+  Resume: string;
+  Restart: string;
+  Back: string;
+  Minimize: string;
+  Maximize: string;
+  Results: string;
+  'Back to Main menu': string;
+  Credits: string;
+  Help: string;
+  'Main Menu': string;
+  Play: string;
+}

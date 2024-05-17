@@ -1,13 +1,17 @@
 <script lang="ts">
+  import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
 
   const page = getPage();
+  const { i18n } = getLocale();
 </script>
 
-<button type="button" on:click={() => ($page = Page.MAIN_PAGE)}>Back to Main menu</button>
+<button type="button" on:click={() => ($page = Page.MAIN_PAGE)}>
+  {$i18n('Back to Main menu')}
+</button>
 
 <section>
-  <h1>Credits</h1>
+  <h1>{$i18n('Credits')}</h1>
 
   <div class="content">
     <p>Credits goes here</p>
