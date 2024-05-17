@@ -20,6 +20,13 @@ export function createLocaleStore(): LocaleContext {
     return (key: LocaleDictionaryKeys) => dictionary[key];
   });
 
+  locale.subscribe(($locale) => {
+    const html = document.querySelector('html');
+    if (html) {
+      html.lang = $locale.toLowerCase();
+    }
+  });
+
   return {
     locale,
     i18n,
