@@ -32,24 +32,23 @@
   }
 
   select {
+    z-index: 1;
+    padding: 0;
+    border: none;
+    margin: 0;
     appearance: none;
     background-color: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
+    cursor: inherit;
     font-family: inherit;
     font-size: inherit;
-    cursor: inherit;
-    line-height: inherit;
     font-size: 20px;
-    z-index: 1;
+    line-height: inherit;
+    outline: none;
 
     // Remove dropdown arrow in IE10 & IE11
     // @link https://www.filamentgroup.com/lab/select-css.html
     &::-ms-expand {
       display: none;
     }
-
-    outline: none;
   }
 </style>

@@ -52,7 +52,7 @@
     border: 0;
     background: none;
     color: var(--blue-color);
-    transform: rotate(90deg);
     outline: none;
+    transform: rotate(90deg);
   }
 </style>
