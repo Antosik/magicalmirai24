@@ -1,3 +1,4 @@
+import { createLocaleStore, LOCALE_CONTEXT_KEY } from '$lib/contexts/locale';
 import {
   createPlayerPositionStore,
   PLAYER_POSITION_CONTEXT_KEY,
@@ -18,6 +19,7 @@ const settingsStore = createSettingsStore(playerInstance);
 const gameStore = createGameStore(playerInstance);
 const pageStore = createPageStore();
 const playerPositionStore = createPlayerPositionStore();
+const localeStore = createLocaleStore();
 
 // Map player & stores to contexts
 const context = new Map<string, unknown>([
@@ -27,6 +29,7 @@ const context = new Map<string, unknown>([
   [GAME_CONTEXT_KEY, gameStore],
   [PAGE_CONTEXT_KEY, pageStore],
   [PLAYER_POSITION_CONTEXT_KEY, playerPositionStore],
+  [LOCALE_CONTEXT_KEY, localeStore],
 ]);
 
 // Pass context to app and mount it

@@ -2,7 +2,9 @@
   import { songs } from '$lib/songs';
 
   import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
+  import LanguageSelect from '$lib/blocks/LanguageSelect.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
+  import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
   import { Manageability, getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
@@ -10,10 +12,11 @@
   const settings = getSettings();
   const page = getPage();
   const { song, manageability } = getPlayerState();
+  const { locale, i18n } = getLocale();
 </script>
 
 <section>
-  <h1>Main Menu</h1>
+  <h1>{$i18n('Main Menu')}</h1>
 
   <select bind:value={$song}>
     {#each Object.entries(songs) as [songId, song] (songId)}
@@ -23,20 +26,23 @@
 
   <ul>
     <li>
-      <button type="button" on:click={() => ($page = Page.GAME)}>Play</button>
+      <button type="button" on:click={() => ($page = Page.GAME)}>{$i18n('Play')}</button>
     </li>
     <li>
-      <button type="button" on:click={() => ($page = Page.HELP)}>Help</button>
+      <button type="button" on:click={() => ($page = Page.HELP)}>{$i18n('Help')}</button>
     </li>
     <li>
-      <button type="button" on:click={() => ($page = Page.CREDITS)}>Credits</button>
+      <button type="button" on:click={() => ($page = Page.CREDITS)}>{$i18n('Credits')}</button>
     </li>
   </ul>
 </section>
 
 {#if $manageability === Manageability.FULL}
   <div class="buttons">
-    <FullscreenButton />
+    <div class="buttons-row">
+      <LanguageSelect bind:value={$locale} />
+      <FullscreenButton />
+    </div>
     <Volume bind:value={$settings.volume} />
   </div>
 {/if}
@@ -86,5 +92,11 @@
     flex-direction: column;
     align-items: flex-end;
     gap: grid(1);
+
+    .buttons-row {
+      @include flex_center;
+
+      gap: grid(1);
+    }
   }
 </style>

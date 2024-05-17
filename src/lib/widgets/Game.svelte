@@ -3,6 +3,7 @@
 
   import PauseButton from '$lib/blocks/PauseButton.svelte';
   import { getGame } from '$lib/contexts/game';
+  import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
   import { getPlayerInstance } from '$lib/contexts/player';
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
@@ -24,6 +25,7 @@
   const player = getPlayerInstance();
   const playerPosition = getPlayerPosition();
   const settings = getSettings();
+  const { i18n } = getLocale();
 
   let timer = START_SONG_DELAY / 1e3;
   let timeout: ReturnType<typeof setTimeout>;
@@ -177,7 +179,7 @@
     {/if}
   {/if}
 {:else}
-  <div>Loading song...</div>
+  <div>{$i18n('Loading song...')}</div>
 {/if}
 
 <SongInfo />

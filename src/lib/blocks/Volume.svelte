@@ -43,6 +43,10 @@
     gap: grid(1);
     transform: rotate(-90deg) translate(0, -100%);
     transform-origin: top right;
+
+    &:focus-within {
+      background: var(--less-transparent-white-color);
+    }
   }
 
   button {

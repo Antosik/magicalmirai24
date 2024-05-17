@@ -1,8 +1,11 @@
-<script>
+<script lang="ts">
   import FeatherIcon from '$lib/components/FeatherIcon.svelte';
+  import { getLocale } from '$lib/contexts/locale';
+
+  const { i18n } = getLocale();
 </script>
 
-<button type="button" on:click>
+<button type="button" title={$i18n('Pause')} on:click>
   <FeatherIcon name="pause" size="24" fill="var(--blue-color)" />
 </button>
 

@@ -1,5 +1,8 @@
 <script lang="ts">
   import FeatherIcon from '$lib/components/FeatherIcon.svelte';
+  import { getLocale } from '$lib/contexts/locale';
+
+  const { i18n } = getLocale();
 
   const isFullscreenEnabled =
     document.fullscreenEnabled ||
@@ -22,7 +25,11 @@
 
 {#if isFullscreenEnabled}
   <div>
-    <button type="button" on:click={toggleFullScreen}>
+    <button
+      type="button"
+      title={fullscreenElement ? $i18n('Minimize') : $i18n('Maximize')}
+      on:click={toggleFullScreen}
+    >
       <FeatherIcon name={fullscreenElement ? 'minimize' : 'maximize'} size="24" />
     </button>
   </div>
@@ -33,6 +40,10 @@
     padding: grid(1);
     background: var(--transparent-white-color);
     gap: grid(1);
+
+    &:focus-within {
+      background: var(--less-transparent-white-color);
+    }
   }
 
   button {
@@ -41,6 +52,7 @@
     border: 0;
     background: none;
     color: var(--blue-color);
+    outline: none;
     transform: rotate(90deg);
   }
 </style>
