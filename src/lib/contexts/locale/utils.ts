@@ -7,13 +7,13 @@ function isSupportedLocale(locale?: string): locale is Locale {
     return false;
   }
 
-  return locale.toUpperCase() in Locale;
+  return locale in Locale;
 }
 
 /**
  * Detects the locale from user's browser or fallbacks to default one
  */
 export function detectUserLocale(): Locale {
-  const browserLocale = navigator.language?.split('-')?.[0];
+  const browserLocale = navigator.language?.split('-')?.[0]?.toUpperCase();
   return isSupportedLocale(browserLocale) ? browserLocale : DEFAULT_LOCALE;
 }
