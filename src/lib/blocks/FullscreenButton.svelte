@@ -40,6 +40,10 @@
     padding: grid(1);
     background: var(--transparent-white-color);
     gap: grid(1);
+
+    &:focus-within {
+      background: var(--less-transparent-white-color);
+    }
   }
 
   button {
@@ -49,5 +53,6 @@
     background: none;
     color: var(--blue-color);
     transform: rotate(90deg);
+    outline: none;
   }
 </style>
