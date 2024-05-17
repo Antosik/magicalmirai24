@@ -2,6 +2,7 @@
   import { songs } from '$lib/songs';
 
   import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
+  import LanguageSelect from '$lib/blocks/LanguageSelect.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
@@ -11,7 +12,7 @@
   const settings = getSettings();
   const page = getPage();
   const { song, manageability } = getPlayerState();
-  const { i18n } = getLocale();
+  const { locale, i18n } = getLocale();
 </script>
 
 <section>
@@ -38,7 +39,10 @@
 
 {#if $manageability === Manageability.FULL}
   <div class="buttons">
-    <FullscreenButton />
+    <div class="buttons-row">
+      <LanguageSelect bind:value={$locale} />
+      <FullscreenButton />
+    </div>
     <Volume bind:value={$settings.volume} />
   </div>
 {/if}
@@ -88,5 +92,11 @@
     flex-direction: column;
     align-items: flex-end;
     gap: grid(1);
+
+    .buttons-row {
+      @include flex_center;
+
+      gap: grid(1);
+    }
   }
 </style>

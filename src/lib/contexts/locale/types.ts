@@ -8,6 +8,8 @@ export const Locale = {
 } as const;
 export type Locale = ValueOf<typeof Locale>;
 
+export const localesList = Object.keys(Locale) as Locale[];
+
 export type LocaleContext = {
   locale: Writable<Locale>;
   i18n: Readable<(key: LocaleDictionaryKeys) => string>;
