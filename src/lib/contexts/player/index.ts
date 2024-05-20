@@ -8,9 +8,8 @@ export const PLAYER_THROTTLE_INTERVAL = 1000;
 
 export function createPlayerInstance(): TextAliveApp.Player {
   return new TextAliveApp.Player({
-    // TODO update token
     app: {
-      token: 'test',
+      token: import.meta.env.VITE_TEXTALIVE_TOKEN,
       parameters: [
         {
           title: 'Volume',
