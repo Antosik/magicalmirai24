@@ -52,7 +52,11 @@
         return;
       }
 
-      if (position > player.video.endTime + animationDuration) {
+      if (position === player.video.duration) {
+        return;
+      }
+
+      if (position > player.video.duration + animationDuration) {
         dispatch('ended');
         return;
       }
