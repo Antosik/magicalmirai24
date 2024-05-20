@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Char } from './types';
-  import type { IChar, IChord, PlayerListener } from 'textalive-app-api';
+  import type { IChar, IChord, PlayerEventListener } from 'textalive-app-api';
 
   import { createEventDispatcher, onDestroy } from 'svelte';
 
@@ -46,13 +46,17 @@
   let charNodes: Record<string, HTMLElement> = {};
   let activeColor: Char['color'];
 
-  const listener: PlayerListener = {
+  const listener: PlayerEventListener = {
     onTimeUpdate(position) {
       if (!player.video.firstChar) {
         return;
       }
 
-      if (position > player.video.endTime + animationDuration) {
+      if (position === player.video.duration) {
+        return;
+      }
+
+      if (position > player.video.duration + animationDuration) {
         dispatch('ended');
         return;
       }

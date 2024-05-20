@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PlayerListener } from 'textalive-app-api';
+  import type { PlayerAppListener, PlayerEventListener } from 'textalive-app-api';
 
   import { interpolateLab } from 'd3-interpolate';
   import { onDestroy } from 'svelte';
@@ -28,7 +28,7 @@
     interpolate: interpolateLab,
   });
 
-  const listener: PlayerListener = {
+  const listener: PlayerEventListener & PlayerAppListener = {
     onVideoReady() {
       const duration = calculateCloudAnimationDuration(player.data.songMap.beats);
       if (duration) {
@@ -114,8 +114,7 @@
 
       // Border
       border-style: solid;
-      border-color: color_adjust($frame-color, 20%) $frame-color color_adjust($frame-color, 20%)
-        $frame-color;
+      border-color: color_adjust($frame-color, 20%) $frame-color;
       box-shadow: inset 2px 2px 4px rgb(0 0 0 / 60%);
       content: '';
       touch-action: none;
