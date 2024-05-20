@@ -1,4 +1,4 @@
-import type { Player } from 'textalive-app-api';
+import type { IPlayerApp, Player } from 'textalive-app-api';
 
 import { getContext } from 'svelte';
 import { writable } from 'svelte/store';
@@ -25,7 +25,7 @@ export function createPlayerStateStore(player: Player): PlayerStateContext {
 
   player.addListener({
     // Set app readiness
-    onAppReady(app) {
+    onAppReady(app: IPlayerApp) {
       readiness.set({ app: true, video: false, timer: false });
       manageability.update(($state) => {
         const newState = calculateManageability(app);
