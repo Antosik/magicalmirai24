@@ -159,7 +159,7 @@
       left: 0;
       width: 100%;
       aspect-ratio: 1300 / 1200;
-      background-image: url('../images/miku_draft_2.png');
+      background-image: url('../images/miku.png');
       background-position: bottom center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -194,7 +194,6 @@
       right: -500px;
       animation-name: flyingcloud;
       aspect-ratio: 800 / 450;
-      background-image: url('../images/base_cloud_draft.png');
       background-position: right center;
       background-repeat: no-repeat;
       background-size: contain;
@@ -207,6 +206,7 @@
         top: 20%;
         height: calc(var(--base-height) * 1.2);
         animation-duration: calc(var(--duration) * 1.2);
+        background-image: url('../images/cloud_big.svg');
       }
 
       &-second {
@@ -215,6 +215,7 @@
         top: 60%;
         height: calc(var(--base-height) * 0.8);
         animation-duration: calc(var(--duration) * 0.8);
+        background-image: url('../images/cloud_small.svg');
       }
 
       @include breakpoint(md) {
@@ -231,22 +232,46 @@
     }
 
     &--big-front {
-      bottom: grid(4);
-      left: 0;
-      width: 400%;
-      height: 16%;
-      animation-duration: var(--duration);
-      animation-name: movingcloud;
-      background-image: url('../images/base_cloud_draft.png');
-      background-size: contain;
-      will-change: transform;
+      & {
+        left: 0;
+        height: 16%;
+        bottom: grid(4);
+        animation-duration: var(--duration);
+        animation-name: movingcloud;
 
-      @include breakpoint(md) {
-        height: 18%;
+        @include breakpoint(md) {
+          height: 18%;
+        }
+
+        @include breakpoint(xl) {
+          height: 20%;
+        }
       }
 
-      @include breakpoint(xl) {
-        height: 20%;
+      &::before,
+      &::after {
+        position: absolute;
+        content: '';
+        display: block;
+        top: 0;
+        height: 100%;
+      }
+
+      &::before {
+        left: -1600px;
+      }
+
+      &::after {
+        right: -1600px;
+      }
+
+      &,
+      &::after,
+      &::before {
+        width: 1600px;
+        background-image: url('../images/cloud_long.svg');
+        background-size: cover;
+        will-change: transform;
       }
     }
   }
@@ -270,11 +295,11 @@
 
   @keyframes movingcloud {
     0% {
-      transform: translateX(0%);
+      transform: translateX(0);
     }
 
     100% {
-      transform: translateX(-75%);
+      transform: translateX(-100%);
     }
   }
 </style>
