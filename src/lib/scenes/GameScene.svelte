@@ -120,7 +120,6 @@
   .content {
     @include absolute_full;
 
-    font-family: 'Mochiy Pop One', sans-serif;
     z-index: $z-index-game;
     width: 100%;
     height: 100%;
@@ -155,12 +154,5 @@
     @include breakpoint(xl) {
       height: 160px;
     }
-  }
-
-  .va-background {
-    @include absolute_full;
-
-    background: linear-gradient(to bottom, var(--va-color), transparent);
-    will-change: background;
   }
 </style>

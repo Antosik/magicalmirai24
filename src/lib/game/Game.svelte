@@ -159,6 +159,7 @@
   .char {
     @include flex_center;
 
+    font-family: 'Mochiy Pop One', sans-serif;
     position: absolute;
     right: -100%;
     width: 100%;
