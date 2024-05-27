@@ -22,6 +22,31 @@
     flex-direction: column;
     color: #020111;
     text-align: center;
-    gap: grid(2);
+    gap: grid(4);
+  }
+
+  h1 {
+    font-size: 28px;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+      font-size: 36px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 42px;
+    }
+  }
+
+  p {
+    font-size: 14px;
+
+    @include breakpoint(md) {
+      font-size: 20px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 26px;
+    }
   }
 </style>

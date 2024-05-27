@@ -1,10 +1,22 @@
 // https://github.com/fontdasu/Mochiypop
 @font-face {
-    font-display: swap;
-    font-family: 'Mochiy Pop One';
-    font-style: normal;
-    font-weight: normal;
-    src: url('../fonts/MochiyPopOne-Regular.woff2') format('woff2'),
-        url('../fonts/MochiyPopOne-Regular.woff') format('woff'),
-        url('../fonts/MochiyPopOne-Regular.ttf') format('ttf');
+  font-display: swap;
+  font-family: 'Mochiy Pop One';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('../fonts/MochiyPopOne-Regular.woff2') format('woff2'),
+    url('../fonts/MochiyPopOne-Regular.woff') format('woff'),
+    url('../fonts/MochiyPopOne-Regular.ttf') format('ttf');
+}
+
+// https://fonts.google.com/specimen/Life+Savers
+@font-face {
+  font-family: 'Live Savers';
+  src: url('../fonts/LifeSavers-Bold.woff2') format('woff2'),
+      url('../fonts/LifeSavers-Bold.woff') format('woff'),
+      url('../fonts/LifeSavers-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }

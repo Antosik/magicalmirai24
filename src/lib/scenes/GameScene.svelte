@@ -117,6 +117,7 @@
   }
 
   .content {
+    font-family: 'Mochiy Pop One', sans-serif;
     position: relative;
     z-index: $z-index-game;
     width: 100%;

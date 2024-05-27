@@ -68,6 +68,10 @@
 </main>
 
 <style lang="scss">
+  .content {
+    font-family: 'Live Savers';
+  }
+
   .moon {
     position: absolute;
     z-index: $z-index-scene;
@@ -89,9 +93,9 @@
       transform: translateX(-50%);
 
       .content {
-        width: 90%;
+        width: 80%;
         height: 25%;
-        padding: grid(4);
+        padding: grid(10);
         margin: 10% auto 20%;
       }
     }
