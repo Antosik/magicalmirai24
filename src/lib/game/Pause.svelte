@@ -58,7 +58,7 @@
     left: 50%;
     width: 300px;
     padding: grid(8);
-    border: 1px solid var(--blue-color);
+    border: 1px solid var(--moon-color);
     background-color: var(--transparent-white-color);
     text-align: center;
     transform: translate(-50%, -50%);
@@ -77,7 +77,7 @@
 
   span {
     &.total {
-      color: var(--blue-color);
+      color: var(--moon-color);
     }
 
     &.catched {

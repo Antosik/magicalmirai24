@@ -51,7 +51,6 @@
 
     border: 0;
     background: none;
-    color: var(--blue-color);
     outline: none;
     transform: rotate(90deg);
   }

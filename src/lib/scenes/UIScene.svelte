@@ -87,7 +87,6 @@
     background-size: cover;
     max-width: calc(100% - grid(4));
     width: fit-content;
-    height: fit-content;
     will-change: width, top, left, transform;
     transition:
       width 600ms,

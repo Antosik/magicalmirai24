@@ -52,7 +52,6 @@
 
     border: 0;
     background: none;
-    color: var(--blue-color);
   }
 
   input[type='range'] {

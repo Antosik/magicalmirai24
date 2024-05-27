@@ -20,7 +20,7 @@
     @include flex_center;
 
     flex-direction: column;
-    color: #020111;
+    color: var(--text-color);
     text-align: center;
     gap: grid(4);
   }

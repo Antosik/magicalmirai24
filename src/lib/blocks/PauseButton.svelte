@@ -6,7 +6,7 @@
 </script>
 
 <button type="button" title={$i18n('Pause')} on:click>
-  <FeatherIcon name="pause" size="24" fill="var(--blue-color)" />
+  <FeatherIcon name="pause" size="24" fill="var(--moon-color)" />
 </button>
 
 <style lang="scss">
@@ -17,6 +17,6 @@
     padding: grid(1);
     border: 0;
     background: none;
-    color: var(--blue-color);
+    color: var(--moon-color);
   }
 </style>

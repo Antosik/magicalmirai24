@@ -2,10 +2,13 @@
 
 :root {
   --blue-color: #1e5b64;
+  --text-color: #020111;
+  --moon-color: #f6f1d5;
   --red-color: #dc2b4d;
   --white-color: #fff;
   --transparent-white-color: rgb(255 255 255 / 50%);
   --less-transparent-white-color: rgb(255 255 255 / 75%);
+
   --frame-size: 12px;
   @include breakpoint(md) {
     --frame-size: 16px;
