@@ -2,6 +2,7 @@
   import { linear } from 'svelte/easing';
   import { fly } from 'svelte/transition';
 
+  import Stars from '$lib/components/Stars.svelte';
   import BigCloud from '$lib/components/clouds/BigCloud.svelte';
   import LongCloud from '$lib/components/clouds/LongCloud.svelte';
   import SmallCloud from '$lib/components/clouds/SmallCloud.svelte';
@@ -50,6 +51,8 @@
     easing: linear,
   }}
 >
+  <Stars {animationDuration} />
+
   {#if smallPosition}
     <SmallCloud {animationDuration} placed --top={smallPosition.top} --left={smallPosition.left} />
   {/if}
@@ -73,7 +76,8 @@
   }
 
   .moon {
-    position: absolute;
+    @include absolute_full;
+
     z-index: $z-index-scene;
     width: 100%;
     height: 100%;

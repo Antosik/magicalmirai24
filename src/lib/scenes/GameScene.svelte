@@ -7,6 +7,7 @@
   import { tweened } from 'svelte/motion';
   import { fly } from 'svelte/transition';
 
+  import Stars from '$lib/components/Stars.svelte';
   import BigCloud from '$lib/components/clouds/BigCloud.svelte';
   import LongCloud from '$lib/components/clouds/LongCloud.svelte';
   import SmallCloud from '$lib/components/clouds/SmallCloud.svelte';
@@ -87,7 +88,7 @@
     easing: linear,
   }}
 >
-  <div class="va-background" style:--va-color={$vaColor}></div>
+  <Stars {animationDuration} {pause} --stars-color={$vaColor} />
 
   <SmallCloud {animationDuration} {pause} />
   <BigCloud {animationDuration} {pause} />
@@ -117,8 +118,9 @@
   }
 
   .content {
+    @include absolute_full;
+
     font-family: 'Mochiy Pop One', sans-serif;
-    position: relative;
     z-index: $z-index-game;
     width: 100%;
     height: 100%;
