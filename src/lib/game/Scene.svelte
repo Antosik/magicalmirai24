@@ -5,6 +5,9 @@
   import { onDestroy } from 'svelte';
   import { tweened } from 'svelte/motion';
 
+  import BigCloud from '$lib/components/clouds/BigCloud.svelte';
+  import LongCloud from '$lib/components/clouds/LongCloud.svelte';
+  import SmallCloud from '$lib/components/clouds/SmallCloud.svelte';
   import { PLAYER_THROTTLE_INTERVAL, getPlayerInstance } from '$lib/contexts/player';
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
@@ -74,17 +77,10 @@
 
 <main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
   <div class="va-background" style:--va-color={$vaColor}></div>
-  <div
-    class="cloud cloud--scene cloud--scene-first"
-    class:pause
-    style:--duration="{animationDuration}ms"
-  ></div>
-  <div
-    class="cloud cloud--scene cloud--scene-second"
-    class:pause
-    style:--duration="{animationDuration}ms"
-  ></div>
-  <div class="cloud cloud--big-front" class:pause style:--duration="{animationDuration}ms"></div>
+
+  <SmallCloud {animationDuration} {pause} />
+  <BigCloud {animationDuration} {pause} />
+  <LongCloud {animationDuration} {pause} />
 
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:top="{$playerPosition}px"></div>
@@ -175,131 +171,10 @@
     }
   }
 
-  .cloud {
-    position: absolute;
-    z-index: $z-index-scene;
-    width: 100%;
-    animation-iteration-count: infinite;
-    animation-play-state: running;
-    animation-timing-function: linear;
-
-    &.pause {
-      animation-play-state: paused;
-    }
-
-    &--scene {
-      --base-height: 80px;
-      --base-drop: 2px;
-
-      right: -500px;
-      animation-name: flyingcloud;
-      aspect-ratio: 800 / 450;
-      background-position: right center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      filter: drop-shadow(rgb(0 0 0 / 60%) var(--shadow-drop) var(--shadow-drop) 2px);
-      will-change: transform;
-
-      &-first {
-        --shadow-drop: calc(var(--base-drop) * 1.2);
-
-        top: 20%;
-        height: calc(var(--base-height) * 1.2);
-        animation-duration: calc(var(--duration) * 1.2);
-        background-image: url('../images/cloud_big.svg');
-      }
-
-      &-second {
-        --shadow-drop: calc(var(--base-drop) * 0.8);
-
-        top: 60%;
-        height: calc(var(--base-height) * 0.8);
-        animation-duration: calc(var(--duration) * 0.8);
-        background-image: url('../images/cloud_small.svg');
-      }
-
-      @include breakpoint(md) {
-        --base-height: 100px;
-      }
-
-      @include breakpoint(lg) {
-        --base-height: 120px;
-      }
-
-      @include breakpoint(xl) {
-        --base-height: 140px;
-      }
-    }
-
-    &--big-front {
-      & {
-        left: 0;
-        height: 16%;
-        bottom: grid(4);
-        animation-duration: var(--duration);
-        animation-name: movingcloud;
-
-        @include breakpoint(md) {
-          height: 18%;
-        }
-
-        @include breakpoint(xl) {
-          height: 20%;
-        }
-      }
-
-      &::before,
-      &::after {
-        position: absolute;
-        content: '';
-        display: block;
-        top: 0;
-        height: 100%;
-      }
-
-      &::before {
-        left: -1600px;
-      }
-
-      &::after {
-        right: -1600px;
-      }
-
-      &,
-      &::after,
-      &::before {
-        width: 1600px;
-        background-image: url('../images/cloud_long.svg');
-        background-size: cover;
-        will-change: transform;
-      }
-    }
-  }
-
   .va-background {
     @include absolute_full;
 
     background: linear-gradient(to bottom, var(--va-color), transparent);
     will-change: background;
-  }
-
-  @keyframes flyingcloud {
-    0% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(calc(-500px - 100%));
-    }
-  }
-
-  @keyframes movingcloud {
-    0% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(-100%);
-    }
   }
 </style>
