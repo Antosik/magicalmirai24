@@ -13,11 +13,11 @@
   div {
     @include absolute_full;
 
-    width: 100%;
-    height: 100%;
+    position: relative;
     z-index: $z-index-scene;
     overflow: hidden;
-    position: relative;
+    width: 100%;
+    height: 100%;
   }
 
   @function multiple-box-shadow($count) {
@@ -25,7 +25,7 @@
     @for $i from 2 through $count {
       $value: '#{$value}, #{random(2000)}px #{random(2000)}px var(--stars-color, rgb(255 255 255 / 50%))';
     }
-    @return unquote($value);
+    @return string_unquote($value);
   }
 
   $shadows-small: multiple-box-shadow(500);
@@ -34,68 +34,68 @@
 
   .stars {
     position: absolute;
-    background: transparent;
     animation-iteration-count: infinite;
     animation-name: starsflow;
     animation-play-state: running;
     animation-timing-function: linear;
+    background: transparent;
 
     &.pause {
       animation-play-state: paused;
     }
 
     &--small {
-      animation-duration: calc(var(--duration) * 20);
-      box-shadow: $shadows-small;
       width: 1px;
       height: 1px;
+      animation-duration: calc(var(--duration) * 20);
+      box-shadow: $shadows-small;
 
       &::after {
-        content: '';
         position: absolute;
         left: 2000px;
         width: 1px;
         height: 1px;
         box-shadow: $shadows-small;
+        content: '';
       }
     }
 
     &--medium {
-      animation-duration: calc(var(--duration) * 40);
-      box-shadow: $shadows-medium;
       width: 2px;
       height: 2px;
+      animation-duration: calc(var(--duration) * 40);
+      box-shadow: $shadows-medium;
 
       &::after {
-        content: '';
         position: absolute;
         left: 2000px;
         width: 2px;
         height: 2px;
         box-shadow: $shadows-medium;
+        content: '';
       }
     }
 
     &--big {
-      animation-duration: calc(var(--duration) * 60);
-      box-shadow: $shadows-big;
       width: 3px;
       height: 3px;
+      animation-duration: calc(var(--duration) * 60);
+      box-shadow: $shadows-big;
 
       &::after {
-        content: '';
         position: absolute;
         left: 2000px;
         width: 3px;
         height: 3px;
         box-shadow: $shadows-big;
+        content: '';
       }
     }
   }
 
   @keyframes starsflow {
     from {
-      transform: translateX(0px);
+      transform: translateX(0);
     }
 
     to {

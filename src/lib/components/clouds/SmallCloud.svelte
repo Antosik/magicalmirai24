@@ -35,10 +35,10 @@
     background-repeat: no-repeat;
     background-size: contain;
     filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
-    will-change: transform, top, left;
     transition:
       top 400ms,
       left 400ms;
+    will-change: transform, top, left;
 
     &.pause,
     &.placed {

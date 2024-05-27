@@ -159,7 +159,6 @@
   .char {
     @include flex_center;
 
-    font-family: 'Mochiy Pop One', sans-serif;
     position: absolute;
     right: -100%;
     width: 100%;
@@ -170,6 +169,7 @@
     animation-name: flyingchar;
     animation-play-state: paused;
     animation-timing-function: linear;
+    font-family: 'Mochiy Pop One', sans-serif;
     font-size: 48px;
     text-align: left;
     user-select: none;

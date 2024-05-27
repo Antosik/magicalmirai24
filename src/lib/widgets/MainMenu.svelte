@@ -49,12 +49,12 @@
   section {
     @include flex_center;
 
-    flex-direction: column;
     width: 100%;
     height: 100%;
+    flex-direction: column;
     padding: grid(8);
-    text-align: center;
     gap: grid(4);
+    text-align: center;
   }
 
   h1 {

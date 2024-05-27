@@ -49,8 +49,8 @@
     @include flex_center;
 
     flex-direction: column;
-    gap: grid(10);
     padding: grid(6);
+    gap: grid(10);
   }
 
   ul {
@@ -66,7 +66,6 @@
     padding: grid(2) grid(4);
     border: 0;
     background: none;
-
     font-size: 28px;
     text-transform: uppercase;
 

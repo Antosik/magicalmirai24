@@ -44,8 +44,8 @@
     @include flex_center;
 
     flex-direction: column;
-    gap: grid(8);
     padding: grid(6);
+    gap: grid(8);
 
     &__percentage {
       font-size: 44px;
@@ -87,7 +87,6 @@
     padding: grid(2) grid(4);
     border: 0;
     background: none;
-
     font-size: 28px;
     text-transform: uppercase;
 

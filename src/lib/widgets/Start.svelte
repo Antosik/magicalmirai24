@@ -21,8 +21,8 @@
 
     flex-direction: column;
     color: var(--text-color);
-    text-align: center;
     gap: grid(4);
+    text-align: center;
   }
 
   h1 {

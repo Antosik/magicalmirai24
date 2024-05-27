@@ -12,11 +12,11 @@
 
 // https://fonts.google.com/specimen/Life+Savers
 @font-face {
+  font-display: swap;
   font-family: 'Live Savers';
+  font-style: normal;
+  font-weight: normal;
   src: url('../fonts/LifeSavers-Bold.woff2') format('woff2'),
       url('../fonts/LifeSavers-Bold.woff') format('woff'),
       url('../fonts/LifeSavers-Bold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }

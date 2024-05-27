@@ -42,33 +42,33 @@
   }
 
   .content {
-    z-index: $z-index-scene;
     position: absolute;
+    z-index: $z-index-scene;
+    top: 50%;
+    left: 50%;
     width: fit-content;
+    min-width: 40%;
     max-width: calc(100% - grid(4));
-    will-change: width, top, left, transform;
+    padding: grid(10);
+    transform: translate(-50%, -50%);
     transition:
       width 600ms,
       top 600ms,
       left 600ms;
-    padding: grid(10);
-    min-width: 40%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    will-change: width, top, left, transform;
   }
 
   .moon {
     @include flex_center;
     @include absolute_full;
 
-    z-index: -1;
     position: absolute;
+    z-index: -1;
 
     img {
+      overflow: visible;
       width: 100%;
       aspect-ratio: 1 / 1;
-      overflow: visible;
     }
   }
 </style>
