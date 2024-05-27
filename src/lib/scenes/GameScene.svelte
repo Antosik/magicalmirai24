@@ -3,7 +3,9 @@
 
   import { interpolateLab } from 'd3-interpolate';
   import { onDestroy } from 'svelte';
+  import { linear } from 'svelte/easing';
   import { tweened } from 'svelte/motion';
+  import { fly } from 'svelte/transition';
 
   import BigCloud from '$lib/components/clouds/BigCloud.svelte';
   import LongCloud from '$lib/components/clouds/LongCloud.svelte';
@@ -12,9 +14,8 @@
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
-
-  import { DEFAULT_CLOUD_ANIMATION_DURATION } from './constants';
-  import { calculateVAColor, calculateCloudAnimationDuration } from './utils';
+  import { DEFAULT_CLOUD_ANIMATION_DURATION } from '$lib/game/constants';
+  import { calculateVAColor, calculateCloudAnimationDuration } from '$lib/game/utils';
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
@@ -75,7 +76,17 @@
   onDestroy(() => player.removeListener(listener));
 </script>
 
-<main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
+<main
+  on:mousemove={handleMouseMove}
+  on:touchmove={handleTouchMove}
+  transition:fly={{
+    delay: 200,
+    duration: 500,
+    x: -window.innerWidth,
+    opacity: 0.5,
+    easing: linear,
+  }}
+>
   <div class="va-background" style:--va-color={$vaColor}></div>
 
   <SmallCloud {animationDuration} {pause} />
@@ -101,21 +112,6 @@
       $background-gradient-center 20%,
       $background-gradient-lower 100%
     );
-
-    &::before {
-      @include absolute_full;
-
-      z-index: $z-index-frame;
-      border-width: var(--frame-size);
-
-      // Border
-      border-style: solid;
-      border-color: color_adjust($frame-color, 20%) $frame-color;
-      box-shadow: inset 2px 2px 4px rgb(0 0 0 / 60%);
-      content: '';
-      touch-action: none;
-      user-select: none;
-    }
   }
 
   .error,
