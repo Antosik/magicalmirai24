@@ -33,6 +33,6 @@ export interface LocaleDictionary {
   'Back to Main menu': string;
   Credits: string;
   Help: string;
-  'Main Menu': string;
+  'Choose Song': string;
   Play: string;
 }

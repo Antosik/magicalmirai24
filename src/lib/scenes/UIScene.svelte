@@ -79,28 +79,46 @@
     @include absolute_full;
 
     z-index: $z-index-scene;
-    width: 100%;
-    height: 100%;
     aspect-ratio: 1/1;
 
     background-image: url('../images/moon.svg');
     background-position: top center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+    max-width: calc(100% - grid(4));
+    width: fit-content;
+    height: fit-content;
+    will-change: width, top, left, transform;
+    transition:
+      width 600ms,
+      top 600ms,
+      left 600ms,
+      transform 600ms;
 
     &--start {
-      max-width: 90%;
       min-width: 50%;
-      width: fit-content;
       top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(0);
 
       .content {
         width: 80%;
         height: 25%;
         padding: grid(10);
         margin: 10% auto 20%;
+      }
+    }
+
+    &--main_page {
+      min-width: 30%;
+      top: 50%;
+      left: 5%;
+      transform: translateX(0) translateY(-50%);
+
+      .content {
+        width: 100%;
+        height: 100%;
+        padding: grid(5);
       }
     }
   }

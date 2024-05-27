@@ -37,12 +37,10 @@
   div {
     @include flex_center;
 
-    flex-direction: row-reverse;
+    flex-direction: row;
     padding: grid(1);
     background: var(--transparent-white-color);
     gap: grid(1);
-    transform: rotate(-90deg) translate(0, -100%);
-    transform-origin: top right;
 
     &:focus-within {
       background: var(--less-transparent-white-color);
@@ -55,7 +53,6 @@
     border: 0;
     background: none;
     color: var(--blue-color);
-    transform: rotate(90deg);
   }
 
   input[type='range'] {
