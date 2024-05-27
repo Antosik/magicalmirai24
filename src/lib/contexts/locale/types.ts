@@ -25,7 +25,7 @@ export interface LocaleDictionary {
   ok: string;
   miss: string;
   Resume: string;
-  Restart: string;
+  Retry: string;
   Back: string;
   Minimize: string;
   Maximize: string;

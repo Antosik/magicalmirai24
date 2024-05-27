@@ -53,10 +53,11 @@
 >
   <Stars {animationDuration} />
 
-  <div class="moon moon--{$page.toLowerCase()}">
-    <div class="content">
-      <slot />
+  <div class="content content--{$page.toLowerCase()}">
+    <div class="moon">
+      <img src="./images/moon.svg" alt="" />
     </div>
+    <slot />
   </div>
 
   {#if smallPosition}
@@ -72,39 +73,22 @@
 
 <style lang="scss">
   .content {
-    font-family: 'Live Savers';
-  }
-
-  .moon {
-    @include absolute_full;
-
     z-index: $z-index-scene;
-    aspect-ratio: 1/1;
-
-    background-image: url('../images/moon.svg');
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    max-width: calc(100% - grid(4));
+    position: absolute;
     width: fit-content;
+    max-width: calc(100% - grid(4));
     will-change: width, top, left, transform;
     transition:
       width 600ms,
       top 600ms,
       left 600ms;
+    padding: grid(10);
 
     &--start {
       min-width: 50%;
       top: 50%;
       left: 50%;
-      transform: translateX(-50%) translateY(0);
-
-      .content {
-        width: 80%;
-        height: 25%;
-        padding: grid(10);
-        margin: 10% auto 20%;
-      }
+      transform: translate(-50%, 0);
     }
 
     &--main_page {
@@ -112,12 +96,6 @@
       top: 50%;
       left: 5%;
       transform: translateX(0) translateY(-50%);
-
-      .content {
-        width: 100%;
-        height: 100%;
-        padding: grid(5);
-      }
     }
 
     &--help,
@@ -125,12 +103,21 @@
       min-width: 70%;
       top: 15%;
       left: 15%;
+    }
+  }
 
-      .content {
-        width: 100%;
-        height: 70%;
-        padding: grid(10);
-      }
+  .moon {
+    @include flex_center;
+    @include absolute_full;
+
+    z-index: -1;
+    position: absolute;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      overflow: visible;
     }
   }
 </style>
