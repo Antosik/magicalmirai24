@@ -121,5 +121,17 @@
         padding: grid(5);
       }
     }
+
+    &--help {
+      min-width: 70%;
+      top: 15%;
+      left: 15%;
+
+      .content {
+        width: 100%;
+        height: 70%;
+        padding: grid(10);
+      }
+    }
   }
 </style>

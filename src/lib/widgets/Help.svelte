@@ -20,34 +20,52 @@
 
 <style lang="scss">
   section {
-    position: absolute;
-    z-index: $z-index-menu;
-    display: flex;
-    flex-direction: column;
-    padding: grid(4);
-    border: 1px solid var(--blue-color);
-    background-color: var(--transparent-white-color);
-    inset: 20% 10%;
-    text-align: center;
-  }
+    @include flex_center;
 
-  button {
-    position: fixed;
-    top: calc(var(--frame-size) + grid(1));
-    left: calc(var(--frame-size) + grid(1));
-    padding: grid(1) grid(2);
-    border: 1px solid var(--blue-color);
-    background-color: var(--transparent-white-color);
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: grid(8);
+    text-align: center;
+    gap: grid(4);
   }
 
   h1 {
-    margin-bottom: grid(4);
+    font-size: 28px;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+      font-size: 32px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 36px;
+    }
+  }
+
+  button {
+    @include flex_center;
+
+    width: 100%;
+    padding: grid(1) grid(4);
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    font-size: 14px;
+
+    @include breakpoint(md) {
+      font-size: 18px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 20px;
+    }
   }
 
   div {
+    width: 100%;
     flex: 1;
     padding: grid(2) grid(4);
-    border: 1px solid var(--blue-color);
     overflow-y: auto;
   }
 </style>
