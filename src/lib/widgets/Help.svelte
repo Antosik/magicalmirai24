@@ -4,9 +4,21 @@
 
   const page = getPage();
   const { i18n } = getLocale();
+
+  function openMainMenu() {
+    $page = Page.MAIN_PAGE;
+  }
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      openMainMenu();
+    }
+  }
 </script>
 
-<button type="button" on:click={() => ($page = Page.MAIN_PAGE)}>
+<svelte:document on:keydown={handleKeyDown} />
+
+<button type="button" on:click={openMainMenu}>
   {$i18n('Back to Main menu')}
 </button>
 
