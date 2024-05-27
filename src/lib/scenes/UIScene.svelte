@@ -92,8 +92,7 @@
     transition:
       width 600ms,
       top 600ms,
-      left 600ms,
-      transform 600ms;
+      left 600ms;
 
     &--start {
       min-width: 50%;
