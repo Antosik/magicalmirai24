@@ -195,5 +195,13 @@
     height: 100%;
     color: var(--moon-color);
     font-size: 28px;
+
+    @include breakpoint(md) {
+      font-size: 32px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 36px;
+    }
   }
 </style>
