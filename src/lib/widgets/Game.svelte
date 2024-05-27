@@ -160,7 +160,7 @@
 
   {#if $manageability === Manageability.FULL}
     <Pause
-      open={pause && !done}
+      open={pause && !timer && !done}
       on:resume={resumeGame}
       on:restart={restartGame}
       on:back={backToMenu}
