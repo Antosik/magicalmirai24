@@ -1,18 +1,27 @@
 <script lang="ts">
+  import { fade } from 'svelte/transition';
+
   export let animationDuration: number;
   export let pause = false;
+  export let placed = false;
 </script>
 
-<div class="cloud cloud--big" class:pause style:--duration="{animationDuration}ms"></div>
+<div
+  transition:fade
+  class="cloud cloud--big"
+  class:pause
+  class:placed
+  style:--duration="{animationDuration}ms"
+></div>
 
 <style lang="scss">
   div {
-    --base-height: 80px;
+    --base-height: 60px;
 
     position: absolute;
     z-index: $z-index-scene;
-    top: 20%;
-    right: -500px;
+    top: var(--top, 20%);
+    left: var(--left, calc(100% + 500px));
     width: 100%;
     height: calc(var(--base-height) * 1.2);
     animation-duration: calc(var(--duration) * 1.2);
@@ -20,28 +29,38 @@
     animation-name: flyingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
-    aspect-ratio: 800 / 450;
+    aspect-ratio: 814 / 226;
     background-image: url('../images/cloud_big.svg');
     background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
     filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
-    will-change: transform;
+    will-change: transform, top, left;
+    transition:
+      top 400ms,
+      left 400ms;
 
-    &.pause {
+    &.pause,
+    &.placed {
       animation-play-state: paused;
     }
 
+    &.placed {
+      --base-height: 75px;
+
+      width: auto;
+    }
+
     @include breakpoint(md) {
-      --base-height: 100px;
+      height: calc(var(--base-height) * 1.25);
     }
 
     @include breakpoint(lg) {
-      --base-height: 120px;
+      height: calc(var(--base-height) * 1.5);
     }
 
     @include breakpoint(xl) {
-      --base-height: 140px;
+      height: calc(var(--base-height) * 1.75);
     }
   }
 

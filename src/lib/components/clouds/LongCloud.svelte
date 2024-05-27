@@ -9,7 +9,7 @@
   div {
     position: absolute;
     z-index: $z-index-scene;
-    bottom: grid(4);
+    bottom: 0;
     left: 0;
     width: 1600px;
     height: 16%;
