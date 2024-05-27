@@ -37,10 +37,13 @@
   $: pause = $songState === SongState.PAUSED && isRealPause(player);
   $: song = songs[$songId];
   $: $manageability !== Manageability.NONE &&
-    player.createFromSongUrl(song.url, {
-      video: song.video,
-    });
+    player
+      .createFromSongUrl(song.url, {
+        video: song.video,
+      })
+      .catch(() => pauseGame());
   $: $readiness.timer && resumeGame();
+  $: $songState === SongState.ENDED && handleSongEnded();
 
   function startTimer(i: number) {
     if (i === 0) {

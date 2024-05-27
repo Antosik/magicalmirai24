@@ -18,7 +18,7 @@
   export let pause: boolean = false;
   export let done: boolean = false;
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{ ended: void }>();
 
   const player = getPlayerInstance();
   const playerPosition = getPlayerPosition();

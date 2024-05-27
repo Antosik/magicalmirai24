@@ -71,7 +71,9 @@ export function createPlayerStateStore(player: Player): PlayerStateContext {
       songState.set(SongState.PLAYING);
     },
     onPause() {
-      songState.set(SongState.PAUSED);
+      songState.set(
+        player.mediaPosition >= player.video.duration ? SongState.ENDED : SongState.PAUSED,
+      );
     },
     onStop() {
       songState.set(SongState.STOPPED);
