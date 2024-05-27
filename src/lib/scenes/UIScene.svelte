@@ -53,6 +53,12 @@
 >
   <Stars {animationDuration} />
 
+  <div class="moon moon--{$page.toLowerCase()}">
+    <div class="content">
+      <slot />
+    </div>
+  </div>
+
   {#if smallPosition}
     <SmallCloud {animationDuration} placed --top={smallPosition.top} --left={smallPosition.left} />
   {/if}
@@ -60,12 +66,6 @@
   {#if bigPosition}
     <BigCloud {animationDuration} placed --top={bigPosition.top} --left={bigPosition.left} />
   {/if}
-
-  <div class="moon moon--{$page.toLowerCase()}">
-    <div class="content">
-      <slot />
-    </div>
-  </div>
 
   <LongCloud {animationDuration} />
 </main>
@@ -122,7 +122,8 @@
       }
     }
 
-    &--help {
+    &--help,
+    &--credits {
       min-width: 70%;
       top: 15%;
       left: 15%;
