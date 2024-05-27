@@ -6,6 +6,7 @@
   import Credits from '$lib/widgets/Credits.svelte';
   import Game from '$lib/widgets/Game.svelte';
   import Help from '$lib/widgets/Help.svelte';
+  import Start from '$lib/widgets/Start.svelte';
 
   import GameScene from './lib/scenes/GameScene.svelte';
   import MainMenu from './lib/widgets/MainMenu.svelte';
@@ -23,6 +24,8 @@
   <UIScene>
     {#if !$readiness.app}
       {$i18n('App loading...')}
+    {:else if $page === Page.START}
+      <Start />
     {:else if $page === Page.MAIN_PAGE}
       <MainMenu />
     {:else if $page === Page.CREDITS}

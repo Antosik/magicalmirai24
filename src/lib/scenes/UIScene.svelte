@@ -58,23 +58,42 @@
     <BigCloud {animationDuration} placed --top={bigPosition.top} --left={bigPosition.left} />
   {/if}
 
-  <LongCloud {animationDuration} />
-
-  <div class="content">
-    <slot />
+  <div class="moon moon--{$page.toLowerCase()}">
+    <div class="content">
+      <slot />
+    </div>
   </div>
+
+  <LongCloud {animationDuration} />
 </main>
 
 <style lang="scss">
-  main {
-    position: relative;
+  .moon {
+    position: absolute;
+    z-index: $z-index-scene;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      180deg,
-      $background-gradient-upper 0%,
-      $background-gradient-center 20%,
-      $background-gradient-lower 100%
-    );
+    aspect-ratio: 1/1;
+
+    background-image: url('../images/moon.svg');
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &--start {
+      max-width: 90%;
+      min-width: 50%;
+      width: fit-content;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .content {
+        width: 90%;
+        height: 25%;
+        padding: grid(4);
+        margin: 10% auto 20%;
+      }
+    }
   }
 </style>

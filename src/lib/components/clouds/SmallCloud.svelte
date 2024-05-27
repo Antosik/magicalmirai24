@@ -31,7 +31,7 @@
     animation-timing-function: linear;
     aspect-ratio: 461 / 297;
     background-image: url('../images/cloud_small.svg');
-    background-position: right center;
+    background-position: left center;
     background-repeat: no-repeat;
     background-size: contain;
     filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
@@ -70,7 +70,7 @@
     }
 
     100% {
-      transform: translateX(calc(-500px - 100%));
+      transform: translateX(calc(-1000px - 100%));
     }
   }
 </style>

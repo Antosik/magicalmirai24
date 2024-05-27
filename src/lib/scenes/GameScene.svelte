@@ -102,18 +102,6 @@
 </main>
 
 <style lang="scss">
-  main {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      180deg,
-      $background-gradient-upper 0%,
-      $background-gradient-center 20%,
-      $background-gradient-lower 100%
-    );
-  }
-
   .error,
   .player {
     user-select: none;
@@ -133,7 +121,6 @@
     z-index: $z-index-game;
     width: 100%;
     height: 100%;
-    padding: var(--frame-size);
   }
 
   .player {
