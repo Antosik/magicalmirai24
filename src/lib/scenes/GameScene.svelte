@@ -5,7 +5,7 @@
   import { onDestroy } from 'svelte';
   import { linear } from 'svelte/easing';
   import { tweened } from 'svelte/motion';
-  import { fly } from 'svelte/transition';
+  import { fade, fly } from 'svelte/transition';
 
   import Stars from '$lib/components/Stars.svelte';
   import BigCloud from '$lib/components/clouds/BigCloud.svelte';
@@ -21,6 +21,7 @@
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
   let animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+  let songProgress = 0;
 
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
@@ -39,17 +40,22 @@
       if (duration) {
         animationDuration = duration;
       }
+
+      songProgress = 0;
     },
     onThrottledTimeUpdate(position) {
       const va = player.getValenceArousal(position);
       vaColor.set(calculateVAColor(va));
+      songProgress = (position / player.video.duration) * 100;
     },
     onAppMediaChange() {
       animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+      songProgress = 0;
       vaColor.set(calculateVAColor(emptyVa));
     },
     onStop() {
       animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+      songProgress = 0;
       vaColor.set(calculateVAColor(emptyVa));
     },
   };
@@ -89,6 +95,10 @@
   }}
 >
   <Stars {animationDuration} {pause} --stars-color={$vaColor} />
+
+  {#if songProgress}
+    <div transition:fade class="moon" style:--progress="{songProgress}%"></div>
+  {/if}
 
   <SmallCloud {animationDuration} {pause} />
   <BigCloud {animationDuration} {pause} />
@@ -153,6 +163,42 @@
 
     @include breakpoint(xl) {
       height: 160px;
+    }
+  }
+
+  .moon {
+    --base-height: 60px;
+    --height: var(--base-height) * 1.2;
+
+    position: absolute;
+    z-index: $z-index-scene;
+    top: calc(-1 * var(--height) / 2);
+    left: calc(-1 * var(--height) / 2);
+    width: 100%;
+    height: var(--height);
+    background-image: url('../images/moon.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
+    transform: translateX(var(--progress));
+    will-change: transform;
+    transition: transform 1s linear;
+
+    @include breakpoint(md) {
+      --height: calc(var(--base-height) * 1.25);
+    }
+
+    @include breakpoint(lg) {
+      --height: calc(var(--base-height) * 1.5);
+    }
+
+    @include breakpoint(xl) {
+      --height: calc(var(--base-height) * 1.75);
+    }
+
+    @include breakpoint(xxxl) {
+      --height: calc(var(--base-height) * 2);
     }
   }
 </style>
