@@ -12,12 +12,12 @@
     bottom: 0;
     left: 0;
     height: 16%;
-    aspect-ratio: 3198 / 220;
     animation-duration: var(--duration);
     animation-iteration-count: infinite;
     animation-name: movingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
+    aspect-ratio: 3198 / 220;
     background-image: url('../images/cloud_long.svg');
     background-size: cover;
     filter: drop-shadow(rgb(0 0 0 / 25%) 5px -1px 3px);

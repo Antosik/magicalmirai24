@@ -182,8 +182,8 @@
     background-size: contain;
     filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
     transform: translateX(var(--progress));
-    will-change: transform;
     transition: transform 1s linear;
+    will-change: transform;
 
     @include breakpoint(md) {
       --height: calc(var(--base-height) * 1.25);
