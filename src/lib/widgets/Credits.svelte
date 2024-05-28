@@ -53,6 +53,10 @@
     @include breakpoint(xl) {
       font-size: 36px;
     }
+
+    @include breakpoint(xl) {
+      font-size: 44px;
+    }
   }
 
   button {
@@ -71,6 +75,10 @@
 
     @include breakpoint(xl) {
       font-size: 20px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 24px;
     }
   }
 

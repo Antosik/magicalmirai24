@@ -87,7 +87,7 @@
     &--start {
       top: 50%;
       left: 50%;
-      min-width: 50%;
+      min-width: 30%;
       transform: translate(-50%, 0);
     }
 

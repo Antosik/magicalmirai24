@@ -15,6 +15,9 @@
   @include breakpoint(xl) {
     --frame-size: 20px;
   }
+  @include breakpoint(xxxl) {
+    --frame-size: 30px;
+  }
 }
 
 html,

@@ -62,6 +62,10 @@
     @include breakpoint(xl) {
       height: calc(var(--base-height) * 1.75);
     }
+
+    @include breakpoint(xxxl) {
+      height: calc(var(--base-height) * 2);
+    }
   }
 
   @keyframes flyingcloud {

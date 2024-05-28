@@ -68,6 +68,10 @@
     @include breakpoint(xl) {
       font-size: 36px;
     }
+
+    @include breakpoint(xxl) {
+      font-size: 44px;
+    }
   }
 
   select,
@@ -81,11 +85,19 @@
     @include breakpoint(xl) {
       font-size: 20px;
     }
+
+    @include breakpoint(xxl) {
+      font-size: 28px;
+    }
   }
 
   select {
     width: 100%;
     max-width: 300px;
+
+    @include breakpoint(xxl) {
+      max-width: 500px;
+    }
   }
 
   ul {

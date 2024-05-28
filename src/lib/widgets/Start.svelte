@@ -36,6 +36,10 @@
     @include breakpoint(xl) {
       font-size: 42px;
     }
+
+    @include breakpoint(xxl) {
+      font-size: 50px;
+    }
   }
 
   p {
@@ -46,7 +50,11 @@
     }
 
     @include breakpoint(xl) {
-      font-size: 26px;
+      font-size: 24px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 32px;
     }
   }
 </style>

@@ -11,8 +11,8 @@
     z-index: $z-index-scene;
     bottom: 0;
     left: 0;
-    width: 1600px;
     height: 16%;
+    aspect-ratio: 3198 / 220;
     animation-duration: var(--duration);
     animation-iteration-count: infinite;
     animation-name: movingcloud;
@@ -41,7 +41,7 @@
       position: absolute;
       top: 0;
       display: block;
-      width: 1600px;
+      width: 100%;
       height: 100%;
       background-image: url('../images/cloud_long.svg');
       background-size: cover;
@@ -50,11 +50,11 @@
     }
 
     &::before {
-      left: -1600px;
+      transform: translateX(-100%);
     }
 
     &::after {
-      right: -1600px;
+      transform: translateX(100%);
     }
   }
 

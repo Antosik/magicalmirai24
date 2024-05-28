@@ -58,6 +58,10 @@
       @include breakpoint(xl) {
         font-size: 52px;
       }
+
+      @include breakpoint(xxl) {
+        font-size: 60px;
+      }
     }
 
     &__count {
@@ -70,6 +74,10 @@
 
       @include breakpoint(xl) {
         font-size: 44px;
+      }
+
+      @include breakpoint(xxl) {
+        font-size: 52px;
       }
     }
   }
@@ -96,6 +104,10 @@
 
     @include breakpoint(xl) {
       font-size: 36px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 44px;
     }
   }
 </style>
