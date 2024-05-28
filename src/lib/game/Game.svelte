@@ -170,21 +170,25 @@
     animation-play-state: paused;
     animation-timing-function: linear;
     font-family: 'Mochiy Pop One', sans-serif;
-    font-size: 48px;
+    font-size: 50px;
     text-align: left;
     user-select: none;
     will-change: transform;
+    -webkit-text-stroke: 2px var(--moon-color);
 
     &--color-dark {
       color: var(--blue-color);
+      text-shadow: 0px 2px 4px var(--blue-color);
     }
 
     &--color-red {
       color: var(--red-color);
+      text-shadow: 0px 2px 4px var(--red-color);
     }
 
     &--color-white {
       color: var(--white-color);
+      text-shadow: 0px 2px 4px var(--white-color);
     }
 
     &.playing {
