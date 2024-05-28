@@ -64,6 +64,7 @@
 
     position: absolute;
     z-index: -1;
+    filter: drop-shadow(0 0 20px var(--moon-color));
 
     img {
       overflow: visible;

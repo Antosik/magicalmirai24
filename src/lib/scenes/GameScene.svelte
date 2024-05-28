@@ -180,7 +180,7 @@
     background-position: left center;
     background-repeat: no-repeat;
     background-size: contain;
-    filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
+    filter: drop-shadow(0 0 20px var(--moon-color));
     transform: translateX(var(--progress));
     transition: transform 1s linear;
     will-change: transform;

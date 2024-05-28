@@ -87,14 +87,12 @@
     &--start {
       top: 50%;
       left: 50%;
-      min-width: 30%;
       transform: translate(-50%, 0);
     }
 
     &--main_page {
       top: 50%;
       left: 5%;
-      min-width: 30%;
       transform: translateX(0) translateY(-50%);
     }
 
@@ -112,6 +110,7 @@
 
     position: absolute;
     z-index: -1;
+    filter: drop-shadow(0 0 20px var(--moon-color));
 
     img {
       overflow: visible;
