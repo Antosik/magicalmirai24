@@ -32,10 +32,10 @@
       case Page.START:
         return { top: '30%', left: '55%' };
       case Page.MAIN_PAGE:
-        return { top: '15%', left: '40%' };
+        return { top: '15%', left: '65%' };
       case Page.HELP:
       case Page.CREDITS:
-        return { top: '20%', left: '60%' };
+        return { top: '10%', left: '60%' };
       default:
         return null;
     }
@@ -98,9 +98,18 @@
 
     &--help,
     &--credits {
-      top: 15%;
-      left: 15%;
-      min-width: 70%;
+      top: 50%;
+      left: 50%;
+      width: calc(100% + grid(10));
+      max-width: none;
+      max-height: 100%;
+      aspect-ratio: 1;
+      transform: translateX(-50%) translateY(-50%);
+
+      @include breakpoint(md) {
+        width: fit-content;
+        width: 70%;
+      }
     }
   }
 
