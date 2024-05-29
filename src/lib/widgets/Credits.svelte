@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
+  import { packages } from '$lib/utils/packages';
 
   const page = getPage();
   const { i18n } = getLocale();
@@ -24,19 +25,38 @@
 
 <section>
   <h1>{$i18n('Credits')}</h1>
-
   <div class="content">
-    <p>Credits goes here</p>
+    <img src="../images/credits.png" alt="" />
+    <h2>Team</h2>
+    <ul>
+      <li><span>Anton Grigorev</span> - Programming</li>
+      <li><span>Valentina Klepnikova</span> - Design</li>
+      <li><span>???</span> - Translation</li>
+    </ul>
+    <h2>Technologies</h2>
+    <ul>
+      {#each packages as item (item.name)}
+        <li>
+          <span>
+            <a href={item.link} target="_blank" rel="noopener nofollow noreferrer">{item.name}</a>
+          </span>
+          {#if item.licenseType}
+            (License - {item.licenseType})
+          {:else if item.licenseLink}
+            (<a href={item.link} target="_blank" rel="noopener nofollow noreferrer">License</a>)
+          {/if}
+        </li>
+      {/each}
+    </ul>
   </div>
 </section>
 
 <style lang="scss">
   section {
-    @include flex_center;
-
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    flex-direction: column;
     padding: grid(8);
     gap: grid(4);
     text-align: center;
@@ -87,5 +107,25 @@
     flex: 1;
     padding: grid(2) grid(4);
     overflow-y: auto;
+  }
+
+  h2 {
+    top: 0;
+    margin-top: grid(4);
+    margin-bottom: grid(1);
+  }
+
+  li,
+  p {
+    margin-bottom: grid(1);
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  img {
+    min-width: 100px;
+    max-width: 30%;
   }
 </style>

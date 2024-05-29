@@ -35,7 +35,7 @@
         return { top: '15%', left: '40%' };
       case Page.HELP:
       case Page.CREDITS:
-        return { top: '20%', left: '60%' };
+        return { top: '10%', left: '60%' };
       default:
         return null;
     }
@@ -98,9 +98,18 @@
 
     &--help,
     &--credits {
-      top: 15%;
-      left: 15%;
-      min-width: 70%;
+      left: 50%;
+      top: 50%;
+      width: calc(100% + grid(10));
+      max-height: 100%;
+      max-width: none;
+      transform: translateX(-50%) translateY(-50%);
+      aspect-ratio: 1;
+
+      @include breakpoint(md) {
+        width: fit-content;
+        width: 70%;
+      }
     }
   }
 
