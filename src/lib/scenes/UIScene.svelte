@@ -98,13 +98,13 @@
 
     &--help,
     &--credits {
-      left: 50%;
       top: 50%;
+      left: 50%;
       width: calc(100% + grid(10));
-      max-height: 100%;
       max-width: none;
-      transform: translateX(-50%) translateY(-50%);
+      max-height: 100%;
       aspect-ratio: 1;
+      transform: translateX(-50%) translateY(-50%);
 
       @include breakpoint(md) {
         width: fit-content;

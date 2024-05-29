@@ -54,9 +54,9 @@
 <style lang="scss">
   section {
     display: flex;
-    flex-direction: column;
     width: 100%;
     height: 100%;
+    flex-direction: column;
     padding: grid(8) grid(8) 10%;
     gap: grid(4);
     text-align: center;
