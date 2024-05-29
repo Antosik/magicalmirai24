@@ -57,7 +57,7 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: grid(8);
+    padding: grid(8) grid(8) 10%;
     gap: grid(4);
     text-align: center;
   }
@@ -79,15 +79,10 @@
     }
   }
 
+  li,
+  p,
   button {
-    @include flex_center;
-
-    width: 100%;
-    padding: grid(1) grid(4);
-    border: none;
-    background: none;
     font-size: 14px;
-    text-transform: uppercase;
 
     @include breakpoint(md) {
       font-size: 18px;
@@ -102,6 +97,16 @@
     }
   }
 
+  button {
+    @include flex_center;
+
+    width: 100%;
+    padding: grid(1) grid(4);
+    border: none;
+    background: none;
+    text-transform: uppercase;
+  }
+
   div {
     width: 100%;
     flex: 1;
@@ -110,9 +115,21 @@
   }
 
   h2 {
-    top: 0;
     margin-top: grid(4);
     margin-bottom: grid(1);
+    font-size: 18px;
+
+    @include breakpoint(md) {
+      font-size: 20px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 24px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 28px;
+    }
   }
 
   li,

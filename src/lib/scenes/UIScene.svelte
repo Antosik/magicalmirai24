@@ -32,7 +32,7 @@
       case Page.START:
         return { top: '30%', left: '55%' };
       case Page.MAIN_PAGE:
-        return { top: '15%', left: '40%' };
+        return { top: '15%', left: '65%' };
       case Page.HELP:
       case Page.CREDITS:
         return { top: '10%', left: '60%' };
