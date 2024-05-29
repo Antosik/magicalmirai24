@@ -80,7 +80,6 @@
   }
 
   li,
-  p,
   button {
     font-size: 14px;
 
@@ -132,8 +131,7 @@
     }
   }
 
-  li,
-  p {
+  li {
     margin-bottom: grid(1);
   }
 
