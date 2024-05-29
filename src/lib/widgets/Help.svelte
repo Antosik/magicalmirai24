@@ -4,9 +4,21 @@
 
   const page = getPage();
   const { i18n } = getLocale();
+
+  function openMainMenu() {
+    $page = Page.MAIN_PAGE;
+  }
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      openMainMenu();
+    }
+  }
 </script>
 
-<button type="button" on:click={() => ($page = Page.MAIN_PAGE)}>
+<svelte:document on:keydown={handleKeyDown} />
+
+<button type="button" on:click={openMainMenu}>
   {$i18n('Back to Main menu')}
 </button>
 
@@ -20,34 +32,60 @@
 
 <style lang="scss">
   section {
-    position: absolute;
-    z-index: $z-index-menu;
-    display: flex;
+    @include flex_center;
+
+    width: 100%;
+    height: 100%;
     flex-direction: column;
-    padding: grid(4);
-    border: 1px solid var(--blue-color);
-    background-color: var(--transparent-white-color);
-    inset: 20% 10%;
+    padding: grid(8);
+    gap: grid(4);
     text-align: center;
   }
 
-  button {
-    position: fixed;
-    top: calc(var(--frame-size) + grid(1));
-    left: calc(var(--frame-size) + grid(1));
-    padding: grid(1) grid(2);
-    border: 1px solid var(--blue-color);
-    background-color: var(--transparent-white-color);
+  h1 {
+    font-size: 28px;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+      font-size: 32px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 36px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 44px;
+    }
   }
 
-  h1 {
-    margin-bottom: grid(4);
+  button {
+    @include flex_center;
+
+    width: 100%;
+    padding: grid(1) grid(4);
+    border: none;
+    background: none;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+      font-size: 18px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 20px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 28px;
+    }
   }
 
   div {
+    width: 100%;
     flex: 1;
     padding: grid(2) grid(4);
-    border: 1px solid var(--blue-color);
     overflow-y: auto;
   }
 </style>

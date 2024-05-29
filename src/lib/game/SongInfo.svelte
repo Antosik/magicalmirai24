@@ -17,7 +17,7 @@
     right: calc(var(--frame-size) + grid(1));
     bottom: calc(var(--frame-size) + grid(1));
     padding: grid(2) grid(2) grid(2) grid(6);
-    background-color: var(--white-color);
+    background-color: var(--moon-color);
     font-size: 12px;
     text-align: right;
   }

@@ -38,6 +38,7 @@ export const SongState = {
   PLAYING: 'PLAYING',
   PAUSED: 'PAUSED',
   STOPPED: 'STOPPED',
+  ENDED: 'ENDED',
 } as const;
 export type SongState = ValueOf<typeof SongState>;
 

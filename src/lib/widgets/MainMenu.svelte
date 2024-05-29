@@ -16,7 +16,7 @@
 </script>
 
 <section>
-  <h1>{$i18n('Main Menu')}</h1>
+  <h1>{$i18n('Choose Song')}</h1>
 
   <select bind:value={$song}>
     {#each Object.entries(songs) as [songId, song] (songId)}
@@ -35,39 +35,69 @@
       <button type="button" on:click={() => ($page = Page.CREDITS)}>{$i18n('Credits')}</button>
     </li>
   </ul>
-</section>
 
-{#if $manageability === Manageability.FULL}
-  <div class="buttons">
-    <div class="buttons-row">
+  {#if $manageability === Manageability.FULL}
+    <div class="buttons">
       <LanguageSelect bind:value={$locale} />
       <FullscreenButton />
+      <Volume bind:value={$settings.volume} />
     </div>
-    <Volume bind:value={$settings.volume} />
-  </div>
-{/if}
+  {/if}
+</section>
 
 <style lang="scss">
   section {
-    position: absolute;
-    z-index: $z-index-menu;
-    top: 50%;
-    left: 50%;
-    width: 300px;
+    @include flex_center;
+
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
     padding: grid(8);
-    border: 1px solid var(--blue-color);
-    background-color: var(--transparent-white-color);
+    gap: grid(4);
     text-align: center;
-    transform: translate(-50%, -50%);
   }
 
-  h1,
-  select {
-    margin-bottom: grid(4);
+  h1 {
+    font-size: 28px;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+      font-size: 32px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 36px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 44px;
+    }
+  }
+
+  select,
+  button {
+    font-size: 14px;
+
+    @include breakpoint(md) {
+      font-size: 18px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 20px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 28px;
+    }
   }
 
   select {
     width: 100%;
+    max-width: 300px;
+
+    @include breakpoint(xxl) {
+      max-width: 500px;
+    }
   }
 
   ul {
@@ -80,23 +110,15 @@
     @include flex_center;
 
     width: 100%;
-    padding: grid(2) grid(4);
-    border: 1px solid var(--blue-color);
+    padding: grid(1) grid(4);
+    border: none;
+    background: none;
+    text-transform: uppercase;
   }
 
   .buttons {
-    position: absolute;
-    top: calc(var(--frame-size) + grid(1));
-    right: calc(var(--frame-size) + grid(1));
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    @include flex_center;
+
     gap: grid(1);
-
-    .buttons-row {
-      @include flex_center;
-
-      gap: grid(1);
-    }
   }
 </style>

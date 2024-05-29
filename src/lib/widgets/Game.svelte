@@ -37,10 +37,13 @@
   $: pause = $songState === SongState.PAUSED && isRealPause(player);
   $: song = songs[$songId];
   $: $manageability !== Manageability.NONE &&
-    player.createFromSongUrl(song.url, {
-      video: song.video,
-    });
+    player
+      .createFromSongUrl(song.url, {
+        video: song.video,
+      })
+      .catch(() => pauseGame());
   $: $readiness.timer && resumeGame();
+  $: $songState === SongState.ENDED && handleSongEnded();
 
   function startTimer(i: number) {
     if (i === 0) {
@@ -160,7 +163,7 @@
 
   {#if $manageability === Manageability.FULL}
     <Pause
-      open={pause && !done}
+      open={pause && !timer && !done}
       on:resume={resumeGame}
       on:restart={restartGame}
       on:back={backToMenu}
@@ -193,7 +196,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    color: var(--blue-color);
+    color: var(--moon-color);
     font-size: 28px;
+
+    @include breakpoint(md) {
+      font-size: 32px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 36px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 44px;
+    }
   }
 </style>

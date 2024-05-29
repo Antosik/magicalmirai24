@@ -18,7 +18,7 @@
   export let pause: boolean = false;
   export let done: boolean = false;
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{ ended: void }>();
 
   const player = getPlayerInstance();
   const playerPosition = getPlayerPosition();
@@ -169,21 +169,26 @@
     animation-name: flyingchar;
     animation-play-state: paused;
     animation-timing-function: linear;
-    font-size: 48px;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 50px;
     text-align: left;
+    -webkit-text-stroke: 2px var(--moon-color);
     user-select: none;
     will-change: transform;
 
     &--color-dark {
       color: var(--blue-color);
+      text-shadow: 0 2px 4px var(--blue-color);
     }
 
     &--color-red {
       color: var(--red-color);
+      text-shadow: 0 2px 4px var(--red-color);
     }
 
     &--color-white {
       color: var(--white-color);
+      text-shadow: 0 2px 4px var(--white-color);
     }
 
     &.playing {

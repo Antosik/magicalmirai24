@@ -3,19 +3,25 @@
 
   import { interpolateLab } from 'd3-interpolate';
   import { onDestroy } from 'svelte';
+  import { linear } from 'svelte/easing';
   import { tweened } from 'svelte/motion';
+  import { fade, fly } from 'svelte/transition';
 
+  import Stars from '$lib/components/Stars.svelte';
+  import BigCloud from '$lib/components/clouds/BigCloud.svelte';
+  import LongCloud from '$lib/components/clouds/LongCloud.svelte';
+  import SmallCloud from '$lib/components/clouds/SmallCloud.svelte';
   import { PLAYER_THROTTLE_INTERVAL, getPlayerInstance } from '$lib/contexts/player';
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
-
-  import { DEFAULT_CLOUD_ANIMATION_DURATION } from './constants';
-  import { calculateVAColor, calculateCloudAnimationDuration } from './utils';
+  import { DEFAULT_CLOUD_ANIMATION_DURATION } from '$lib/game/constants';
+  import { calculateVAColor, calculateCloudAnimationDuration } from '$lib/game/utils';
 
   let errorNode: HTMLElement;
   let playerNode: HTMLElement;
   let animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+  let songProgress = 0;
 
   const { songState } = getPlayerState();
   const player = getPlayerInstance();
@@ -34,17 +40,22 @@
       if (duration) {
         animationDuration = duration;
       }
+
+      songProgress = 0;
     },
     onThrottledTimeUpdate(position) {
       const va = player.getValenceArousal(position);
       vaColor.set(calculateVAColor(va));
+      songProgress = (position / player.video.duration) * 100;
     },
     onAppMediaChange() {
       animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+      songProgress = 0;
       vaColor.set(calculateVAColor(emptyVa));
     },
     onStop() {
       animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+      songProgress = 0;
       vaColor.set(calculateVAColor(emptyVa));
     },
   };
@@ -72,19 +83,26 @@
   onDestroy(() => player.removeListener(listener));
 </script>
 
-<main on:mousemove={handleMouseMove} on:touchmove={handleTouchMove}>
-  <div class="va-background" style:--va-color={$vaColor}></div>
-  <div
-    class="cloud cloud--scene cloud--scene-first"
-    class:pause
-    style:--duration="{animationDuration}ms"
-  ></div>
-  <div
-    class="cloud cloud--scene cloud--scene-second"
-    class:pause
-    style:--duration="{animationDuration}ms"
-  ></div>
-  <div class="cloud cloud--big-front" class:pause style:--duration="{animationDuration}ms"></div>
+<main
+  on:mousemove={handleMouseMove}
+  on:touchmove={handleTouchMove}
+  transition:fly={{
+    delay: 200,
+    duration: 500,
+    x: -window.innerWidth,
+    opacity: 0.5,
+    easing: linear,
+  }}
+>
+  <Stars {animationDuration} {pause} --stars-color={$vaColor} />
+
+  {#if songProgress}
+    <div transition:fade class="moon" style:--progress="{songProgress}%"></div>
+  {/if}
+
+  <SmallCloud {animationDuration} {pause} />
+  <BigCloud {animationDuration} {pause} />
+  <LongCloud {animationDuration} {pause} />
 
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:top="{$playerPosition}px"></div>
@@ -95,33 +113,6 @@
 </main>
 
 <style lang="scss">
-  main {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      180deg,
-      $background-gradient-upper 0%,
-      $background-gradient-center 20%,
-      $background-gradient-lower 100%
-    );
-
-    &::before {
-      @include absolute_full;
-
-      z-index: $z-index-frame;
-      border-width: var(--frame-size);
-
-      // Border
-      border-style: solid;
-      border-color: color_adjust($frame-color, 20%) $frame-color;
-      box-shadow: inset 2px 2px 4px rgb(0 0 0 / 60%);
-      content: '';
-      touch-action: none;
-      user-select: none;
-    }
-  }
-
   .error,
   .player {
     user-select: none;
@@ -137,11 +128,11 @@
   }
 
   .content {
-    position: relative;
+    @include absolute_full;
+
     z-index: $z-index-game;
     width: 100%;
     height: 100%;
-    padding: var(--frame-size);
   }
 
   .player {
@@ -159,7 +150,7 @@
       left: 0;
       width: 100%;
       aspect-ratio: 1300 / 1200;
-      background-image: url('../images/miku_draft_2.png');
+      background-image: url('../images/miku.png');
       background-position: bottom center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -175,106 +166,39 @@
     }
   }
 
-  .cloud {
+  .moon {
+    --base-height: 60px;
+    --height: var(--base-height) * 1.2;
+
     position: absolute;
     z-index: $z-index-scene;
+    top: calc(-1 * var(--height) / 2);
+    left: calc(-1 * var(--height) / 2);
     width: 100%;
-    animation-iteration-count: infinite;
-    animation-play-state: running;
-    animation-timing-function: linear;
+    height: var(--height);
+    background-image: url('../images/moon.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(0 0 20px var(--moon-color));
+    transform: translateX(var(--progress));
+    transition: transform 1s linear;
+    will-change: transform;
 
-    &.pause {
-      animation-play-state: paused;
+    @include breakpoint(md) {
+      --height: calc(var(--base-height) * 1.25);
     }
 
-    &--scene {
-      --base-height: 80px;
-      --base-drop: 2px;
-
-      right: -500px;
-      animation-name: flyingcloud;
-      aspect-ratio: 800 / 450;
-      background-image: url('../images/base_cloud_draft.png');
-      background-position: right center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      filter: drop-shadow(rgb(0 0 0 / 60%) var(--shadow-drop) var(--shadow-drop) 2px);
-      will-change: transform;
-
-      &-first {
-        --shadow-drop: calc(var(--base-drop) * 1.2);
-
-        top: 20%;
-        height: calc(var(--base-height) * 1.2);
-        animation-duration: calc(var(--duration) * 1.2);
-      }
-
-      &-second {
-        --shadow-drop: calc(var(--base-drop) * 0.8);
-
-        top: 60%;
-        height: calc(var(--base-height) * 0.8);
-        animation-duration: calc(var(--duration) * 0.8);
-      }
-
-      @include breakpoint(md) {
-        --base-height: 100px;
-      }
-
-      @include breakpoint(lg) {
-        --base-height: 120px;
-      }
-
-      @include breakpoint(xl) {
-        --base-height: 140px;
-      }
+    @include breakpoint(lg) {
+      --height: calc(var(--base-height) * 1.5);
     }
 
-    &--big-front {
-      bottom: grid(4);
-      left: 0;
-      width: 400%;
-      height: 16%;
-      animation-duration: var(--duration);
-      animation-name: movingcloud;
-      background-image: url('../images/base_cloud_draft.png');
-      background-size: contain;
-      will-change: transform;
-
-      @include breakpoint(md) {
-        height: 18%;
-      }
-
-      @include breakpoint(xl) {
-        height: 20%;
-      }
-    }
-  }
-
-  .va-background {
-    @include absolute_full;
-
-    background: linear-gradient(to bottom, var(--va-color), transparent);
-    will-change: background;
-  }
-
-  @keyframes flyingcloud {
-    0% {
-      transform: translateX(0);
+    @include breakpoint(xl) {
+      --height: calc(var(--base-height) * 1.75);
     }
 
-    100% {
-      transform: translateX(calc(-500px - 100%));
-    }
-  }
-
-  @keyframes movingcloud {
-    0% {
-      transform: translateX(0%);
-    }
-
-    100% {
-      transform: translateX(-75%);
+    @include breakpoint(xxxl) {
+      --height: calc(var(--base-height) * 2);
     }
   }
 </style>

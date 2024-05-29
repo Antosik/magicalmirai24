@@ -6,7 +6,7 @@ import { Page, type PageContext } from './types';
 export const PAGE_CONTEXT_KEY = 'page';
 
 export function createPageStore(): PageContext {
-  return writable<Page>(Page.MAIN_PAGE);
+  return writable<Page>(Page.START);
 }
 
 export const getPage = () => getContext<PageContext>(PAGE_CONTEXT_KEY);

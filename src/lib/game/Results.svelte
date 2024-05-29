@@ -1,13 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { fade } from 'svelte/transition';
 
   import { getGame } from '$lib/contexts/game';
   import { getLocale } from '$lib/contexts/locale';
+  import GameStateScene from '$lib/scenes/GameStateScene.svelte';
 
   export let open = false;
 
-  const { chars, catched, missed } = getGame();
+  const { chars, catched } = getGame();
   const { i18n } = getLocale();
 
   const dispatch = createEventDispatcher<{
@@ -18,63 +18,67 @@
 </script>
 
 {#if open}
-  <dialog open transition:fade={{ duration: 200 }}>
-    <h2>{$i18n('Results')}</h2>
+  <GameStateScene>
+    <div class="results">
+      <h2 class="visually-hidden">{$i18n('Results')}</h2>
 
-    <div>
-      <span class="total">{$i18n('total')}: {$chars.size}</span> /
-      <span class="catched">{$i18n('ok')}: {$catched.length}</span> /
-      <span class="missed">{$i18n('miss')}: {$missed.length}</span>
+      <div class="results__percentage">
+        {Math.floor(($catched.length / ($chars.size ?? 1)) * 100)}%
+      </div>
+      <div class="results__count">{$catched.length} / {$chars.size}</div>
+
+      <ul>
+        <li>
+          <button type="button" on:click={() => dispatch('restart')}>{$i18n('Retry')}</button>
+        </li>
+        <li>
+          <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
+        </li>
+      </ul>
     </div>
-
-    <ul>
-      <li>
-        <button type="button" on:click={() => dispatch('restart')}>{$i18n('Restart')}</button>
-      </li>
-      <li>
-        <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
-      </li>
-    </ul>
-  </dialog>
+  </GameStateScene>
 {/if}
 
 <style lang="scss">
-  dialog {
-    position: absolute;
-    z-index: $z-index-menu;
-    top: 50%;
-    left: 50%;
-    width: 300px;
-    padding: grid(8);
-    border: 1px solid var(--blue-color);
-    background-color: var(--transparent-white-color);
-    text-align: center;
-    transform: translate(-50%, -50%);
-  }
-
-  h2,
-  div {
-    margin-bottom: grid(4);
-  }
-
-  div {
+  .results {
     @include flex_center;
 
-    font-size: 20px;
-    gap: grid(1);
-  }
+    flex-direction: column;
+    padding: grid(6);
+    gap: grid(8);
 
-  span {
-    &.total {
-      color: var(--blue-color);
+    &__percentage {
+      font-size: 44px;
+      text-transform: uppercase;
+
+      @include breakpoint(md) {
+        font-size: 48px;
+      }
+
+      @include breakpoint(xl) {
+        font-size: 52px;
+      }
+
+      @include breakpoint(xxl) {
+        font-size: 60px;
+      }
     }
 
-    &.catched {
-      color: var(--white-color);
-    }
+    &__count {
+      font-size: 36px;
+      text-transform: uppercase;
 
-    &.missed {
-      color: var(--red-color);
+      @include breakpoint(md) {
+        font-size: 40px;
+      }
+
+      @include breakpoint(xl) {
+        font-size: 44px;
+      }
+
+      @include breakpoint(xxl) {
+        font-size: 52px;
+      }
     }
   }
 
@@ -89,7 +93,21 @@
 
     width: 100%;
     padding: grid(2) grid(4);
-    border: 1px solid black;
+    border: 0;
     background: none;
+    font-size: 28px;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+      font-size: 32px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 36px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 44px;
+    }
   }
 </style>

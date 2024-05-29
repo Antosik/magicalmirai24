@@ -47,7 +47,9 @@ module.exports = {
 					"math_div",
 					"gradient",
 					"color_adjust_alpha",
-					"color_adjust"
+					"color_adjust",
+					"string_unquote",
+					"multiple-box-shadow"
 				]
 			}
 		],
