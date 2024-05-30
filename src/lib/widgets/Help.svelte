@@ -26,18 +26,38 @@
   <h1>{$i18n('Help')}</h1>
 
   <div class="content">
-    <p>Help goes here</p>
+    <ul>
+      <li>
+        <img src="../images/miku.png" alt="" />
+        <p>Navigate Miku-san with mouse move or keys</p>
+      </li>
+      <li>
+        <img src="../images/miku.png" alt="" />
+        <p>Navigate Miku-san with mouse move or keys</p>
+      </li>
+      <li>
+        <img src="../images/miku.png" alt="" />
+        <p>Navigate Miku-san with mouse move or keys</p>
+      </li>
+      <li>
+        <img src="../images/miku.png" alt="" />
+        <p>Navigate Miku-san with mouse move or keys</p>
+      </li>
+      <li>
+        <img src="../images/miku.png" alt="" />
+        <p>Navigate Miku-san with mouse move or keys</p>
+      </li>
+    </ul>
   </div>
 </section>
 
 <style lang="scss">
   section {
-    @include flex_center;
-
+    display: flex;
     width: 100%;
     height: 100%;
     flex-direction: column;
-    padding: grid(8);
+    padding: grid(8) grid(8) 20%;
     gap: grid(4);
     text-align: center;
   }
@@ -83,9 +103,37 @@
   }
 
   div {
+    @include flex_vcenter;
+
     width: 100%;
     flex: 1;
     padding: grid(2) grid(4);
-    overflow-y: auto;
+  }
+
+  ul {
+    @include flex_vcenter;
+
+    padding: grid(4) 0;
+    gap: grid(5);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+  }
+
+  li {
+    @include flex_center;
+
+    width: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    gap: grid(2);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  img {
+    min-width: 100px;
+    max-width: 50%;
   }
 </style>
