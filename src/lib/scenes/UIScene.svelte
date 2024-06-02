@@ -99,7 +99,7 @@
     width: fit-content;
     max-width: calc(100% - grid(4));
     padding: grid(10);
-    transition: all 600ms;
+    transition: all 1s;
     will-change: width, top, left, transform;
 
     &--start {
