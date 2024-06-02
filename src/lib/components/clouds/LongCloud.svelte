@@ -8,10 +8,10 @@
 <style lang="scss">
   div {
     position: absolute;
-    z-index: $z-index-scene;
+    z-index: $z-index-long-cloud;
     bottom: 0;
     left: 0;
-    height: 16%;
+    height: var(--long-cloud-height, 16%);
     animation-duration: var(--duration);
     animation-iteration-count: infinite;
     animation-name: movingcloud;
@@ -28,11 +28,11 @@
     }
 
     @include breakpoint(md) {
-      height: 18%;
+      height: var(--long-cloud-height, 18%);
     }
 
     @include breakpoint(xl) {
-      height: 20%;
+      height: var(--long-cloud-height, 20%);
     }
 
     // To make animation more stable we need to add pseudoelements before & after the cloud
