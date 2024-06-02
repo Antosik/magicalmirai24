@@ -3,7 +3,7 @@
   export let pause = false;
 </script>
 
-<div class="cloud cloud--long" class:pause style:--duration="{animationDuration}ms"></div>
+<div class="cloud cloud--long" class:pause style:--duration="{animationDuration * 2}ms"></div>
 
 <style lang="scss">
   div {
