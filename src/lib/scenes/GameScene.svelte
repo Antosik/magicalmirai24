@@ -113,6 +113,18 @@
 </main>
 
 <style lang="scss">
+  :root {
+    --long-cloud-height: 16%;
+
+    @include breakpoint(md) {
+      --long-cloud-height: 18%;
+    }
+
+    @include breakpoint(xl) {
+      --long-cloud-height: 20%;
+    }
+  }
+
   .error,
   .player {
     user-select: none;
@@ -133,6 +145,7 @@
     z-index: $z-index-game;
     width: 100%;
     height: 100%;
+    padding-bottom: var(--long-cloud-height);
   }
 
   .player {

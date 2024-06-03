@@ -11,7 +11,7 @@
   class="cloud cloud--small"
   class:pause
   class:placed
-  style:--duration="{animationDuration}ms"
+  style:--duration="{animationDuration * 2}ms"
 ></div>
 
 <style lang="scss">

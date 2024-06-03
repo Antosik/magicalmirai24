@@ -12,6 +12,7 @@
   const page = getPage();
 
   let animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
+  let transitionLive = false;
 
   $: smallPosition = getSmallCloudPosition($page);
   $: bigPosition = getBigCloudPosition($page);
@@ -40,6 +41,18 @@
         return null;
     }
   };
+
+  function handleTransitionStart(e: TransitionEvent & { currentTarget: HTMLDivElement }) {
+    if (e.target === e.currentTarget) {
+      transitionLive = true;
+    }
+  }
+
+  function handleTransitionEnd(e: TransitionEvent & { currentTarget: HTMLDivElement }) {
+    if (e.target === e.currentTarget) {
+      transitionLive = false;
+    }
+  }
 </script>
 
 <main
@@ -53,11 +66,19 @@
 >
   <Stars {animationDuration} />
 
-  <div class="content content--{$page.toLowerCase()}">
-    <div class="moon">
+  <div
+    class="content content--{$page.toLowerCase()}"
+    on:transitionstart={handleTransitionStart}
+    on:transitionrun={handleTransitionStart}
+    on:transitioncancel={handleTransitionEnd}
+    on:transitionend={handleTransitionEnd}
+  >
+    <div class="moon" class:transitionLive>
       <img src="./images/moon.svg" alt="" />
     </div>
-    <slot />
+    <div class="content-wrapper" class:transitionLive>
+      <slot />
+    </div>
   </div>
 
   {#if smallPosition}
@@ -78,10 +99,7 @@
     width: fit-content;
     max-width: calc(100% - grid(4));
     padding: grid(10);
-    transition:
-      width 600ms,
-      top 600ms,
-      left 600ms;
+    transition: all 1s;
     will-change: width, top, left, transform;
 
     &--start {
@@ -121,10 +139,22 @@
     z-index: -1;
     filter: drop-shadow(0 0 20px var(--moon-color));
 
+    &.transitionLive {
+      z-index: $z-index-game;
+    }
+
     img {
       overflow: visible;
       width: 100%;
       aspect-ratio: 1 / 1;
+    }
+  }
+
+  .content-wrapper {
+    display: contents;
+
+    &.transitionLive {
+      visibility: hidden;
     }
   }
 </style>
