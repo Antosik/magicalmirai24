@@ -4,12 +4,14 @@
   import FeatherIcon from './FeatherIcon.svelte';
 
   export let items: T[] = [];
+  export let loop = false;
 
   let slider: HTMLUListElement;
   let activeElement: HTMLLIElement;
 
   function toPrevious() {
-    const previous = activeElement.previousElementSibling as HTMLLIElement;
+    const previous = (activeElement.previousElementSibling ??
+      (loop ? slider.lastChild : null)) as HTMLLIElement;
     if (previous) {
       activeElement = previous;
       activeElement.scrollIntoView();
@@ -17,7 +19,8 @@
   }
 
   function toNext() {
-    const next = activeElement.nextElementSibling as HTMLLIElement;
+    const next = (activeElement.nextElementSibling ??
+      (loop ? slider.firstChild : null)) as HTMLLIElement;
     if (next) {
       activeElement = next;
       activeElement.scrollIntoView();
@@ -26,6 +29,22 @@
 
   onMount(() => {
     activeElement = slider.firstChild as HTMLLIElement;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const activeEntry = entries.find((el) => el.isIntersecting);
+        if (activeEntry && activeEntry.target) {
+          activeElement = activeEntry.target as HTMLLIElement;
+        }
+      },
+      {
+        root: slider,
+        threshold: 1,
+      },
+    );
+    Array.from(slider.children).forEach((node) => {
+      observer.observe(node);
+    });
   });
 </script>
 
@@ -35,8 +54,8 @@
   </button>
   <ul bind:this={slider}>
     {#each items as item, index}
-      <li>
-        <slot {item} {index} />
+      <li data-index={index}>
+        <slot {item} {index} active={activeElement?.dataset?.index === index.toString()} />
       </li>
     {/each}
   </ul>
