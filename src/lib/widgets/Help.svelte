@@ -118,7 +118,7 @@
     padding: grid(2) grid(4);
   }
 
-  artile {
+  article {
     @include flex_center;
 
     width: 100%;

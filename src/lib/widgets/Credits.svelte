@@ -1,7 +1,10 @@
 <script lang="ts">
+  import Slider from '$lib/components/Slider.svelte';
   import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
-  import { packages } from '$lib/utils/packages';
+
+  import Team from './credits/Team.svelte';
+  import Technologies from './credits/Technologies.svelte';
 
   const page = getPage();
   const { i18n } = getLocale();
@@ -27,27 +30,16 @@
   <h1>{$i18n('Credits')}</h1>
   <div class="content">
     <img src="../images/credits.png" alt="" />
-    <h2>Team</h2>
-    <ul>
-      <li><span>Anton Grigorev</span> - Programming</li>
-      <li><span>Valentina Klepnikova</span> - Design</li>
-      <li><span>???</span> - Translation</li>
-    </ul>
-    <h2>Technologies</h2>
-    <ul>
-      {#each packages as item (item.name)}
+    <Slider>
+      <svelte:fragment slot="raw">
         <li>
-          <span>
-            <a href={item.link} target="_blank" rel="noopener nofollow noreferrer">{item.name}</a>
-          </span>
-          {#if item.licenseType}
-            (License - {item.licenseType})
-          {:else if item.licenseLink}
-            (<a href={item.link} target="_blank" rel="noopener nofollow noreferrer">License</a>)
-          {/if}
+          <Team />
         </li>
-      {/each}
-    </ul>
+        <li>
+          <Technologies />
+        </li>
+      </svelte:fragment>
+    </Slider>
   </div>
 </section>
 
@@ -57,9 +49,14 @@
     width: 100%;
     height: 100%;
     flex-direction: column;
-    padding: grid(8) grid(8) 10%;
-    gap: grid(4);
+    padding: grid(4) grid(4) 15%;
+    gap: grid(2);
     text-align: center;
+
+    @include breakpoint(md) {
+      padding: grid(8) grid(8) 15%;
+      gap: grid(4);
+    }
   }
 
   h1 {
@@ -79,9 +76,15 @@
     }
   }
 
-  li,
   button {
+    @include flex_center;
+
+    width: 100%;
+    padding: grid(1) grid(4);
+    border: none;
+    background: none;
     font-size: 14px;
+    text-transform: uppercase;
 
     @include breakpoint(md) {
       font-size: 18px;
@@ -96,51 +99,38 @@
     }
   }
 
-  button {
+  div {
     @include flex_center;
 
     width: 100%;
-    padding: grid(1) grid(4);
-    border: none;
-    background: none;
-    text-transform: uppercase;
-  }
-
-  div {
-    width: 100%;
-    flex: 1;
-    padding: grid(2) grid(4);
-    overflow-y: auto;
-  }
-
-  h2 {
-    margin-top: grid(4);
-    margin-bottom: grid(1);
-    font-size: 18px;
-
-    @include breakpoint(md) {
-      font-size: 20px;
-    }
-
-    @include breakpoint(xl) {
-      font-size: 24px;
-    }
-
-    @include breakpoint(xxl) {
-      font-size: 28px;
-    }
+    height: 100%;
+    gap: grid(2);
   }
 
   li {
-    margin-bottom: grid(1);
-  }
+    display: flex;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    align-items: center;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
 
-  span {
-    font-weight: bold;
+    @include breakpoint(md) {
+      justify-content: center;
+    }
   }
 
   img {
+    display: none;
     min-width: 100px;
     max-width: 30%;
+
+    @include breakpoint(md) {
+      display: block;
+    }
   }
 </style>

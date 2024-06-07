@@ -31,14 +31,14 @@
   function toPrevious() {
     if (previousElement) {
       setActiveElement(previousElement);
-      activeElement.scrollIntoView();
+      activeElement.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     }
   }
 
   function toNext() {
     if (nextElement) {
       setActiveElement(nextElement);
-      activeElement.scrollIntoView();
+      activeElement.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     }
   }
 
@@ -72,6 +72,8 @@
       <li data-index={index}>
         <slot {item} {index} active={activeElement?.dataset?.index === index.toString()} />
       </li>
+    {:else}
+      <slot name="raw" />
     {/each}
   </ul>
   <button type="button" on:click={toNext} disabled={!nextElement}>
@@ -83,8 +85,9 @@
   div {
     @include flex_vcenter;
 
-    width: 100%;
-    flex: 1;
+    width: min-content;
+    height: 100%;
+    flex: 0 1;
   }
 
   button {
@@ -100,9 +103,9 @@
   }
 
   ul {
-    @include flex_vcenter;
-
-    width: min-content;
+    display: flex;
+    width: 100%;
+    height: 100%;
     gap: grid(5);
     overflow-x: auto;
     overscroll-behavior-x: contain;
@@ -117,6 +120,7 @@
     @include flex_center;
 
     width: 100%;
+    height: 100%;
     flex-grow: 1;
     flex-shrink: 0;
     scroll-snap-align: center;
