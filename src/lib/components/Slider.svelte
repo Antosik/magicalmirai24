@@ -1,5 +1,5 @@
 <script lang="ts" generics="T">
-  import { onMount } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
 
   import FeatherIcon from './FeatherIcon.svelte';
 
@@ -11,6 +11,16 @@
   let previousElement: HTMLLIElement | null;
   let nextElement: HTMLLIElement | null;
 
+  const dispatch = createEventDispatcher<{
+    change: T;
+  }>();
+
+  function setActiveElement(element: HTMLLIElement) {
+    activeElement = element;
+    dispatch('change', items[Number(element.dataset.index)]);
+    calculateNeighbours();
+  }
+
   function calculateNeighbours() {
     previousElement = (activeElement.previousElementSibling ??
       (loop ? slider.lastChild : null)) as HTMLLIElement;
@@ -20,30 +30,26 @@
 
   function toPrevious() {
     if (previousElement) {
-      activeElement = previousElement;
+      setActiveElement(previousElement);
       activeElement.scrollIntoView();
     }
-    calculateNeighbours();
   }
 
   function toNext() {
     if (nextElement) {
-      activeElement = nextElement;
+      setActiveElement(nextElement);
       activeElement.scrollIntoView();
     }
-    calculateNeighbours();
   }
 
   onMount(() => {
-    activeElement = slider.firstChild as HTMLLIElement;
-    calculateNeighbours();
+    setActiveElement(slider.firstChild as HTMLLIElement);
 
     const observer = new IntersectionObserver(
       (entries) => {
         const activeEntry = entries.find((el) => el.isIntersecting);
         if (activeEntry && activeEntry.target) {
-          activeElement = activeEntry.target as HTMLLIElement;
-          calculateNeighbours();
+          setActiveElement(activeEntry.target as HTMLLIElement);
         }
       },
       {
@@ -96,7 +102,7 @@
   ul {
     @include flex_vcenter;
 
-    padding: grid(4) 0;
+    width: min-content;
     gap: grid(5);
     overflow-x: auto;
     overscroll-behavior-x: contain;
