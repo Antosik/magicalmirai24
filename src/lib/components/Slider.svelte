@@ -8,33 +8,42 @@
 
   let slider: HTMLUListElement;
   let activeElement: HTMLLIElement;
+  let previousElement: HTMLLIElement | null;
+  let nextElement: HTMLLIElement | null;
+
+  function calculateNeighbours() {
+    previousElement = (activeElement.previousElementSibling ??
+      (loop ? slider.lastChild : null)) as HTMLLIElement;
+    nextElement = (activeElement.nextElementSibling ??
+      (loop ? slider.firstChild : null)) as HTMLLIElement;
+  }
 
   function toPrevious() {
-    const previous = (activeElement.previousElementSibling ??
-      (loop ? slider.lastChild : null)) as HTMLLIElement;
-    if (previous) {
-      activeElement = previous;
+    if (previousElement) {
+      activeElement = previousElement;
       activeElement.scrollIntoView();
     }
+    calculateNeighbours();
   }
 
   function toNext() {
-    const next = (activeElement.nextElementSibling ??
-      (loop ? slider.firstChild : null)) as HTMLLIElement;
-    if (next) {
-      activeElement = next;
+    if (nextElement) {
+      activeElement = nextElement;
       activeElement.scrollIntoView();
     }
+    calculateNeighbours();
   }
 
   onMount(() => {
     activeElement = slider.firstChild as HTMLLIElement;
+    calculateNeighbours();
 
     const observer = new IntersectionObserver(
       (entries) => {
         const activeEntry = entries.find((el) => el.isIntersecting);
         if (activeEntry && activeEntry.target) {
           activeElement = activeEntry.target as HTMLLIElement;
+          calculateNeighbours();
         }
       },
       {
@@ -49,7 +58,7 @@
 </script>
 
 <div>
-  <button type="button" on:click={toPrevious}>
+  <button type="button" on:click={toPrevious} disabled={!previousElement}>
     <FeatherIcon name="chevron-left" size="24" />
   </button>
   <ul bind:this={slider}>
@@ -59,7 +68,7 @@
       </li>
     {/each}
   </ul>
-  <button type="button" on:click={toNext}>
+  <button type="button" on:click={toNext} disabled={!nextElement}>
     <FeatherIcon name="chevron-right" size="24" />
   </button>
 </div>
@@ -78,6 +87,10 @@
     padding: grid(1);
     border: none;
     background: none;
+
+    &:disabled {
+      visibility: hidden;
+    }
   }
 
   ul {
