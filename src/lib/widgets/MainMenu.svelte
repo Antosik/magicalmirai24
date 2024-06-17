@@ -4,25 +4,30 @@
   import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import LanguageSelect from '$lib/blocks/LanguageSelect.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
+  import Slider from '$lib/components/Slider.svelte';
   import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
   import { Manageability, getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
+  import type { Song } from '$lib/songs/types';
 
   const settings = getSettings();
   const page = getPage();
   const { song, manageability } = getPlayerState();
   const { locale, i18n } = getLocale();
+
+  const songItems = Object.values(songs);
+  const handleSongChange = (e: CustomEvent<Song>) => {
+    $song = e.detail.id;
+  };
 </script>
 
 <section>
   <h1>{$i18n('Choose Song')}</h1>
 
-  <select bind:value={$song}>
-    {#each Object.entries(songs) as [songId, song] (songId)}
-      <option value={songId}>{song.artist} - {song.title}</option>
-    {/each}
-  </select>
+  <Slider items={songItems} let:item={songItem} on:change={handleSongChange}>
+    <p>{songItem.artist}<br />{songItem.title}</p>
+  </Slider>
 
   <ul>
     <li>

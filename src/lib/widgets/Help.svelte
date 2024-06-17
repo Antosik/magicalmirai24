@@ -1,9 +1,33 @@
 <script lang="ts">
+  import Slider from '$lib/components/Slider.svelte';
   import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
 
   const page = getPage();
   const { i18n } = getLocale();
+
+  const helpItems = [
+    {
+      image: 'miku',
+      text: 'Navigate Miku-san with mouse move or keys',
+    },
+    {
+      image: 'miku',
+      text: 'Navigate Miku-san with mouse move or keys',
+    },
+    {
+      image: 'miku',
+      text: 'Navigate Miku-san with mouse move or keys',
+    },
+    {
+      image: 'miku',
+      text: 'Navigate Miku-san with mouse move or keys',
+    },
+    {
+      image: 'miku',
+      text: 'Navigate Miku-san with mouse move or keys',
+    },
+  ];
 
   function openMainMenu() {
     $page = Page.MAIN_PAGE;
@@ -26,28 +50,12 @@
   <h1>{$i18n('Help')}</h1>
 
   <div class="content">
-    <ul>
-      <li>
+    <Slider items={helpItems}>
+      <article>
         <img src="../images/miku.png" alt="" />
         <p>Navigate Miku-san with mouse move or keys</p>
-      </li>
-      <li>
-        <img src="../images/miku.png" alt="" />
-        <p>Navigate Miku-san with mouse move or keys</p>
-      </li>
-      <li>
-        <img src="../images/miku.png" alt="" />
-        <p>Navigate Miku-san with mouse move or keys</p>
-      </li>
-      <li>
-        <img src="../images/miku.png" alt="" />
-        <p>Navigate Miku-san with mouse move or keys</p>
-      </li>
-      <li>
-        <img src="../images/miku.png" alt="" />
-        <p>Navigate Miku-san with mouse move or keys</p>
-      </li>
-    </ul>
+      </article>
+    </Slider>
   </div>
 </section>
 
@@ -110,17 +118,7 @@
     padding: grid(2) grid(4);
   }
 
-  ul {
-    @include flex_vcenter;
-
-    padding: grid(4) 0;
-    gap: grid(5);
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-  }
-
-  li {
+  article {
     @include flex_center;
 
     width: 100%;
@@ -128,8 +126,6 @@
     flex-grow: 1;
     flex-shrink: 0;
     gap: grid(2);
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
   }
 
   img {

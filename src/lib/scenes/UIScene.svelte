@@ -126,6 +126,11 @@
 
       @include breakpoint(md) {
         width: fit-content;
+      }
+    }
+
+    &--credits {
+      @include breakpoint(md) {
         width: 70%;
       }
     }
