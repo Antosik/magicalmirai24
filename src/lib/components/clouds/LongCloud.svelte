@@ -1,12 +1,21 @@
 <script lang="ts">
+  import LongCloudPart from './LongCloudPart.svelte';
+
   export let animationDuration: number;
   export let pause = false;
 </script>
 
-<div class="cloud cloud--long" class:pause style:--duration="{animationDuration * 20}ms"></div>
+<div class="cloud cloud--long" class:pause style:--duration="{animationDuration * 20}ms">
+  <LongCloudPart />
+  <LongCloudPart />
+  <LongCloudPart />
+  <LongCloudPart />
+</div>
 
 <style lang="scss">
   div {
+    @include flex_center;
+
     position: absolute;
     z-index: $z-index-long-cloud;
     bottom: 0;
@@ -17,10 +26,6 @@
     animation-name: movingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
-    aspect-ratio: 4795 / 220;
-    background-image: url('../images/cloud_long.svg');
-    background-size: cover;
-    filter: drop-shadow(rgb(0 0 0 / 25%) 15px -13px 4px);
     will-change: transform;
 
     &.pause {
@@ -34,37 +39,15 @@
     @include breakpoint(xl) {
       height: var(--long-cloud-height, 20%);
     }
-
-    // To make animation more stable we need to add pseudoelements before & after the cloud
-    &::before,
-    &::after {
-      position: absolute;
-      top: 0;
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-image: url('../images/cloud_long.svg');
-      background-size: cover;
-      content: '';
-      will-change: transform;
-    }
-
-    &::before {
-      transform: translateX(-100%);
-    }
-
-    &::after {
-      transform: translateX(100%);
-    }
   }
 
   @keyframes movingcloud {
     0% {
-      transform: translateX(0);
+      transform: translateX(-25%);
     }
 
     100% {
-      transform: translateX(-100%);
+      transform: translateX(-75%);
     }
   }
 </style>
