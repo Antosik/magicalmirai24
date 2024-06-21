@@ -30,10 +30,8 @@
   }
 
   input[type='range'] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     width: 200px;
+    appearance: none;
     background-color: transparent;
 
     &:focus {
@@ -42,37 +40,32 @@
   }
 
   input[type='range']::-webkit-slider-runnable-track {
-    -webkit-appearance: none;
-    appearance: none;
     height: 3px;
+    appearance: none;
     background: var(--text-color);
   }
 
   input[type='range']::-moz-range-track {
-    -moz-appearance: none;
-    appearance: none;
     height: 3px;
+    appearance: none;
     background: var(--text-color);
   }
 
   input[type='range']::-ms-track {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     height: 3px;
+    appearance: none;
     background: var(--text-color);
   }
 
   input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    border-radius: 50%;
-    height: 28px;
-    width: 28px;
     position: relative;
     bottom: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    appearance: none;
     background: var(--text-color) url('../images/volume.svg') center no-repeat;
-    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 40%);
     cursor: grab;
 
     &:active {
@@ -81,15 +74,14 @@
   }
 
   input[type='range']::-moz-range-thumb {
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 50%;
-    height: 28px;
-    width: 28px;
     position: relative;
     bottom: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    appearance: none;
     background: var(--text-color) url('../images/volume.svg') center no-repeat;
-    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 40%);
     cursor: grab;
 
     &:active {
@@ -98,16 +90,14 @@
   }
 
   input[type='range']::-ms-thumb {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 50%;
-    height: 28px;
-    width: 28px;
     position: relative;
     bottom: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    appearance: none;
     background: var(--text-color) url('../images/volume.svg') center no-repeat;
-    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 40%);
     cursor: grab;
 
     &:active {

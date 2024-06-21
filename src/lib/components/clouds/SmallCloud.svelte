@@ -34,11 +34,11 @@
     background-position: left center;
     background-repeat: repeat-x;
     background-size: contain;
+    filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
     mask-image: url('../images/cloud_small.svg');
-    mask-size: contain;
     mask-position: left center;
     mask-repeat: no-repeat;
-    filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
+    mask-size: contain;
     transition:
       top 400ms,
       left 400ms;
@@ -47,11 +47,11 @@
     &::after {
       @include absolute_full;
 
-      content: '';
       background-image: url('../images/cloud_small.svg');
-      background-size: contain;
       background-position: left center;
       background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
       mix-blend-mode: overlay;
     }
 

@@ -79,11 +79,11 @@
   }
 
   button {
-    text-transform: uppercase;
-    border: 0;
-    background: 0;
     padding: 0 grid(1);
+    border: 0;
     border-bottom: 1px solid transparent;
+    background: 0;
+    text-transform: uppercase;
 
     &.active {
       border-bottom: 1px solid var(--text-color);

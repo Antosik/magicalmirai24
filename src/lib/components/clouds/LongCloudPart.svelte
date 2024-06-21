@@ -11,21 +11,21 @@
     background-image: url('../images/texture02.png');
     background-position: left center;
     background-repeat: repeat-x;
+    filter: drop-shadow(rgb(0 0 0 / 25%) 15px -13px 4px);
     mask-image: url('../images/cloud_long.svg');
-    mask-size: cover;
     mask-position: left center;
     mask-repeat: no-repeat;
-    filter: drop-shadow(rgb(0 0 0 / 25%) 15px -13px 4px);
+    mask-size: cover;
     will-change: transform;
 
     &::after {
       @include absolute_full;
 
-      content: '';
       background-image: url('../images/cloud_long.svg');
-      background-size: cover;
       background-position: left center;
       background-repeat: no-repeat;
+      background-size: cover;
+      content: '';
       mix-blend-mode: overlay;
     }
   }
