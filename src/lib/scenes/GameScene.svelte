@@ -128,11 +128,11 @@
   }
 
   .paper-background {
-    background-image: url(../images/texture02.png);
-    background-repeat: repeat;
     position: absolute;
     width: 100%;
     height: 100%;
+    background-image: url('../images/texture02.png');
+    background-repeat: repeat;
     filter: opacity(25%);
   }
 
