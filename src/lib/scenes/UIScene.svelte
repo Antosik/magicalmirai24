@@ -176,7 +176,7 @@
   }
 
   .blend {
-    mix-blend-mode: color-burn;
+    mix-blend-mode: normal;
   }
 
   .content-wrapper {
