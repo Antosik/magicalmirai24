@@ -34,22 +34,10 @@
     @include flex_center;
 
     flex-direction: column;
-    padding-bottom: 30%;
     aspect-ratio: 1;
     color: var(--text-color);
     gap: grid(4);
     text-align: center;
-
-    @include breakpoint_h(lg) {
-      padding-bottom: 25%;
-    }
-
-    @include breakpoint_h(xl) {
-      padding-bottom: 15%;
-    }
-    @include breakpoint_h(xll) {
-      padding-bottom: 5%;
-    }
   }
 
   h1 {
