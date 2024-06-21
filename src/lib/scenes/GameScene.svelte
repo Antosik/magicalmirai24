@@ -201,11 +201,11 @@
     width: 100%;
     height: var(--height);
     background-image: url('../images/moon.svg');
-    background-position: left center;
+    background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
-    transform: translateX(var(--progress));
+    transform: translateX(calc(var(--progress) * -1));
     transition: transform 1s linear;
     will-change: transform;
 
@@ -214,9 +214,8 @@
       position: absolute;
       width: 200vw;
       height: 200vh;
-      left: calc(var(--height) / 2);
-      top: calc(var(--height) / 2);
-      transform: translate(-50%, -50%);
+      right: -100vw;
+      top: -100vh;
       background: radial-gradient(rgba(219, 200, 97, 0.08), rgba(145, 139, 105, 0));
       z-index: -1;
     }
