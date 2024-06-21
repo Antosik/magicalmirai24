@@ -65,13 +65,11 @@
     left: 50%;
     width: fit-content;
     min-width: 40%;
-    max-width: calc(100% - grid(4));
+    max-width: calc(100% + grid(4));
     padding: grid(10);
+    filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translate(-50%, -50%);
-    transition:
-      width 600ms,
-      top 600ms,
-      left 600ms;
+    transition: all 1s;
     will-change: width, top, left, transform;
   }
 
@@ -81,7 +79,6 @@
 
     position: absolute;
     z-index: -1;
-    filter: drop-shadow(0 0 50px var(--moon-shine-color));
 
     .img-moon {
       overflow: visible;
