@@ -84,6 +84,7 @@
     @include flex_vcenter;
 
     width: min-content;
+    max-width: calc(100% - grid(4));
     height: 100%;
     flex: 0 1;
   }

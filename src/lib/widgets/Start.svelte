@@ -37,6 +37,19 @@
     color: var(--text-color);
     gap: grid(4);
     text-align: center;
+    aspect-ratio: 1;
+    padding-bottom: 30%;
+
+    @include breakpoint_h(lg) {
+      padding-bottom: 25%;
+    }
+
+    @include breakpoint_h(xl) {
+      padding-bottom: 15%;
+    }
+    @include breakpoint_h(xll) {
+      padding-bottom: 5%;
+    }
   }
 
   h1 {

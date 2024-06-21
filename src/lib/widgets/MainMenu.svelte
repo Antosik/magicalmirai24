@@ -50,12 +50,11 @@
   section {
     @include flex_center;
 
-    width: 100%;
-    height: 100%;
     flex-direction: column;
     padding: grid(8);
     gap: grid(4);
     text-align: center;
+    aspect-ratio: 1;
   }
 
   h1 {

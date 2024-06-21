@@ -37,6 +37,11 @@ $breakpoints: (
     @content;
   }
 }
+@mixin breakpoint_h($point) {
+  @media (min-height: map.get($breakpoints, $point)) {
+    @content;
+  }
+}
 
 @mixin container_sizing {
   box-sizing: content-box;

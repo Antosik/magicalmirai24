@@ -40,7 +40,6 @@
   ul {
     height: min-content;
     align-items: flex-start;
-    padding-bottom: grid(20);
     overflow-y: auto;
   }
 

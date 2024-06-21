@@ -21,7 +21,7 @@
   const getSmallCloudPosition = (page: Page) => {
     switch (page) {
       case Page.MAIN_PAGE:
-        return { top: '45%', left: '70%' };
+        return { top: '50%', left: '70%' };
       case Page.HELP:
         return { top: '60%', left: '5%' };
       default:
@@ -114,10 +114,15 @@
     position: absolute;
     z-index: $z-index-scene;
     width: fit-content;
-    max-width: calc(100% - grid(4));
+    max-width: calc(100% + grid(4));
     padding: grid(10);
     transition: all 1s;
     will-change: width, top, left, transform;
+    filter: drop-shadow(0 0 50px var(--moon-shine-color));
+
+    @include breakpoint(sm) {
+      max-width: calc(100% - grid(4));
+    }
 
     &--start {
       top: 50%;
@@ -125,30 +130,20 @@
       transform: translate(-50%, 0);
     }
 
-    &--main_page {
-      top: 50%;
-      left: 5%;
-      transform: translateX(0) translateY(-50%);
-    }
-
+    &--main_page,
     &--help,
     &--credits {
       top: 50%;
       left: 50%;
-      width: calc(100% + grid(10));
-      max-width: none;
+      transform: translate(-50%, -50%);
+      max-width: 100%;
       max-height: 100%;
-      aspect-ratio: 1;
-      transform: translateX(-50%) translateY(-50%);
-
-      @include breakpoint(md) {
-        width: fit-content;
-      }
     }
 
-    &--credits {
+    &--main_page {
       @include breakpoint(md) {
-        width: 70%;
+        left: 5%;
+        transform: translate(0, -50%);
       }
     }
   }
@@ -159,7 +154,6 @@
 
     position: absolute;
     z-index: -1;
-    filter: drop-shadow(0 0 50px var(--moon-shine-color));
 
     &.transitionLive {
       z-index: $z-index-game;
@@ -167,13 +161,13 @@
 
     .img-moon {
       overflow: visible;
-      width: 100%;
+      height: 100%;
       aspect-ratio: 1 / 1;
     }
 
     .img-paper {
       position: absolute;
-      width: 100%;
+      height: 100%;
       border-radius: 50%;
       aspect-ratio: 1 / 1;
       object-fit: fill;

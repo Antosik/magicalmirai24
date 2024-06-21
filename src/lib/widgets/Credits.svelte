@@ -46,15 +46,14 @@
 <style lang="scss">
   section {
     display: flex;
-    width: 100%;
-    height: 100%;
     flex-direction: column;
-    padding: grid(4) grid(4) 15%;
+    padding: grid(4);
     gap: grid(2);
     text-align: center;
+    aspect-ratio: 1;
 
     @include breakpoint(md) {
-      padding: grid(8) grid(8) 15%;
+      padding: grid(8);
       gap: grid(4);
     }
   }
@@ -103,8 +102,9 @@
     @include flex_center;
 
     width: 100%;
-    height: 100%;
+    height: calc(100% - 15%);
     gap: grid(2);
+    padding-bottom: 15%;
   }
 
   li {

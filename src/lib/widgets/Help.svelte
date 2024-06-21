@@ -62,12 +62,11 @@
 <style lang="scss">
   section {
     display: flex;
-    width: 100%;
-    height: 100%;
     flex-direction: column;
     padding: grid(8) grid(8) 20%;
     gap: grid(4);
     text-align: center;
+    aspect-ratio: 1;
   }
 
   h1 {

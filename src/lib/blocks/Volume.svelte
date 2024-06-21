@@ -30,12 +30,16 @@
   }
 
   input[type='range'] {
-    width: 200px;
+    width: 100%;
     appearance: none;
     background-color: transparent;
 
     &:focus {
       outline-color: var(--text-color);
+    }
+
+    @include breakpoint(sm) {
+      width: 200px;
     }
   }
 
