@@ -146,6 +146,18 @@
         transform: translate(0, -50%);
       }
     }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 200vw;
+      height: 200vh;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(rgba(219, 200, 97, 0.1), rgba(145, 139, 105, 0));
+      z-index: -1;
+    }
   }
 
   .moon {

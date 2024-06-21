@@ -209,6 +209,18 @@
     transition: transform 1s linear;
     will-change: transform;
 
+    &::before {
+      content: '';
+      position: absolute;
+      width: 200vw;
+      height: 200vh;
+      left: calc(var(--height) / 2);
+      top: calc(var(--height) / 2);
+      transform: translate(-50%, -50%);
+      background: radial-gradient(rgba(219, 200, 97, 0.08), rgba(145, 139, 105, 0));
+      z-index: -1;
+    }
+
     @include breakpoint(md) {
       --height: calc(var(--base-height) * 1.25);
     }
