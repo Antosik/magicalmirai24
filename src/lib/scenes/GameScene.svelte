@@ -94,6 +94,8 @@
     easing: linear,
   }}
 >
+  <div class="paper-background" />
+
   <Stars {animationDuration} {pause} --stars-color={$vaColor} />
 
   {#if songProgress}
@@ -123,6 +125,15 @@
     @include breakpoint(xl) {
       --long-cloud-height: 20%;
     }
+  }
+
+  .paper-background {
+    background-image: url(../images/texture02.png);
+    background-repeat: repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: opacity(25%);
   }
 
   .error,
@@ -162,7 +173,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      aspect-ratio: 1300 / 1200;
+      aspect-ratio: 1339 / 1194;
       background-image: url('../images/miku.png');
       background-position: bottom center;
       background-repeat: no-repeat;
@@ -185,7 +196,7 @@
 
     position: absolute;
     z-index: $z-index-scene;
-    top: calc(-1 * var(--height) / 2);
+    top: calc(var(--height) / 4);
     left: calc(-1 * var(--height) / 2);
     width: 100%;
     height: var(--height);
@@ -193,7 +204,7 @@
     background-position: left center;
     background-repeat: no-repeat;
     background-size: contain;
-    filter: drop-shadow(0 0 20px var(--moon-color));
+    filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translateX(var(--progress));
     transition: transform 1s linear;
     will-change: transform;

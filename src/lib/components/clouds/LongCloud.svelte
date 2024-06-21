@@ -3,7 +3,7 @@
   export let pause = false;
 </script>
 
-<div class="cloud cloud--long" class:pause style:--duration="{animationDuration * 2}ms"></div>
+<div class="cloud cloud--long" class:pause style:--duration="{animationDuration * 20}ms"></div>
 
 <style lang="scss">
   div {
@@ -17,10 +17,10 @@
     animation-name: movingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
-    aspect-ratio: 3198 / 220;
-    background-image: url('../images/cloud_long.svg');
+    aspect-ratio: 4795 / 220;
+    background-image: url('../images/cloud_long4.svg');
     background-size: cover;
-    filter: drop-shadow(rgb(0 0 0 / 25%) 5px -1px 3px);
+    filter: drop-shadow(rgb(0 0 0 / 25%) 15px -13px 4px);
     will-change: transform;
 
     &.pause {
@@ -43,7 +43,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      background-image: url('../images/cloud_long.svg');
+      background-image: url('../images/cloud_long4.svg');
       background-size: cover;
       content: '';
       will-change: transform;

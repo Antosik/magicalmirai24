@@ -64,6 +64,8 @@
     easing: linear,
   }}
 >
+  <div class="paper-background" />
+
   <Stars {animationDuration} />
 
   <div
@@ -74,7 +76,8 @@
     on:transitionend={handleTransitionEnd}
   >
     <div class="moon" class:transitionLive>
-      <img src="./images/moon.svg" alt="" />
+      <img class="blend img-moon" src="./images/moon.svg" alt="" />
+      <img class="blend img-paper" src="./images/texture.png" alt="" />
     </div>
     <div class="content-wrapper" class:transitionLive>
       <slot />
@@ -93,6 +96,15 @@
 </main>
 
 <style lang="scss">
+  .paper-background {
+    background-image: url(../images/texture02.png);
+    background-repeat: repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: opacity(25%);
+  }
+
   .content {
     position: absolute;
     z-index: $z-index-scene;
@@ -142,17 +154,30 @@
 
     position: absolute;
     z-index: -1;
-    filter: drop-shadow(0 0 20px var(--moon-color));
-
+    filter: drop-shadow(0 0 50px var(--moon-shine-color));
+    
     &.transitionLive {
       z-index: $z-index-game;
     }
 
-    img {
+    .img-moon {
       overflow: visible;
       width: 100%;
       aspect-ratio: 1 / 1;
     }
+
+    .img-paper {
+      position: absolute;
+      overflow: visible;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      object-fit: fill;
+    }
+  }
+
+  .blend {
+    mix-blend-mode: color-burn;
   }
 
   .content-wrapper {
