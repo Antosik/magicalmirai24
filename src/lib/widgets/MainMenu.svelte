@@ -74,9 +74,21 @@
     }
   }
 
-  select,
   button {
+    @include flex_center;
+
+    width: 100%;
+    padding: grid(1) grid(4);
+    border: none;
+    border-bottom: 1px solid transparent;
+    background: none;
+    text-transform: uppercase;
     font-size: 14px;
+    transition: border-bottom 200ms ease-in-out;
+
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
+    }
 
     @include breakpoint(md) {
       font-size: 18px;
@@ -104,16 +116,6 @@
     display: flex;
     flex-direction: column;
     gap: grid(2);
-  }
-
-  button {
-    @include flex_center;
-
-    width: 100%;
-    padding: grid(1) grid(4);
-    border: none;
-    background: none;
-    text-transform: uppercase;
   }
 
   .buttons {

@@ -67,6 +67,13 @@
     font-size: 28px;
     text-transform: uppercase;
 
+    transition: border-bottom 200ms ease-in-out;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
+    }
+
     @include breakpoint(md) {
       font-size: 32px;
     }

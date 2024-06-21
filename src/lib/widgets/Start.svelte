@@ -80,13 +80,14 @@
   }
 
   button {
-    padding: 0 grid(1);
     border: 0;
     border-bottom: 1px solid transparent;
     background: 0;
     text-transform: uppercase;
+    transition: border-bottom 200ms ease-in-out;
 
-    &.active {
+    &.active,
+    &:hover {
       border-bottom: 1px solid var(--text-color);
     }
   }

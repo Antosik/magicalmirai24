@@ -44,6 +44,11 @@
     border: 0;
     background: none;
     outline: none;
+    transition: transform 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
 
     &:focus {
       filter: drop-shadow(0 0 50px var(--moon-shine-color));

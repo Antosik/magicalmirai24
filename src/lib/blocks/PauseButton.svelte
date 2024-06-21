@@ -17,5 +17,10 @@
     border: 0;
     background: none;
     color: var(--moon-color);
+    transition: transform 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 </style>

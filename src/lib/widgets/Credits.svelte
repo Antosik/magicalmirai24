@@ -78,12 +78,19 @@
   button {
     @include flex_center;
 
-    width: 100%;
+    margin: 0 auto;
     padding: grid(1) grid(4);
     border: none;
     background: none;
     font-size: 14px;
     text-transform: uppercase;
+
+    transition: border-bottom 200ms ease-in-out;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
+    }
 
     @include breakpoint(md) {
       font-size: 18px;

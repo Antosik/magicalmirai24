@@ -95,6 +95,11 @@
     padding: grid(1);
     border: none;
     background: none;
+    transition: transform 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
 
     &:disabled {
       visibility: hidden;
