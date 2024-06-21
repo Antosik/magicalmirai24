@@ -1,8 +1,6 @@
 <script lang="ts" generics="T">
   import { createEventDispatcher, onMount } from 'svelte';
 
-  import FeatherIcon from './FeatherIcon.svelte';
-
   export let items: T[] = [];
   export let loop = false;
 
@@ -65,7 +63,7 @@
 
 <div>
   <button type="button" on:click={toPrevious} disabled={!previousElement}>
-    <FeatherIcon name="chevron-left" size="24" />
+    <img src="../images/arrow.svg" class="arrow arrow--left" alt="" width="24" height="24" />
   </button>
   <ul bind:this={slider}>
     {#each items as item, index}
@@ -77,7 +75,7 @@
     {/each}
   </ul>
   <button type="button" on:click={toNext} disabled={!nextElement}>
-    <FeatherIcon name="chevron-right" size="24" />
+    <img src="../images/arrow.svg" class="arrow arrow--right" alt="" width="24" height="24" />
   </button>
 </div>
 
@@ -125,5 +123,9 @@
     flex-shrink: 0;
     scroll-snap-align: center;
     scroll-snap-stop: always;
+  }
+
+  .arrow--right {
+    transform: rotate(180deg);
   }
 </style>
