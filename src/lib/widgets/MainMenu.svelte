@@ -1,7 +1,6 @@
 <script lang="ts">
   import { songs } from '$lib/songs';
 
-  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import LanguageSelect from '$lib/blocks/LanguageSelect.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import Slider from '$lib/components/Slider.svelte';
@@ -44,7 +43,6 @@
   {#if $manageability === Manageability.FULL}
     <div class="buttons">
       <LanguageSelect bind:value={$locale} />
-      <FullscreenButton />
       <Volume bind:value={$settings.volume} />
     </div>
   {/if}

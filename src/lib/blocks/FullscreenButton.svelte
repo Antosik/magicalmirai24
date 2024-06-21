@@ -1,5 +1,4 @@
 <script lang="ts">
-  import FeatherIcon from '$lib/components/FeatherIcon.svelte';
   import { getLocale } from '$lib/contexts/locale';
 
   const { i18n } = getLocale();
@@ -24,34 +23,30 @@
 <svelte:document bind:fullscreenElement />
 
 {#if isFullscreenEnabled}
-  <div>
-    <button
-      type="button"
-      title={fullscreenElement ? $i18n('Minimize') : $i18n('Maximize')}
-      on:click={toggleFullScreen}
-    >
-      <FeatherIcon name={fullscreenElement ? 'minimize' : 'maximize'} size="24" />
-    </button>
-  </div>
+  <button
+    type="button"
+    title={fullscreenElement ? $i18n('Minimize') : $i18n('Maximize')}
+    on:click={toggleFullScreen}
+  >
+    <img
+      src="../images/{fullscreenElement ? 'minimize' : 'maximize'}.svg"
+      alt={fullscreenElement ? $i18n('Minimize') : $i18n('Maximize')}
+      width="24"
+      height="24"
+    />
+  </button>
 {/if}
 
 <style lang="scss">
-  div {
-    padding: grid(1);
-    background: var(--transparent-white-color);
-    gap: grid(1);
-
-    &:focus-within {
-      background: var(--less-transparent-white-color);
-    }
-  }
-
   button {
     @include flex_center;
 
     border: 0;
     background: none;
     outline: none;
-    transform: rotate(90deg);
+
+    &:focus {
+      filter: drop-shadow(0 0 50px var(--moon-shine-color));
+    }
   }
 </style>

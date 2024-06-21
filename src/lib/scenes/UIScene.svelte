@@ -2,6 +2,7 @@
   import { linear } from 'svelte/easing';
   import { fly } from 'svelte/transition';
 
+  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Stars from '$lib/components/Stars.svelte';
   import BigCloud from '$lib/components/clouds/BigCloud.svelte';
   import LongCloud from '$lib/components/clouds/LongCloud.svelte';
@@ -82,6 +83,10 @@
     <div class="content-wrapper" class:transitionLive>
       <slot />
     </div>
+  </div>
+
+  <div class="buttons">
+    <FullscreenButton />
   </div>
 
   {#if smallPosition}
@@ -185,5 +190,14 @@
     &.transitionLive {
       visibility: hidden;
     }
+  }
+
+  .buttons {
+    @include flex_center;
+
+    position: absolute;
+    top: grid(4);
+    right: grid(4);
+    gap: grid(1);
   }
 </style>

@@ -2,6 +2,7 @@
   import { linear } from 'svelte/easing';
   import { fly } from 'svelte/transition';
 
+  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Stars from '$lib/components/Stars.svelte';
   import BigCloud from '$lib/components/clouds/BigCloud.svelte';
   import LongCloud from '$lib/components/clouds/LongCloud.svelte';
@@ -30,6 +31,10 @@
       <img class="blend img-paper" src="./images/texture.png" alt="" />
     </div>
     <slot />
+  </div>
+
+  <div class="buttons">
+    <FullscreenButton />
   </div>
 
   <SmallCloud {animationDuration} pause />
@@ -95,5 +100,14 @@
 
   .blend {
     mix-blend-mode: normal;
+  }
+
+  .buttons {
+    @include flex_center;
+
+    position: absolute;
+    top: grid(4);
+    right: grid(4);
+    gap: grid(1);
   }
 </style>

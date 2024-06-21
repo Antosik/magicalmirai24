@@ -1,6 +1,7 @@
 <script lang="ts">
   import { songs } from '$lib/songs';
 
+  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import PauseButton from '$lib/blocks/PauseButton.svelte';
   import { getGame } from '$lib/contexts/game';
   import { getLocale } from '$lib/contexts/locale';
@@ -169,26 +170,29 @@
       on:back={backToMenu}
     />
 
-    {#if !pause && !timer}
-      <PauseButton on:click={pauseGame} />
-    {/if}
+    <div class="buttons">
+      <FullscreenButton />
+      {#if !pause && !timer}
+        <PauseButton on:click={pauseGame} />
+      {/if}
+    </div>
 
     <Results open={done} on:restart={restartGame} on:back={backToMenu} />
 
     {#if timer}
-      <div>
+      <div class="placeholder">
         {timer}
       </div>
     {/if}
   {/if}
 {:else}
-  <div>{$i18n('Loading song...')}</div>
+  <div class="placeholder">{$i18n('Loading song...')}</div>
 {/if}
 
 <SongInfo />
 
 <style lang="scss">
-  div {
+  .placeholder {
     @include flex_center;
 
     position: absolute;
@@ -210,5 +214,14 @@
     @include breakpoint(xxl) {
       font-size: 44px;
     }
+  }
+
+  .buttons {
+    @include flex_center;
+
+    position: absolute;
+    top: grid(4);
+    right: grid(4);
+    gap: grid(1);
   }
 </style>

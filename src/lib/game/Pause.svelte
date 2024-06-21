@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
-  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import { getLocale } from '$lib/contexts/locale';
   import { getSettings } from '$lib/contexts/settings';
@@ -37,7 +36,6 @@
       </ul>
 
       <div class="buttons">
-        <FullscreenButton />
         <Volume bind:value={$settings.volume} />
       </div>
     </div>
