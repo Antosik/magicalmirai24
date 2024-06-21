@@ -116,9 +116,9 @@
     width: fit-content;
     max-width: calc(100% + grid(4));
     padding: grid(10);
+    filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transition: all 1s;
     will-change: width, top, left, transform;
-    filter: drop-shadow(0 0 50px var(--moon-shine-color));
 
     @include breakpoint(sm) {
       max-width: calc(100% - grid(4));
@@ -135,9 +135,9 @@
     &--credits {
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
       max-width: 100%;
       max-height: 100%;
+      transform: translate(-50%, -50%);
     }
 
     &--main_page {

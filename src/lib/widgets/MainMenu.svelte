@@ -52,9 +52,9 @@
 
     flex-direction: column;
     padding: grid(8);
+    aspect-ratio: 1;
     gap: grid(4);
     text-align: center;
-    aspect-ratio: 1;
   }
 
   h1 {

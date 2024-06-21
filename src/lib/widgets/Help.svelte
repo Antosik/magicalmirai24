@@ -64,9 +64,9 @@
     display: flex;
     flex-direction: column;
     padding: grid(8) grid(8) 20%;
+    aspect-ratio: 1;
     gap: grid(4);
     text-align: center;
-    aspect-ratio: 1;
   }
 
   h1 {

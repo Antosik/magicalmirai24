@@ -34,11 +34,11 @@
     @include flex_center;
 
     flex-direction: column;
+    padding-bottom: 30%;
+    aspect-ratio: 1;
     color: var(--text-color);
     gap: grid(4);
     text-align: center;
-    aspect-ratio: 1;
-    padding-bottom: 30%;
 
     @include breakpoint_h(lg) {
       padding-bottom: 25%;

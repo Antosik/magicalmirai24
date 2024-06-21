@@ -48,9 +48,9 @@
     display: flex;
     flex-direction: column;
     padding: grid(4);
+    aspect-ratio: 1;
     gap: grid(2);
     text-align: center;
-    aspect-ratio: 1;
 
     @include breakpoint(md) {
       padding: grid(8);
@@ -103,8 +103,8 @@
 
     width: 100%;
     height: calc(100% - 15%);
-    gap: grid(2);
     padding-bottom: 15%;
+    gap: grid(2);
   }
 
   li {
