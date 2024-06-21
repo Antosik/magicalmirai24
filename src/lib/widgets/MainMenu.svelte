@@ -1,7 +1,6 @@
 <script lang="ts">
   import { songs } from '$lib/songs';
 
-  import LanguageSelect from '$lib/blocks/LanguageSelect.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import Slider from '$lib/components/Slider.svelte';
   import { getLocale } from '$lib/contexts/locale';
@@ -13,7 +12,7 @@
   const settings = getSettings();
   const page = getPage();
   const { song, manageability } = getPlayerState();
-  const { locale, i18n } = getLocale();
+  const { i18n } = getLocale();
 
   const songItems = Object.values(songs);
   const handleSongChange = (e: CustomEvent<Song>) => {
@@ -42,7 +41,6 @@
 
   {#if $manageability === Manageability.FULL}
     <div class="buttons">
-      <LanguageSelect bind:value={$locale} />
       <Volume bind:value={$settings.volume} />
     </div>
   {/if}

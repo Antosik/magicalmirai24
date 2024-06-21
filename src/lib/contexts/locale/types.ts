@@ -5,6 +5,7 @@ import type { ValueOf } from '$lib/utils/types';
 /** Available locales */
 export const Locale = {
   EN: 'EN',
+  JA: 'JA',
 } as const;
 export type Locale = ValueOf<typeof Locale>;
 
