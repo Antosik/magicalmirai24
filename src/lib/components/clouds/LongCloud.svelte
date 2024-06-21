@@ -18,7 +18,7 @@
     animation-play-state: running;
     animation-timing-function: linear;
     aspect-ratio: 4795 / 220;
-    background-image: url('../images/cloud_long4.svg');
+    background-image: url('../images/cloud_long.svg');
     background-size: cover;
     filter: drop-shadow(rgb(0 0 0 / 25%) 15px -13px 4px);
     will-change: transform;
@@ -43,7 +43,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      background-image: url('../images/cloud_long4.svg');
+      background-image: url('../images/cloud_long.svg');
       background-size: cover;
       content: '';
       will-change: transform;
