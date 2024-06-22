@@ -69,8 +69,6 @@
     padding: grid(10);
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translate(-50%, -50%);
-    transition: all 1s;
-    will-change: width, top, left, transform;
 
     &::before {
       position: absolute;

@@ -85,6 +85,7 @@
     background: 0;
     text-transform: uppercase;
     transition: border-bottom 200ms ease-in-out;
+    will-change: border-bottom;
 
     &.active,
     &:hover {
