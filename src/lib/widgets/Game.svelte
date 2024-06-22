@@ -172,13 +172,6 @@
       on:back={backToMenu}
     />
 
-    <div class="buttons">
-      <FullscreenButton />
-      {#if !pause && !timer}
-        <PauseButton on:click={pauseGame} />
-      {/if}
-    </div>
-
     <Results open={done} on:restart={restartGame} on:back={backToMenu} />
 
     {#if readyToStart && !timer}
@@ -192,6 +185,13 @@
         {timer}
       </div>
     {/if}
+
+    <div class="buttons">
+      <FullscreenButton />
+      {#if !readyToStart && !pause && !timer}
+        <PauseButton on:click={pauseGame} />
+      {/if}
+    </div>
   {/if}
 {:else}
   <div class="placeholder">{$i18n('Loading song...')}</div>
