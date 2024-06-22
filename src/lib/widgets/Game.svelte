@@ -28,7 +28,7 @@
   const settings = getSettings();
   const { i18n } = getLocale();
 
-  let timer = START_SONG_DELAY / 1e3;
+  let timer = 0;
   let timeout: ReturnType<typeof setTimeout>;
   let restart = 0;
   let visibilityState: DocumentVisibilityState;
@@ -36,6 +36,9 @@
   let done = false;
 
   $: pause = $songState === SongState.PAUSED && isRealPause(player);
+  $: readyToStart =
+    $readiness.timer &&
+    ($songState === SongState.NONE || ($songState === SongState.PAUSED && !isRealPause(player)));
   $: song = songs[$songId];
   $: $manageability !== Manageability.NONE &&
     player
@@ -43,7 +46,6 @@
         video: song.video,
       })
       .catch(() => pauseGame());
-  $: $readiness.timer && resumeGame();
   $: $songState === SongState.ENDED && handleSongEnded();
 
   function startTimer(i: number) {
@@ -179,6 +181,12 @@
 
     <Results open={done} on:restart={restartGame} on:back={backToMenu} />
 
+    {#if readyToStart && !timer}
+      <div class="placeholder">
+        <button type="button" class="start" on:click={resumeGame}>Click start</button>
+      </div>
+    {/if}
+
     {#if timer}
       <div class="placeholder">
         {timer}
@@ -223,5 +231,11 @@
     top: grid(4);
     right: grid(4);
     gap: grid(1);
+  }
+
+  .start {
+    border: 0;
+    background: 0;
+    font-size: 1.2em;
   }
 </style>
