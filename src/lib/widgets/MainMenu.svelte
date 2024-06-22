@@ -82,8 +82,8 @@
     border: none;
     border-bottom: 1px solid transparent;
     background: none;
-    text-transform: uppercase;
     font-size: 14px;
+    text-transform: uppercase;
     transition: border-bottom 200ms ease-in-out;
 
     &:hover {

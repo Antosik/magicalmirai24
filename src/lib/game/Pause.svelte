@@ -63,12 +63,11 @@
     width: 100%;
     padding: grid(2) grid(4);
     border: 0;
+    border-bottom: 1px solid transparent;
     background: none;
     font-size: 28px;
     text-transform: uppercase;
-
     transition: border-bottom 200ms ease-in-out;
-    border-bottom: 1px solid transparent;
 
     &:hover {
       border-bottom: 1px solid var(--text-color);

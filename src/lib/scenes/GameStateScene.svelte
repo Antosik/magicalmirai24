@@ -73,15 +73,15 @@
     will-change: width, top, left, transform;
 
     &::before {
-      content: '';
       position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
       width: 200vw;
       height: 200vh;
-      left: 50%;
-      top: 50%;
+      background: radial-gradient(rgb(219 200 97 / 10%), rgb(145 139 105 / 0%));
+      content: '';
       transform: translate(-50%, -50%);
-      background: radial-gradient(rgba(219, 200, 97, 0.1), rgba(145, 139, 105, 0));
-      z-index: -1;
     }
   }
 

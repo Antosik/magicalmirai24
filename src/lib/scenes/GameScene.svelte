@@ -210,14 +210,14 @@
     will-change: transform;
 
     &::before {
-      content: '';
       position: absolute;
+      z-index: -1;
+      top: -100vh;
+      right: -100vw;
       width: 200vw;
       height: 200vh;
-      right: -100vw;
-      top: -100vh;
-      background: radial-gradient(rgba(219, 200, 97, 0.08), rgba(145, 139, 105, 0));
-      z-index: -1;
+      background: radial-gradient(rgb(219 200 97 / 8%), rgb(145 139 105 / 0%));
+      content: '';
     }
 
     @include breakpoint(md) {

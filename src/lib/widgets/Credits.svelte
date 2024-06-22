@@ -78,15 +78,14 @@
   button {
     @include flex_center;
 
-    margin: 0 auto;
     padding: grid(1) grid(4);
     border: none;
+    border-bottom: 1px solid transparent;
+    margin: 0 auto;
     background: none;
     font-size: 14px;
     text-transform: uppercase;
-
     transition: border-bottom 200ms ease-in-out;
-    border-bottom: 1px solid transparent;
 
     &:hover {
       border-bottom: 1px solid var(--text-color);
