@@ -176,7 +176,9 @@
 
     {#if readyToStart && !timer}
       <div class="placeholder">
-        <button type="button" class="start" on:click={resumeGame}>Click start</button>
+        <button type="button" class="start" on:click|capture={() => player?.requestPlay()}>
+          Click start
+        </button>
       </div>
     {/if}
 
