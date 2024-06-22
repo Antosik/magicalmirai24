@@ -192,6 +192,12 @@
         <PauseButton on:click={pauseGame} />
       {/if}
     </div>
+  {:else if $manageability === Manageability.PARTIAL}
+    <div class="buttons">
+      {#if !readyToStart && !pause && !timer}
+        <PauseButton on:click={backToMenu} />
+      {/if}
+    </div>
   {/if}
 {:else}
   <div class="placeholder">{$i18n('Loading song...')}</div>

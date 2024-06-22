@@ -26,7 +26,7 @@ export const Manageability = {
   /** User can select audio and control playback */
   FULL: 'FULL',
   /** User can select audio, playback is controlled by host */
-  PARTIAL: 'FULL',
+  PARTIAL: 'PARTIAL',
   /** Playback and song are controlled by host */
   NONE: 'NONE',
 } as const;
