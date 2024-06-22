@@ -192,7 +192,6 @@
 
   .moon {
     --base-height: 60px;
-    --height: var(--base-height) * 1.2;
 
     position: absolute;
     z-index: $z-index-scene;
@@ -218,6 +217,10 @@
       height: 200vh;
       background: radial-gradient(rgb(219 200 97 / 8%), rgb(145 139 105 / 0%));
       content: '';
+    }
+
+    @include breakpoint(xs) {
+      --height: calc(var(--base-height) * 1.2);
     }
 
     @include breakpoint(md) {
