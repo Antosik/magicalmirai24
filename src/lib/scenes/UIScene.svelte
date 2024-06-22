@@ -113,11 +113,18 @@
   .content {
     position: absolute;
     z-index: $z-index-scene;
+    top: 50%;
+    left: 50%;
     width: fit-content;
-    max-width: calc(100% + grid(4));
+    max-width: 100%;
+    max-height: 100%;
     padding: grid(10);
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
-    transition: all 1s;
+    transform: translate(-50%, -50%);
+    transition:
+      width 1s,
+      top 1s,
+      left 1s;
     will-change: width, top, left, transform;
 
     @include breakpoint(sm) {
@@ -125,25 +132,13 @@
     }
 
     &--start {
-      top: 30%;
+      top: 70%;
       left: 50%;
-      transform: translate(-50%, 0);
-    }
-
-    &--main_page,
-    &--help,
-    &--credits {
-      top: 50%;
-      left: 50%;
-      max-width: 100%;
-      max-height: 100%;
-      transform: translate(-50%, -50%);
     }
 
     &--main_page {
       @include breakpoint(md) {
-        left: 5%;
-        transform: translate(0, -50%);
+        left: 25%;
       }
     }
 
