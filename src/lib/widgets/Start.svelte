@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
 
   const page = getPage();
+  const { locale } = getLocale();
 
   const openMainPage = () => {
     $page = Page.MAIN_PAGE;
@@ -12,7 +14,19 @@
 
 <div>
   <h1>Miku-san kamishibai</h1>
-  <p>Press to start</p>
+  <ul>
+    <li>
+      <button type="button" class:active={$locale === 'EN'} on:click={() => ($locale = 'EN')}>
+        English
+      </button>
+    </li>
+    |
+    <li>
+      <button type="button" class:active={$locale === 'JA'} on:click={() => ($locale = 'JA')}>
+        日本語
+      </button>
+    </li>
+  </ul>
 </div>
 
 <style lang="scss">
@@ -20,6 +34,7 @@
     @include flex_center;
 
     flex-direction: column;
+    aspect-ratio: 1;
     color: var(--text-color);
     gap: grid(4);
     text-align: center;
@@ -42,7 +57,9 @@
     }
   }
 
-  p {
+  ul {
+    @include flex_center;
+
     font-size: 14px;
 
     @include breakpoint(md) {
@@ -55,6 +72,23 @@
 
     @include breakpoint(xxl) {
       font-size: 32px;
+    }
+  }
+
+  li {
+    padding: grid(1) grid(2);
+  }
+
+  button {
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: 0;
+    text-transform: uppercase;
+    transition: border-bottom 200ms ease-in-out;
+
+    &.active,
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
     }
   }
 </style>

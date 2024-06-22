@@ -46,15 +46,14 @@
 <style lang="scss">
   section {
     display: flex;
-    width: 100%;
-    height: 100%;
     flex-direction: column;
-    padding: grid(4) grid(4) 15%;
+    padding: grid(4);
+    aspect-ratio: 1;
     gap: grid(2);
     text-align: center;
 
     @include breakpoint(md) {
-      padding: grid(8) grid(8) 15%;
+      padding: grid(8);
       gap: grid(4);
     }
   }
@@ -79,12 +78,18 @@
   button {
     @include flex_center;
 
-    width: 100%;
     padding: grid(1) grid(4);
     border: none;
+    border-bottom: 1px solid transparent;
+    margin: 0 auto;
     background: none;
     font-size: 14px;
     text-transform: uppercase;
+    transition: border-bottom 200ms ease-in-out;
+
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
+    }
 
     @include breakpoint(md) {
       font-size: 18px;
@@ -103,7 +108,8 @@
     @include flex_center;
 
     width: 100%;
-    height: 100%;
+    height: calc(100% - 15%);
+    padding-bottom: 15%;
     gap: grid(2);
   }
 

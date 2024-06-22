@@ -1,21 +1,5 @@
 <script lang="ts">
-  import type { FeatherIconNames } from 'feather-icons';
-
-  import FeatherIcon from '$lib/components/FeatherIcon.svelte';
-
   export let value: number = 100;
-
-  const calculateIcon = (volume: number): FeatherIconNames => {
-    if (volume >= 66) {
-      return 'volume-2';
-    } else if (volume >= 33) {
-      return 'volume-1';
-    } else if (volume > 0) {
-      return 'volume';
-    } else {
-      return 'volume-x';
-    }
-  };
 
   const handleButtonClick = () => {
     value = value > 0 ? 0 : 100;
@@ -24,27 +8,18 @@
 
 <div>
   <button type="button" on:click={handleButtonClick}>
-    <FeatherIcon name={calculateIcon(value)} size="24" />
+    {value}%
   </button>
   <input type="range" min="0" max="100" bind:value />
 </div>
 
 <style lang="scss">
-  $unfilled-track-color: #48b8ad;
-  $filled-track-color: #1e5b64;
-  $thumb-color: #fbdfaf;
-
   div {
     @include flex_center;
 
     flex-direction: row;
     padding: grid(1);
-    background: var(--transparent-white-color);
     gap: grid(1);
-
-    &:focus-within {
-      background: var(--less-transparent-white-color);
-    }
   }
 
   button {
@@ -55,32 +30,82 @@
   }
 
   input[type='range'] {
-    overflow: hidden;
+    width: 100%;
     appearance: none;
-    background-color: $unfilled-track-color;
+    background-color: transparent;
 
-    &::-webkit-slider-runnable-track {
-      height: 10px;
-      margin-top: -1px;
-      appearance: none;
-      color: $unfilled-track-color;
+    &:focus {
+      outline-color: var(--text-color);
     }
 
-    &::-webkit-slider-thumb {
-      width: 10px;
-      height: 10px;
-      appearance: none;
-      background: $thumb-color;
-      box-shadow: -80px 0 0 80px $filled-track-color;
-      cursor: ew-resize;
+    @include breakpoint(sm) {
+      width: 200px;
     }
+  }
 
-    &::-moz-range-progress {
-      background-color: $filled-track-color;
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 3px;
+    appearance: none;
+    background: var(--text-color);
+  }
+
+  input[type='range']::-moz-range-track {
+    height: 3px;
+    appearance: none;
+    background: var(--text-color);
+  }
+
+  input[type='range']::-ms-track {
+    height: 3px;
+    appearance: none;
+    background: var(--text-color);
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    position: relative;
+    bottom: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    appearance: none;
+    background: var(--text-color) url('../images/volume.svg') center no-repeat;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 40%);
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
     }
+  }
 
-    &::-moz-range-track {
-      background-color: $unfilled-track-color;
+  input[type='range']::-moz-range-thumb {
+    position: relative;
+    bottom: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    appearance: none;
+    background: var(--text-color) url('../images/volume.svg') center no-repeat;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 40%);
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  input[type='range']::-ms-thumb {
+    position: relative;
+    bottom: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    appearance: none;
+    background: var(--text-color) url('../images/volume.svg') center no-repeat;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 40%);
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
     }
   }
 </style>

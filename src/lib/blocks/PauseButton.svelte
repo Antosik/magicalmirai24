@@ -11,12 +11,16 @@
 
 <style lang="scss">
   button {
-    position: fixed;
-    top: calc(var(--frame-size) + grid(1));
-    right: calc(var(--frame-size) + grid(1));
+    @include flex_center;
+
     padding: grid(1);
     border: 0;
     background: none;
     color: var(--moon-color);
+    transition: transform 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 </style>

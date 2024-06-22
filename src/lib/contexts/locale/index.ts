@@ -4,6 +4,7 @@ import { getContext } from 'svelte';
 import { derived, writable } from 'svelte/store';
 
 import enLocale from './locales/en.json';
+import jaLocale from './locales/ja.json';
 import { Locale } from './types';
 import { detectUserLocale } from './utils';
 
@@ -11,6 +12,7 @@ export const LOCALE_CONTEXT_KEY = 'locale';
 
 const LOCALES_DICTIONARY: Record<Locale, LocaleDictionary> = {
   [Locale.EN]: enLocale,
+  [Locale.JA]: jaLocale,
 };
 
 export function createLocaleStore(): LocaleContext {

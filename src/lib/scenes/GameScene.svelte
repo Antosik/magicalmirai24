@@ -94,6 +94,8 @@
     easing: linear,
   }}
 >
+  <div class="paper-background" />
+
   <Stars {animationDuration} {pause} --stars-color={$vaColor} />
 
   {#if songProgress}
@@ -123,6 +125,15 @@
     @include breakpoint(xl) {
       --long-cloud-height: 20%;
     }
+  }
+
+  .paper-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/texture02.png');
+    background-repeat: repeat;
+    filter: opacity(25%);
   }
 
   .error,
@@ -162,7 +173,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      aspect-ratio: 1300 / 1200;
+      aspect-ratio: 1339 / 1194;
       background-image: url('../images/miku.png');
       background-position: bottom center;
       background-repeat: no-repeat;
@@ -185,18 +196,29 @@
 
     position: absolute;
     z-index: $z-index-scene;
-    top: calc(-1 * var(--height) / 2);
+    top: calc(var(--height) / 4);
     left: calc(-1 * var(--height) / 2);
     width: 100%;
     height: var(--height);
     background-image: url('../images/moon.svg');
-    background-position: left center;
+    background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
-    filter: drop-shadow(0 0 20px var(--moon-color));
-    transform: translateX(var(--progress));
+    filter: drop-shadow(0 0 50px var(--moon-shine-color));
+    transform: translateX(calc(var(--progress) * -1));
     transition: transform 1s linear;
     will-change: transform;
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      top: -100vh;
+      right: -100vw;
+      width: 200vw;
+      height: 200vh;
+      background: radial-gradient(rgb(219 200 97 / 8%), rgb(145 139 105 / 0%));
+      content: '';
+    }
 
     @include breakpoint(md) {
       --height: calc(var(--base-height) * 1.25);

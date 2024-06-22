@@ -2,6 +2,7 @@
   import { linear } from 'svelte/easing';
   import { fly } from 'svelte/transition';
 
+  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Stars from '$lib/components/Stars.svelte';
   import BigCloud from '$lib/components/clouds/BigCloud.svelte';
   import LongCloud from '$lib/components/clouds/LongCloud.svelte';
@@ -20,13 +21,20 @@
     easing: linear,
   }}
 >
+  <div class="paper-background" />
+
   <Stars {animationDuration} pause />
 
   <div class="content">
     <div class="moon">
-      <img src="./images/moon.svg" alt="" />
+      <img class="blend img-moon" src="./images/moon.svg" alt="" />
+      <img class="blend img-paper" src="./images/texture.png" alt="" />
     </div>
     <slot />
+  </div>
+
+  <div class="buttons">
+    <FullscreenButton />
   </div>
 
   <SmallCloud {animationDuration} pause />
@@ -41,6 +49,15 @@
     background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
   }
 
+  .paper-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/texture02.png');
+    background-repeat: repeat;
+    filter: opacity(35%);
+  }
+
   .content {
     position: absolute;
     z-index: $z-index-scene;
@@ -48,14 +65,24 @@
     left: 50%;
     width: fit-content;
     min-width: 40%;
-    max-width: calc(100% - grid(4));
+    max-width: calc(100% + grid(4));
     padding: grid(10);
+    filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translate(-50%, -50%);
-    transition:
-      width 600ms,
-      top 600ms,
-      left 600ms;
+    transition: all 1s;
     will-change: width, top, left, transform;
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      width: 200vw;
+      height: 200vh;
+      background: radial-gradient(rgb(219 200 97 / 10%), rgb(145 139 105 / 0%));
+      content: '';
+      transform: translate(-50%, -50%);
+    }
   }
 
   .moon {
@@ -64,12 +91,32 @@
 
     position: absolute;
     z-index: -1;
-    filter: drop-shadow(0 0 20px var(--moon-color));
 
-    img {
+    .img-moon {
       overflow: visible;
       width: 100%;
       aspect-ratio: 1 / 1;
     }
+
+    .img-paper {
+      position: absolute;
+      width: 100%;
+      border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      object-fit: fill;
+    }
+  }
+
+  .blend {
+    mix-blend-mode: normal;
+  }
+
+  .buttons {
+    @include flex_center;
+
+    position: absolute;
+    top: grid(4);
+    right: grid(4);
+    gap: grid(1);
   }
 </style>

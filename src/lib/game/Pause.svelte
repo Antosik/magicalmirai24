@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
-  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import { getLocale } from '$lib/contexts/locale';
   import { getSettings } from '$lib/contexts/settings';
@@ -37,7 +36,6 @@
       </ul>
 
       <div class="buttons">
-        <FullscreenButton />
         <Volume bind:value={$settings.volume} />
       </div>
     </div>
@@ -65,9 +63,15 @@
     width: 100%;
     padding: grid(2) grid(4);
     border: 0;
+    border-bottom: 1px solid transparent;
     background: none;
     font-size: 28px;
     text-transform: uppercase;
+    transition: border-bottom 200ms ease-in-out;
+
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
+    }
 
     @include breakpoint(md) {
       font-size: 32px;

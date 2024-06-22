@@ -1,8 +1,6 @@
 <script lang="ts">
   import { songs } from '$lib/songs';
 
-  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
-  import LanguageSelect from '$lib/blocks/LanguageSelect.svelte';
   import Volume from '$lib/blocks/Volume.svelte';
   import Slider from '$lib/components/Slider.svelte';
   import { getLocale } from '$lib/contexts/locale';
@@ -14,7 +12,7 @@
   const settings = getSettings();
   const page = getPage();
   const { song, manageability } = getPlayerState();
-  const { locale, i18n } = getLocale();
+  const { i18n } = getLocale();
 
   const songItems = Object.values(songs);
   const handleSongChange = (e: CustomEvent<Song>) => {
@@ -43,8 +41,6 @@
 
   {#if $manageability === Manageability.FULL}
     <div class="buttons">
-      <LanguageSelect bind:value={$locale} />
-      <FullscreenButton />
       <Volume bind:value={$settings.volume} />
     </div>
   {/if}
@@ -54,10 +50,9 @@
   section {
     @include flex_center;
 
-    width: 100%;
-    height: 100%;
     flex-direction: column;
     padding: grid(8);
+    aspect-ratio: 1;
     gap: grid(4);
     text-align: center;
   }
@@ -79,9 +74,21 @@
     }
   }
 
-  select,
   button {
+    @include flex_center;
+
+    width: 100%;
+    padding: grid(1) grid(4);
+    border: none;
+    border-bottom: 1px solid transparent;
+    background: none;
     font-size: 14px;
+    text-transform: uppercase;
+    transition: border-bottom 200ms ease-in-out;
+
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
+    }
 
     @include breakpoint(md) {
       font-size: 18px;
@@ -109,16 +116,6 @@
     display: flex;
     flex-direction: column;
     gap: grid(2);
-  }
-
-  button {
-    @include flex_center;
-
-    width: 100%;
-    padding: grid(1) grid(4);
-    border: none;
-    background: none;
-    text-transform: uppercase;
   }
 
   .buttons {

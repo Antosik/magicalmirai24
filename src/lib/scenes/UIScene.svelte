@@ -2,6 +2,7 @@
   import { linear } from 'svelte/easing';
   import { fly } from 'svelte/transition';
 
+  import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
   import Stars from '$lib/components/Stars.svelte';
   import BigCloud from '$lib/components/clouds/BigCloud.svelte';
   import LongCloud from '$lib/components/clouds/LongCloud.svelte';
@@ -20,7 +21,7 @@
   const getSmallCloudPosition = (page: Page) => {
     switch (page) {
       case Page.MAIN_PAGE:
-        return { top: '45%', left: '70%' };
+        return { top: '50%', left: '70%' };
       case Page.HELP:
         return { top: '60%', left: '5%' };
       default:
@@ -64,6 +65,8 @@
     easing: linear,
   }}
 >
+  <div class="paper-background" />
+
   <Stars {animationDuration} />
 
   <div
@@ -74,11 +77,16 @@
     on:transitionend={handleTransitionEnd}
   >
     <div class="moon" class:transitionLive>
-      <img src="./images/moon.svg" alt="" />
+      <img class="blend img-moon" src="./images/moon.svg" alt="" />
+      <img class="blend img-paper" src="./images/texture.png" alt="" />
     </div>
     <div class="content-wrapper" class:transitionLive>
       <slot />
     </div>
+  </div>
+
+  <div class="buttons">
+    <FullscreenButton />
   </div>
 
   {#if smallPosition}
@@ -93,46 +101,62 @@
 </main>
 
 <style lang="scss">
+  .paper-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/texture02.png');
+    background-repeat: repeat;
+    filter: opacity(25%);
+  }
+
   .content {
     position: absolute;
     z-index: $z-index-scene;
     width: fit-content;
-    max-width: calc(100% - grid(4));
+    max-width: calc(100% + grid(4));
     padding: grid(10);
+    filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transition: all 1s;
     will-change: width, top, left, transform;
 
+    @include breakpoint(sm) {
+      max-width: calc(100% - grid(4));
+    }
+
     &--start {
-      top: 50%;
+      top: 30%;
       left: 50%;
       transform: translate(-50%, 0);
     }
 
-    &--main_page {
-      top: 50%;
-      left: 5%;
-      transform: translateX(0) translateY(-50%);
-    }
-
+    &--main_page,
     &--help,
     &--credits {
       top: 50%;
       left: 50%;
-      width: calc(100% + grid(10));
-      max-width: none;
+      max-width: 100%;
       max-height: 100%;
-      aspect-ratio: 1;
-      transform: translateX(-50%) translateY(-50%);
+      transform: translate(-50%, -50%);
+    }
 
+    &--main_page {
       @include breakpoint(md) {
-        width: fit-content;
+        left: 5%;
+        transform: translate(0, -50%);
       }
     }
 
-    &--credits {
-      @include breakpoint(md) {
-        width: 70%;
-      }
+    &::before {
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      width: 200vw;
+      height: 200vh;
+      background: radial-gradient(rgb(219 200 97 / 10%), rgb(145 139 105 / 0%));
+      content: '';
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -142,17 +166,28 @@
 
     position: absolute;
     z-index: -1;
-    filter: drop-shadow(0 0 20px var(--moon-color));
 
     &.transitionLive {
       z-index: $z-index-game;
     }
 
-    img {
+    .img-moon {
       overflow: visible;
-      width: 100%;
+      height: 100%;
       aspect-ratio: 1 / 1;
     }
+
+    .img-paper {
+      position: absolute;
+      height: 100%;
+      border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      object-fit: fill;
+    }
+  }
+
+  .blend {
+    mix-blend-mode: normal;
   }
 
   .content-wrapper {
@@ -161,5 +196,14 @@
     &.transitionLive {
       visibility: hidden;
     }
+  }
+
+  .buttons {
+    @include flex_center;
+
+    position: absolute;
+    top: grid(4);
+    right: grid(4);
+    gap: grid(1);
   }
 </style>

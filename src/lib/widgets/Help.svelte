@@ -62,10 +62,9 @@
 <style lang="scss">
   section {
     display: flex;
-    width: 100%;
-    height: 100%;
     flex-direction: column;
     padding: grid(8) grid(8) 20%;
+    aspect-ratio: 1;
     gap: grid(4);
     text-align: center;
   }
@@ -90,12 +89,18 @@
   button {
     @include flex_center;
 
-    width: 100%;
     padding: grid(1) grid(4);
     border: none;
+    border-bottom: 1px solid transparent;
+    margin: 0 auto;
     background: none;
     font-size: 14px;
     text-transform: uppercase;
+    transition: border-bottom 200ms ease-in-out;
+
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
+    }
 
     @include breakpoint(md) {
       font-size: 18px;
