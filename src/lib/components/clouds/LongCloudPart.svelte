@@ -17,6 +17,7 @@
     mask-position: left center;
     mask-repeat: no-repeat;
     mask-size: cover;
+    will-change: transform;
 
     &::after {
       @include absolute_full;
