@@ -25,6 +25,12 @@ export function createPlayerInstance(): TextAliveApp.Player {
           params: [0, 25],
           initialValue: DEFAULT_SETTINGS.speed,
         },
+        {
+          title: 'Autoplay',
+          name: 'autoplay',
+          className: 'Check',
+          initialValue: DEFAULT_SETTINGS.autoplay,
+        },
       ],
     },
 

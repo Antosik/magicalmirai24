@@ -192,13 +192,12 @@
 
   .moon {
     --base-height: 60px;
-    --height: var(--base-height) * 1.2;
 
     position: absolute;
     z-index: $z-index-scene;
     top: calc(var(--height) / 4);
-    left: calc(-1 * var(--height) / 2);
-    width: 100%;
+    right: calc(var(--height) / 4);
+    width: calc(100% - var(--height) * 6 / 4);
     height: var(--height);
     background-image: url('../images/moon.svg');
     background-position: right center;
@@ -218,6 +217,10 @@
       height: 200vh;
       background: radial-gradient(rgb(219 200 97 / 8%), rgb(145 139 105 / 0%));
       content: '';
+    }
+
+    @include breakpoint(xs) {
+      --height: calc(var(--base-height) * 1.2);
     }
 
     @include breakpoint(md) {

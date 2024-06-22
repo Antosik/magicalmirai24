@@ -97,6 +97,7 @@
     font-size: 14px;
     text-transform: uppercase;
     transition: border-bottom 200ms ease-in-out;
+    will-change: border-bottom;
 
     &:hover {
       border-bottom: 1px solid var(--text-color);
