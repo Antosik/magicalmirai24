@@ -197,14 +197,14 @@
     z-index: $z-index-scene;
     top: calc(var(--height) / 4);
     right: calc(var(--height) / 4);
-    width: calc(100% - var(--height) / 2);
+    width: calc(100% - var(--height) * 6 / 4);
     height: var(--height);
     background-image: url('../images/moon.svg');
     background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
-    transform: translateX(calc(var(--progress) * -1 + var(--height)));
+    transform: translateX(calc(var(--progress) * -1));
     transition: transform 1s linear;
     will-change: transform;
 
