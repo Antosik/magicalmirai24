@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   import { songs } from '$lib/songs';
 
   import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
