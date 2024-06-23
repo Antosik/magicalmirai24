@@ -121,14 +121,14 @@
 
 <style lang="scss">
   :root {
-    --long-cloud-height: 16%;
+    --long-cloud-height: 16dvh;
 
     @include breakpoint(md) {
-      --long-cloud-height: 18%;
+      --long-cloud-height: 18dvh;
     }
 
     @include breakpoint(xl) {
-      --long-cloud-height: 20%;
+      --long-cloud-height: 20dvh;
     }
   }
 

@@ -23,7 +23,7 @@
     z-index: $z-index-long-cloud;
     bottom: 0;
     left: 0;
-    height: var(--long-cloud-height, 16%);
+    height: var(--long-cloud-height, 16dvh);
     animation-duration: var(--duration);
     animation-iteration-count: infinite;
     animation-name: movingcloud;
@@ -38,11 +38,11 @@
     }
 
     @include breakpoint(md) {
-      height: var(--long-cloud-height, 18%);
+      height: var(--long-cloud-height, 16dvh);
     }
 
     @include breakpoint(xl) {
-      height: var(--long-cloud-height, 20%);
+      height: var(--long-cloud-height, 16dvh);
     }
   }
 
