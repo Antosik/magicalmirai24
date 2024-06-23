@@ -107,7 +107,7 @@
   <LongCloud {animationDuration} {pause} />
 
   <div bind:this={errorNode} class="error"></div>
-  <div bind:this={playerNode} class="player" style:top="{$playerPosition}px"></div>
+  <div bind:this={playerNode} class="player" style:--position="{$playerPosition}px"></div>
 
   <div class="content">
     <slot {errorNode} {playerNode} />
@@ -161,11 +161,13 @@
 
   .player {
     position: absolute;
+    top: 0;
+    bottom: 0;
     left: 5%;
     height: 80px;
     aspect-ratio: 1303 / 582;
     filter: drop-shadow(rgb(0 0 0 / 60%) 4px 4px 4px);
-    transform: translateY(-50%) translateZ(0);
+    transform: translateY(var(--position, 50%)) translateZ(0);
     will-change: top;
 
     &::before {
