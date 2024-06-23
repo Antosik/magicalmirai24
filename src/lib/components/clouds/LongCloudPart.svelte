@@ -13,7 +13,6 @@
     background-position: left center;
     background-repeat: repeat-x;
     background-size: contain;
-    filter: drop-shadow(rgb(0 0 0 / 25%) 15px -13px 4px);
     mask-image: url('../images/cloud_long.svg');
     mask-position: left center;
     mask-repeat: no-repeat;

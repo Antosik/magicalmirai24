@@ -17,10 +17,12 @@
   class:pause
   class:placed
   style:--duration="{animationDuration * 2}ms"
-></div>
+>
+  <div class="cloud--small__image"></div>
+</div>
 
 <style lang="scss">
-  div {
+  .cloud--small {
     --base-height: 60px;
 
     position: absolute;
@@ -34,31 +36,12 @@
     animation-name: flyingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
-    aspect-ratio: 461 / 297;
-    background-image: url('../images/texture02.png');
-    background-position: left center;
-    background-repeat: repeat-x;
-    background-size: contain;
     filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
-    mask-image: url('../images/cloud_small.svg');
-    mask-position: left center;
-    mask-repeat: no-repeat;
-    mask-size: contain;
     transition:
       top 400ms,
       left 400ms;
     will-change: transform, top, left;
-
-    &::after {
-      @include absolute_full;
-
-      background-image: url('../images/cloud_small.svg');
-      background-position: left center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      content: '';
-      mix-blend-mode: overlay;
-    }
+    aspect-ratio: 461 / 297;
 
     &.pause,
     &.placed {
@@ -85,6 +68,32 @@
 
     @include breakpoint(xxxl) {
       height: calc(var(--base-height) * 2);
+    }
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      background-image: url('../images/texture02.png');
+      background-position: left center;
+      background-repeat: repeat-x;
+      background-size: contain;
+      filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
+      mask-image: url('../images/cloud_small.svg');
+      mask-position: left center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      transform: translateZ(0);
+
+      &::after {
+        @include absolute_full;
+
+        background-image: url('../images/cloud_small.svg');
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: '';
+        mix-blend-mode: overlay;
+      }
     }
   }
 
