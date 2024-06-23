@@ -53,6 +53,8 @@
   section {
     @include flex_center;
 
+    max-width: calc(100dvw + grid(4));
+    max-height: calc(100dvh + grid(4));
     flex-direction: column;
     aspect-ratio: 1;
     padding: grid(4);

@@ -219,10 +219,10 @@
     &::before {
       position: absolute;
       z-index: -1;
-      top: -100vh;
-      right: -100vw;
-      width: 200vw;
-      height: 200vh;
+      top: -100dvh;
+      right: -100dvw;
+      width: 200dvw;
+      height: 200dvh;
       background: radial-gradient(rgb(219 200 97 / 8%), rgb(145 139 105 / 0%));
       content: '';
     }

@@ -32,7 +32,7 @@
   const getBigCloudPosition = (page: Page) => {
     switch (page) {
       case Page.START:
-        return { top: '30%', left: '55%' };
+        return { top: '20%', left: '55%' };
       case Page.MAIN_PAGE:
         return { top: '15%', left: '65%' };
       case Page.HELP:
@@ -116,8 +116,8 @@
     top: 50%;
     left: 50%;
     width: fit-content;
-    max-width: calc(100vw + grid(4));
-    max-height: calc(100vh + grid(4));
+    max-width: calc(100dvw + grid(4));
+    max-height: calc(100dvh + grid(4));
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translate(-50%, -50%);
     transition:
@@ -143,8 +143,8 @@
       z-index: -1;
       top: 50%;
       left: 50%;
-      width: 200vw;
-      height: 200vh;
+      width: 200dvw;
+      height: 200dvh;
       background: radial-gradient(rgb(219 200 97 / 10%), rgb(145 139 105 / 0%));
       content: '';
       transform: translate(-50%, -50%);

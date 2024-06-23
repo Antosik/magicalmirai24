@@ -91,6 +91,7 @@
     max-width: calc(100% - grid(4));
     height: 100%;
     flex: 0 1;
+    margin: 0 auto;
   }
 
   button {

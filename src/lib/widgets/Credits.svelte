@@ -54,6 +54,8 @@
     aspect-ratio: 1;
     gap: grid(2);
     text-align: center;
+    max-width: calc(100dvw + grid(4));
+    max-height: calc(100dvh + grid(4));
 
     @include breakpoint(lg) {
       padding: grid(8);

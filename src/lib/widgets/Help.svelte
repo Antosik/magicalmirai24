@@ -69,6 +69,8 @@
     aspect-ratio: 1;
     gap: grid(4);
     text-align: center;
+    max-width: calc(100dvw + grid(4));
+    max-height: calc(100dvh + grid(4));
   }
 
   h1 {
