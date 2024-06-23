@@ -52,15 +52,10 @@
     max-width: calc(100dvw + grid(4));
     max-height: calc(100dvh + grid(4));
     flex-direction: column;
-    padding: grid(4);
+    padding: grid(8);
     aspect-ratio: 1;
-    gap: grid(2);
+    gap: grid(4);
     text-align: center;
-
-    @include breakpoint(lg) {
-      padding: grid(8);
-      gap: grid(4);
-    }
   }
 
   h1 {
