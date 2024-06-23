@@ -26,6 +26,7 @@
     animation-name: movingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
+    gap: 0;
     will-change: transform;
 
     &.pause {

@@ -5,7 +5,6 @@
 
 <style lang="scss">
   div {
-    z-index: $z-index-long-cloud;
     height: 100%;
     aspect-ratio: 4795 / 220;
     background-image: url('../images/texture02.png');
