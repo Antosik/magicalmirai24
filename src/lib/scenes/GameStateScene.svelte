@@ -46,6 +46,7 @@
   section {
     @include absolute_full;
 
+    overflow: hidden;
     background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
   }
 
@@ -64,9 +65,9 @@
     top: 50%;
     left: 50%;
     width: fit-content;
-    min-width: 40%;
-    max-width: calc(100% + grid(4));
-    padding: grid(10);
+    min-width: 40dvw;
+    max-width: calc(100dvw + grid(4));
+    max-height: calc(100dvh + grid(4));
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translate(-50%, -50%);
 
@@ -75,8 +76,8 @@
       z-index: -1;
       top: 50%;
       left: 50%;
-      width: 200vw;
-      height: 200vh;
+      width: 200dvw;
+      height: 200dvh;
       background: radial-gradient(rgb(219 200 97 / 10%), rgb(145 139 105 / 0%));
       content: '';
       transform: translate(-50%, -50%);

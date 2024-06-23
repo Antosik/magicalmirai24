@@ -5,7 +5,7 @@ export type Settings = {
   volume: number;
   /** Game speed */
   speed: number;
-  /** Autoplay mode */
+  /** Is autoplay mode enabled */
   autoplay: boolean;
 };
 

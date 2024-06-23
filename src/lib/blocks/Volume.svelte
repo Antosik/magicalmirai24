@@ -1,9 +1,11 @@
+<!-- @component Volume range component -->
+
 <script lang="ts">
   export let value: number = 100;
 
-  const handleButtonClick = () => {
+  function handleButtonClick() {
     value = value > 0 ? 0 : 100;
-  };
+  }
 </script>
 
 <div>

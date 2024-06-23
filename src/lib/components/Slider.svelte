@@ -1,7 +1,11 @@
+<!-- @component Slider component -->
+
 <script lang="ts" generics="T">
   import { createEventDispatcher, onMount } from 'svelte';
 
+  /** Slider items */
   export let items: T[] = [];
+  /** Is slider looped */
   export let loop = false;
 
   let slider: HTMLUListElement;
@@ -87,6 +91,7 @@
     max-width: calc(100% - grid(4));
     height: 100%;
     flex: 0 1;
+    margin: 0 auto;
   }
 
   button {
@@ -96,7 +101,6 @@
     border: none;
     background: none;
     transition: transform 200ms ease-in-out;
-    will-change: transform;
 
     &:hover {
       transform: scale(1.2);

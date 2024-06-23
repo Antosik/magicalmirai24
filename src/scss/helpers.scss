@@ -57,10 +57,6 @@ ul {
   list-style: none;
 }
 
-.container {
-  @include container_sizing;
-}
-
 label,
 button,
 input,

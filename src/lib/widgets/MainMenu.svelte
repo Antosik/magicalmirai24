@@ -1,3 +1,5 @@
+<!-- @component Main menu page -->
+
 <script lang="ts">
   import { songs } from '$lib/songs';
 
@@ -15,9 +17,10 @@
   const { i18n } = getLocale();
 
   const songItems = Object.values(songs);
-  const handleSongChange = (e: CustomEvent<Song>) => {
+
+  function handleSongChange(e: CustomEvent<Song>) {
     $song = e.detail.id;
-  };
+  }
 </script>
 
 <section>
@@ -50,11 +53,22 @@
   section {
     @include flex_center;
 
+    max-width: calc(100dvw + grid(4));
+    max-height: calc(100dvh + grid(4));
     flex-direction: column;
-    padding: grid(8);
+    padding: grid(4);
     aspect-ratio: 1;
-    gap: grid(4);
+    gap: grid(2);
     text-align: center;
+
+    @include breakpoint(lg) {
+      padding: grid(8);
+      gap: grid(4);
+    }
+
+    @include breakpoint(xxl) {
+      padding: grid(16);
+    }
   }
 
   h1 {
@@ -85,7 +99,6 @@
     font-size: 14px;
     text-transform: uppercase;
     transition: border-bottom 200ms ease-in-out;
-    will-change: border-bottom;
 
     &:hover {
       border-bottom: 1px solid var(--text-color);
@@ -101,15 +114,6 @@
 
     @include breakpoint(xxl) {
       font-size: 28px;
-    }
-  }
-
-  select {
-    width: 100%;
-    max-width: 300px;
-
-    @include breakpoint(xxl) {
-      max-width: 500px;
     }
   }
 

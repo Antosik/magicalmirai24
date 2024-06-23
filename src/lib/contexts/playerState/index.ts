@@ -4,6 +4,7 @@ import { getContext } from 'svelte';
 import { writable } from 'svelte/store';
 
 import { SongId } from '$lib/songs/types';
+import { createWakeLock } from '$lib/utils/screen';
 
 import {
   SongState,
@@ -12,7 +13,7 @@ import {
   type Readiness,
   type SongInfo,
 } from './types';
-import { calculateManageability } from './utils';
+import { calculateManageability, isEnded } from './utils';
 
 export const PLAYER_STATE_CONTEXT_KEY = 'playerState';
 
@@ -22,6 +23,8 @@ export function createPlayerStateStore(player: Player): PlayerStateContext {
   const manageability = writable<Manageability>(Manageability.FULL);
   const songState = writable<SongState>(SongState.NONE);
   const song = writable<SongId>(SongId.SUPERHERO);
+
+  const wakeLock = createWakeLock();
 
   player.addListener({
     // Set app readiness
@@ -68,14 +71,15 @@ export function createPlayerStateStore(player: Player): PlayerStateContext {
       songState.set(SongState.NONE);
     },
     onPlay() {
+      void wakeLock.acquire();
       songState.set(SongState.PLAYING);
     },
     onPause() {
-      songState.set(
-        player.mediaPosition >= player.video.duration ? SongState.ENDED : SongState.PAUSED,
-      );
+      void wakeLock.release();
+      songState.set(isEnded(player) ? SongState.ENDED : SongState.PAUSED);
     },
     onStop() {
+      void wakeLock.release();
       songState.set(SongState.STOPPED);
     },
   });

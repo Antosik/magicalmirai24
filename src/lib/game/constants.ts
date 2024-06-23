@@ -4,7 +4,7 @@ import type { ValueOf } from '$lib/utils/types';
 export const START_SONG_DELAY = 3e3; // 3s
 
 /** Time to wait before a pause will be counted as triggered by the user */
-export const REAL_PAUSE_DELAY = 100; // 10ms
+export const REAL_PAUSE_DELAY = 100; // 100ms
 
 /** Char colors */
 export const CharColor = {

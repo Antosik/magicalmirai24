@@ -15,6 +15,7 @@
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
+  import SongInfo from '$lib/game/SongInfo.svelte';
   import { DEFAULT_CLOUD_ANIMATION_DURATION } from '$lib/game/constants';
   import { calculateVAColor, calculateCloudAnimationDuration } from '$lib/game/utils';
 
@@ -61,7 +62,13 @@
   };
   player.addListener(listener);
 
-  $: pause = $songState === SongState.PAUSED;
+  $: pause =
+    $songState === SongState.PAUSED ||
+    $songState === SongState.STOPPED ||
+    $songState === SongState.ENDED;
+  $: if ($songState === SongState.STOPPED) {
+    songProgress = 0;
+  }
 
   const handleMouseMove = (e: MouseEvent & { currentTarget: HTMLElement }) => {
     // Skip controls in automode
@@ -105,9 +112,10 @@
   <SmallCloud {animationDuration} {pause} />
   <BigCloud {animationDuration} {pause} />
   <LongCloud {animationDuration} {pause} />
+  <SongInfo />
 
   <div bind:this={errorNode} class="error"></div>
-  <div bind:this={playerNode} class="player" style:top="{$playerPosition}px"></div>
+  <div bind:this={playerNode} class="player" style:--position="{$playerPosition}px"></div>
 
   <div class="content">
     <slot {errorNode} {playerNode} />
@@ -116,14 +124,14 @@
 
 <style lang="scss">
   :root {
-    --long-cloud-height: 16%;
+    --long-cloud-height: 16dvh;
 
     @include breakpoint(md) {
-      --long-cloud-height: 18%;
+      --long-cloud-height: 18dvh;
     }
 
     @include breakpoint(xl) {
-      --long-cloud-height: 20%;
+      --long-cloud-height: 20dvh;
     }
   }
 
@@ -157,15 +165,18 @@
     width: 100%;
     height: 100%;
     padding-bottom: var(--long-cloud-height);
+    transform: translateZ(0);
   }
 
   .player {
     position: absolute;
+    top: 0;
+    bottom: 0;
     left: 5%;
     height: 80px;
     aspect-ratio: 1303 / 582;
     filter: drop-shadow(rgb(0 0 0 / 60%) 4px 4px 4px);
-    transform: translateY(-50%) translateZ(0);
+    transform: translateY(var(--position, 50%)) translateZ(0);
     will-change: top;
 
     &::before {
@@ -211,10 +222,10 @@
     &::before {
       position: absolute;
       z-index: -1;
-      top: -100vh;
-      right: -100vw;
-      width: 200vw;
-      height: 200vh;
+      top: -100dvh;
+      right: -100dvw;
+      width: 200dvw;
+      height: 200dvh;
       background: radial-gradient(rgb(219 200 97 / 8%), rgb(145 139 105 / 0%));
       content: '';
     }

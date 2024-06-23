@@ -1,7 +1,13 @@
 import { Locale } from './types';
 
+/** Default locale for an app */
 const DEFAULT_LOCALE = Locale.EN;
 
+/**
+ * Checks is the passed locale available in app
+ * @param locale Locale
+ * @returns Is the passed locale available in app
+ */
 function isSupportedLocale(locale?: string): locale is Locale {
   if (!locale) {
     return false;

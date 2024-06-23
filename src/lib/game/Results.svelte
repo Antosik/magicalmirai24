@@ -1,11 +1,11 @@
+<!-- @component Results screen on game page -->
+
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
   import { getGame } from '$lib/contexts/game';
   import { getLocale } from '$lib/contexts/locale';
   import GameStateScene from '$lib/scenes/GameStateScene.svelte';
-
-  export let open = false;
 
   const { chars, catched } = getGame();
   const { i18n } = getLocale();
@@ -17,27 +17,27 @@
   }>();
 </script>
 
-{#if open}
-  <GameStateScene>
-    <div class="results">
-      <h2 class="visually-hidden">{$i18n('Results')}</h2>
+<GameStateScene>
+  <div class="results">
+    <h2 class="visually-hidden">{$i18n('Results')}</h2>
 
+    {#if $chars.size}
       <div class="results__percentage">
         {Math.floor(($catched.length / ($chars.size ?? 1)) * 100)}%
       </div>
       <div class="results__count">{$catched.length} / {$chars.size}</div>
+    {/if}
 
-      <ul>
-        <li>
-          <button type="button" on:click={() => dispatch('restart')}>{$i18n('Retry')}</button>
-        </li>
-        <li>
-          <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
-        </li>
-      </ul>
-    </div>
-  </GameStateScene>
-{/if}
+    <ul>
+      <li>
+        <button type="button" on:click={() => dispatch('restart')}>{$i18n('Retry')}</button>
+      </li>
+      <li>
+        <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
+      </li>
+    </ul>
+  </div>
+</GameStateScene>
 
 <style lang="scss">
   .results {

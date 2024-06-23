@@ -1,4 +1,6 @@
-<script>
+<!-- @component Technologies tab on Credits page -->
+
+<script lang="ts">
   import { packages } from '$lib/utils/packages';
 </script>
 

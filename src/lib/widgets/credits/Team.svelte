@@ -1,3 +1,5 @@
+<!-- @component Team tab on Credits page -->
+
 <h2>Team</h2>
 <ul>
   <li><span>Anton Grigorev</span> - Programming</li>

@@ -1,3 +1,5 @@
+<!-- @component Credits page -->
+
 <script lang="ts">
   import Slider from '$lib/components/Slider.svelte';
   import { getLocale } from '$lib/contexts/locale';
@@ -22,12 +24,13 @@
 
 <svelte:document on:keydown={handleKeyDown} />
 
-<button type="button" on:click={openMainMenu}>
-  {$i18n('Back to Main menu')}
-</button>
-
 <section>
+  <button type="button" on:click={openMainMenu}>
+    {$i18n('Back to Main menu')}
+  </button>
+
   <h1>{$i18n('Credits')}</h1>
+
   <div class="content">
     <img src="../images/credits.png" alt="" />
     <Slider>
@@ -46,16 +49,13 @@
 <style lang="scss">
   section {
     display: flex;
+    max-width: calc(100dvw + grid(4));
+    max-height: calc(100dvh + grid(4));
     flex-direction: column;
-    padding: grid(4);
+    padding: grid(8);
     aspect-ratio: 1;
-    gap: grid(2);
+    gap: grid(4);
     text-align: center;
-
-    @include breakpoint(md) {
-      padding: grid(8);
-      gap: grid(4);
-    }
   }
 
   h1 {
@@ -86,7 +86,6 @@
     font-size: 14px;
     text-transform: uppercase;
     transition: border-bottom 200ms ease-in-out;
-    will-change: border-bottom;
 
     &:hover {
       border-bottom: 1px solid var(--text-color);
@@ -126,7 +125,7 @@
     scroll-snap-align: center;
     scroll-snap-stop: always;
 
-    @include breakpoint(md) {
+    @include breakpoint(lg) {
       justify-content: center;
     }
   }
@@ -136,7 +135,7 @@
     min-width: 100px;
     max-width: 30%;
 
-    @include breakpoint(md) {
+    @include breakpoint(lg) {
       display: block;
     }
   }

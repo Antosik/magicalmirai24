@@ -1,12 +1,13 @@
+<!-- @component Pause button component -->
+
 <script lang="ts">
-  import FeatherIcon from '$lib/components/FeatherIcon.svelte';
   import { getLocale } from '$lib/contexts/locale';
 
   const { i18n } = getLocale();
 </script>
 
 <button type="button" title={$i18n('Pause')} on:click>
-  <FeatherIcon name="pause" size="24" fill="var(--moon-color)" />
+  <img src="../images/pause.svg" alt={$i18n('Pause')} width="24" height="24" />
 </button>
 
 <style lang="scss">
@@ -16,9 +17,7 @@
     padding: grid(1);
     border: 0;
     background: none;
-    color: var(--moon-color);
     transition: transform 200ms ease-in-out;
-    will-change: transform;
 
     &:hover {
       transform: scale(1.2);

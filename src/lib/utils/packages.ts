@@ -1,7 +1,12 @@
+/** Describes licensed NPM package */
 type Package = {
+  /** Package name */
   name: string;
+  /** Package url */
   link: string;
+  /** Type of license for package */
   licenseType?: string;
+  /** Link to custom license for package */
   licenseLink?: string;
 };
 

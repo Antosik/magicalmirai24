@@ -1,3 +1,5 @@
+<!-- @component Help page -->
+
 <script lang="ts">
   import Slider from '$lib/components/Slider.svelte';
   import { getLocale } from '$lib/contexts/locale';
@@ -42,11 +44,11 @@
 
 <svelte:document on:keydown={handleKeyDown} />
 
-<button type="button" on:click={openMainMenu}>
-  {$i18n('Back to Main menu')}
-</button>
-
 <section>
+  <button type="button" on:click={openMainMenu}>
+    {$i18n('Back to Main menu')}
+  </button>
+
   <h1>{$i18n('Help')}</h1>
 
   <div class="content">
@@ -62,6 +64,8 @@
 <style lang="scss">
   section {
     display: flex;
+    max-width: calc(100dvw + grid(4));
+    max-height: calc(100dvh + grid(4));
     flex-direction: column;
     padding: grid(8) grid(8) 20%;
     aspect-ratio: 1;
@@ -97,7 +101,6 @@
     font-size: 14px;
     text-transform: uppercase;
     transition: border-bottom 200ms ease-in-out;
-    will-change: border-bottom;
 
     &:hover {
       border-bottom: 1px solid var(--text-color);

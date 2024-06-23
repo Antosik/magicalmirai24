@@ -1,3 +1,5 @@
+<!-- @component Pause screen on game page -->
+
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
@@ -5,8 +7,6 @@
   import { getLocale } from '$lib/contexts/locale';
   import { getSettings } from '$lib/contexts/settings';
   import GameStateScene from '$lib/scenes/GameStateScene.svelte';
-
-  export let open = false;
 
   const settings = getSettings();
   const { i18n } = getLocale();
@@ -18,29 +18,27 @@
   }>();
 </script>
 
-{#if open}
-  <GameStateScene>
-    <div class="pause">
-      <h2 class="visually-hidden">{$i18n('Pause')}</h2>
+<GameStateScene>
+  <div class="pause">
+    <h2 class="visually-hidden">{$i18n('Pause')}</h2>
 
-      <ul>
-        <li>
-          <button type="button" on:click={() => dispatch('resume')}>{$i18n('Resume')}</button>
-        </li>
-        <li>
-          <button type="button" on:click={() => dispatch('restart')}>{$i18n('Retry')}</button>
-        </li>
-        <li>
-          <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
-        </li>
-      </ul>
+    <ul>
+      <li>
+        <button type="button" on:click={() => dispatch('resume')}>{$i18n('Resume')}</button>
+      </li>
+      <li>
+        <button type="button" on:click={() => dispatch('restart')}>{$i18n('Retry')}</button>
+      </li>
+      <li>
+        <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
+      </li>
+    </ul>
 
-      <div class="buttons">
-        <Volume bind:value={$settings.volume} />
-      </div>
+    <div class="buttons">
+      <Volume bind:value={$settings.volume} />
     </div>
-  </GameStateScene>
-{/if}
+  </div>
+</GameStateScene>
 
 <style lang="scss">
   .pause {
