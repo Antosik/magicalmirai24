@@ -104,15 +104,6 @@
     }
   }
 
-  select {
-    width: 100%;
-    max-width: 300px;
-
-    @include breakpoint(xxl) {
-      max-width: 500px;
-    }
-  }
-
   ul {
     display: flex;
     flex-direction: column;
