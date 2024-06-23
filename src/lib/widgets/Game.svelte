@@ -33,8 +33,8 @@
   let restart = 0;
   let visibilityState: DocumentVisibilityState;
   let windowHeight = window.innerHeight;
-  let done = false;
 
+  $: done = $songState === SongState.ENDED;
   $: pause = $songState === SongState.PAUSED && isRealPause(player);
   $: readyToStart =
     $readiness.timer &&
@@ -46,7 +46,6 @@
         video: song.video,
       })
       .catch(() => pauseGame());
-  $: $songState === SongState.ENDED && handleSongEnded();
 
   function startTimer(i: number) {
     if (i === 0) {
@@ -67,14 +66,12 @@
 
   function pauseGame() {
     timer = 0;
-    done = false;
     player?.requestPause();
     clearTimeout(timeout);
   }
 
   function resumeGame() {
     timer = START_SONG_DELAY / 1e3;
-    done = false;
     startTimer(timer);
   }
 
@@ -96,11 +93,6 @@
     stopGame();
     songState.set(SongState.NONE);
     page.set(Page.MAIN_PAGE);
-  }
-
-  async function handleSongEnded() {
-    pauseGame();
-    done = true;
   }
 
   /** If user is alt+tab'ed during the game - pause it */
@@ -161,40 +153,41 @@
       {playerNode}
       {done}
       pause={Boolean(pause || timer || done)}
-      on:ended={handleSongEnded}
+      on:ended={() => $songState === SongState.ENDED}
     />
   {/key}
 
   {#if $manageability === Manageability.FULL}
-    <Pause
-      open={pause && !timer && !done}
-      on:resume={resumeGame}
-      on:restart={restartGame}
-      on:back={backToMenu}
-    />
-
-    <Results open={done} on:restart={restartGame} on:back={backToMenu} />
-
-    {#if readyToStart && !timer}
-      <div class="placeholder">
-        <button type="button" class="start" on:click|capture={() => player?.requestPlay()}>
-          Click start
-        </button>
-      </div>
-    {/if}
-
-    {#if timer}
-      <div class="placeholder">
-        {timer}
-      </div>
-    {/if}
-
-    <div class="buttons">
-      <FullscreenButton />
-      {#if !readyToStart && !pause && !timer}
-        <PauseButton on:click={pauseGame} />
+    {#if done}
+      <Results open on:restart={restartGame} on:back={backToMenu} />
+    {:else}
+      {#if timer}
+        <div class="placeholder">
+          {timer}
+        </div>
+      {:else if pause}
+        <Pause open on:resume={resumeGame} on:restart={restartGame} on:back={backToMenu} />
+      {:else if readyToStart}
+        <div class="placeholder">
+          <button type="button" class="start" on:click|capture={() => player?.requestPlay()}>
+            Click start
+          </button>
+        </div>
       {/if}
-    </div>
+
+      {#if timer}
+        <div class="placeholder">
+          {timer}
+        </div>
+      {/if}
+
+      <div class="buttons">
+        <FullscreenButton />
+        {#if !readyToStart && !pause && !timer}
+          <PauseButton on:click={pauseGame} />
+        {/if}
+      </div>
+    {/if}
   {:else if $manageability === Manageability.PARTIAL}
     <div class="buttons">
       {#if !readyToStart && !pause && !timer}
