@@ -62,7 +62,10 @@
   };
   player.addListener(listener);
 
-  $: pause = $songState === SongState.PAUSED;
+  $: pause =
+    $songState === SongState.PAUSED ||
+    $songState === SongState.STOPPED ||
+    $songState === SongState.ENDED;
   $: if ($songState === SongState.STOPPED) {
     songProgress = 0;
   }
