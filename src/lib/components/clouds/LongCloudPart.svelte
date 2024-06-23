@@ -1,3 +1,5 @@
+<!-- @component Part of long animated cloud -->
+
 <script lang="ts">
 </script>
 

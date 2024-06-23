@@ -7,7 +7,7 @@ export type Chars = Map<Char['id'], Char>;
 export type GameContext = {
   /** All characters that were visible in game */
   chars: Writable<Chars>;
-  /** List of characters in game */
+  /** Chars that currently on a game scene */
   ingame: Readable<Char[]>;
   /** List of catched characters */
   catched: Readable<Char[]>;

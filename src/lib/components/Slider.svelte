@@ -1,7 +1,11 @@
+<!-- @component Slider component -->
+
 <script lang="ts" generics="T">
   import { createEventDispatcher, onMount } from 'svelte';
 
+  /** Slider items */
   export let items: T[] = [];
+  /** Is slider looped */
   export let loop = false;
 
   let slider: HTMLUListElement;

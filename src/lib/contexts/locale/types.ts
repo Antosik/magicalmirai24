@@ -9,10 +9,10 @@ export const Locale = {
 } as const;
 export type Locale = ValueOf<typeof Locale>;
 
-export const localesList = Object.keys(Locale) as Locale[];
-
 export type LocaleContext = {
+  /** App locale */
   locale: Writable<Locale>;
+  /** Translator function */
   i18n: Readable<(key: LocaleDictionaryKeys) => string>;
 };
 

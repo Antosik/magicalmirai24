@@ -2,6 +2,7 @@ import type { Writable } from 'svelte/store';
 
 import type { ValueOf } from '$lib/utils/types';
 
+/** App page */
 export const Page = {
   START: 'START',
   MAIN_PAGE: 'MAIN_PAGE',

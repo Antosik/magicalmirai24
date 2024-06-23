@@ -16,7 +16,10 @@ const LOCALES_DICTIONARY: Record<Locale, LocaleDictionary> = {
 };
 
 export function createLocaleStore(): LocaleContext {
+  /** App locale */
   const locale = writable<Locale>(detectUserLocale());
+
+  /** Translator function */
   const i18n = derived(locale, ($locale) => {
     const dictionary = LOCALES_DICTIONARY[$locale];
     return (key: LocaleDictionaryKeys) => dictionary[key];

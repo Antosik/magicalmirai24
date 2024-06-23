@@ -9,19 +9,26 @@ import { CharState } from '$lib/game/constants';
 export const GAME_CONTEXT_KEY = 'game';
 
 export function createGameStore(player: Player): GameContext {
+  /** All characters that were visible in game */
   const chars = writable<Chars>(new Map());
+
+  /** List of catched characters */
   const catched = derived(
     chars,
     ($charsStore) =>
       Array.from($charsStore.values()).filter((char) => char.state === CharState.CATCHED),
     [],
   );
+
+  /** List of missed characters */
   const missed = derived(
     chars,
     ($charsStore) =>
       Array.from($charsStore.values()).filter((char) => char.state === CharState.MISSED),
     [],
   );
+
+  /** Chars that currently on a game scene */
   const ingame = derived(
     chars,
     ($charsStore) =>

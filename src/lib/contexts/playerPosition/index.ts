@@ -10,6 +10,7 @@ const DAMPING = 0.8; // Default svelte stiffness = 0.8
 
 export function createPlayerPositionStore(): PlayerPositionContext {
   const store = spring(window.innerHeight / 2, { stiffness: STIFFNESS, damping: DAMPING });
+
   store.subscribe((y) => {
     const windowHeight = window.innerHeight;
 
@@ -19,6 +20,7 @@ export function createPlayerPositionStore(): PlayerPositionContext {
       store.set(windowHeight * 0.9);
     }
   });
+
   return store;
 }
 

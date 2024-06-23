@@ -1,7 +1,11 @@
+<!-- @component Long animated cloud component -->
+
 <script lang="ts">
   import LongCloudPart from './LongCloudPart.svelte';
 
+  /** Animation duration (speed) */
   export let animationDuration: number;
+  /** Is the animation paused */
   export let pause = false;
 </script>
 

@@ -1,5 +1,9 @@
+<!-- @component Background stars component -->
+
 <script lang="ts">
+  /** Animation duration (speed) */
   export let animationDuration: number;
+  /** Is the animation paused */
   export let pause = false;
 </script>
 
