@@ -160,6 +160,7 @@
     width: 100%;
     height: 100%;
     padding-bottom: var(--long-cloud-height);
+    transform: translateZ(0);
   }
 
   .player {

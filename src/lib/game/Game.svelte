@@ -174,7 +174,6 @@
     text-align: left;
     -webkit-text-stroke: 2px var(--moon-color);
     user-select: none;
-    will-change: transform;
 
     &--color-dark {
       color: var(--blue-color);
