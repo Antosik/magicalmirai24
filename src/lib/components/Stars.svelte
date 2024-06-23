@@ -28,9 +28,9 @@
     @return string_unquote($value);
   }
 
-  $shadows-small: multiple-box-shadow(500);
-  $shadows-medium: multiple-box-shadow(200);
-  $shadows-big: multiple-box-shadow(50);
+  $shadows-small: multiple-box-shadow(375);
+  $shadows-medium: multiple-box-shadow(150);
+  $shadows-big: multiple-box-shadow(35);
 
   .stars {
     position: absolute;
