@@ -29,9 +29,9 @@
     animation-name: movingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
+    filter: drop-shadow(rgb(0 0 0 / 25%) 15px -13px 4px);
     gap: 0;
     will-change: transform;
-    filter: drop-shadow(rgb(0 0 0 / 25%) 15px -13px 4px);
 
     &.pause {
       animation-play-state: paused;

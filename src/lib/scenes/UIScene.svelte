@@ -127,7 +127,7 @@
     will-change: width, top, left, transform;
 
     &--start {
-      @media (min-height: 768px) {
+      @media (height >= 768px) {
         top: 70%;
       }
     }

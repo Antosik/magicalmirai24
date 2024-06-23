@@ -56,14 +56,14 @@
     max-width: calc(100dvw + grid(4));
     max-height: calc(100dvh + grid(4));
     flex-direction: column;
-    aspect-ratio: 1;
     padding: grid(4);
+    aspect-ratio: 1;
     gap: grid(2);
     text-align: center;
 
     @include breakpoint(lg) {
-      gap: grid(4);
       padding: grid(8);
+      gap: grid(4);
     }
 
     @include breakpoint(xxl) {

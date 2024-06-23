@@ -46,8 +46,8 @@
   section {
     @include absolute_full;
 
-    background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
     overflow: hidden;
+    background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
   }
 
   .paper-background {
