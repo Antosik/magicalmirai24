@@ -1,3 +1,5 @@
+<!-- @component Button component to open the app in fullscreen mode -->
+
 <script lang="ts">
   import { getLocale } from '$lib/contexts/locale';
 

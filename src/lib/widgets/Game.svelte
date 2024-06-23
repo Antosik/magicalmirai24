@@ -1,6 +1,6 @@
-<script lang="ts">
-  import { onMount } from 'svelte';
+<!-- @component Game page -->
 
+<script lang="ts">
   import { songs } from '$lib/songs';
 
   import FullscreenButton from '$lib/blocks/FullscreenButton.svelte';
@@ -14,7 +14,6 @@
   import { getSettings } from '$lib/contexts/settings';
   import Game from '$lib/game/Game.svelte';
   import Pause from '$lib/game/Pause.svelte';
-  import SongInfo from '$lib/game/SongInfo.svelte';
   import { START_SONG_DELAY } from '$lib/game/constants';
   import { calculateKeyboardPositioningStep, isRealPause } from '$lib/game/utils';
   import Results from '../game/Results.svelte';
@@ -161,14 +160,14 @@
 
   {#if $manageability === Manageability.FULL}
     {#if done}
-      <Results open on:restart={restartGame} on:back={backToMenu} />
+      <Results on:restart={restartGame} on:back={backToMenu} />
     {:else}
       {#if timer}
         <div class="placeholder">
           {timer}
         </div>
       {:else if pause}
-        <Pause open on:resume={resumeGame} on:restart={restartGame} on:back={backToMenu} />
+        <Pause on:resume={resumeGame} on:restart={restartGame} on:back={backToMenu} />
       {:else if readyToStart}
         <div class="placeholder">
           <button type="button" class="start" on:click|capture={() => player?.requestPlay()}>
@@ -200,8 +199,6 @@
 {:else}
   <div class="placeholder">{$i18n('Loading song...')}</div>
 {/if}
-
-<SongInfo />
 
 <style lang="scss">
   .placeholder {

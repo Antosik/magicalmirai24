@@ -1,6 +1,6 @@
 import { SongId, type Song } from './types';
 
-// SUPERHERO / めろくる
+/** SUPERHERO / めろくる */
 export const superhero: Song = {
   id: SongId.SUPERHERO,
   title: 'SUPERHERO',
@@ -15,9 +15,9 @@ export const superhero: Song = {
     lyricId: 59415,
     lyricDiffId: 13962,
   },
-};
+} as const;
 
-// いつか君と話したミライは / タケノコ少年
+/** いつか君と話したミライは / タケノコ少年 */
 export const someday: Song = {
   id: SongId.SOMEDAY,
   title: 'いつか君と話したミライは',
@@ -32,9 +32,9 @@ export const someday: Song = {
     lyricId: 59416,
     lyricDiffId: 13963,
   },
-};
+} as const;
 
-// フューチャーノーツ / shikisai
+/** フューチャーノーツ / shikisai  */
 export const future: Song = {
   id: SongId.FUTURE,
   title: 'フューチャーノーツ',
@@ -49,9 +49,9 @@ export const future: Song = {
     lyricId: 59417,
     lyricDiffId: 13964,
   },
-};
+} as const;
 
-// 未来交響曲 / ヤマギシコージ
+/** 未来交響曲 / ヤマギシコージ */
 export const symphony: Song = {
   id: SongId.SYMPHONY,
   title: '未来交響曲',
@@ -66,9 +66,9 @@ export const symphony: Song = {
     lyricId: 59418,
     lyricDiffId: 13965,
   },
-};
+} as const;
 
-// リアリティ / 歩く人
+/** リアリティ / 歩く人 */
 export const reality: Song = {
   id: SongId.REALITY,
   title: 'リアリティ',
@@ -83,9 +83,9 @@ export const reality: Song = {
     lyricId: 59419,
     lyricDiffId: 13966,
   },
-};
+} as const;
 
-// The Marks / 2ouDNS
+/** The Marks / 2ouDNS */
 export const marks: Song = {
   id: SongId.MARKS,
   title: 'The Marks',
@@ -100,8 +100,9 @@ export const marks: Song = {
     lyricId: 59420,
     lyricDiffId: 13967,
   },
-};
+} as const;
 
+/** Songs map */
 export const songs: Record<SongId, Song> = {
   [SongId.SUPERHERO]: superhero,
   [SongId.SOMEDAY]: someday,

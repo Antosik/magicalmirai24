@@ -1,3 +1,5 @@
+<!-- @component Pause button component -->
+
 <script lang="ts">
   import FeatherIcon from '$lib/components/FeatherIcon.svelte';
   import { getLocale } from '$lib/contexts/locale';

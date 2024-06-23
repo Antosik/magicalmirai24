@@ -15,6 +15,7 @@
   import { getPlayerPosition } from '$lib/contexts/playerPosition';
   import { SongState, getPlayerState } from '$lib/contexts/playerState';
   import { getSettings } from '$lib/contexts/settings';
+  import SongInfo from '$lib/game/SongInfo.svelte';
   import { DEFAULT_CLOUD_ANIMATION_DURATION } from '$lib/game/constants';
   import { calculateVAColor, calculateCloudAnimationDuration } from '$lib/game/utils';
 
@@ -108,6 +109,7 @@
   <SmallCloud {animationDuration} {pause} />
   <BigCloud {animationDuration} {pause} />
   <LongCloud {animationDuration} {pause} />
+  <SongInfo />
 
   <div bind:this={errorNode} class="error"></div>
   <div bind:this={playerNode} class="player" style:--position="{$playerPosition}px"></div>

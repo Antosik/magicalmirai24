@@ -1,3 +1,5 @@
+<!-- @component General game logic (chars creation & catching) -->
+
 <script lang="ts">
   import type { Char } from './types';
   import type { IChar, IChord, PlayerEventListener } from 'textalive-app-api';
@@ -48,24 +50,28 @@
 
   const listener: PlayerEventListener = {
     onTimeUpdate(position) {
+      // If there is no lyrics - exit
       if (!player.video.firstChar) {
         return;
       }
 
+      // If song is completed - exit
       if (position === player.video.duration) {
         return;
       }
-
       if (position > player.video.duration + animationDuration) {
         dispatch('ended');
         return;
       }
 
-      const amplitude = player.getVocalAmplitude(position);
+      // Calculate current chord to apply char color
       const currentChord = player.findChord(position);
-
       activeColor = calculateActiveColor(activeColor, chord, currentChord);
       chord = currentChord;
+
+      // Calculate current amplitude to apply char Y position
+      const amplitude = player.getVocalAmplitude(position);
+      const positionY = calculateCharYPosition(amplitude, maxAmplitude);
 
       let current = c || player.video.firstChar;
       while (current && current.startTime < position + 500) {
@@ -73,7 +79,7 @@
           createChar({
             id: `${position}.${current.text}`,
             amplitude,
-            positionY: calculateCharYPosition(amplitude, maxAmplitude),
+            positionY,
             color: activeColor,
             text: current.text,
             state: CharState.IN_PROGRESS,
@@ -86,6 +92,7 @@
   };
   player.addListener(listener);
 
+  /** Creates chars in database */
   function createChar(char: Char) {
     chars.update(($chars) => {
       $chars.set(char.id, char);
@@ -93,6 +100,7 @@
     });
   }
 
+  /** Updates chars status in database */
   function setCharState(charId: Char['id'], state: Char['state']) {
     chars.update(($chars) => {
       const char = $chars.get(charId);
@@ -103,6 +111,7 @@
     });
   }
 
+  // This code block detects an intersection between player & char blocks
   let frame: number;
   frame = requestAnimationFrame(checkIntersections);
   function checkIntersections() {

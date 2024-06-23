@@ -1,3 +1,5 @@
+<!-- @component Credits page -->
+
 <script lang="ts">
   import Slider from '$lib/components/Slider.svelte';
   import { getLocale } from '$lib/contexts/locale';

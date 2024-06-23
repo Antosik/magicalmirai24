@@ -108,15 +108,29 @@ export function calculateCloudAnimationDuration(beats: IBeat[] = []): number | u
   return Math.max(MIN_CLOUD_ANIMATION_DURATION, Math.min(duration, MAX_CLOUD_ANIMATION_DURATION));
 }
 
-/** Calculates the step size (in px) for control with keyboard */
+/**
+ * Calculates the step size (in px) for control with keyboard
+ * @param windowHeight Height of the browser window
+ * @returns Step size on keyboard control
+ */
 export function calculateKeyboardPositioningStep(windowHeight: number): number {
   return windowHeight * (KEYBOARD_POSITION_STEP / 100);
 }
 
+/**
+ * Calculates the coeffient for arousal
+ * @param arousal Arousal value
+ * @returns Coeffient for arousal
+ */
 function calculateArousalCoefficient(arousal: ValenceArousalValue['a']): number {
   return Math.floor(Math.abs(arousal * AROUSAL_COLOR_MULTIPLIER) * 1000) / 1000;
 }
 
+/**
+ * Calculates the color based on valence & arousal values
+ * @param object Object with arousal and valence values
+ * @returns Color in rgb format
+ */
 export function calculateVAColor({ a: arousal, v: valence }: ValenceArousalValue): string {
   const arousalCoefficient = calculateArousalCoefficient(arousal);
 

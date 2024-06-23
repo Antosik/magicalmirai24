@@ -1,3 +1,5 @@
+<!-- @component Volume range component -->
+
 <script lang="ts">
   export let value: number = 100;
 

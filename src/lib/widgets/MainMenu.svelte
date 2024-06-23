@@ -1,3 +1,5 @@
+<!-- @component Main menu page -->
+
 <script lang="ts">
   import { songs } from '$lib/songs';
 
@@ -15,9 +17,10 @@
   const { i18n } = getLocale();
 
   const songItems = Object.values(songs);
-  const handleSongChange = (e: CustomEvent<Song>) => {
+
+  function handleSongChange(e: CustomEvent<Song>) {
     $song = e.detail.id;
-  };
+  }
 </script>
 
 <section>

@@ -1,3 +1,5 @@
+<!-- @component Song info block on game page -->
+
 <script lang="ts">
   import { getPlayerState } from '$lib/contexts/playerState';
 
@@ -14,8 +16,8 @@
   div {
     position: absolute;
     z-index: $z-index-menu;
-    right: calc(var(--frame-size) + grid(1));
-    bottom: calc(var(--frame-size) + grid(1));
+    right: grid(4);
+    bottom: grid(4);
     padding: grid(2) grid(2) grid(2) grid(6);
     background-color: var(--moon-color);
     font-size: 12px;

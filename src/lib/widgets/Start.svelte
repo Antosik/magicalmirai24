@@ -1,3 +1,5 @@
+<!-- @component Start page -->
+
 <script lang="ts">
   import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
@@ -5,9 +7,9 @@
   const page = getPage();
   const { locale } = getLocale();
 
-  const openMainPage = () => {
+  function openMainPage() {
     $page = Page.MAIN_PAGE;
-  };
+  }
 </script>
 
 <svelte:document on:click={openMainPage} on:keydown={openMainPage} />
