@@ -9,7 +9,6 @@
   <LongCloudPart />
   <LongCloudPart />
   <LongCloudPart />
-  <LongCloudPart />
 </div>
 
 <style lang="scss">
@@ -44,11 +43,11 @@
 
   @keyframes movingcloud {
     0% {
-      transform: translateX(-25%);
+      transform: translateX(-33%);
     }
 
     100% {
-      transform: translateX(-75%);
+      transform: translateX(-66%);
     }
   }
 </style>
