@@ -22,10 +22,12 @@
     <div class="results">
       <h2 class="visually-hidden">{$i18n('Results')}</h2>
 
-      <div class="results__percentage">
-        {Math.floor(($catched.length / ($chars.size ?? 1)) * 100)}%
-      </div>
-      <div class="results__count">{$catched.length} / {$chars.size}</div>
+      {#if $chars.size}
+        <div class="results__percentage">
+          {Math.floor(($catched.length / ($chars.size ?? 1)) * 100)}%
+        </div>
+        <div class="results__count">{$catched.length} / {$chars.size}</div>
+      {/if}
 
       <ul>
         <li>
