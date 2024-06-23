@@ -3,10 +3,13 @@
   "short_name": "Magical Mirai 2024",
   "start_url": "/?source=pwa",
   "display": "standalone",
-  "orientation": "landscape",
+  "orientation": "landscape-primary",
   "lang": "en-US",
   "background_color": "#020111",
   "scope": "/",
   "theme_color": "#020111",
-  "icons": []
+  "icons": [
+    { "src": "./icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "./icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
 }
