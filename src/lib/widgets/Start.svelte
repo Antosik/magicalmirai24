@@ -40,6 +40,7 @@
     color: var(--text-color);
     gap: grid(4);
     text-align: center;
+    padding: grid(10);
   }
 
   h1 {

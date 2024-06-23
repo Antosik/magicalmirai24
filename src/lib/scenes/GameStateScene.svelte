@@ -47,6 +47,7 @@
     @include absolute_full;
 
     background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
+    overflow: hidden;
   }
 
   .paper-background {
@@ -64,9 +65,9 @@
     top: 50%;
     left: 50%;
     width: fit-content;
-    min-width: 40%;
-    max-width: calc(100% + grid(4));
-    padding: grid(10);
+    min-width: 40vw;
+    max-width: calc(100vw + grid(4));
+    max-height: calc(100vh + grid(4));
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translate(-50%, -50%);
 

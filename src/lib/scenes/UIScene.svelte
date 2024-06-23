@@ -116,9 +116,8 @@
     top: 50%;
     left: 50%;
     width: fit-content;
-    max-width: 100%;
-    max-height: 100%;
-    padding: grid(10);
+    max-width: calc(100vw + grid(4));
+    max-height: calc(100vh + grid(4));
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translate(-50%, -50%);
     transition:
@@ -127,17 +126,14 @@
       left 1s;
     will-change: width, top, left, transform;
 
-    @include breakpoint(sm) {
-      max-width: calc(100% - grid(4));
-    }
-
     &--start {
-      top: 70%;
-      left: 50%;
+      @media (min-height: 768px) {
+        top: 70%;
+      }
     }
 
     &--main_page {
-      @include breakpoint(md) {
+      @include breakpoint(lg) {
         left: 25%;
       }
     }
@@ -159,7 +155,6 @@
     @include flex_center;
     @include absolute_full;
 
-    position: absolute;
     z-index: -1;
 
     &.transitionLive {

@@ -54,10 +54,19 @@
     @include flex_center;
 
     flex-direction: column;
-    padding: grid(8);
     aspect-ratio: 1;
-    gap: grid(4);
+    padding: grid(4);
+    gap: grid(2);
     text-align: center;
+
+    @include breakpoint(lg) {
+      gap: grid(4);
+      padding: grid(8);
+    }
+
+    @include breakpoint(xxl) {
+      padding: grid(16);
+    }
   }
 
   h1 {

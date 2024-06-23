@@ -44,11 +44,11 @@
 
 <svelte:document on:keydown={handleKeyDown} />
 
-<button type="button" on:click={openMainMenu}>
-  {$i18n('Back to Main menu')}
-</button>
-
 <section>
+  <button type="button" on:click={openMainMenu}>
+    {$i18n('Back to Main menu')}
+  </button>
+
   <h1>{$i18n('Help')}</h1>
 
   <div class="content">

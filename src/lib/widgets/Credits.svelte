@@ -24,12 +24,13 @@
 
 <svelte:document on:keydown={handleKeyDown} />
 
-<button type="button" on:click={openMainMenu}>
-  {$i18n('Back to Main menu')}
-</button>
-
 <section>
+  <button type="button" on:click={openMainMenu}>
+    {$i18n('Back to Main menu')}
+  </button>
+
   <h1>{$i18n('Credits')}</h1>
+
   <div class="content">
     <img src="../images/credits.png" alt="" />
     <Slider>
@@ -54,7 +55,7 @@
     gap: grid(2);
     text-align: center;
 
-    @include breakpoint(md) {
+    @include breakpoint(lg) {
       padding: grid(8);
       gap: grid(4);
     }
@@ -127,7 +128,7 @@
     scroll-snap-align: center;
     scroll-snap-stop: always;
 
-    @include breakpoint(md) {
+    @include breakpoint(lg) {
       justify-content: center;
     }
   }
@@ -137,7 +138,7 @@
     min-width: 100px;
     max-width: 30%;
 
-    @include breakpoint(md) {
+    @include breakpoint(lg) {
       display: block;
     }
   }
