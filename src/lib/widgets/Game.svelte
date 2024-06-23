@@ -84,6 +84,7 @@
     clearTimeout(timeout);
     chars.set(new Map());
     restart++;
+    $songState = SongState.STOPPED;
   }
 
   function restartGame() {

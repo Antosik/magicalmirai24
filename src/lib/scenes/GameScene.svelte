@@ -62,6 +62,9 @@
   player.addListener(listener);
 
   $: pause = $songState === SongState.PAUSED;
+  $: if ($songState === SongState.STOPPED) {
+    songProgress = 0;
+  }
 
   const handleMouseMove = (e: MouseEvent & { currentTarget: HTMLElement }) => {
     // Skip controls in automode
