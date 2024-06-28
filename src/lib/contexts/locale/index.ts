@@ -39,3 +39,4 @@ export function createLocaleStore(): LocaleContext {
 }
 
 export const getLocale = () => getContext<LocaleContext>(LOCALE_CONTEXT_KEY);
+export type { LocaleDictionaryKeys };

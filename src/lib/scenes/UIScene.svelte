@@ -13,7 +13,14 @@
   const page = getPage();
 
   let animationDuration = DEFAULT_CLOUD_ANIMATION_DURATION;
-  let transitionLive = false;
+
+  let contentWrapper: HTMLDivElement;
+
+  page.subscribe(() => {
+    contentWrapper?.classList.add('transitionLive');
+    const timer = setTimeout(() => contentWrapper?.classList.remove('transitionLive'), 1e3);
+    return () => timer && clearTimeout(timer);
+  });
 
   $: smallPosition = getSmallCloudPosition($page);
   $: bigPosition = getBigCloudPosition($page);
@@ -45,13 +52,13 @@
 
   function handleTransitionStart(e: TransitionEvent & { currentTarget: HTMLDivElement }) {
     if (e.target === e.currentTarget) {
-      transitionLive = true;
+      contentWrapper?.classList.add('transitionLive');
     }
   }
 
   function handleTransitionEnd(e: TransitionEvent & { currentTarget: HTMLDivElement }) {
     if (e.target === e.currentTarget) {
-      transitionLive = false;
+      contentWrapper?.classList.remove('transitionLive');
     }
   }
 </script>
@@ -65,8 +72,6 @@
     easing: linear,
   }}
 >
-  <div class="paper-background" />
-
   <Stars {animationDuration} />
 
   <div
@@ -76,11 +81,11 @@
     on:transitioncancel={handleTransitionEnd}
     on:transitionend={handleTransitionEnd}
   >
-    <div class="moon" class:transitionLive>
+    <div class="moon">
       <img class="blend img-moon" src="./images/moon.svg" alt="" />
       <img class="blend img-paper" src="./images/texture.png" alt="" />
     </div>
-    <div class="content-wrapper" class:transitionLive>
+    <div class="content-wrapper" bind:this={contentWrapper}>
       <slot />
     </div>
   </div>
@@ -101,15 +106,6 @@
 </main>
 
 <style lang="scss">
-  .paper-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('../images/texture02.png');
-    background-repeat: repeat;
-    filter: opacity(25%);
-  }
-
   .content {
     position: absolute;
     z-index: $z-index-scene;
@@ -157,10 +153,6 @@
 
     z-index: -1;
 
-    &.transitionLive {
-      z-index: $z-index-game;
-    }
-
     .img-moon {
       overflow: visible;
       height: 100%;
@@ -181,10 +173,8 @@
   }
 
   .content-wrapper {
-    display: contents;
-
     &.transitionLive {
-      visibility: hidden;
+      opacity: 0;
     }
   }
 

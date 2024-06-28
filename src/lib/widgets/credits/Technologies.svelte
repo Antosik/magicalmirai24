@@ -1,10 +1,13 @@
 <!-- @component Technologies tab on Credits page -->
 
 <script lang="ts">
+  import { getLocale } from '$lib/contexts/locale';
   import { packages } from '$lib/utils/packages';
+
+  const { i18n } = getLocale();
 </script>
 
-<h2>Technologies</h2>
+<h2>{$i18n('Technologies')}</h2>
 <ul>
   {#each packages as item (item.name)}
     <li>

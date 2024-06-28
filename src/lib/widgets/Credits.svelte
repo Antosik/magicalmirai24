@@ -26,7 +26,7 @@
 
 <section>
   <button type="button" on:click={openMainMenu}>
-    {$i18n('Back to Main menu')}
+    {$i18n('Main menu')}
   </button>
 
   <h1>{$i18n('Credits')}</h1>

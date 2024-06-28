@@ -1,10 +1,16 @@
 <!-- @component Team tab on Credits page -->
 
-<h2>Team</h2>
+<script lang="ts">
+  import { getLocale } from '$lib/contexts/locale';
+
+  const { i18n } = getLocale();
+</script>
+
+<h2>{$i18n('Team')}</h2>
 <ul>
-  <li><span>Anton Grigorev</span> - Programming</li>
-  <li><span>Valentina Klepnikova</span> - Design</li>
-  <li><span>???</span> - Translation</li>
+  <li><span>Anton Grigorev</span> - {$i18n('Programming')}</li>
+  <li><span>Valentina Klepnikova</span> - {$i18n('Design')}</li>
+  <li><span>???</span> - {$i18n('Translation')}</li>
 </ul>
 
 <style lang="scss">

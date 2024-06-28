@@ -24,7 +24,7 @@
 </script>
 
 <section>
-  <h1>{$i18n('Choose Song')}</h1>
+  <h1>{$i18n('Choose song')}</h1>
 
   <Slider items={songItems} let:item={songItem} on:change={handleSongChange}>
     <p>{songItem.artist}<br />{songItem.title}</p>

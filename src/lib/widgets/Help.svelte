@@ -8,26 +8,26 @@
   const page = getPage();
   const { i18n } = getLocale();
 
-  const helpItems = [
+  $: helpItems = [
     {
-      image: 'miku',
-      text: 'Navigate Miku-san with mouse move or keys',
+      image: 'navigate',
+      text: $i18n('Navigate Miku-san with mouse or arrow keys'),
     },
     {
-      image: 'miku',
-      text: 'Navigate Miku-san with mouse move or keys',
+      image: 'area',
+      text: $i18n('Miku-san effective area'),
     },
     {
-      image: 'miku',
-      text: 'Navigate Miku-san with mouse move or keys',
+      image: 'lyrics',
+      text: $i18n('Help Miku-san to collect all the lyrics'),
     },
     {
-      image: 'miku',
-      text: 'Navigate Miku-san with mouse move or keys',
+      image: 'moon',
+      text: $i18n('Position of the moon reflects the progress of the song'),
     },
     {
-      image: 'miku',
-      text: 'Navigate Miku-san with mouse move or keys',
+      image: 'results',
+      text: $i18n('Behold your result and have fun together with Miku-san!'),
     },
   ];
 
@@ -46,16 +46,16 @@
 
 <section>
   <button type="button" on:click={openMainMenu}>
-    {$i18n('Back to Main menu')}
+    {$i18n('Main menu')}
   </button>
 
   <h1>{$i18n('Help')}</h1>
 
   <div class="content">
-    <Slider items={helpItems}>
+    <Slider items={helpItems} let:item>
       <article>
-        <img src="../images/miku.png" alt="" />
-        <p>Navigate Miku-san with mouse move or keys</p>
+        <img src="../images/help/{item.image}.png" alt="" />
+        <p>{item.text}</p>
       </article>
     </Slider>
   </div>
@@ -140,5 +140,21 @@
   img {
     min-width: 100px;
     max-width: 50%;
+  }
+
+  p {
+    font-size: 16px;
+
+    @include breakpoint(md) {
+      font-size: 20px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 24px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 32px;
+    }
   }
 </style>

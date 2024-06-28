@@ -101,8 +101,6 @@
     easing: linear,
   }}
 >
-  <div class="paper-background" />
-
   <Stars {animationDuration} {pause} --stars-color={$vaColor} />
 
   {#if songProgress}
@@ -133,15 +131,6 @@
     @include breakpoint(xl) {
       --long-cloud-height: 20dvh;
     }
-  }
-
-  .paper-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('../images/texture02.png');
-    background-repeat: repeat;
-    filter: opacity(25%);
   }
 
   .error,

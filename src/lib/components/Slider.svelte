@@ -3,10 +3,14 @@
 <script lang="ts" generics="T">
   import { createEventDispatcher, onMount } from 'svelte';
 
+  import { getLocale } from '$lib/contexts/locale';
+
   /** Slider items */
   export let items: T[] = [];
   /** Is slider looped */
   export let loop = false;
+
+  const { i18n } = getLocale();
 
   let slider: HTMLUListElement;
   let activeElement: HTMLLIElement;
@@ -67,7 +71,13 @@
 
 <div>
   <button type="button" on:click={toPrevious} disabled={!previousElement}>
-    <img src="../images/arrow.svg" class="arrow arrow--left" alt="" width="24" height="24" />
+    <img
+      src="../images/arrow.svg"
+      class="arrow arrow--left"
+      alt={$i18n('Previous')}
+      width="24"
+      height="24"
+    />
   </button>
   <ul bind:this={slider}>
     {#each items as item, index}
@@ -79,7 +89,13 @@
     {/each}
   </ul>
   <button type="button" on:click={toNext} disabled={!nextElement}>
-    <img src="../images/arrow.svg" class="arrow arrow--right" alt="" width="24" height="24" />
+    <img
+      src="../images/arrow.svg"
+      class="arrow arrow--right"
+      alt={$i18n('Next')}
+      width="24"
+      height="24"
+    />
   </button>
 </div>
 
@@ -119,10 +135,7 @@
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    scrollbar-width: none;
   }
 
   li {

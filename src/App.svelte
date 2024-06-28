@@ -16,6 +16,8 @@
   const { manageability, readiness } = getPlayerState();
 </script>
 
+<div class="paper-background" />
+
 {#if $manageability === Manageability.NONE || $page === Page.GAME}
   <GameScene let:errorNode let:playerNode>
     <Game {errorNode} {playerNode} />
@@ -35,3 +37,14 @@
     {/if}
   </UIScene>
 {/if}
+
+<style lang="scss">
+  .paper-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/texture02.png');
+    background-repeat: repeat;
+    filter: opacity(25%);
+  }
+</style>

@@ -1,14 +1,18 @@
 <!-- @component Volume range component -->
 
 <script lang="ts">
+  import { getLocale } from '$lib/contexts/locale';
+
   export let value: number = 100;
+
+  const { i18n } = getLocale();
 
   function handleButtonClick() {
     value = value > 0 ? 0 : 100;
   }
 </script>
 
-<div>
+<div title={$i18n('Volume')}>
   <button type="button" on:click={handleButtonClick}>
     {value}%
   </button>
