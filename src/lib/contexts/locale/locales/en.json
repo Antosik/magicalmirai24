@@ -1,19 +1,40 @@
 {
   "App loading...": "App loading...",
   "Loading song...": "Loading song...",
+
+  "Miku-san Kamishibai": "Miku-san Kamishibai",
+
+  "Choose song": "Choose song",
+  "Play": "Play",
+  "Help": "Help",
+  "Credits": "Credits",
+
+  "Main menu": "Main menu",
+
+  "Click me": "Click me",
+
   "Pause": "Pause",
-  "total": "total",
-  "ok": "ok",
-  "miss": "miss",
   "Resume": "Resume",
   "Retry": "Retry",
   "Back": "Back",
+
+  "Results": "Results",
+
+  "Navigate Miku-san with mouse or arrow keys": "Navigate Miku-san with mouse or arrow keys",
+  "Miku-san effective area": "Miku-san effective area",
+  "Help Miku-san to collect all the lyrics": "Help Miku-san to collect all the lyrics",
+  "Position of the moon reflects the progress of the song": "Position of the moon reflects the progress of the song",
+  "Behold your result and have fun together with Miku-san!": "Behold your result and have fun together with Miku-san!",
+
+  "Team": "Team",
+  "Programming": "Programming",
+  "Design": "Design",
+  "Translation": "Translation",
+  "Technologies": "Technologies",
+
+  "Volume": "Volume",
   "Minimize": "Minimize",
   "Maximize": "Maximize",
-  "Results": "Results",
-  "Back to Main menu": "Back to Main menu",
-  "Credits": "Credits",
-  "Help": "Help",
-  "Choose Song": "Choose Song",
-  "Play": "Play"
+  "Previous": "Previous",
+  "Next": "Next"
 }

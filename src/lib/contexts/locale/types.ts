@@ -21,19 +21,40 @@ export type LocaleDictionaryKeys = keyof LocaleDictionary;
 export interface LocaleDictionary {
   'App loading...': string;
   'Loading song...': string;
+
+  'Miku-san Kamishibai': string;
+
+  'Choose song': string;
+  Play: string;
+  Help: string;
+  Credits: string;
+
+  'Main menu': string;
+
+  'Click me': string;
+
   Pause: string;
-  total: string;
-  ok: string;
-  miss: string;
   Resume: string;
   Retry: string;
   Back: string;
+
+  Results: string;
+
+  'Navigate Miku-san with mouse or arrow keys': string;
+  'Miku-san effective area': string;
+  'Help Miku-san to collect all the lyrics': string;
+  'Position of the moon reflects the progress of the song': string;
+  'Behold your result and have fun together with Miku-san!': string;
+
+  Team: string;
+  Programming: string;
+  Design: string;
+  Translation: string;
+  Technologies: string;
+
+  Volume: string;
   Minimize: string;
   Maximize: string;
-  Results: string;
-  'Back to Main menu': string;
-  Credits: string;
-  Help: string;
-  'Choose Song': string;
-  Play: string;
+  Previous: string;
+  Next: string;
 }

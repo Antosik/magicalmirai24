@@ -171,7 +171,7 @@
       {:else if readyToStart}
         <div class="placeholder">
           <button type="button" class="start" on:click|capture={() => player?.requestPlay()}>
-            Click start
+            {$i18n('Click me')}
           </button>
         </div>
       {/if}
