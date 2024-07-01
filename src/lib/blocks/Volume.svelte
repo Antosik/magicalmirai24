@@ -23,6 +23,7 @@
   div {
     @include flex_center;
 
+    width: 100%;
     flex-direction: row;
     padding: grid(1);
     gap: grid(1);
