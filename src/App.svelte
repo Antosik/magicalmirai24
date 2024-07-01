@@ -18,7 +18,10 @@
 </script>
 
 <div class="paper-background" />
-<BackgroundMusic />
+
+{#if $page !== Page.START}
+  <BackgroundMusic />
+{/if}
 
 {#if $manageability === Manageability.NONE || $page === Page.GAME}
   <GameScene let:errorNode let:playerNode>
