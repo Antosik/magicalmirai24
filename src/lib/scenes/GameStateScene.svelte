@@ -21,6 +21,8 @@
     easing: linear,
   }}
 >
+  <div class="paper-background" />
+
   <Stars {animationDuration} pause />
 
   <div class="content">
@@ -41,6 +43,15 @@
 </section>
 
 <style lang="scss">
+  .paper-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/texture02.png');
+    background-repeat: repeat;
+    filter: opacity(25%);
+  }
+
   section {
     @include absolute_full;
 
@@ -54,7 +65,6 @@
     top: 50%;
     left: 50%;
     width: fit-content;
-    min-width: 40dvw;
     max-width: calc(100dvw + grid(4));
     max-height: calc(100dvh + grid(4));
     filter: drop-shadow(0 0 50px var(--moon-shine-color));
@@ -77,18 +87,17 @@
     @include flex_center;
     @include absolute_full;
 
-    position: absolute;
     z-index: -1;
 
     .img-moon {
       overflow: visible;
-      width: 100%;
+      height: 100%;
       aspect-ratio: 1 / 1;
     }
 
     .img-paper {
       position: absolute;
-      width: 100%;
+      height: 100%;
       border-radius: 50%;
       aspect-ratio: 1 / 1;
       object-fit: fill;
