@@ -54,7 +54,11 @@
   <div class="content">
     <Slider items={helpItems} let:item>
       <article>
-        <img src="../images/help/{item.image}.png" alt="" />
+        <picture>
+          <source srcset="./images/help/{item.image}.avif" type="image/avif" />
+          <source srcset="./images/help/{item.image}.webp" type="image/webp" />
+          <img src="./images/help/{item.image}.png" alt="" />
+        </picture>
         <p>{item.text}</p>
       </article>
     </Slider>
@@ -137,9 +141,14 @@
     gap: grid(2);
   }
 
-  img {
+  picture {
     min-width: 100px;
     max-width: 50%;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
   }
 
   p {

@@ -6,10 +6,10 @@
 <div class="cloud cloud--long-part"></div>
 
 <style lang="scss">
-  div {
+  .cloud--long-part {
     height: 100%;
     aspect-ratio: 4795 / 220;
-    background-image: url('../images/texture02.png');
+    background-image: url('../images/paper_texture.png');
     background-position: left center;
     background-repeat: repeat-x;
     background-size: contain;
@@ -29,5 +29,13 @@
       content: '';
       mix-blend-mode: overlay;
     }
+  }
+
+  :global(.webp .cloud--long-part) {
+    background-image: url('../images/paper_texture.webp');
+  }
+
+  :global(.avif .cloud--long-part) {
+    background-image: url('../images/paper_texture.avif');
   }
 </style>

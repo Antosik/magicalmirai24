@@ -28,7 +28,11 @@
   <div class="content">
     <div class="moon">
       <img class="blend img-moon" src="./images/moon.svg" alt="" />
-      <img class="blend img-paper" src="./images/texture.png" alt="" />
+      <picture class="img-paper">
+        <source srcset="./images/moon_texture.avif" type="image/avif" />
+        <source srcset="./images/moon_texture.webp" type="image/webp" />
+        <img class="blend img-paper" src="./images/moon_texture.png" alt="" />
+      </picture>
     </div>
     <slot />
   </div>
@@ -43,15 +47,6 @@
 </section>
 
 <style lang="scss">
-  .paper-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('../images/texture02.png');
-    background-repeat: repeat;
-    filter: opacity(25%);
-  }
-
   section {
     @include absolute_full;
 

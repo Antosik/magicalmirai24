@@ -32,7 +32,11 @@
   <h1>{$i18n('Credits')}</h1>
 
   <div class="content">
-    <img src="../images/credits.png" alt="" />
+    <picture>
+      <source srcset="./images/credits.avif" type="image/avif" />
+      <source srcset="./images/credits.webp" type="image/webp" />
+      <img src="./images/credits.png" alt="" />
+    </picture>
     <Slider>
       <svelte:fragment slot="raw">
         <li>
@@ -130,7 +134,7 @@
     }
   }
 
-  img {
+  picture {
     display: none;
     min-width: 100px;
     max-width: 30%;
@@ -138,5 +142,10 @@
     @include breakpoint(lg) {
       display: block;
     }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
   }
 </style>
