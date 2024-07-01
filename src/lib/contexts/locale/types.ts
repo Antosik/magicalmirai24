@@ -51,6 +51,7 @@ export interface LocaleDictionary {
   Design: string;
   Translation: string;
   Technologies: string;
+  'Background music': string;
 
   Volume: string;
   Minimize: string;

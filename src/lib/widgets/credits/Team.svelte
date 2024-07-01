@@ -11,6 +11,11 @@
   <li><span>Anton Grigorev</span> - {$i18n('Programming')}</li>
   <li><span>Valentina Klepnikova</span> - {$i18n('Design')}</li>
   <li><span>???</span> - {$i18n('Translation')}</li>
+  <li>
+    <span><a href="https://www.youtube.com/@wintergatan">Wintergatan</a></span> - {$i18n(
+      'Background music',
+    )}
+  </li>
 </ul>
 
 <style lang="scss">
