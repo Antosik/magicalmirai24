@@ -83,7 +83,11 @@
   >
     <div class="moon">
       <img class="blend img-moon" src="./images/moon.svg" alt="" />
-      <img class="blend img-paper" src="./images/texture.png" alt="" />
+      <picture class="img-paper">
+        <source srcset="./images/moon_texture.avif" type="image/avif" />
+        <source srcset="./images/moon_texture.webp" type="image/webp" />
+        <img class="blend img-paper" src="./images/moon_texture.png" alt="" />
+      </picture>
     </div>
     <div class="content-wrapper" bind:this={contentWrapper}>
       <slot />

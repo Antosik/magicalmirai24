@@ -190,6 +190,14 @@
     }
   }
 
+  :global(.webp .player::before) {
+    background-image: url('../images/miku.webp');
+  }
+
+  :global(.avif .player::before) {
+    background-image: url('../images/miku.avif');
+  }
+
   .moon {
     --base-height: 60px;
 

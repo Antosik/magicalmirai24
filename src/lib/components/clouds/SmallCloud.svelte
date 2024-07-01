@@ -73,7 +73,7 @@
     &__image {
       width: 100%;
       height: 100%;
-      background-image: url('../images/texture02.png');
+      background-image: url('../images/paper_texture.png');
       background-position: left center;
       background-repeat: repeat-x;
       background-size: contain;
@@ -95,6 +95,14 @@
         mix-blend-mode: overlay;
       }
     }
+  }
+
+  :global(.webp .cloud--small__image) {
+    background-image: url('../images/paper_texture.webp');
+  }
+
+  :global(.avif .cloud--small__image) {
+    background-image: url('../images/paper_texture.avif');
   }
 
   @keyframes flyingcloud {
