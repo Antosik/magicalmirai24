@@ -21,6 +21,8 @@
     easing: linear,
   }}
 >
+  <div class="paper-background" />
+
   <Stars {animationDuration} pause />
 
   <div class="content">
@@ -41,6 +43,15 @@
 </section>
 
 <style lang="scss">
+  .paper-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/texture02.png');
+    background-repeat: repeat;
+    filter: opacity(25%);
+  }
+
   section {
     @include absolute_full;
 
