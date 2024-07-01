@@ -48,8 +48,8 @@
     max-height: calc(100dvh + grid(4));
     flex-direction: column;
     padding: grid(10);
-    gap: grid(5);
     aspect-ratio: 1;
+    gap: grid(5);
 
     @include breakpoint(xxl) {
       padding: grid(16);
