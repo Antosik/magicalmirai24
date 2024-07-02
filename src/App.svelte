@@ -1,4 +1,5 @@
 <script lang="ts">
+  import BackgroundMusic from '$lib/components/BackgroundMusic.svelte';
   import { getLocale } from '$lib/contexts/locale';
   import { Page, getPage } from '$lib/contexts/page';
   import { Manageability, getPlayerState } from '$lib/contexts/playerState';
@@ -17,6 +18,10 @@
 </script>
 
 <div class="paper-background" />
+
+{#if $page !== Page.START}
+  <BackgroundMusic />
+{/if}
 
 {#if $manageability === Manageability.NONE || $page === Page.GAME}
   <GameScene let:errorNode let:playerNode>
