@@ -43,5 +43,6 @@
 </script>
 
 <audio class="visually-hidden" loop bind:this={audioPlayer}>
+  <source src="./audio/background_music.ogg" type="audio/ogg; codecs=vorbis" />
   <source src="./audio/background_music.mp3" type="audio/mpeg" />
 </audio>
