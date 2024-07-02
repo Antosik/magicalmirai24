@@ -12,9 +12,16 @@
   <li><span>Valentina Klepnikova</span> - {$i18n('Design')}</li>
   <li><span>???</span> - {$i18n('Translation')}</li>
   <li>
-    <span><a href="https://www.youtube.com/@wintergatan">Wintergatan</a></span> - {$i18n(
-      'Background music',
-    )}
+    <span>
+      <a
+        href="https://www.youtube.com/@wintergatan"
+        target="_blank"
+        rel="nofollow norefferer noopener"
+      >
+        Wintergatan
+      </a>
+    </span>
+    - {$i18n('Background music')}
   </li>
 </ul>
 
