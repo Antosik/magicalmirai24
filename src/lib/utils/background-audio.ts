@@ -21,11 +21,15 @@ async function isAudioVolumeChangeAvailable() {
   return Promise.race([promise, timeoutPromise]);
 }
 
+type VolumeControl = (volume: number) => void;
+
 /**
  * Returns the function that updates the background audio volume level.
  * @param audioElement HTML Audio Element
  */
-export async function createBackgroundAudioVolumeControl(audioElement: HTMLAudioElement) {
+export async function createBackgroundAudioVolumeControl(
+  audioElement: HTMLAudioElement,
+): Promise<VolumeControl> {
   const isVolumeChangeAvailable = await isAudioVolumeChangeAvailable();
 
   // If there is native volume change available - use it
@@ -49,4 +53,46 @@ export async function createBackgroundAudioVolumeControl(audioElement: HTMLAudio
   gainNode.connect(audioContext.destination);
 
   return updateVolume;
+}
+
+type VolumeSmoothChangeParameters = {
+  /** Start volume */
+  startVolume: number;
+  /** End volume */
+  endVolume: number;
+  /** Interval to update from start volume to end volume (in ms) */
+  interval?: number;
+  /** Steps count */
+  steps?: number;
+};
+
+/**
+ * Smoothly updates volume
+ * Used to get the music fade-in and fade-out effect
+ * @param volumeControl Function to update volume
+ * @param args Options
+ */
+export async function changeVolumeSmoothly(
+  volumeControl: VolumeControl,
+  { startVolume, endVolume, steps = 10, interval = 500 }: VolumeSmoothChangeParameters,
+) {
+  const stepVolume = ((endVolume - startVolume) / interval) * steps;
+
+  return new Promise<void>((res) => {
+    let currentVolume = startVolume;
+
+    const timer = setInterval(function () {
+      if (
+        (endVolume > startVolume && currentVolume >= endVolume) ||
+        (endVolume < startVolume && currentVolume <= endVolume)
+      ) {
+        clearInterval(timer);
+        res();
+        return;
+      }
+
+      volumeControl(currentVolume);
+      currentVolume += stepVolume;
+    }, interval / steps);
+  });
 }

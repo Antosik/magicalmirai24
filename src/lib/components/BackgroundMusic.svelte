@@ -3,7 +3,10 @@
 
   import { getPage, Page } from '$lib/contexts/page';
   import { getSettings } from '$lib/contexts/settings';
-  import { createBackgroundAudioVolumeControl } from '$lib/utils/background-audio';
+  import {
+    changeVolumeSmoothly,
+    createBackgroundAudioVolumeControl,
+  } from '$lib/utils/background-audio';
 
   let audioPlayer: HTMLAudioElement;
 
@@ -21,19 +24,30 @@
     });
 
     // Stop when moving to game page and resume when navigating to other
-    page.subscribe(($page) => {
+    page.subscribe(async ($page) => {
+      const backgroundVolume = ($settings.volume / 100) * VOLUME_COEFFICIENT;
+
       switch ($page) {
         case Page.MAIN_PAGE:
         case Page.HELP:
         case Page.CREDITS:
           if (audioPlayer.paused) {
-            setVolume(($settings.volume / 100) * VOLUME_COEFFICIENT);
+            setVolume(0);
             audioPlayer.play();
+            await changeVolumeSmoothly(setVolume, {
+              startVolume: 0,
+              endVolume: backgroundVolume,
+            });
           }
           return;
 
         case Page.GAME:
           if (!audioPlayer.paused) {
+            await changeVolumeSmoothly(setVolume, {
+              startVolume: backgroundVolume,
+              endVolume: 0,
+            });
+            setVolume(0);
             audioPlayer.pause();
           }
           return;
