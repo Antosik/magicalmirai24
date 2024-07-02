@@ -101,7 +101,7 @@
     easing: linear,
   }}
 >
-  <Stars {animationDuration} {pause} --stars-color={$vaColor} />
+  <Stars {animationDuration} pause --stars-color={$vaColor} />
 
   {#if songProgress}
     <div transition:fade class="moon" style:--progress="{songProgress}%"></div>

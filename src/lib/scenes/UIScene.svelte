@@ -72,7 +72,7 @@
     easing: linear,
   }}
 >
-  <Stars {animationDuration} />
+  <Stars {animationDuration} pause />
 
   <div
     class="content content--{$page.toLowerCase()}"
