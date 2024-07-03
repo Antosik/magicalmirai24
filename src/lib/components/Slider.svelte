@@ -75,8 +75,8 @@
       src="../images/arrow.svg"
       class="arrow arrow--left"
       alt={$i18n('Previous')}
-      width="24"
-      height="24"
+      width="21"
+      height="35"
     />
   </button>
   <ul bind:this={slider}>
@@ -93,8 +93,8 @@
       src="../images/arrow.svg"
       class="arrow arrow--right"
       alt={$i18n('Next')}
-      width="24"
-      height="24"
+      width="21"
+      height="35"
     />
   </button>
 </div>
