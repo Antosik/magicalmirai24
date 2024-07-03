@@ -211,7 +211,6 @@
     background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
-    filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translateX(calc(var(--progress) * -1));
     transition: transform 1s linear;
     will-change: transform;
@@ -223,7 +222,12 @@
       right: -100dvw;
       width: 200dvw;
       height: 200dvh;
-      background: radial-gradient(rgb(219 200 97 / 8%), rgb(145 139 105 / 0%));
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgb(255, 193, 0) -100%,
+        rgba(212, 190, 0, 0.05) 35%,
+        rgba(238, 130, 238, 0) 100%
+      );
       content: '';
     }
 

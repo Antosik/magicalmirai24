@@ -10,6 +10,7 @@
   --transparent-white-color: rgb(255 255 255 / 50%);
   --less-transparent-white-color: rgb(255 255 255 / 75%);
   --frame-size: 12px;
+
   @include breakpoint(lg) {
     --frame-size: 24px;
   }
@@ -27,7 +28,7 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
-  background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
+  background-color: $color-bg;
   font-family: 'Live Savers', sans-serif;
 }
 
@@ -38,7 +39,7 @@ body {
   width: 100%;
   height: 100%;
   padding: var(--frame-size);
-  background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
+  background-color: $color-bg;
   box-shadow: inset 2px 2px 4px rgb(0 0 0 / 60%);
 
   &::before {
@@ -89,4 +90,9 @@ button {
   .webp & {
     background-image: url('../images/paper_texture.webp');
   }
+}
+
+// bg texture
+.combine {
+  mix-blend-mode: screen;
 }
