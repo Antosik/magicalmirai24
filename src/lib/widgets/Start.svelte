@@ -66,13 +66,16 @@
     @include flex_center;
 
     font-size: 14px;
+    gap: grid(2);
 
     @include breakpoint(md) {
       font-size: 20px;
+      gap: grid(3);
     }
 
     @include breakpoint(xl) {
       font-size: 24px;
+      gap: grid(4);
     }
 
     @include breakpoint(xxl) {
@@ -82,18 +85,17 @@
 
   li {
     padding: grid(1) grid(2);
+    align-self: flex-end;
   }
 
   button {
     border: 0;
-    border-bottom: 1px solid transparent;
     background: 0;
     text-transform: uppercase;
-    transition: border-bottom 200ms ease-in-out;
+    transition: transform 200ms ease-in-out;
 
-    &.active,
     &:hover {
-      border-bottom: 1px solid var(--text-color);
+      transform: scale(1.2);
     }
   }
 </style>
