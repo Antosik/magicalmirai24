@@ -9,16 +9,22 @@
   --white-color: #fff;
   --transparent-white-color: rgb(255 255 255 / 50%);
   --less-transparent-white-color: rgb(255 255 255 / 75%);
-  --frame-size: 12px;
+  --frame-size: 20px;
 
-  @include breakpoint(lg) {
-    --frame-size: 24px;
+  @include breakpoint(sm) {
+    --frame-size: 30px;
   }
-  @include breakpoint(xl) {
-    --frame-size: 32px;
-  }
-  @include breakpoint(xxxl) {
+
+  @include breakpoint(md) {
     --frame-size: 40px;
+  }
+
+  @include breakpoint(xl) {
+    --frame-size: 50px;
+  }
+
+  @include breakpoint(xxxl) {
+    --frame-size: 100px;
   }
 }
 
@@ -41,7 +47,6 @@ body {
   height: 100%;
   padding: var(--frame-size);
   background-color: $color-bg;
-  box-shadow: inset 2px 2px 4px rgb(0 0 0 / 60%);
 
   &::before {
     @include absolute_full;
@@ -54,6 +59,7 @@ body {
     pointer-events: none;
     touch-action: none;
     user-select: none;
+    box-shadow: inset 10px -10px 15px 5px rgba(0,0,0,0.75);
 
     .webp & {
       border-image: url('../images/frame.webp') 101 / var(--frame-size) round;
