@@ -47,11 +47,7 @@ export interface LocaleDictionary {
   'Behold your result and have fun together with Miku-san!': string;
 
   Team: string;
-  Programming: string;
-  Design: string;
-  Translation: string;
   Technologies: string;
-  'Background music': string;
 
   Volume: string;
   Minimize: string;
