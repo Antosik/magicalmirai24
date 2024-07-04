@@ -20,7 +20,6 @@
     opacity: 1,
     easing: linear,
   }}
-  class="combine"
 >
   <div class="paper-background combine" />
 
@@ -61,8 +60,8 @@
     top: 50%;
     left: 50%;
     width: fit-content;
-    max-width: calc(100dvw + grid(4));
-    max-height: calc(100dvh + grid(4));
+    max-width: calc(100dvw + grid(4) - var(--frame-size));
+    max-height: calc(100dvh + grid(4) - var(--frame-size));
     transform: translate(-50%, -50%);
 
     &::before {

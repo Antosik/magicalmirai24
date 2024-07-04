@@ -239,7 +239,7 @@
     content: '';
     transform: rotate(90deg);
 
-    @include breakpoint(md) {
+    @media (orientation: landscape) and (min-width: 768px) {
       display: none;
     }
   }
