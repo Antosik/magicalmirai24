@@ -225,6 +225,25 @@
     }
   }
 
+  .placeholder::after {
+    background-image: url('../images/advice.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    content: '';
+    width: 55px;
+    height: 55px;
+    display: block;
+    top: 0;
+    position: relative;
+    left: 12px;
+    animation: rotate 2s linear 2;
+    transform: rotate(90deg);
+
+    @include breakpoint(md) {
+      display: none;
+    }
+  }
+
   .buttons {
     @include flex_center;
 
@@ -238,5 +257,19 @@
     border: 0;
     background: 0;
     font-size: 1.2em;
+  }
+
+  @keyframes -global-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    50% {
+      transform: rotate(90deg);
+    }
+
+    50% {
+      transform: rotate(0deg);
+    }
   }
 </style>
