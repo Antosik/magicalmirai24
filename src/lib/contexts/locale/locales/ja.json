@@ -1,41 +1,37 @@
 {
-  "App loading...": "App loading...",
-  "Loading song...": "Loading song...",
+  "App loading...": "アップロード中",
+  "Loading song...": "曲ロード中...",
 
-  "Miku-san Kamishibai": "Miku-san Kamishibai",
+  "Miku-san Kamishibai": "ミクさんの紙芝居",
 
-  "Choose song": "Choose song",
-  "Play": "Play",
-  "Help": "Help",
-  "Credits": "Credits",
+  "Choose song": "ソングを選択",
+  "Play": "プレイ",
+  "Help": "ヘルプ",
+  "Credits": "クレジット",
 
-  "Main menu": "Main menu",
+  "Main menu": "メインメニュー",
 
-  "Click me": "Click me",
+  "Click me": "ゲームを開始",
 
-  "Pause": "Pause",
-  "Resume": "Resume",
-  "Retry": "Retry",
-  "Back": "Back",
+  "Pause": "一時停止",
+  "Resume": "ゲームに戻る",
+  "Retry": "リトライ",
+  "Back": "メインメニューへ",
 
-  "Results": "Results",
+  "Results": "スコア",
 
-  "Navigate Miku-san with mouse or arrow keys": "Navigate Miku-san with mouse or arrow keys",
-  "Miku-san effective area": "Miku-san effective area",
-  "Help Miku-san to collect all the lyrics": "Help Miku-san to collect all the lyrics",
-  "Position of the moon reflects the progress of the song": "Position of the moon reflects the progress of the song",
-  "Behold your result and have fun together with Miku-san!": "Behold your result and have fun together with Miku-san!",
+  "Navigate Miku-san with mouse or arrow keys": "マウスまたは矢印キーを使って移動します",
+  "Miku-san effective area": "ミクさんの有効エリア",
+  "Help Miku-san to collect all the lyrics": "ミクさんにすべての歌詞を集めるのを手伝ってください",
+  "Position of the moon reflects the progress of the song": "歌の進行は月の位置で反映しています",
+  "Behold your result and have fun together with Miku-san!": "スコアを見てミクさんと一緒に楽しみましょう!",
 
-  "Team": "Team",
-  "Programming": "Programming",
-  "Design": "Design",
-  "Translation": "Translation",
-  "Technologies": "Technologies",
-  "Background music": "Background music",
+  "Team": "チーム",
+  "Technologies": "テクノロジー",
 
-  "Volume": "Volume",
-  "Minimize": "Minimize",
-  "Maximize": "Maximize",
-  "Previous": "Previous",
-  "Next": "Next"
+  "Volume": "ミュジック音量",
+  "Minimize": "MIN",
+  "Maximize": "MAX",
+  "Previous": "前へ",
+  "Next": "次へ"
 }
