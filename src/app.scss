@@ -59,7 +59,7 @@ body {
     pointer-events: none;
     touch-action: none;
     user-select: none;
-    box-shadow: inset 10px -10px 15px 5px rgba(0,0,0,0.75);
+    box-shadow: inset 6px -6px 15px 14px rgba(0, 0, 0, 0.75);
 
     .webp & {
       border-image: url('../images/frame.webp') 101 / var(--frame-size) round;

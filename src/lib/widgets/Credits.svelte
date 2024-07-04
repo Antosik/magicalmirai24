@@ -123,7 +123,6 @@
     align-items: center;
     scroll-snap-align: center;
     scroll-snap-stop: always;
-    // gap: grid(7);
     justify-content: center;
   }
 </style>
