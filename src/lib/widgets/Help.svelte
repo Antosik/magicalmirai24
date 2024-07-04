@@ -68,8 +68,8 @@
 <style lang="scss">
   section {
     display: flex;
-    max-width: calc(100dvw + grid(4));
-    max-height: calc(100dvh + grid(4));
+    max-width: calc(100dvw + grid(4) - var(--frame-size));
+    max-height: calc(100dvh + grid(4) - var(--frame-size));
     flex-direction: column;
     padding: grid(8) grid(8) 20%;
     aspect-ratio: 1;
