@@ -232,7 +232,7 @@
     display: block;
     width: 55px;
     height: 55px;
-    animation: rotate 2s linear 2;
+    animation: rotate 2s ease-in-out 2;
     background-image: url('../images/advice.svg');
     background-repeat: no-repeat;
     background-size: contain;
