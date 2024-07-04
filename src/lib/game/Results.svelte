@@ -19,13 +19,18 @@
 
 <GameStateScene>
   <div class="results">
-    <h2 class="visually-hidden">{$i18n('Results')}</h2>
+    <h2>{$i18n('Results')}</h2>
 
     {#if $chars.size}
-      <div class="results__percentage">
-        {Math.floor(($catched.length / ($chars.size ?? 1)) * 100)}%
+      <div class="results__numbers">
+        <div class="results__percentage">
+          {Math.floor(($catched.length / ($chars.size ?? 1)) * 100)}%
+        </div>
+        <div class="results__count">
+          <p class="results__count_user">{$catched.length}</p>
+          <p class="results__count_total">{$chars.size}</p>
+        </div>
       </div>
-      <div class="results__count">{$catched.length} / {$chars.size}</div>
     {/if}
 
     <ul>
@@ -33,20 +38,37 @@
         <button type="button" on:click={() => dispatch('restart')}>{$i18n('Retry')}</button>
       </li>
       <li>
-        <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
+        <button type="button" on:click={() => dispatch('back')}>{$i18n('Main menu')}</button>
       </li>
     </ul>
   </div>
 </GameStateScene>
 
 <style lang="scss">
+  h2 {
+    font-size: 28px;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+      font-size: 32px;
+    }
+
+    @include breakpoint(xl) {
+      font-size: 36px;
+    }
+
+    @include breakpoint(xxl) {
+      font-size: 44px;
+    }
+  }
+
   .results {
     @include flex_center;
 
     max-width: calc(100dvw + grid(4) - var(--frame-size));
     max-height: calc(100dvh + grid(4) - var(--frame-size));
     flex-direction: column;
-    padding: grid(10);
+    padding: grid(17.5);
     aspect-ratio: 1;
     gap: grid(5);
 
@@ -54,26 +76,36 @@
       padding: grid(16);
     }
 
+    &__numbers {
+      @include flex_center;
+
+      gap: grid(5);
+      padding: grid(10);
+    }
+
     &__percentage {
-      font-size: 44px;
+      font-size: 70px;
       text-transform: uppercase;
 
       @include breakpoint(md) {
-        font-size: 48px;
-      }
-
-      @include breakpoint(xl) {
-        font-size: 52px;
-      }
-
-      @include breakpoint(xxl) {
-        font-size: 60px;
+        font-size: 104px;
       }
     }
 
     &__count {
-      font-size: 36px;
+      font-size: 29px;
       text-transform: uppercase;
+      margin-top: grid(-1.75);
+
+      &_user {
+        padding: 0 grid(2);
+      }
+
+      &_total {
+        display: inline-block;
+        border-top: 3px solid $color-text;
+        padding: grid(0.5) grid(2) 0 grid(2);
+      }
 
       @include breakpoint(md) {
         font-size: 40px;
@@ -104,6 +136,12 @@
     background: none;
     font-size: 28px;
     text-transform: uppercase;
+    text-wrap: nowrap;
+    transition: transform 200ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
 
     @include breakpoint(md) {
       font-size: 32px;
