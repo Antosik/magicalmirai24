@@ -164,7 +164,7 @@
     left: 5%;
     height: 80px;
     aspect-ratio: 1303 / 582;
-    filter: drop-shadow(rgb(0 0 0 / 60%) 4px 4px 4px);
+    filter: drop-shadow(20px -17px 3px rgba(0, 0, 0, 0.4));
     transform: translateY(var(--position, 50%)) translateZ(0);
     will-change: top;
 

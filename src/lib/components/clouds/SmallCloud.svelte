@@ -37,7 +37,7 @@
     animation-play-state: running;
     animation-timing-function: linear;
     aspect-ratio: 461 / 297;
-    filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
+    filter: drop-shadow(20px -17px 3px rgba(0, 0, 0, 0.4));
     transition:
       top 400ms,
       left 400ms;
@@ -77,7 +77,7 @@
       background-position: left center;
       background-repeat: repeat-x;
       background-size: contain;
-      filter: drop-shadow(rgb(0 0 0 / 25%) 5px 15px 3px);
+      filter: drop-shadow(20px -17px 3px rgba(0, 0, 0, 0.4));
       mask-image: url('../images/cloud_small.svg');
       mask-position: left center;
       mask-repeat: no-repeat;
