@@ -76,8 +76,8 @@
     border-radius: 50%;
     appearance: none;
     background: var(--text-color) url('../images/volume.svg') center no-repeat;
-    filter: drop-shadow(4px -4px 1px rgba(0, 0, 0, 0.4));
     cursor: grab;
+    filter: drop-shadow(4px -4px 1px rgb(0 0 0 / 40%));
 
     &:active {
       cursor: grabbing;
@@ -92,8 +92,8 @@
     border-radius: 50%;
     appearance: none;
     background: var(--text-color) url('../images/volume.svg') center no-repeat;
-    filter: drop-shadow(4px -4px 1px rgba(0, 0, 0, 0.4));
     cursor: grab;
+    filter: drop-shadow(4px -4px 1px rgb(0 0 0 / 40%));
 
     &:active {
       cursor: grabbing;
@@ -108,8 +108,8 @@
     border-radius: 50%;
     appearance: none;
     background: var(--text-color) url('../images/volume.svg') center no-repeat;
-    filter: drop-shadow(4px -4px 1px rgba(0, 0, 0, 0.4));
     cursor: grab;
+    filter: drop-shadow(4px -4px 1px rgb(0 0 0 / 40%));
 
     &:active {
       cursor: grabbing;

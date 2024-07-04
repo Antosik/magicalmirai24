@@ -35,8 +35,8 @@ body {
   height: 100%;
   margin: 0;
   background-color: $color-bg;
-  font-family: 'Live Savers', sans-serif;
   color: #484a51;
+  font-family: 'Live Savers', sans-serif;
 }
 
 #app {
@@ -55,11 +55,11 @@ body {
     border-width: var(--frame-size);
     border-style: solid;
     border-image: url('../images/frame.png') 101 / var(--frame-size) round;
+    box-shadow: inset 6px -6px 15px 14px rgb(0 0 0 / 75%);
     content: '';
     pointer-events: none;
     touch-action: none;
     user-select: none;
-    box-shadow: inset 6px -6px 15px 14px rgba(0, 0, 0, 0.75);
 
     .webp & {
       border-image: url('../images/frame.webp') 101 / var(--frame-size) round;

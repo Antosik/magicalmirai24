@@ -58,13 +58,13 @@
   }
 
   h1 {
+    margin-top: grid(3.75);
     font-size: 28px;
     text-transform: uppercase;
-    margin-top: grid(3.75);
 
     @include breakpoint(xs) {
-      font-size: 32px;
       margin-top: grid(7.5);
+      font-size: 32px;
     }
 
     @include breakpoint(xl) {
@@ -121,8 +121,8 @@
     flex-grow: 1;
     flex-shrink: 0;
     align-items: center;
+    justify-content: center;
     scroll-snap-align: center;
     scroll-snap-stop: always;
-    justify-content: center;
   }
 </style>

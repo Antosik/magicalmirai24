@@ -164,7 +164,7 @@
     left: 5%;
     height: 80px;
     aspect-ratio: 1303 / 582;
-    filter: drop-shadow(20px -17px 3px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(20px -17px 3px rgb(0 0 0 / 40%));
     transform: translateY(var(--position, 50%)) translateZ(0);
     will-change: top;
 
@@ -224,9 +224,9 @@
       height: 200dvh;
       background: radial-gradient(
         circle at 50% 50%,
-        rgb(255, 193, 0) -100%,
-        rgba(212, 190, 0, 0.05) 35%,
-        rgba(238, 130, 238, 0) 100%
+        rgb(255 193 0) -100%,
+        rgb(212 190 0 / 5%) 35%,
+        rgb(238 130 238 / 0%) 100%
       );
       content: '';
     }

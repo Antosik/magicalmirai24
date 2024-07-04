@@ -226,17 +226,17 @@
   }
 
   .placeholder::after {
-    background-image: url('../images/advice.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    content: '';
+    position: relative;
+    top: 0;
+    left: 12px;
+    display: block;
     width: 55px;
     height: 55px;
-    display: block;
-    top: 0;
-    position: relative;
-    left: 12px;
     animation: rotate 2s linear 2;
+    background-image: url('../images/advice.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
     transform: rotate(90deg);
 
     @include breakpoint(md) {
@@ -259,17 +259,14 @@
     font-size: 1.2em;
   }
 
+  /* stylelint-disable-next-line keyframes-name-pattern */
   @keyframes -global-rotate {
     0% {
       transform: rotate(0deg);
     }
 
-    50% {
+    100% {
       transform: rotate(90deg);
-    }
-
-    50% {
-      transform: rotate(0deg);
     }
   }
 </style>

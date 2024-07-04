@@ -78,13 +78,13 @@
   }
 
   h1 {
+    margin-top: grid(3.75);
     font-size: 28px;
     text-transform: uppercase;
-    margin-top: grid(3.75);
 
     @include breakpoint(md) {
-      font-size: 32px;
       margin-top: grid(7.5);
+      font-size: 32px;
     }
 
     @include breakpoint(xl) {

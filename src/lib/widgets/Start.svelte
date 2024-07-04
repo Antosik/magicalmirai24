@@ -84,8 +84,8 @@
   }
 
   li {
-    padding: grid(1) grid(2);
     align-self: flex-end;
+    padding: grid(1) grid(2);
   }
 
   button {

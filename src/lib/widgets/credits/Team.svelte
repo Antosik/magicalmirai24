@@ -14,13 +14,9 @@
       <li>Valentina Klepikova</li>
       <li>Translator Translator</li>
       <li>
-          <a
-            href="https://wintergatan.net/"
-            target="_blank"
-            rel="nofollow norefferer noopener"
-          >
-            Wintergatan
-          </a>
+        <a href="https://wintergatan.net/" target="_blank" rel="nofollow norefferer noopener">
+          Wintergatan
+        </a>
       </li>
     </ul>
     <picture>
@@ -34,10 +30,10 @@
 <style lang="scss">
   .wrapper {
     display: flex;
-    flex-direction: column;
-    gap: grid(5);
     width: 100%;
     height: 100%;
+    flex-direction: column;
+    gap: grid(5);
 
     @include breakpoint(sm) {
       gap: 50px;
@@ -46,17 +42,16 @@
 
   .content-wrapper {
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: grid(7);
-    align-items: center;
   }
-  
+
   h2 {
+    align-self: center;
     margin-top: grid(4);
     margin-bottom: grid(1);
     font-size: 18px;
-    align-self: center;
-
 
     @include breakpoint(sm) {
       font-size: 20px;
@@ -77,13 +72,13 @@
     text-align: center;
 
     @include breakpoint(sm) {
-      text-align: start;
       font-size: 16px;
+      text-align: start;
     }
 
     @include breakpoint(md) {
-      font-size: 18px;
       margin-bottom: grid(3);
+      font-size: 18px;
     }
 
     @include breakpoint(xl) {

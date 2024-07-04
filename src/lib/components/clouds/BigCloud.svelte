@@ -37,7 +37,7 @@
     animation-play-state: running;
     animation-timing-function: linear;
     aspect-ratio: 814 / 226;
-    filter: drop-shadow(20px -17px 3px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(20px -17px 3px rgb(0 0 0 / 40%));
     transition:
       top 400ms,
       left 400ms;

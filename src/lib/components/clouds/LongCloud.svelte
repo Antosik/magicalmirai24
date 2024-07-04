@@ -29,7 +29,7 @@
     animation-name: movingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
-    filter: drop-shadow(20px -17px 3px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(20px -17px 3px rgb(0 0 0 / 40%));
     gap: 0;
     will-change: transform;
 

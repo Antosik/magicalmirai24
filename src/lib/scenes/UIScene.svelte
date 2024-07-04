@@ -146,9 +146,9 @@
       height: 200dvh;
       background: radial-gradient(
         circle at 50% 50%,
-        rgb(255, 193, 0) -100%,
-        rgba(212, 190, 0, 0.05) 35%,
-        rgba(238, 130, 238, 0) 100%
+        rgb(255 193 0) -100%,
+        rgb(212 190 0 / 5%) 35%,
+        rgb(238 130 238 / 0%) 100%
       );
       content: '';
       transform: translate(-50%, -50%);

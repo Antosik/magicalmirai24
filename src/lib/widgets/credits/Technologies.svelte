@@ -29,10 +29,10 @@
   div {
     @include flex_center;
 
-    height: 100%;
     width: 100%;
+    height: 100%;
     flex-direction: column;
-    gap: grid(5);    
+    gap: grid(5);
   }
 
   h2 {
@@ -54,12 +54,12 @@
   }
 
   ul {
-    height: min-content;
     display: flex;
+    height: min-content;
     flex-direction: column;
     align-items: flex-start;
-    overflow-y: auto;
     padding-left: grid(6);
+    overflow-y: auto;
   }
 
   li {
