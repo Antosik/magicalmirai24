@@ -12,7 +12,7 @@
     <ul>
       <li>Anton Grigorev</li>
       <li>Valentina Klepikova</li>
-      <li>Translator Translator</li>
+      <li>lemma</li>
       <li>
         <a href="https://wintergatan.net/" target="_blank" rel="nofollow norefferer noopener">
           Wintergatan
