@@ -72,7 +72,7 @@
     easing: linear,
   }}
 >
-  <Stars {animationDuration} />
+  <Stars {animationDuration} pause />
 
   <div
     class="content content--{$page.toLowerCase()}"
@@ -118,7 +118,6 @@
     width: fit-content;
     max-width: calc(100dvw + grid(4));
     max-height: calc(100dvh + grid(4));
-    filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translate(-50%, -50%);
     transition:
       width 1s,
@@ -145,7 +144,12 @@
       left: 50%;
       width: 200dvw;
       height: 200dvh;
-      background: radial-gradient(rgb(219 200 97 / 10%), rgb(145 139 105 / 0%));
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgb(255 193 0) -100%,
+        rgb(212 190 0 / 5%) 35%,
+        rgb(238 130 238 / 0%) 100%
+      );
       content: '';
       transform: translate(-50%, -50%);
     }
@@ -172,8 +176,9 @@
     }
   }
 
+  // moon blend
   .blend {
-    mix-blend-mode: normal;
+    mix-blend-mode: luminosity;
   }
 
   .content-wrapper {

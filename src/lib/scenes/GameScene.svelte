@@ -101,7 +101,7 @@
     easing: linear,
   }}
 >
-  <Stars {animationDuration} {pause} --stars-color={$vaColor} />
+  <Stars {animationDuration} pause --stars-color={$vaColor} />
 
   {#if songProgress}
     <div transition:fade class="moon" style:--progress="{songProgress}%"></div>
@@ -164,7 +164,7 @@
     left: 5%;
     height: 80px;
     aspect-ratio: 1303 / 582;
-    filter: drop-shadow(rgb(0 0 0 / 60%) 4px 4px 4px);
+    filter: drop-shadow(20px -17px 3px rgb(0 0 0 / 40%));
     transform: translateY(var(--position, 50%)) translateZ(0);
     will-change: top;
 
@@ -211,7 +211,6 @@
     background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
-    filter: drop-shadow(0 0 50px var(--moon-shine-color));
     transform: translateX(calc(var(--progress) * -1));
     transition: transform 1s linear;
     will-change: transform;
@@ -223,7 +222,12 @@
       right: -100dvw;
       width: 200dvw;
       height: 200dvh;
-      background: radial-gradient(rgb(219 200 97 / 8%), rgb(145 139 105 / 0%));
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgb(255 193 0) -100%,
+        rgb(212 190 0 / 5%) 35%,
+        rgb(238 130 238 / 0%) 100%
+      );
       content: '';
     }
 

@@ -225,6 +225,25 @@
     }
   }
 
+  .placeholder::after {
+    position: relative;
+    top: 0;
+    left: 12px;
+    display: block;
+    width: 55px;
+    height: 55px;
+    animation: rotate 2s ease-in-out 2;
+    background-image: url('../images/advice.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    transform: rotate(90deg);
+
+    @include breakpoint(md) {
+      display: none;
+    }
+  }
+
   .buttons {
     @include flex_center;
 
@@ -238,5 +257,16 @@
     border: 0;
     background: 0;
     font-size: 1.2em;
+  }
+
+  /* stylelint-disable-next-line keyframes-name-pattern */
+  @keyframes -global-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(90deg);
+    }
   }
 </style>

@@ -7,29 +7,40 @@
   const { i18n } = getLocale();
 </script>
 
-<h2>{$i18n('Technologies')}</h2>
-<ul>
-  {#each packages as item (item.name)}
-    <li>
-      <span>
-        <a href={item.link} target="_blank" rel="noopener nofollow noreferrer">{item.name}</a>
-      </span>
-      {#if item.licenseType}
-        (License - {item.licenseType})
-      {:else if item.licenseLink}
-        (<a href={item.link} target="_blank" rel="noopener nofollow noreferrer">License</a>)
-      {/if}
-    </li>
-  {/each}
-</ul>
+<div>
+  <h2>{$i18n('Technologies')}</h2>
+  <ul>
+    {#each packages as item (item.name)}
+      <li>
+        <span>
+          <a href={item.link} target="_blank" rel="noopener nofollow noreferrer">{item.name}</a>
+        </span>
+        {#if item.licenseType}
+          (License - {item.licenseType})
+        {:else if item.licenseLink}
+          (<a href={item.link} target="_blank" rel="noopener nofollow noreferrer">License</a>)
+        {/if}
+      </li>
+    {/each}
+  </ul>
+</div>
 
 <style lang="scss">
+  div {
+    @include flex_center;
+
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: grid(5);
+  }
+
   h2 {
     margin-top: grid(4);
     margin-bottom: grid(1);
     font-size: 18px;
 
-    @include breakpoint(md) {
+    @include breakpoint(sm) {
       font-size: 20px;
     }
 
@@ -43,14 +54,18 @@
   }
 
   ul {
+    display: flex;
     height: min-content;
+    flex-direction: column;
     align-items: flex-start;
+    padding-left: grid(6);
     overflow-y: auto;
   }
 
   li {
     margin-bottom: grid(1);
     font-size: 14px;
+    text-align: start;
 
     @include breakpoint(md) {
       font-size: 18px;

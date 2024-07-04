@@ -47,9 +47,9 @@
     max-width: calc(100dvw + grid(4));
     max-height: calc(100dvh + grid(4));
     flex-direction: column;
-    padding: grid(10);
+    padding: grid(12.5) grid(10) grid(10);
     aspect-ratio: 1;
-    gap: grid(5);
+    gap: grid(4);
 
     @include breakpoint(xxl) {
       padding: grid(16);
@@ -68,14 +68,13 @@
     width: 100%;
     padding: grid(2) grid(4);
     border: 0;
-    border-bottom: 1px solid transparent;
     background: none;
     font-size: 28px;
     text-transform: uppercase;
-    transition: border-bottom 200ms ease-in-out;
+    transition: transform 200ms ease-in-out;
 
     &:hover {
-      border-bottom: 1px solid var(--text-color);
+      transform: scale(1.2);
     }
 
     @include breakpoint(md) {

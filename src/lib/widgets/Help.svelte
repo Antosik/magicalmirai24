@@ -78,10 +78,12 @@
   }
 
   h1 {
+    margin-top: grid(3.75);
     font-size: 28px;
     text-transform: uppercase;
 
     @include breakpoint(md) {
+      margin-top: grid(7.5);
       font-size: 32px;
     }
 
@@ -99,15 +101,14 @@
 
     padding: grid(1) grid(4);
     border: none;
-    border-bottom: 1px solid transparent;
     margin: 0 auto;
     background: none;
     font-size: 14px;
     text-transform: uppercase;
-    transition: border-bottom 200ms ease-in-out;
+    transition: transform 200ms ease-in-out;
 
     &:hover {
-      border-bottom: 1px solid var(--text-color);
+      transform: scale(1.3);
     }
 
     @include breakpoint(md) {

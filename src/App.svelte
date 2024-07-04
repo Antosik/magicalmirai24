@@ -17,7 +17,7 @@
   const { manageability, readiness } = getPlayerState();
 </script>
 
-<div class="paper-background" />
+<div class="paper-background combine" />
 
 {#if $page !== Page.START}
   <BackgroundMusic />

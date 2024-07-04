@@ -32,11 +32,6 @@
   <h1>{$i18n('Credits')}</h1>
 
   <div class="content">
-    <picture>
-      <source srcset="./images/credits.avif" type="image/avif" />
-      <source srcset="./images/credits.webp" type="image/webp" />
-      <img src="./images/credits.png" alt="" />
-    </picture>
     <Slider>
       <svelte:fragment slot="raw">
         <li>
@@ -63,10 +58,12 @@
   }
 
   h1 {
+    margin-top: grid(3.75);
     font-size: 28px;
     text-transform: uppercase;
 
-    @include breakpoint(md) {
+    @include breakpoint(xs) {
+      margin-top: grid(7.5);
       font-size: 32px;
     }
 
@@ -84,15 +81,14 @@
 
     padding: grid(1) grid(4);
     border: none;
-    border-bottom: 1px solid transparent;
     margin: 0 auto;
     background: none;
     font-size: 14px;
     text-transform: uppercase;
-    transition: border-bottom 200ms ease-in-out;
+    transition: transform 200ms ease-in-out;
 
     &:hover {
-      border-bottom: 1px solid var(--text-color);
+      transform: scale(1.3);
     }
 
     @include breakpoint(md) {
@@ -122,30 +118,11 @@
     overflow: auto;
     width: 100%;
     height: 100%;
-    flex-direction: column;
     flex-grow: 1;
     flex-shrink: 0;
     align-items: center;
+    justify-content: center;
     scroll-snap-align: center;
     scroll-snap-stop: always;
-
-    @include breakpoint(lg) {
-      justify-content: center;
-    }
-  }
-
-  picture {
-    display: none;
-    min-width: 100px;
-    max-width: 30%;
-
-    @include breakpoint(lg) {
-      display: block;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
   }
 </style>
