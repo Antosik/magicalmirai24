@@ -32,11 +32,6 @@
   <h1>{$i18n('Credits')}</h1>
 
   <div class="content">
-    <picture>
-      <source srcset="./images/credits.avif" type="image/avif" />
-      <source srcset="./images/credits.webp" type="image/webp" />
-      <img src="./images/credits.png" alt="" />
-    </picture>
     <Slider>
       <svelte:fragment slot="raw">
         <li>
@@ -65,9 +60,11 @@
   h1 {
     font-size: 28px;
     text-transform: uppercase;
+    margin-top: grid(3.75);
 
-    @include breakpoint(md) {
+    @include breakpoint(xs) {
       font-size: 32px;
+      margin-top: grid(7.5);
     }
 
     @include breakpoint(xl) {
@@ -121,30 +118,12 @@
     overflow: auto;
     width: 100%;
     height: 100%;
-    flex-direction: column;
     flex-grow: 1;
     flex-shrink: 0;
     align-items: center;
     scroll-snap-align: center;
     scroll-snap-stop: always;
-
-    @include breakpoint(lg) {
-      justify-content: center;
-    }
-  }
-
-  picture {
-    display: none;
-    min-width: 100px;
-    max-width: 30%;
-
-    @include breakpoint(lg) {
-      display: block;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
+    // gap: grid(7);
+    justify-content: center;
   }
 </style>
