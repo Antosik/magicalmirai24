@@ -79,8 +79,8 @@
     &__numbers {
       @include flex_center;
 
-      gap: grid(5);
       padding: grid(10);
+      gap: grid(5);
     }
 
     &__percentage {
@@ -93,9 +93,9 @@
     }
 
     &__count {
+      margin-top: grid(-1.75);
       font-size: 29px;
       text-transform: uppercase;
-      margin-top: grid(-1.75);
 
       &_user {
         padding: 0 grid(2);
@@ -103,8 +103,8 @@
 
       &_total {
         display: inline-block;
+        padding: grid(0.5) grid(2) 0;
         border-top: 3px solid $color-text;
-        padding: grid(0.5) grid(2) 0 grid(2);
       }
 
       @include breakpoint(md) {
