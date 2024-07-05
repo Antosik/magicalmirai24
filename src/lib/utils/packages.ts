@@ -23,11 +23,6 @@ export const packages: Package[] = [
     licenseType: 'ISC',
   },
   {
-    name: 'feather-icons',
-    link: 'https://github.com/feathericons/feather',
-    licenseType: 'MIT',
-  },
-  {
     name: 'textalive-app-api',
     link: 'https://github.com/TextAliveJp/textalive-app-api',
     licenseLink: 'https://github.com/TextAliveJp/textalive-app-api/blob/main/LICENSE.md',
@@ -54,11 +49,6 @@ export const packages: Package[] = [
   },
   {
     name: '@types/d3-interpolate',
-    link: 'https://github.com/DefinitelyTyped/DefinitelyTyped',
-    licenseType: 'MIT',
-  },
-  {
-    name: '@types/feather-icons',
     link: 'https://github.com/DefinitelyTyped/DefinitelyTyped',
     licenseType: 'MIT',
   },
