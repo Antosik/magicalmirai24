@@ -134,5 +134,5 @@ TextAlive App API について詳しくはWebサイト [TextAlive for Developers
 
 ### Background Music
 
-Marble Machine by [Wintergatan](https://www.youtube.com/@wintergatan)
+Marble Machine by [Wintergatan](https://www.youtube.com/@wintergatan).  
 Approved for non-commercial use.
