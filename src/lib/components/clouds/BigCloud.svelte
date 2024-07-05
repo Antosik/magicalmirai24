@@ -36,11 +36,11 @@
     animation-name: flyingcloud;
     animation-play-state: running;
     animation-timing-function: linear;
-    aspect-ratio: 814 / 226;
+    aspect-ratio: 855 / 248;
     filter: drop-shadow(20px -17px 3px rgb(0 0 0 / 40%));
     transition:
-      top 400ms,
-      left 400ms;
+      top 1800ms,
+      left 1800ms;
     will-change: transform, top, left;
 
     &.pause,
