@@ -185,8 +185,8 @@
     user-select: none;
 
     &--color-dark {
-      color: var(--blue-color);
-      text-shadow: 0 2px 4px var(--blue-color);
+      color: var(--black-color);
+      text-shadow: 0 2px 4px var(--black-color);
     }
 
     &--color-red {
@@ -194,9 +194,9 @@
       text-shadow: 0 2px 4px var(--red-color);
     }
 
-    &--color-white {
-      color: var(--white-color);
-      text-shadow: 0 2px 4px var(--white-color);
+    &--color-blue {
+      color: var(--blue-color);
+      text-shadow: 0 2px 4px var(--blue-color);
     }
 
     &.playing {
