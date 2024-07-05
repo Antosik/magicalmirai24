@@ -84,8 +84,8 @@ export function calculateActiveColor(
     case CharColor.DARK:
       return CharColor.RED;
     case CharColor.RED:
-      return CharColor.WHITE;
-    case CharColor.WHITE:
+      return CharColor.BLUE;
+    case CharColor.BLUE:
       return CharColor.DARK;
   }
 }

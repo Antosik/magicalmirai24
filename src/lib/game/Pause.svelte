@@ -47,12 +47,12 @@
     max-width: calc(100dvw + grid(4) - var(--frame-size));
     max-height: calc(100dvh + grid(4) - var(--frame-size));
     flex-direction: column;
-    padding: grid(12.5) grid(10) grid(10);
+    padding: grid(25) grid(10) grid(22.5);
     aspect-ratio: 1;
-    gap: grid(4);
+    gap: grid(9);
 
     @include breakpoint(xxl) {
-      padding: grid(16);
+      padding: grid(30) grid(10) grid(27.5);
     }
   }
 

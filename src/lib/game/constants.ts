@@ -9,7 +9,7 @@ export const REAL_PAUSE_DELAY = 100; // 100ms
 /** Char colors */
 export const CharColor = {
   RED: 'red',
-  WHITE: 'white',
+  BLUE: 'blue',
   DARK: 'dark',
 } as const;
 export type CharColor = ValueOf<typeof CharColor>;

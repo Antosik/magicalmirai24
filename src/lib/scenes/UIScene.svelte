@@ -28,9 +28,10 @@
   const getSmallCloudPosition = (page: Page) => {
     switch (page) {
       case Page.MAIN_PAGE:
-        return { top: '50%', left: '70%' };
+        return { top: '50%', left: '1%' };
+      case Page.CREDITS:
       case Page.HELP:
-        return { top: '60%', left: '5%' };
+        return { top: '65%', left: '5%' };
       default:
         return null;
     }
