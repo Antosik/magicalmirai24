@@ -118,8 +118,8 @@ Parameters can be changed with:
 
 ## Team
 
-- Programming - @Antosik
-- Design - @sdobnaya
+- Programming - Antosik
+- Design - sdobnaya
 - Translation - lemma
 
 ## Acknowledgements
