@@ -25,6 +25,8 @@
 
 ## About
 
+Immerse yourself in the magical world of the night sky with Hatsune Miku! Fly on a little airplane, collecting words to your favorite music, and enjoy the unique kamishibai-style atmosphere. Start your musical adventure now!
+
 <details>
 <summary>Screenshots</summary>
 <br>
