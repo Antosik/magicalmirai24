@@ -30,7 +30,7 @@
         <button type="button" on:click={() => dispatch('restart')}>{$i18n('Retry')}</button>
       </li>
       <li>
-        <button type="button" on:click={() => dispatch('back')}>{$i18n('Back')}</button>
+        <button type="button" on:click={() => dispatch('back')}>{$i18n('Main menu')}</button>
       </li>
     </ul>
 
